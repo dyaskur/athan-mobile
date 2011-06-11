@@ -201,7 +201,7 @@ public class MainForm extends Menu
         mLabelLibelleDate.setUIID(UIID_LABEL_CURRENT_DATE);
         Container ctnLibellesDates = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         ctnLibellesDates.addComponent(mLabelLibelleJour);
-        ctnLibellesDates.addComponent(mLabelLibelleDate);
+        //ctnLibellesDates.addComponent(mLabelLibelleDate);
         ctnLibellesDates.setPreferredH(50);
         mDatePrecedente = new Button(Main.icons.getImage("Previous"));
         mDateSuivante = new Button(Main.icons.getImage("Next"));

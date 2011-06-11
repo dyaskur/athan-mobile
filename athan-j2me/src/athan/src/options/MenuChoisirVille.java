@@ -42,6 +42,7 @@ import javax.microedition.location.LocationProvider;
 public class MenuChoisirVille extends Menu {
 
     private static final int HAUTEUR_LABEL = 15;
+    private static final int HAUTEUR_LABEL_TOUS = 120;
 
     private TextField mTextFieldNomVille;
     private TextField mTextFieldNomRegion;
@@ -155,6 +156,7 @@ public class MenuChoisirVille extends Menu {
                                     lLabelNomPays);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 70, 3),
                                     mTextFieldNomPays);
+        ctnInfosLocalisation.setPreferredH(HAUTEUR_LABEL_TOUS);
 
         mGpsSearch = new Button(RESSOURCE.get("GPSSearch"));
         mGpsSearch.setAlignment(Component.CENTER);
@@ -289,6 +291,8 @@ public class MenuChoisirVille extends Menu {
                 final Form parametersForm = new Form(RESSOURCE.get("GeocodingWindowTitle"));
                 parametersForm.setLayout(new BorderLayout());
 
+                parametersForm.setFocusable(true);
+
                 TableLayout tbGrid = new TableLayout(4, 2);
                 Container grid = new Container(tbGrid);
                 grid.setLayout(tbGrid);
@@ -348,12 +352,6 @@ public class MenuChoisirVille extends Menu {
                 VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomPays,
                     VirtualKeyboard.getVirtualKeyboard(mTextFieldNomPays));
 
-                TextArea consignes = new TextArea(RESSOURCE.getContenu_ConsignesGeocoding());
-                consignes.setUIID(UIID_TEXTAREA_SEARCH_TOOLTIP);
-                consignes.setEnabled(false);
-                consignes.setEditable(false);
-                consignes.setGrowByContent(true);
-
                 grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
                                     lLabelNomVille);
                 grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
@@ -372,7 +370,6 @@ public class MenuChoisirVille extends Menu {
                                     lCbIndicatif);
 
                 //parametersForm.setScrollable(true);
-                parametersForm.addComponent(BorderLayout.NORTH, consignes);
                 parametersForm.addComponent(BorderLayout.CENTER, grid);
                 
                 Command searchCommand = new Command(RESSOURCE.get("Command.Search")) {
@@ -489,7 +486,30 @@ public class MenuChoisirVille extends Menu {
                     }
                 };
 
+                Command helpCommand = new Command(RESSOURCE.get("Command.Help")) {
+                    public void actionPerformed(ActionEvent evt) {
+                        Form helpForm = new Form(RESSOURCE.get("Window.Help"));
+                        helpForm.setLayout(new BorderLayout());
+                        TextArea helpText = new TextArea(RESSOURCE.getContenu_ConsignesGeocoding(),
+                                                    5, 10);
+                        helpText.setEditable(false);
+                        helpForm.setScrollable(true);
+                        helpText.setFocusable(true);
+                        //helpText.setUIID(UIID_TEXTAREA_SEARCH_TOOLTIP);
+                        helpForm.addComponent(BorderLayout.CENTER, helpText);
+                        Command c = new Command(RESSOURCE.get("Menu.Back")) {
+                            public void actionPerformed(ActionEvent evt) {
+                                parametersForm.showBack();
+                            }
+                        };
+                        helpForm.addCommand(c);
+                        helpForm.setBackCommand(c);
+                        helpForm.show();
+                    }
+                };
+
                 parametersForm.addCommand(cancelCommand);
+                parametersForm.addCommand(helpCommand);
                 parametersForm.addCommand(searchCommand);
                 parametersForm.setBackCommand(cancelCommand);
                 parametersForm.show();
@@ -520,10 +540,6 @@ public class MenuChoisirVille extends Menu {
         mApiSearch.setVisible(!editable);
         mGpsSearch.setVisible(!editable);
         mManualSearch.setVisible(!editable);
-
-        mGpsSearch.setVisible(false);
-        mManualSearch.setVisible(false);
-        mApiSearch.setVisible(false);
 
         form.repaint();
     }

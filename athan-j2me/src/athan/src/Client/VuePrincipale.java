@@ -117,7 +117,7 @@ public class VuePrincipale implements AthanConstantes {
             dateJour[1] += " " + mPrieresJournee.getHoraire();
         }
 
-        Main.getMainForm().getLabelLibelleJour().setText(dateJour[0]);
+        Main.getMainForm().getLabelLibelleJour().setText(dateJour[0] + "\n" + dateJour[1]);
         Main.getMainForm().getLabelLibelleDate().setText(dateJour[1]);
     }
 
