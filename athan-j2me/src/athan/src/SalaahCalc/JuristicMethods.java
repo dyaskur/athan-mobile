@@ -10,10 +10,10 @@ package athan.src.SalaahCalc;
  */
 public class JuristicMethods {
 
-    public final int value;
+    private final int value;
 
-    protected static final int Shafii_VAL = 0;
-    protected static final int Hanafi_VAL = 1;
+    private static final int Shafii_VAL = 0;
+    private static final int Hanafi_VAL = 1;
 
     /** L'attribut qui contient la valeur associé à l'enum */
     public static final JuristicMethods Shafii = new JuristicMethods(Shafii_VAL);

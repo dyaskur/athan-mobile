@@ -13,12 +13,12 @@ import com.sun.lwuit.Container;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Image;
 import com.sun.lwuit.Label;
+import com.sun.lwuit.TextArea;
 import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
-import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.table.TableLayout;
 import java.util.Date;
 import java.util.Timer;
@@ -42,8 +42,7 @@ public class MainForm extends Menu
     private Button mHomeHeureCourante;
 
     private Button mDatePrecedente;
-    private Label mLabelLibelleJour;
-    private Label mLabelLibelleDate;
+    private TextArea mTextAreaLibelleJour;
     private Button mDateSuivante;
 
     private Label mLabelHoraireSohb;
@@ -100,17 +99,10 @@ public class MainForm extends Menu
     }
 
     /**
-     * @return the mLabelLibelleJour
+     * @return the mTextAreaLibelleJour
      */
-    public Label getLabelLibelleJour() {
-        return mLabelLibelleJour;
-    }
-
-    /**
-     * @return the mLabelLibelleDate
-     */
-    public Label getLabelLibelleDate() {
-        return mLabelLibelleDate;
+    public TextArea getTextAreaLibelleJour() {
+        return mTextAreaLibelleJour;
     }
 
     /**
@@ -185,29 +177,32 @@ public class MainForm extends Menu
         // Conteneur du haut : lieu + home
         mLabelLieu = new Label("");
         mLabelLieu.setAlignment(Component.LEFT);
+        mLabelLieu.setFocusable(true);
+        mLabelLieu.setUIID(UIID_LABEL_CURRENT_CITY);
+        mLabelLieu.getUnselectedStyle().setBgTransparency(0);
+        mLabelLieu.getSelectedStyle().setBgTransparency(0);        
         mHomeHeureCourante = new Button(Main.icons.getImage("Home"));
         Container ctnVilleHome = new Container(new BorderLayout());
         ctnVilleHome.addComponent(BorderLayout.WEST, mLabelLieu);
         ctnVilleHome.addComponent(BorderLayout.EAST, mHomeHeureCourante);
         mHomeHeureCourante.setVisible(false);
+        mHomeHeureCourante.setFocusable(true);
         ctnVilleHome.setPreferredH(30);
 
         // Conteneur de parcours des dates
-        mLabelLibelleJour = new Label("");
-        mLabelLibelleJour.setAlignment(Component.CENTER);
-        mLabelLibelleJour.setUIID(UIID_LABEL_CURRENT_DATE);
-        mLabelLibelleDate = new Label("");
-        mLabelLibelleDate.setAlignment(Component.CENTER);
-        mLabelLibelleDate.setUIID(UIID_LABEL_CURRENT_DATE);
-        Container ctnLibellesDates = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        ctnLibellesDates.addComponent(mLabelLibelleJour);
-        //ctnLibellesDates.addComponent(mLabelLibelleDate);
-        ctnLibellesDates.setPreferredH(50);
+        mTextAreaLibelleJour = new TextArea("");
+        mTextAreaLibelleJour.setAlignment(Component.CENTER);
+        mTextAreaLibelleJour.setUIID(UIID_LABEL_CURRENT_DATE);
+        mTextAreaLibelleJour.setRows(2);
+        mTextAreaLibelleJour.setEditable(false);
+        mTextAreaLibelleJour.setFocusable(false);       
         mDatePrecedente = new Button(Main.icons.getImage("Previous"));
+        mDatePrecedente.setFocusable(true);
         mDateSuivante = new Button(Main.icons.getImage("Next"));
+        mDateSuivante.setFocusable(true);
         Container ctnDates = new Container(new BorderLayout());
         ctnDates.addComponent(BorderLayout.WEST, mDatePrecedente);
-        ctnDates.addComponent(BorderLayout.CENTER, ctnLibellesDates);
+        ctnDates.addComponent(BorderLayout.CENTER, mTextAreaLibelleJour);
         ctnDates.addComponent(BorderLayout.EAST, mDateSuivante);        
 
         // Conteneur des horaires de prières
@@ -325,11 +320,16 @@ public class MainForm extends Menu
 
         f.addCommand(Main.optionsCommand);
         f.addCommand(Main.exitCommand);
+        f.setBackCommand(Main.exitCommand);
     }
 
     private Label renvoyerLabelNomPriere(String pNomPriere) {
         Label retour = new Label(pNomPriere);
-        retour.getStyle().setFont(Main.theme.getFont(FONT_LABEL_PRAYER_NAME));
+        //retour.getUnselectedStyle().setFont(Main.theme.getFont(FONT_LABEL_PRAYER_NAME));
+        //retour.getSelectedStyle().setFont(Main.theme.getFont(FONT_LABEL_PRAYER_NAME));
+        retour.setUIID(UIID_LABEL_PRAYER_NAME);
+        retour.getUnselectedStyle().setBgTransparency(0);
+        retour.getSelectedStyle().setBgTransparency(0);
         if (!Main.isTactile()) {
             retour.setFocusable(true);
         }

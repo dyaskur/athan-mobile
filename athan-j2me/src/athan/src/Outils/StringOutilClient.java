@@ -16,7 +16,7 @@ public class StringOutilClient {
     public static final String EMPTY = "";
 
     public static boolean isEmpty(String pString) {
-        return pString != null && pString.trim().length() > 0;
+        return pString == null || pString.trim().length() == 0;
     }
 
     public static boolean isDateMemeJour(Date pDate1, Date pDate2) {

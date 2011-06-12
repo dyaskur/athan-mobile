@@ -101,8 +101,21 @@ public class VuePrincipale implements AthanConstantes {
         String lieu = "";
         
         try {
-            lieu = ServiceFactory.getFactory().getPreferences()
+            String ville = ServiceFactory.getFactory().getPreferences()
                                      .get(Preferences.sCityName);
+            if (!StringOutilClient.isEmpty(ville)) {
+                lieu += ville;
+            }
+            String region = ServiceFactory.getFactory().getPreferences()
+                                     .get(Preferences.sRegionName);
+            if (!StringOutilClient.isEmpty(region)) {
+                lieu += ", " + region;
+            }
+            String pays = ServiceFactory.getFactory().getPreferences()
+                                     .get(Preferences.sCountryName);
+            if (!StringOutilClient.isEmpty(pays)) {
+                lieu += ", " + pays;
+            }
         } catch (Exception exc) {
             exc.printStackTrace();
         }
@@ -117,8 +130,8 @@ public class VuePrincipale implements AthanConstantes {
             dateJour[1] += " " + mPrieresJournee.getHoraire();
         }
 
-        Main.getMainForm().getLabelLibelleJour().setText(dateJour[0] + "\n" + dateJour[1]);
-        Main.getMainForm().getLabelLibelleDate().setText(dateJour[1]);
+        Main.getMainForm().getTextAreaLibelleJour().setText(dateJour[0]
+                    + "\n" + dateJour[1]);
     }
 
     private void renseignerPrieres() {

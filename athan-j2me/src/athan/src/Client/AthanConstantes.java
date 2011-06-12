@@ -13,7 +13,8 @@ public interface AthanConstantes {
 
     // Variables
     public static final int TIMEOUT_GPS = 15; // en secondes
-    public static final int TIMEOUT_FENETRE_GPS = 0; // en secondes
+    public static final int TIMEOUT_FENETRE_ERROR = 0; // en ms
+    public static final int TIMEOUT_CONFIRMATION_MODIF = 2000; // en ms
     public static final String PATTERN_LIBELLE = "%s"; // en secondes
 
     // Geocoding
@@ -23,6 +24,27 @@ public interface AthanConstantes {
         "en",
         "es",
         "fr"
+    };
+
+    // Méthodes de calcul
+    public static final String [] CALCULATION_METHOD_FR = {
+        "Jafari",
+        "Karachi",
+        "Société Islamique Nord-Américaine",
+        "Ligue Islamique Mondiale",
+        "Mecque",
+        "Egypte",
+        "Personnalisée"
+    };
+
+    public static final String [] CALCULATION_METHOD_EN = {
+        "Jafari",
+        "Karachi",
+        "Islamic Society of North America",
+        "Muslim World League",
+        "Mekkah",
+        "Egypt",
+        "Custom"
     };
 
     // Icones
@@ -48,20 +70,29 @@ public interface AthanConstantes {
     public static final String UIID_LABEL_CURRENT_DATE = "LabelCurrentDate";
     public static final String UIID_LABEL_LOCALISATION_INFO = "LabelLocalisationInfo";
     public static final String UIID_TEXTAREA_SEARCH_TOOLTIP = "TextAreaSearchTooltip";
+    public static final String UIID_LABEL_PRAYER_NAME = "LabelPrayerName";
+    public static final String UIID_LABEL_CURRENT_CITY = "LabelCurrentCity";
+    public static final String UIID_LABEL_INFO_NAME = "LabelInfoName";
 
     public static final String FONT_LABEL_NEXT_PRAYER = "NextPrayer";
     public static final String FONT_LABEL_PRAYER = "Prayer";
-    public static final String FONT_LABEL_PRAYER_NAME = "PrayerName";
-    public static final String FONT_LABEL_INFO_NAME = "LabelInfoName";
+    //public static final String FONT_LABEL_PRAYER_NAME = "PrayerName";
+    //public static final String FONT_LABEL_INFO_NAME = "LabelInfoName";
 
     public static final String[] TRANSITION_TEXT_NO3D = {"Slide Up", "Slide Down", "Fade"};
 
     // Claviers
     public static final String[][] KB_COORDINATES = new String[][]{
-        {"\u0030", "\u0031", "\u0032", "\u0033", "\u0034", "\u0035", "$Delete$"},
-        {"\u0036", "\u0037", "\u0038", "\u0039", "\u002e", "$OK$"}
+        {"0", "1", "2", "3", "4", "5", "$Delete$"},
+        {"6", "7", "8", "9", ".", "-", "$OK$"}
     };
     public static final String KB_COORDINATES_MODE = "Val.";
+
+    public static final String[][] KB_INTEGER = new String[][]{
+        {"0", "1", "2", "3", "4", "5", "$Delete$"},
+        {"6", "7", "8", "9", "-", "$OK$"}
+    };
+    public static final String KB_INTEGER_MODE = "Val.";
 
     public static final String[][] KB_NOMS_fr = new String[][]{
         {"\u0061", "\u007A", "\u0065", "\u0072", "\u0074", "\u0079",

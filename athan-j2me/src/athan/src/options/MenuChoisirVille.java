@@ -89,19 +89,31 @@ public class MenuChoisirVille extends Menu {
         //tblLayoutInfosLocalisation.createConstraint().setWidthPercentage(100);
 
         Label lLabelNomVille = new Label(RESSOURCE.get("CityName"));
-        lLabelNomVille.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+        lLabelNomVille.setUIID(UIID_LABEL_INFO_NAME);
+        lLabelNomVille.getUnselectedStyle().setBgTransparency(0);
+        lLabelNomVille.getSelectedStyle().setBgTransparency(0);
+        lLabelNomVille.setFocusable(true);
         lLabelNomVille.setAlignment(Component.LEFT);
 
         Label lLabelNomRegion = new Label(RESSOURCE.get("RegionName"));
-        lLabelNomRegion.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+        lLabelNomRegion.setUIID(UIID_LABEL_INFO_NAME);
+        lLabelNomRegion.getUnselectedStyle().setBgTransparency(0);
+        lLabelNomRegion.getSelectedStyle().setBgTransparency(0);
+        lLabelNomRegion.setFocusable(true);
         lLabelNomRegion.setAlignment(Component.LEFT);
 
         Label lLabelNomPays = new Label(RESSOURCE.get("CountryName"));
-        lLabelNomPays.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+        lLabelNomPays.setUIID(UIID_LABEL_INFO_NAME);
+        lLabelNomPays.getUnselectedStyle().setBgTransparency(0);
+        lLabelNomPays.getSelectedStyle().setBgTransparency(0);
+        lLabelNomPays.setFocusable(true);
         lLabelNomPays.setAlignment(Component.LEFT);
 
         Label lLabelLat = new Label(RESSOURCE.get("LatLng"));
-        lLabelLat.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+        lLabelLat.setUIID(UIID_LABEL_INFO_NAME);
+        lLabelLat.getUnselectedStyle().setBgTransparency(0);
+        lLabelLat.getSelectedStyle().setBgTransparency(0);
+        lLabelLat.setFocusable(true);
         lLabelLat.setAlignment(Component.LEFT);
 
         mTextFieldNomVille = new TextField();
@@ -124,13 +136,13 @@ public class MenuChoisirVille extends Menu {
 
         mTextFieldLat = new TextField();
         mTextFieldLat.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mTextFieldLat.setAlignment(TextField.LEFT);
+        mTextFieldLat.setAlignment(TextField.RIGHT);
         mTextFieldLat.setRows(1);
         mTextFieldLat.setPreferredH(HAUTEUR_LABEL);
 
         mTextFieldLng = new TextField();
         mTextFieldLng.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mTextFieldLng.setAlignment(TextField.LEFT);
+        mTextFieldLng.setAlignment(TextField.RIGHT);
         mTextFieldLng.setRows(1);
         mTextFieldLng.setPreferredH(HAUTEUR_LABEL);
 
@@ -270,7 +282,7 @@ public class MenuChoisirVille extends Menu {
                     contenuDialogue += RESSOURCE.get("Longitude") + " " + latLng[1];
 
                     Dialog.show(RESSOURCE.get("fetchGPSTitle"), contenuDialogue, annulerCommand,
-                    new Command[] {annulerCommand, okCommand}, dialogType, null, TIMEOUT_FENETRE_GPS,
+                    new Command[] {annulerCommand, okCommand}, dialogType, null, TIMEOUT_FENETRE_ERROR,
                     CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
                 } else {
@@ -278,7 +290,7 @@ public class MenuChoisirVille extends Menu {
                     contenuDialogue = RESSOURCE.get("ErrorFetchGPS");
 
                     Dialog.show(RESSOURCE.get("fetchGPSTitle"), contenuDialogue, annulerCommand,
-                    new Command[] {annulerCommand}, dialogType, null, TIMEOUT_FENETRE_GPS,
+                    new Command[] {annulerCommand}, dialogType, null, TIMEOUT_FENETRE_ERROR,
                     CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                 }
             }
@@ -298,19 +310,31 @@ public class MenuChoisirVille extends Menu {
                 grid.setLayout(tbGrid);
 
                 Label lLabelNomVille = new Label(RESSOURCE.get("CityName"));
-                lLabelNomVille.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+                lLabelNomVille.setUIID(UIID_LABEL_INFO_NAME);
+                lLabelNomVille.getUnselectedStyle().setBgTransparency(0);
+                lLabelNomVille.getSelectedStyle().setBgTransparency(0);
+                lLabelNomVille.setFocusable(true);
                 lLabelNomVille.setAlignment(Component.LEFT);
 
                 Label lLabelNomRegion = new Label(RESSOURCE.get("RegionName"));
-                lLabelNomRegion.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+                lLabelNomRegion.setUIID(UIID_LABEL_INFO_NAME);
+                lLabelNomRegion.getUnselectedStyle().setBgTransparency(0);
+                lLabelNomRegion.getSelectedStyle().setBgTransparency(0);
+                lLabelNomRegion.setFocusable(true);
                 lLabelNomRegion.setAlignment(Component.LEFT);
 
                 Label lLabelNomPays = new Label(RESSOURCE.get("CountryName"));
-                lLabelNomPays.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+                lLabelNomPays.setUIID(UIID_LABEL_INFO_NAME);
+                lLabelNomPays.getUnselectedStyle().setBgTransparency(0);
+                lLabelNomPays.getSelectedStyle().setBgTransparency(0);
+                lLabelNomPays.setFocusable(true);
                 lLabelNomPays.setAlignment(Component.LEFT);
 
                 Label lLabelLanguage = new Label(RESSOURCE.get("GeocodingIndicative"));
-                lLabelLanguage.getStyle().setFont(Main.theme.getFont(FONT_LABEL_INFO_NAME));
+                lLabelLanguage.setUIID(UIID_LABEL_INFO_NAME);
+                lLabelLanguage.getUnselectedStyle().setBgTransparency(0);
+                lLabelLanguage.getSelectedStyle().setBgTransparency(0);
+                lLabelLanguage.setFocusable(true);
                 lLabelLanguage.setAlignment(Component.LEFT);
 
                 final TextField lTextFieldNomVille = new TextField();
@@ -395,7 +419,7 @@ public class MenuChoisirVille extends Menu {
                             
                             Dialog.show(RESSOURCE.get("GeocodingWindowParametersLackTitle"),
                                     RESSOURCE.get("GeocodingWindowParametersLackContent"), annulerCommand,
-                            new Command[] {annulerCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_GPS,
+                            new Command[] {annulerCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                             return;
                         } else {
@@ -440,7 +464,7 @@ public class MenuChoisirVille extends Menu {
                                         };
                                         Dialog.show(RESSOURCE.get("errorTitle"),
                                             RESSOURCE.get("GeocodingWindowRemoteException"), annulerCommand,
-                                            new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_GPS,
+                                            new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                                         return;
                                     } catch (AthanException exc) {
@@ -450,7 +474,7 @@ public class MenuChoisirVille extends Menu {
                                         };
                                         Dialog.show(RESSOURCE.get("errorTitle"),
                                             RESSOURCE.get("GeocodingWindowCustomException") + "\n" + exc.getMessage(), annulerCommand,
-                                            new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_GPS,
+                                            new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                                         return;
                                     } catch (Exception exc) {
@@ -460,21 +484,15 @@ public class MenuChoisirVille extends Menu {
                                         };
                                         Dialog.show(RESSOURCE.get("errorTitle"),
                                             RESSOURCE.get("GeocodingWindowUnknownException"), annulerCommand,
-                                            new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_GPS,
+                                            new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                                         return;
                                     }
 
-                                    System.out.println("GEOCODING OK");
-
                                     // Geocoding OK
                                     f.showBack();
-
-                                    System.out.println("fin showback OK");
                                 }
                             }).start();
-
-                            System.out.println("fin thread OK");
                         }
                     }
                 };
@@ -546,10 +564,12 @@ public class MenuChoisirVille extends Menu {
 
     private boolean sauvegarderParametresEcran() {
         // On vérifie que les paramètres sont corrects
+        double latitude = 0.0;
+        double longitude = 0.0;
         boolean okDonnees = true;
         try {
-            double latitude = Double.valueOf(mTextFieldLat.getText()).doubleValue();
-            double longitude = Double.valueOf(mTextFieldLng.getText()).doubleValue();
+            latitude = Double.valueOf(mTextFieldLat.getText()).doubleValue();
+            longitude = Double.valueOf(mTextFieldLng.getText()).doubleValue();
 
             if (latitude < 0.0 || latitude > 90.0) {
                 okDonnees = false;
@@ -563,14 +583,14 @@ public class MenuChoisirVille extends Menu {
             okDonnees = false;
         }
 
-        if (!okDonnees) {
-            final ResourceReader RESSOURCE = ServiceFactory.getFactory()
+        final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                             .getResourceReader();
 
-            // Message
+        if (!okDonnees) {
+            // Message d'erreur
             Command okCommand = new Command(RESSOURCE.get("Command.OK"));
             Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorLocationParameters"), okCommand,
-                    new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_GPS,
+                    new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                     CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
             // Sortie
             return false;
@@ -578,9 +598,9 @@ public class MenuChoisirVille extends Menu {
 
         try {
             ServiceFactory.getFactory().getPreferences()
-                .set(Preferences.sLatitude, mTextFieldLat.getText());
+                .set(Preferences.sLatitude, Double.toString(latitude));
             ServiceFactory.getFactory().getPreferences()
-                .set(Preferences.sLongitude, mTextFieldLng.getText());
+                .set(Preferences.sLongitude, Double.toString(longitude));
             ServiceFactory.getFactory().getPreferences()
                 .set(Preferences.sCityName, mTextFieldNomVille.getText());
             ServiceFactory.getFactory().getPreferences()
@@ -590,6 +610,12 @@ public class MenuChoisirVille extends Menu {
 
             ServiceFactory.getFactory().getPreferences()
                     .save();
+
+            // Message de confirmation modif
+            Command okCommand = new Command(RESSOURCE.get("Command.OK"));
+            Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
+                    new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
+                    CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
         } catch (Exception exc) {
             exc.printStackTrace();
         }

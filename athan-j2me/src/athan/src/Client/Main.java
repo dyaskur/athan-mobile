@@ -9,7 +9,6 @@ import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Factory.TacheTimer;
 import com.sun.lwuit.Command;
-import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Display;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
@@ -155,7 +154,7 @@ public class Main extends javax.microedition.midlet.MIDlet
         MainForm.setOptionForm(false);
 
         sMainForm = new MainForm(this);
-        sMainForm.run(exitCommand, this);
+        sMainForm.run(exitCommand, this, false);
 
         // On crée le timer
         sTimer = new Timer();

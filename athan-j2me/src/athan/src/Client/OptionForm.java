@@ -325,15 +325,10 @@ public class OptionForm extends Form
     public void actionPerformed(ActionEvent evt) {
         Command cmd = evt.getCommand();
         switch (cmd.getId()) {
-            /*
-            case RUN_COMMAND:
-                mCurrentMenu = ((Menu) (mDemosHash.get(this.getFocused())));
-                mCurrentMenu.run(backCommand, this);
-                break;
-            */
             case EXIT_COMMAND:
-                Main.getMainForm().run(Main.exitCommand, Main.getMainForm().getMain());
-
+                Main.getMainForm().run(Main.exitCommand,
+                        Main.getMainForm().getMain(),
+                        false);
                 Main.setTimer(new Timer());
                 Main.getTimer().schedule(new TacheTimer(), 0, TacheTimer.DUREE_CYCLE);
                 break;
@@ -357,23 +352,6 @@ public class OptionForm extends Form
                 });
                 aboutForm.show();
                 break;
-            /*
-            case DRAG_MODE_COMMAND:
-                this.setDragMode(true);
-                this.removeCommand(dragModeCommand);
-                this.addCommand(scrollModeCommand);
-                break;
-            case SCROLL_MODE_COMMAND:
-                this.setDragMode(false);
-                this.removeCommand(scrollModeCommand);
-                this.addCommand(dragModeCommand);
-                break;
-            case RTL_COMMAND:
-                LookAndFeel laf = UIManager.getInstance().getLookAndFeel();
-                laf.setRTL(!laf.isRTL());
-                setMainForm(Main.icons);
-                break;
-            */
         }
     }
 
@@ -439,11 +417,7 @@ public class OptionForm extends Form
         
         this.addCommand(exitCommand);
         this.addCommand(aboutCommand);
-        /*
-        this.addCommand(rtlCommand);
-        this.addCommand(dragModeCommand);
-        this.addCommand(runCommand);
-        */
+        this.setBackCommand(exitCommand);
         this.addCommandListener(this);
     }
 
@@ -455,7 +429,7 @@ public class OptionForm extends Form
 
         public void actionPerformed(ActionEvent evt) {
             mCurrentMenu = ((Menu) (mDemosHash.get(evt.getSource())));
-            mCurrentMenu.run(backCommand, OptionForm.this);
+            mCurrentMenu.run(backCommand, OptionForm.this, true);
         }
     }
 

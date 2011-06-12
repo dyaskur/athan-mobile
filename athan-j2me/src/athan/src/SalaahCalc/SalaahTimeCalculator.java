@@ -18,8 +18,8 @@ import java.util.TimeZone;
  */
 public class SalaahTimeCalculator {
     // Adjusting Methods for Higher Latitudes
-    static final int None = 0;    // No adjustment
-    static final int MidNight = 1;    // middle of night
+    static final int None = 0;          // No adjustment
+    static final int MidNight = 1;      // middle of night
     static final int OneSeventh = 2;    // 1/7th of night
     static final int AngleBased = 3;    // angle/60th of night
 
@@ -56,7 +56,8 @@ public class SalaahTimeCalculator {
     private double JDate;
     
     /** calculation */
-    private int numIterations = 1;		// number of iterations needed to compute times, this should never be more than 1;
+    // number of iterations needed to compute times, this should never be more than 1;
+    private int numIterations = 1;
 
     private ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
@@ -141,7 +142,6 @@ public class SalaahTimeCalculator {
     ///Makkah  = 4
     ///Egypt   = 5
     ///Custom  = 6
-    ///Saad    = 7
     /// </summary>
     /// <param name="methodToUse">Calculation Method to use</param>
     public void setCalculationMethod(CalculationMethods methodToUse)

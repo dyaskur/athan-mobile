@@ -40,31 +40,35 @@ public abstract class Menu
     /**
      * Invoked by the main code to start the demo
      */
-    public final void run(final Command backCommand, ActionListener commandListener) {
+    public final void run(final Command backCommand,
+                                ActionListener commandListener,
+                                boolean showHelp) {
         System.gc();
         
         final ResourceReader RESOURCE = ServiceFactory.getFactory().getResourceReader();
         
         mForm = new Form(getName());
-        
-        mForm.addCommand(new Command(RESOURCE.get("Menu.Help")) {
-            public void actionPerformed(ActionEvent evt) {
-                Form helpForm = new Form(RESOURCE.get("Window.Help"));
-                helpForm.setLayout(new BorderLayout());
-                TextArea helpText = new TextArea(getHelpImpl(), 5, 10);
-                helpText.setEditable(false);
-                helpForm.setScrollable(false);
-                helpForm.addComponent(BorderLayout.CENTER, helpText);
-                Command c = new Command(RESOURCE.get("Menu.Back")) {
-                    public void actionPerformed(ActionEvent evt) {
-                        mForm.show();
-                    }
-                };
-                helpForm.addCommand(c);
-                helpForm.setBackCommand(c);
-                helpForm.show();
-            }
-        });
+
+        if (showHelp) {
+            mForm.addCommand(new Command(RESOURCE.get("Menu.Help")) {
+                public void actionPerformed(ActionEvent evt) {
+                    Form helpForm = new Form(RESOURCE.get("Window.Help"));
+                    helpForm.setLayout(new BorderLayout());
+                    TextArea helpText = new TextArea(getHelpImpl(), 5, 10);
+                    helpText.setEditable(false);
+                    helpForm.setScrollable(false);
+                    helpForm.addComponent(BorderLayout.CENTER, helpText);
+                    Command c = new Command(RESOURCE.get("Menu.Back")) {
+                        public void actionPerformed(ActionEvent evt) {
+                            mForm.show();
+                        }
+                    };
+                    helpForm.addCommand(c);
+                    helpForm.setBackCommand(c);
+                    helpForm.show();
+                }
+            });
+        }
         mForm.addCommand(backCommand);
         mForm.setCommandListener(commandListener);
         mForm.setBackCommand(backCommand);

@@ -10,15 +10,15 @@ package athan.src.SalaahCalc;
  */
 public class CalculationMethods {
 
-    public final int value;
+    private final int value;
 
-    protected static final int Jafari_VAL = 0;
-    protected static final int Karachi_VAL = 1;
-    protected static final int ISNA_VAL = 2;
-    protected static final int MWL_VAL = 3;
-    protected static final int Makkah_VAL = 4;
-    protected static final int Egypt_VAL = 5;
-    protected static final int Custom_VAL = 6;
+    private static final int Jafari_VAL = 0;
+    private static final int Karachi_VAL = 1;
+    private static final int ISNA_VAL = 2;
+    private static final int MWL_VAL = 3;
+    private static final int Makkah_VAL = 4;
+    private static final int Egypt_VAL = 5;
+    private static final int Custom_VAL = 6;
 
     /** L'attribut qui contient la valeur associé à l'enum */
     public static final CalculationMethods Jafari = new CalculationMethods(Jafari_VAL);
