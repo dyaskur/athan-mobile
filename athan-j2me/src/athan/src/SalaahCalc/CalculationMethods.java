@@ -30,7 +30,7 @@ public class CalculationMethods {
     public static final CalculationMethods Custom = new CalculationMethods(Custom_VAL);
 
     /** Le constructeur qui associe une valeur à l'enum */
-    private CalculationMethods(int value) {
+    public CalculationMethods(int value) {
         this.value = value;
     }
 

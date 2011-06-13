@@ -47,6 +47,11 @@ public interface AthanConstantes {
         "Custom"
     };
 
+    public static final String [] CALCULATION_ASR_METHOD = {
+        "Shafii",
+        "Hanafi"
+    };
+
     // Icones
     public static final String MENU_AFFICHAGE_COMPAS = "MenuAffichageCompas";
     public static final String MENU_ALARMES = "MenuAlarmes";
@@ -82,11 +87,11 @@ public interface AthanConstantes {
     public static final String[] TRANSITION_TEXT_NO3D = {"Slide Up", "Slide Down", "Fade"};
 
     // Claviers
-    public static final String[][] KB_COORDINATES = new String[][]{
+    public static final String[][] KB_FLOATS = new String[][]{
         {"0", "1", "2", "3", "4", "5", "$Delete$"},
         {"6", "7", "8", "9", ".", "-", "$OK$"}
     };
-    public static final String KB_COORDINATES_MODE = "Val.";
+    public static final String KB_FLOATS_MODE = "Val.";
 
     public static final String[][] KB_INTEGER = new String[][]{
         {"0", "1", "2", "3", "4", "5", "$Delete$"},

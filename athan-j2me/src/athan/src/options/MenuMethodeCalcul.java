@@ -3,12 +3,15 @@
  */
 package athan.src.options;
 
+import athan.src.Client.AthanException;
 import athan.src.Client.Main;
 import athan.src.Client.Menu;
 import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Outils.StringOutilClient;
+import athan.src.SalaahCalc.CalculationMethods;
+import athan.src.microfloat.Real;
 import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
@@ -19,8 +22,11 @@ import com.sun.lwuit.Label;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.events.ActionEvent;
+import com.sun.lwuit.events.SelectionListener;
 import com.sun.lwuit.impl.midp.VirtualKeyboard;
 import com.sun.lwuit.layouts.BoxLayout;
+import com.sun.lwuit.layouts.GridLayout;
+import com.sun.lwuit.table.TableLayout;
 
 /**
  * Menu méthode de calcul
@@ -30,11 +36,18 @@ import com.sun.lwuit.layouts.BoxLayout;
 public class MenuMethodeCalcul extends Menu {
 
     private static final int HAUTEUR_LABEL = 18;
-    private static final int HAUTEUR_LABEL_TOUS = 25;
+    private static final int HAUTEUR_LABEL_TOUS = 50;
 
     private Command mOK;
 
-    private TextField mDecalage;
+    private ComboBox mChoixMethode;
+    private ComboBox mMaghrebSelector;
+    private ComboBox mIshaaSelector;
+    private ComboBox mAsrJuristicMethode;
+
+    private TextField mFajrAngle;
+    private TextField mMaghrebValue;
+    private TextField mIshaaValue;
 
     public String getName() {
         return "Calcul";
@@ -46,6 +59,98 @@ public class MenuMethodeCalcul extends Menu {
 
     protected String getHelp() {
         return "Aide";
+    }
+
+    private TableLayout.Constraint getCtnLayoutParams(TableLayout pTB,
+                                                    int pPourcentage,
+                                                    int pHorizontalSpan) {
+        TableLayout.Constraint contrainte = pTB.createConstraint();
+        if (pPourcentage == 100) {
+            //contrainte.setHeightPercentage(10);
+        } else {
+            //contrainte.setHeightPercentage(18);
+        }
+        contrainte.setHorizontalSpan(pHorizontalSpan);
+        contrainte.setWidthPercentage(pPourcentage);
+        return contrainte;
+    }
+
+    private void choixSelectionChange() {
+
+        if (mChoixMethode.getSelectedIndex()
+                != CalculationMethods.Custom.getValue()) {
+            mFajrAngle.setEditable(false);
+            mMaghrebSelector.setEnabled(false);
+            mMaghrebValue.setEditable(false);
+            mIshaaSelector.setEnabled(false);
+            mIshaaValue.setEditable(false);
+
+            switch(mChoixMethode.getSelectedIndex()) {
+                // Jafari
+                case 0:
+                    mFajrAngle.setText("16");
+                    mMaghrebSelector.setSelectedIndex(0);
+                    mMaghrebValue.setText("4");
+                    mIshaaSelector.setSelectedIndex(0);
+                    mIshaaValue.setText("14");
+                    break;
+                // Karachi
+                case 1:
+                    mFajrAngle.setText("18");
+                    mMaghrebSelector.setSelectedIndex(1);
+                    mMaghrebValue.setText("0");
+                    mIshaaSelector.setSelectedIndex(0);
+                    mIshaaValue.setText("18");
+                    break;
+                // ISNA
+                case 2:
+                    mFajrAngle.setText("15");
+                    mMaghrebSelector.setSelectedIndex(1);
+                    mMaghrebValue.setText("0");
+                    mIshaaSelector.setSelectedIndex(0);
+                    mIshaaValue.setText("15");
+                    break;
+                // MWL
+                case 3:
+                    mFajrAngle.setText("18");
+                    mMaghrebSelector.setSelectedIndex(1);
+                    mMaghrebValue.setText("0");
+                    mIshaaSelector.setSelectedIndex(0);
+                    mIshaaValue.setText("17");
+                    break;
+                // Makkah
+                case 4:
+                    mFajrAngle.setText("18.5");
+                    mMaghrebSelector.setSelectedIndex(1);
+                    mMaghrebValue.setText("0");
+                    mIshaaSelector.setSelectedIndex(1);
+                    mIshaaValue.setText("90");
+                    break;
+                // Egypt
+                case 5:
+                    mFajrAngle.setText("19.5");
+                    mMaghrebSelector.setSelectedIndex(1);
+                    mMaghrebValue.setText("0");
+                    mIshaaSelector.setSelectedIndex(0);
+                    mIshaaValue.setText("17.5");
+                    break;
+                default:
+                    mFajrAngle.setText("");
+                    mMaghrebSelector.setSelectedIndex(0);
+                    mMaghrebValue.setText("");
+                    mIshaaSelector.setSelectedIndex(0);
+                    mIshaaValue.setText("");
+                    break;
+            }
+        } else {
+            mFajrAngle.setEditable(true);
+            mMaghrebSelector.setEnabled(true);
+            mMaghrebValue.setEditable(true);
+            mIshaaSelector.setEnabled(true);
+            mIshaaValue.setEditable(true);
+
+            initialiserCustomParams();
+        }
     }
 
     protected void execute(final Form f) {
@@ -61,27 +166,102 @@ public class MenuMethodeCalcul extends Menu {
             f.setFocusScrolling(true);
         }
 
-        Label lLabelDecalage = new Label(RESSOURCE.get("TimeLag"));
-        lLabelDecalage.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelDecalage.getUnselectedStyle().setBgTransparency(0);
-        lLabelDecalage.getSelectedStyle().setBgTransparency(0);
-        lLabelDecalage.setFocusable(true);
-        lLabelDecalage.setAlignment(Component.LEFT);
-        lLabelDecalage.setPreferredH(HAUTEUR_LABEL);
+        Label lLabelChoixMethode = new Label(RESSOURCE.get("CalculationMethod"));
+        lLabelChoixMethode.setUIID(UIID_LABEL_INFO_NAME);
+        lLabelChoixMethode.getUnselectedStyle().setBgTransparency(0);
+        lLabelChoixMethode.getSelectedStyle().setBgTransparency(0);
+        lLabelChoixMethode.setFocusable(true);
+        lLabelChoixMethode.setAlignment(Component.LEFT);
+        lLabelChoixMethode.setPreferredH(HAUTEUR_LABEL);
 
-        mDecalage = new TextField();
-        mDecalage.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mDecalage.setAlignment(TextField.LEFT);
-        mDecalage.setRows(1);
-        mDecalage.setPreferredH(HAUTEUR_LABEL);
+        Label lLabelAsrMethod = new Label(RESSOURCE.get("AsrJuristicMethod"));
+        lLabelAsrMethod.setUIID(UIID_LABEL_INFO_NAME);
+        lLabelAsrMethod.getUnselectedStyle().setBgTransparency(0);
+        lLabelAsrMethod.getSelectedStyle().setBgTransparency(0);
+        lLabelAsrMethod.setFocusable(true);
+        lLabelAsrMethod.setAlignment(Component.LEFT);
+        lLabelAsrMethod.setPreferredH(HAUTEUR_LABEL);
 
-        Container ctnSaisie = new Container(new BoxLayout(BoxLayout.X_AXIS));
-        ctnSaisie.addComponent(lLabelDecalage);
-        ctnSaisie.addComponent(mDecalage);
+        String [] maghrebValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAS") };
+        String [] ishaaValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAM") };
+
+        if (ServiceFactory.getFactory().getPreferences()
+                .getLangue().equals(Preferences.LANGUE_EN)) {
+            mChoixMethode = new ComboBox(CALCULATION_METHOD_EN);
+        } else if (ServiceFactory.getFactory().getPreferences()
+                .getLangue().equals(Preferences.LANGUE_FR)) {
+            mChoixMethode = new ComboBox(CALCULATION_METHOD_FR);
+        } else {
+            // Par défaut
+            mChoixMethode = new ComboBox(CALCULATION_METHOD_EN);
+        }
+        mChoixMethode.setSelectedIndex(0);
+        mChoixMethode.addSelectionListener(new SelectionListener() {
+
+            public void selectionChanged(int oldSelected, int newSelected) {
+                if (oldSelected != newSelected) {
+                    choixSelectionChange();
+                }
+            }
+        });
+
+        mAsrJuristicMethode = new ComboBox(CALCULATION_ASR_METHOD);
+        mAsrJuristicMethode.setSelectedIndex(0);
+
+        mMaghrebSelector = new ComboBox(maghrebValues);
+        mMaghrebSelector.setSelectedIndex(0);
+        mIshaaSelector = new ComboBox(ishaaValues);
+        mIshaaSelector.setSelectedIndex(0);
+
+        mFajrAngle = new TextField();
+        mFajrAngle.setUIID(UIID_LABEL_LOCALISATION_INFO);
+        mFajrAngle.setAlignment(TextField.LEFT);
+        mFajrAngle.setRows(1);
+        mFajrAngle.setPreferredH(HAUTEUR_LABEL);
+
+        mMaghrebValue = new TextField();
+        mMaghrebValue.setUIID(UIID_LABEL_LOCALISATION_INFO);
+        mMaghrebValue.setAlignment(TextField.LEFT);
+        mMaghrebValue.setRows(1);
+        mMaghrebValue.setPreferredH(HAUTEUR_LABEL);
+
+        mIshaaValue = new TextField();
+        mIshaaValue.setUIID(UIID_LABEL_LOCALISATION_INFO);
+        mIshaaValue.setAlignment(TextField.LEFT);
+        mIshaaValue.setRows(1);
+        mIshaaValue.setPreferredH(HAUTEUR_LABEL);
+
+        Container ctnSaisie = new Container(new GridLayout(2, 2));
+        ctnSaisie.addComponent(lLabelChoixMethode);
+        ctnSaisie.addComponent(mChoixMethode);
+        ctnSaisie.addComponent(lLabelAsrMethod);
+        ctnSaisie.addComponent(mAsrJuristicMethode);
         ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
+
+        TableLayout tblLayoutParams = new TableLayout(3, 3);
+        Container lCtnParams = new Container();
+        lCtnParams.setLayout(tblLayoutParams);
+
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 60, 2),
+                                    retournerLabelParam(RESSOURCE.get("fajrAngle")));
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 40, 1),
+                                    mFajrAngle);
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
+                                    retournerLabelParam(RESSOURCE.get("maghrebParam")));
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
+                                    mMaghrebSelector);
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 20, 1),
+                                    mMaghrebValue);
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
+                                    retournerLabelParam(RESSOURCE.get("ishaaParam")));
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
+                                    mIshaaSelector);
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 20, 1),
+                                    mIshaaValue);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         f.addComponent(ctnSaisie);
+        f.addComponent(lCtnParams);
 
         // Gestion du comportement (ergonomie)
         if (!Main.isTactile()) {
@@ -93,16 +273,41 @@ public class MenuMethodeCalcul extends Menu {
             public void actionPerformed(ActionEvent ae) {
                 // On vérifie la saisie
                 boolean contenuOk = true;
-                int decalage = 0;
-                try {
-                    String s_decalage = mDecalage.getText();
-                    if (!StringOutilClient.isEmpty(s_decalage)) {
-                        decalage = Integer.parseInt(s_decalage);
-                    } else {
+                int calculationMethod = mChoixMethode.getSelectedIndex();
+
+                double fajrAngle = 0.0;
+                int maghrebSelector = mMaghrebSelector.getSelectedIndex();
+                int ishaaSelector = mIshaaSelector.getSelectedIndex();
+                double maghrebValue = 0.0;
+                double ishaaValue = 0.0;
+
+                if (calculationMethod == CalculationMethods.Custom.getValue()) {
+                    try {
+                        String s_fajrAngle = mFajrAngle.getText();
+                        String s_maghrebValue = mMaghrebValue.getText();
+                        String s_ishaaValue = mIshaaValue.getText();
+                        if (!StringOutilClient.isEmpty(s_fajrAngle)
+                                && !StringOutilClient.isEmpty(s_maghrebValue)
+                                && !StringOutilClient.isEmpty(s_ishaaValue)) {
+
+                            fajrAngle = Double.parseDouble(s_fajrAngle);
+                            maghrebValue = Double.parseDouble(s_maghrebValue);
+                            ishaaValue = Double.parseDouble(s_ishaaValue);
+
+                            if (!estAngleCorrect(fajrAngle)
+                                    || (maghrebSelector == 0 && !estAngleCorrect(maghrebValue))
+                                    || (maghrebSelector == 1 && !estMinutesCorrect(maghrebValue))
+                                    || (ishaaSelector == 0 && !estAngleCorrect(ishaaValue))
+                                    || (ishaaSelector == 1 && !estMinutesCorrect(ishaaValue))) {
+                                throw new AthanException("outbound values");
+                            }
+
+                        } else {
+                            throw new AthanException("empty values");
+                        }
+                    } catch(Exception exc) {
                         contenuOk = false;
                     }
-                } catch(Exception exc) {
-                    contenuOk = false;
                 }
 
                 if (!contenuOk) {
@@ -111,7 +316,7 @@ public class MenuMethodeCalcul extends Menu {
 
                     // Message d'erreur
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
-                    Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorTimeLagParameters"), okCommand,
+                    Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorCalculationParameters"), okCommand,
                             new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                     return;
@@ -119,7 +324,20 @@ public class MenuMethodeCalcul extends Menu {
 
                 try {
                     ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sDecalageHoraire, Integer.toString(decalage));
+                        .set(Preferences.sCalculationMethod, Integer.toString(calculationMethod));
+
+                    if (calculationMethod == CalculationMethods.Custom.getValue()) {
+                        ServiceFactory.getFactory().getPreferences()
+                                .set(Preferences.sCustomFajrAngle, Double.toString(fajrAngle));
+                        ServiceFactory.getFactory().getPreferences()
+                                .set(Preferences.sCustomMaghrebSelector, Integer.toString(maghrebSelector));
+                        ServiceFactory.getFactory().getPreferences()
+                                .set(Preferences.sCustomMaghrebValue, Double.toString(maghrebValue));
+                        ServiceFactory.getFactory().getPreferences()
+                                .set(Preferences.sCustomIshaaSelector, Integer.toString(ishaaSelector));
+                        ServiceFactory.getFactory().getPreferences()
+                                .set(Preferences.sCustomIshaaValue, Double.toString(ishaaValue));
+                    }
 
                     ServiceFactory.getFactory().getPreferences()
                             .save();
@@ -127,7 +345,7 @@ public class MenuMethodeCalcul extends Menu {
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, 2000,
+                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                 } catch (Exception exc) {
                     exc.printStackTrace();
@@ -136,29 +354,101 @@ public class MenuMethodeCalcul extends Menu {
         };
 
         f.addCommand(mOK);
-        initialiserInfosDecalage();
+        initialiserInfosParam();
         initialiserClaviers();
     }
 
-    private void initialiserInfosDecalage() {
+    private boolean estAngleCorrect(double pAngle) {
+        return pAngle >= 0.0 && pAngle <= 20.0;
+    }
 
-        String lDecalage = "0";
+    private boolean estMinutesCorrect(double pMinutes) {
+        System.out.println("pMinutes - Math.floor(pMinutes) " + (pMinutes - Math.floor(pMinutes)));
+        return (pMinutes - Math.floor(pMinutes) == 0.0)
+                    &&  pMinutes >= 0 && pMinutes <= 120;
+    }
+
+    private void initialiserInfosParam() {
+
+        initialiserCustomParams();
+
+        int lAsrMethod = 0;
+        int lCalcMethod = 0;
 
         try {
-            lDecalage = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sDecalageHoraire);
+            lAsrMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sMethodeJuridiqueAsr));
+            lCalcMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCalculationMethod));
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+
+        mAsrJuristicMethode.setSelectedIndex(lAsrMethod);
+
+        mChoixMethode.setSelectedIndex(lCalcMethod);
+        choixSelectionChange();
+    }
+
+    private void initialiserCustomParams() {
+
+        String lFajrValue = "0";
+        int lMaghrebSelector = 0;
+        int lIshaaSelector = 0;
+        String lMaghrebValue = "0";
+        String lIshaaValue = "0";
+
+        try {
+            lFajrValue = ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCustomFajrAngle);
+            lMaghrebSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCustomMaghrebSelector));
+            lMaghrebValue = ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCustomMaghrebValue);
+            lIshaaSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCustomIshaaSelector));
+            lIshaaValue = ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCustomIshaaValue);
 
         } catch (Exception exc) {
             exc.printStackTrace();
         }
 
-        mDecalage.setText(lDecalage);
+        mFajrAngle.setText(lFajrValue);
+        mMaghrebSelector.setSelectedIndex(lMaghrebSelector);
+        if (lMaghrebSelector == 0) {
+            mMaghrebValue.setText(lMaghrebValue);
+        } else {
+            Real rMaghrebValue = new Real(lMaghrebValue);
+            mMaghrebValue.setText(new Integer(rMaghrebValue.toInteger()).toString());
+        }
+        mIshaaSelector.setSelectedIndex(lIshaaSelector);
+        if (lIshaaSelector == 0) {
+            mIshaaValue.setText(lIshaaValue);
+        } else {
+            Real rIshaaValue = new Real(lIshaaValue);
+            mIshaaValue.setText(new Integer(rIshaaValue.toInteger()).toString());
+        }
     }
 
     private void initialiserClaviers() {
-        VirtualKeyboard vkbEntier = new VirtualKeyboard();
-        vkbEntier.addInputMode(KB_INTEGER_MODE, KB_INTEGER);
-        vkbEntier.setInputModeOrder(new String[]{KB_INTEGER_MODE});
-        VirtualKeyboard.bindVirtualKeyboard(mDecalage, vkbEntier);
+        VirtualKeyboard vkbAngles = new VirtualKeyboard();
+        vkbAngles.addInputMode(KB_FLOATS_MODE, KB_FLOATS);
+        vkbAngles.setInputModeOrder(new String[]{KB_FLOATS_MODE});
+        VirtualKeyboard.bindVirtualKeyboard(mFajrAngle, vkbAngles);
+        VirtualKeyboard.bindVirtualKeyboard(mMaghrebValue, vkbAngles);
+        VirtualKeyboard.bindVirtualKeyboard(mIshaaValue, vkbAngles);
+    }
+
+    private Label retournerLabelParam(String pTitle) {
+        Label lLabel = new Label(pTitle);
+        lLabel.setUIID(UIID_LABEL_INFO_NAME);
+        lLabel.getUnselectedStyle().setBgTransparency(0);
+        lLabel.getSelectedStyle().setBgTransparency(0);
+        lLabel.setFocusable(true);
+        lLabel.setAlignment(Component.LEFT);
+        lLabel.setPreferredH(HAUTEUR_LABEL);
+
+        return lLabel;
     }
 }

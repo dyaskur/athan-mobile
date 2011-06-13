@@ -74,7 +74,7 @@ public class SalaahTimeCalculator {
                         new double[]{18, 1, 0, 0, 18},      //Karachi
                         new double[]{15, 1, 0, 0, 15},      //ISNA
                         new double[]{18, 1, 0, 0, 17},      //MWL
-                        new double[]{19, 1, 0, 1, 90},      //Makkah
+                        new double[]{18.5, 1, 0, 1, 90},    //Makkah
                         new double[]{19.5, 1, 0, 0, 17.5},  //Egypt
                         new double[]{12, 1, 0, 0, 12}       //Custom
                     };
@@ -144,31 +144,46 @@ public class SalaahTimeCalculator {
     ///Custom  = 6
     /// </summary>
     /// <param name="methodToUse">Calculation Method to use</param>
-    public void setCalculationMethod(CalculationMethods methodToUse)
+    public void setCalculationMethod(CalculationMethods methodToUse,
+                                        CalculationCustomParams params)
     {
         this.calcMethod = methodToUse.getValue();
+
+        if (CalculationMethods.Custom.getValue() == methodToUse.getValue()) {
+            setFajrAngle(params.getFajrAngle());
+            if (params.getMaghrebSelector() == 0) {
+                setMaghribAngle(params.getMaghrebValue());
+            } else {
+                setMaghribMinutes(params.getMaghrebValue());
+            }
+            if (params.getIshaaSelector() == 0) {
+                setIshaAngle(params.getIshaaValue());
+            } else {
+                setIshaMinutes(params.getIshaaValue());
+            }
+        }
     }
 
     // set the juristic method for Asr
-    public void setAsrJurusticionType(JuristicMethods selectedJuristicion)
+    public void setAsrJurusticType(JuristicMethods selectedJuristicion)
     {
         this.asrJuristic = selectedJuristicion.getValue();
     }
 
     // set the angle for calculating Fajr
-    private void setFajrAngle(double angle)
+    public void setFajrAngle(double angle)
     {
         this.setCustomParams(new Double[] { new Double(angle), null, null, null, null });
     }
 
     // set the angle for calculating Maghrib
-    private void setMaghribAngle(double angle)
+    public void setMaghribAngle(double angle)
     {
         this.setCustomParams(new Double[] { null, new Double(0), new Double(angle), null, null });
     }
 
     // set the angle for calculating Isha
-    private void setIshaAngle(double angle)
+    public void setIshaAngle(double angle)
     {
         this.setCustomParams(new Double[] { null, null, null, new Double(0), new Double(angle) });
     }
@@ -181,13 +196,13 @@ public class SalaahTimeCalculator {
     }
 
     // set the minutes after Sunset for calculating Maghrib
-    private void setMaghribMinutes(int minutes)
+    public void setMaghribMinutes(double minutes)
     {
         this.setCustomParams(new Double[] { null, new Double(1), new Double(minutes), null, null });
     }
 
     // set the minutes after Maghrib for calculating Isha
-    private void setIshaMinutes(int minutes)
+    public void setIshaMinutes(double minutes)
     {
         this.setCustomParams(new Double[] { null, null, null, new Double(1), new Double(minutes) });
     }
@@ -195,12 +210,12 @@ public class SalaahTimeCalculator {
     // set custom values for calculation parameters
     private void setCustomParams(Double[] userParams)
     {
-        for (int i = 0; i < 5; i++)
-        {
-            if (userParams[i] == null)
+        for (int i = 0; i < 5; i++) {
+            if (userParams[i] == null) {
                 this.methodParams[CalculationMethods.Custom.getValue()][i] = this.methodParams[this.calcMethod][i];
-            else
+            } else {
                 this.methodParams[CalculationMethods.Custom.getValue()][i] = userParams[i].doubleValue();
+            }
         }
         this.calcMethod = CalculationMethods.Custom.getValue();
     }
@@ -327,8 +342,16 @@ public class SalaahTimeCalculator {
         double Dhuhr = this.computeMidDay(t[2].doubleValue());
         double Asr = this.computeAsr(1 + this.asrJuristic, t[3].doubleValue());
         double Sunset = this.computeTime(0.833, t[4].doubleValue());
-        double Maghrib = this.computeTime(this.methodParams[this.calcMethod][2], t[5].doubleValue());
-        double Isha = this.computeTime(this.methodParams[this.calcMethod][4], t[6].doubleValue());
+        
+        double Maghrib = 0;
+        double Isha = 0;
+        
+        if (this.methodParams[this.calcMethod][1] == 0) {
+            Maghrib = this.computeTime(this.methodParams[this.calcMethod][2], t[5].doubleValue());
+        }
+        if (this.methodParams[this.calcMethod][3] == 0) {
+            Isha = this.computeTime(this.methodParams[this.calcMethod][4], t[6].doubleValue());
+        }
 
         return new Double[] { new Double(Fajr), new Double(Sunrise), new Double(Dhuhr),
                     new Double(Asr), new Double(Sunset), new Double(Maghrib), new Double(Isha) };

@@ -3,13 +3,13 @@
  */
 package athan.src.options;
 
+import athan.src.Client.AthanException;
 import athan.src.Client.Main;
 import athan.src.Client.Menu;
 import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Outils.StringOutilClient;
-import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
@@ -19,9 +19,7 @@ import com.sun.lwuit.Label;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.events.ActionEvent;
-import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.impl.midp.VirtualKeyboard;
-import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 
 /**
@@ -83,6 +81,7 @@ public class MenuConfigHeureLocale extends Menu {
         ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        f.addComponent(new Label());
         f.addComponent(ctnSaisie);
 
         // Gestion du comportement (ergonomie)
@@ -100,8 +99,11 @@ public class MenuConfigHeureLocale extends Menu {
                     String s_decalage = mDecalage.getText();
                     if (!StringOutilClient.isEmpty(s_decalage)) {
                         decalage = Integer.parseInt(s_decalage);
+                        if (Math.abs(decalage) > 12) {
+                            throw new AthanException("> 12");
+                        }
                     } else {
-                        contenuOk = false;
+                        throw new AthanException("empty");
                     }
                 } catch(Exception exc) {
                     contenuOk = false;
@@ -129,7 +131,7 @@ public class MenuConfigHeureLocale extends Menu {
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, 2000,
+                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                 } catch (Exception exc) {
                     exc.printStackTrace();

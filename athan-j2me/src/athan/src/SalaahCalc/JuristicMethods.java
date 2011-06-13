@@ -20,7 +20,7 @@ public class JuristicMethods {
     public static final JuristicMethods Hanafi = new JuristicMethods(Hanafi_VAL);
 
     /** Le constructeur qui associe une valeur à l'enum */
-    private JuristicMethods(int value) {
+    public JuristicMethods(int value) {
         this.value = value;
     }
 

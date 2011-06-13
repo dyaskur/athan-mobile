@@ -10,6 +10,7 @@ import athan.src.Factory.ServiceFactory;
 import athan.src.Outils.StringOutilClient;
 import athan.src.Priere.Horaire;
 import athan.src.Priere.PrieresJournee;
+import athan.src.SalaahCalc.CalculationCustomParams;
 import athan.src.SalaahCalc.CalculationMethods;
 import athan.src.SalaahCalc.JuristicMethods;
 import athan.src.SalaahCalc.SalaahTimeCalculator;
@@ -36,6 +37,8 @@ public class VuePrincipale implements AthanConstantes {
         int formatHoraire = 0;
         int methodeJuridiqueAsr = 0;
         int decalageHoraire = 0;
+        int calculationMethod = 0;
+        CalculationCustomParams customParams;
 
         try {
             sLatitude = ServiceFactory.getFactory().getPreferences()
@@ -48,17 +51,16 @@ public class VuePrincipale implements AthanConstantes {
                                 .get(Preferences.sMethodeJuridiqueAsr));
             decalageHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
                                 .get(Preferences.sDecalageHoraire));
-        
+            calculationMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                                .get(Preferences.sCalculationMethod));
+            customParams = ServiceFactory.getFactory().getPreferences()
+                                .getCalculationCustomParams();
 
             // Calcul des prières
             SalaahTimeCalculator calc = new SalaahTimeCalculator();
-            calc.setCalculationMethod(CalculationMethods.Custom);
-            calc.setTimeFormat(formatHoraire);
-            if (methodeJuridiqueAsr == 0) {
-                calc.setAsrJurusticionType(JuristicMethods.Shafii);
-            } else {
-                calc.setAsrJurusticionType(JuristicMethods.Hanafi);
-            }
+            calc.setCalculationMethod(new CalculationMethods(calculationMethod), customParams);
+            calc.setAsrJurusticType(new JuristicMethods(methodeJuridiqueAsr));
+            calc.setTimeFormat(formatHoraire);            
 
             String[] lesHoraires = calc.getPrayerTimes(pDate,
                                             Double.parseDouble(sLatitude),

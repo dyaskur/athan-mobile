@@ -692,8 +692,8 @@ public class MenuChoisirVille extends Menu {
 
     private void initialiserClaviers() {
         VirtualKeyboard vkbCoordonnees = new VirtualKeyboard();
-        vkbCoordonnees.addInputMode(KB_COORDINATES_MODE, KB_COORDINATES);
-        vkbCoordonnees.setInputModeOrder(new String[]{KB_COORDINATES_MODE});
+        vkbCoordonnees.addInputMode(KB_FLOATS_MODE, KB_FLOATS);
+        vkbCoordonnees.setInputModeOrder(new String[]{KB_FLOATS_MODE});
         VirtualKeyboard.bindVirtualKeyboard(mTextFieldLat, vkbCoordonnees);
         VirtualKeyboard.bindVirtualKeyboard(mTextFieldLng, vkbCoordonnees);
 

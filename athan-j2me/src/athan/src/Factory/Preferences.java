@@ -6,6 +6,7 @@ package athan.src.Factory;
 
 import athan.src.SalaahCalc.SalaahTimeCalculator;
 import athan.src.Outils.StringOutilClient;
+import athan.src.SalaahCalc.CalculationCustomParams;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.microedition.rms.RecordEnumeration;
@@ -32,6 +33,12 @@ public class Preferences {
     public static final String sDecalageHoraire = "decalageHoraire";
     public static final String sFormatHoraire = "formatHoraire";
     public static final String sMethodeJuridiqueAsr = "methodeJuristiqueAsr";
+    public static final String sCalculationMethod = "methodeCalcul";
+    public static final String sCustomFajrAngle = "customFajrAngle";
+    public static final String sCustomMaghrebSelector = "customMaghrebSelector";
+    public static final String sCustomMaghrebValue = "customMaghrebValue";
+    public static final String sCustomIshaaSelector = "customIshaaSelector";
+    public static final String sCustomIshaaValue = "customIshaaValue";
     public static final String sLangue = "langue";
 
     private String mRecordStoreName;
@@ -51,6 +58,25 @@ public class Preferences {
 
     public String get(String key) {
         return (String) mHashtable.get(key);
+    }
+
+    public CalculationCustomParams getCalculationCustomParams() {
+
+        CalculationCustomParams retour = new CalculationCustomParams();
+
+        double lFajrAngle = Double.parseDouble(get(sCustomFajrAngle));
+        int lMaghrebSelector = Integer.parseInt(get(sCustomMaghrebSelector));
+        double lMaghrebValue = Double.parseDouble(get(sCustomMaghrebValue));
+        int lIshaaSelector = Integer.parseInt(get(sCustomIshaaSelector));
+        double lIshaaValue = Double.parseDouble(get(sCustomIshaaValue));
+
+        retour.setFajrAngle(lFajrAngle);
+        retour.setMaghrebSelector(lMaghrebSelector);
+        retour.setMaghrebValue(lMaghrebValue);
+        retour.setIshaaSelector(lIshaaSelector);
+        retour.setIshaaValue(lIshaaValue);
+        
+        return retour;
     }
     
     public void set(String key, String value) {
@@ -140,6 +166,12 @@ public class Preferences {
         put(sDecalageHoraire, "0");
         put(sFormatHoraire, "0");
         put(sMethodeJuridiqueAsr, "0");
+        put(sCalculationMethod, "6");
+        put(sCustomFajrAngle, "12");
+        put(sCustomMaghrebSelector, "1");
+        put(sCustomMaghrebValue, "0");
+        put(sCustomIshaaSelector, "0");
+        put(sCustomIshaaValue, "12");
         put(sLangue, LANGUE_EN);
     }
 
