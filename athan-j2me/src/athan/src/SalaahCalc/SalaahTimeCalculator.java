@@ -54,7 +54,7 @@ public class SalaahTimeCalculator {
     private int timeZone;
     /** Julian date */
     private double JDate;
-    
+
     /** calculation */
     // number of iterations needed to compute times, this should never be more than 1;
     private int numIterations = 1;
@@ -285,7 +285,8 @@ public class SalaahTimeCalculator {
         double e = 23.439 - 0.00000036 * D;
 
         double d = this.darcsin(this.dsin(e) * this.dsin(L));
-        double RA = this.darctan2(this.dcos(e) * this.dsin(L), this.dcos(L)) / 15;
+        double RA = this.darctan2(this.dcos(e) * this.dsin(L), this.dcos(L)) / 15.0;
+        
         RA = this.fixhour(RA);
         double EqT = q / 15 - RA;
 
@@ -341,18 +342,20 @@ public class SalaahTimeCalculator {
         double Sunrise = this.computeTime(180 - 0.833, t[1].doubleValue());
         double Dhuhr = this.computeMidDay(t[2].doubleValue());
         double Asr = this.computeAsr(1 + this.asrJuristic, t[3].doubleValue());
+        
         double Sunset = this.computeTime(0.833, t[4].doubleValue());
         
         double Maghrib = 0;
         double Isha = 0;
-        
+
         if (this.methodParams[this.calcMethod][1] == 0) {
             Maghrib = this.computeTime(this.methodParams[this.calcMethod][2], t[5].doubleValue());
         }
+        
         if (this.methodParams[this.calcMethod][3] == 0) {
             Isha = this.computeTime(this.methodParams[this.calcMethod][4], t[6].doubleValue());
         }
-
+        
         return new Double[] { new Double(Fajr), new Double(Sunrise), new Double(Dhuhr),
                     new Double(Asr), new Double(Sunset), new Double(Maghrib), new Double(Isha) };
     }
@@ -597,8 +600,7 @@ public class SalaahTimeCalculator {
     private double darcsin(double x)
     {
         //return this.rtd(Math.Asin(x));
-        Real r = new Real(Double.toString(x));
-        System.out.print(r.toString());
+        Real r = new Real(Double.toString(x));        
         r.asin();
         r = this.rtd(r);
         return Double.parseDouble(r.toString());
@@ -620,7 +622,7 @@ public class SalaahTimeCalculator {
         //return this.rtd(Math.Atan(x));
         Real r = new Real(Double.toString(x));
         r.atan();
-        r = this.rtd(r);
+        //r = this.rtd(r);
         return Double.parseDouble(r.toString());
     }
 
@@ -632,13 +634,13 @@ public class SalaahTimeCalculator {
         double M_PI_2 = M_PI / 2.0;
         double absx, absy, val;
         if (x == 0 && y == 0) {
-            return 0;
+            return this.rtd(0);
         }
         absy = y < 0 ? -y : y;
         absx = x < 0 ? -x : x;
         if (absy - absx == absy) {
             /* x negligible compared to y */
-            return y < 0 ? -M_PI_2 : M_PI_2;
+            return this.rtd(y < 0 ? -M_PI_2 : M_PI_2);
         }
         if (absx - absy == absx) {
             /* y negligible compared to x */
@@ -648,13 +650,13 @@ public class SalaahTimeCalculator {
         }
         if (x > 0) {
             /* first or fourth quadrant; already correct */
-            return val;
+            return this.rtd(val);
         }
         if (y < 0) {
             /* third quadrant */
-            return val - M_PI;
+            return this.rtd(val - M_PI);
         }
-        return val + M_PI;
+        return this.rtd(val + M_PI);
     }
 
     // degree arccot
