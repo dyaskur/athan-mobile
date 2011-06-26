@@ -28,14 +28,14 @@ public abstract class Menu
     private Form mForm;
 
     /**
-     * returns the name of the demo to display in the list
+     * returns the name of the icon base
      */
-    public abstract String getName();
+    protected abstract String getName();
 
     /**
      * returns the name of the icon base
      */
-    public abstract String getIconBaseName();
+    protected abstract String getIconBaseName();
 
     /**
      * Invoked by the main code to start the demo

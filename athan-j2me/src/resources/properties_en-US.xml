@@ -2,8 +2,8 @@
 <strings version="0.1">
   <!-- Contents -->
   <contenu_about>
-  Saad Benbouzid (c) 2011
-  Fait par mes soins
+  Saad Benbouzid © 2010-2011
+  Done using J2ME
   </contenu_about>
   <contenu_consignesGeocoding>
   - Type in your localization information and just leave blank the parameters you don't want to fill in.

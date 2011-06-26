@@ -2,13 +2,13 @@
 <strings version="0.1">
   <!-- Contents -->
   <contenu_about>
-  Saad Benbouzid (c) 2011
-  Fait par mes soins
+  Saad Benbouzid © 2010-2011
+  Compilé avec J2ME
   </contenu_about>
   <contenu_consignesGeocoding>
-  - Type in your localization information and just leave blank the parameters you don't want to fill in.
-  - There must be at least one field filled in.
-  - The better fields are filled in, the more relevant the response will be.
+  - Entrez les informations de localisation et laissez blancs les paramètres que vous ne souhaitez pas renseigner.
+  - Au moins un champ doit être renseigné.
+  - Mieux les champs sont remplis, meilleure seront vos chances d'obtenir le bon résultat.
   </contenu_consignesGeocoding>
   <!-- Errors -->
 </strings>

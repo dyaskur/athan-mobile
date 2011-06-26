@@ -56,10 +56,17 @@ public class ServiceFactory {
     }
 
     /**
-     * @return the mResiyrceReader
+     * @return the mResourceReader
      */
     public ResourceReader getResourceReader() {
         return mResourceReader;
+    }
+
+    /**
+     * assigns the mResourceReader
+     */
+    public void setResourceReader(ResourceReader pResourceReader) {
+        mResourceReader = pResourceReader;
     }
 
     /**

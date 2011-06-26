@@ -33,7 +33,7 @@ import com.sun.lwuit.table.TableLayout;
  * 
  * @author Saad BENBOUZID
  */
-public class MenuMethodeCalcul extends Menu {
+public class MenuCalculationMethod extends Menu {
 
     private static final int HAUTEUR_LABEL = 18;
     private static final int HAUTEUR_LABEL_TOUS = 50;
@@ -49,16 +49,18 @@ public class MenuMethodeCalcul extends Menu {
     private TextField mMaghrebValue;
     private TextField mIshaaValue;
 
-    public String getName() {
-        return "Calcul";
-    }
-
-    public String getIconBaseName() {
-        return MENU_METHODE_CALCUL;
-    }
-
     protected String getHelp() {
-        return "Aide";
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("Menu.Help");
+    }
+
+    protected String getName() {
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("MenuCalculationMethod");
+    }
+
+    protected String getIconBaseName() {
+        return MENU_METHODE_CALCUL;
     }
 
     private TableLayout.Constraint getCtnLayoutParams(TableLayout pTB,

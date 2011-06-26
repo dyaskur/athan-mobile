@@ -60,7 +60,7 @@ public class VuePrincipale implements AthanConstantes {
             SalaahTimeCalculator calc = new SalaahTimeCalculator();
             calc.setCalculationMethod(new CalculationMethods(calculationMethod), customParams);
             calc.setAsrJurusticType(new JuristicMethods(methodeJuridiqueAsr));
-            calc.setTimeFormat(formatHoraire);            
+            calc.setTimeFormat(formatHoraire);
 
             String[] lesHoraires = calc.getPrayerTimes(pDate,
                                             Double.parseDouble(sLatitude),

@@ -6,14 +6,14 @@ package athan.src.Client;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Factory.TacheTimer;
-import athan.src.options.MenuAffichageCompas;
-import athan.src.options.MenuAlarmes;
-import athan.src.options.MenuChoisirVille;
-import athan.src.options.MenuConfigHeureLocale;
-import athan.src.options.MenuCorrectionCalendrier;
-import athan.src.options.MenuLangageApplication;
-import athan.src.options.MenuMethodeCalcul;
-import athan.src.options.MenuRecapitulatifModes;
+import athan.src.options.MenuCompass;
+import athan.src.options.MenuAlerts;
+import athan.src.options.MenuLocation;
+import athan.src.options.MenuLocalTime;
+import athan.src.options.MenuCalendarCorrection;
+import athan.src.options.MenuApplicationLanguage;
+import athan.src.options.MenuCalculationMethod;
+import athan.src.options.MenuSettingsSummary;
 import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
@@ -72,14 +72,14 @@ public class OptionForm extends Form
     private static Transition sComponentTransitions;
 
     private static final Menu[] DEMOS = new Menu[]{
-        new MenuAlarmes(),
-        new MenuChoisirVille(),
-        new MenuAffichageCompas(),
-        new MenuConfigHeureLocale(),
-        new MenuCorrectionCalendrier(),
-        new MenuLangageApplication(),
-        new MenuMethodeCalcul(),
-        new MenuRecapitulatifModes()
+        new MenuAlerts(),
+        new MenuLocation(),
+        new MenuCompass(),
+        new MenuLocalTime(),
+        new MenuCalendarCorrection(),
+        new MenuApplicationLanguage(),
+        new MenuCalculationMethod(),
+        new MenuSettingsSummary()
     };
 
     private Hashtable mDemosHash = new Hashtable();

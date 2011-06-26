@@ -29,17 +29,13 @@ import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.table.TableLayout;
 import java.rmi.RemoteException;
-import javax.microedition.location.Coordinates;
-import javax.microedition.location.Criteria;
-import javax.microedition.location.Location;
-import javax.microedition.location.LocationProvider;
 
 /**
  * Set of the button types available in the UI
  * 
  * @author Saad BENBOUZID
  */
-public class MenuChoisirVille extends Menu {
+public class MenuLocation extends Menu {
 
     private static final int HAUTEUR_LABEL = 15;
     private static final int HAUTEUR_LABEL_TOUS = 120;
@@ -57,16 +53,18 @@ public class MenuChoisirVille extends Menu {
     private Button mOK;
     private Button mAnnuler;
 
-    public String getName() {
-        return "Position";
-    }
-
-    public String getIconBaseName() {
-        return MENU_CHOISIR_VILLE;
-    }
-
     protected String getHelp() {
-        return "Aide";
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("Menu.Help");
+    }
+
+    protected String getName() {
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("MenuLocation");
+    }
+    
+    protected String getIconBaseName() {
+        return MENU_CHOISIR_VILLE;
     }
 
     protected void execute(final Form f) {
@@ -190,7 +188,10 @@ public class MenuChoisirVille extends Menu {
         ctnSaisies.addComponent(mGpsSearch);
         ctnSaisies.addComponent(mApiSearch);
         ctnSaisies.addComponent(mManualSearch);
-        
+
+        // A activer si fonction GPS sur mobile cible
+        mGpsSearch.setEnabled(false);
+
         f.setLayout(new BorderLayout());
         f.addComponent(BorderLayout.CENTER, ctnInfosLocalisation);
         f.addComponent(BorderLayout.SOUTH, ctnSaisies);
@@ -233,14 +234,15 @@ public class MenuChoisirVille extends Menu {
             public void actionPerformed(ActionEvent ae) {
 
                 boolean success = true;
-                
+                /*
                 Criteria cr = new Criteria();
                 cr.setHorizontalAccuracy(500);
                 LocationProvider lp;
-
+                */
                 final String[] latLng = new String[2];
 
                 try {
+                    /*
                     lp = LocationProvider.getInstance(cr);
                     Location l = lp.getLocation(TIMEOUT_GPS); // timeout de 15 secondes
                     Coordinates c = l.getQualifiedCoordinates();
@@ -252,7 +254,7 @@ public class MenuChoisirVille extends Menu {
                       latLng[0] = Double.toString(lat);
                       latLng[1] = Double.toString(lon);
                     }
-                    
+                    */
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     success = false;

@@ -3,49 +3,48 @@
  */
 package athan.src.options;
 
-import athan.src.Client.AthanException;
 import athan.src.Client.Main;
 import athan.src.Client.Menu;
 import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
-import athan.src.Outils.StringOutilClient;
+import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
 import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
-import com.sun.lwuit.TextField;
 import com.sun.lwuit.animations.CommonTransitions;
-import com.sun.lwuit.events.ActionEvent;
-import com.sun.lwuit.impl.midp.VirtualKeyboard;
 import com.sun.lwuit.layouts.BoxLayout;
+import com.sun.lwuit.events.ActionEvent;
 
 /**
- * Menu de configuration de l'heure locale
+ * Menu choix de la langue de l'application
  * 
  * @author Saad BENBOUZID
  */
-public class MenuConfigHeureLocale extends Menu {
+public class MenuApplicationLanguage extends Menu {
 
     private static final int HAUTEUR_LABEL = 18;
     private static final int HAUTEUR_LABEL_TOUS = 25;
 
     private Command mOK;
 
-    private TextField mDecalage;
-
-    public String getName() {
-        return "Heure locale";
-    }
-
-    public String getIconBaseName() {
-        return MENU_CONFIG_HEURE_LOCALE;
-    }
+    private ComboBox mLangCmb;
 
     protected String getHelp() {
-        return "Aide";
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("Menu.Help");
+    }
+
+    protected String getIconBaseName() {
+        return MENU_LANGAGE_APPLICATION;
+    }
+
+    protected String getName() {
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("MenuApplicationLanguage");
     }
 
     protected void execute(final Form f) {
@@ -61,7 +60,7 @@ public class MenuConfigHeureLocale extends Menu {
             f.setFocusScrolling(true);
         }
 
-        Label lLabelDecalage = new Label(RESSOURCE.get("TimeLag"));
+        Label lLabelDecalage = new Label(RESSOURCE.get("LanguageChoice"));
         lLabelDecalage.setUIID(UIID_LABEL_INFO_NAME);
         lLabelDecalage.getUnselectedStyle().setBgTransparency(0);
         lLabelDecalage.getSelectedStyle().setBgTransparency(0);
@@ -69,15 +68,12 @@ public class MenuConfigHeureLocale extends Menu {
         lLabelDecalage.setAlignment(Component.LEFT);
         lLabelDecalage.setPreferredH(HAUTEUR_LABEL);
 
-        mDecalage = new TextField();
-        mDecalage.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mDecalage.setAlignment(TextField.LEFT);
-        mDecalage.setRows(1);
-        mDecalage.setPreferredH(HAUTEUR_LABEL);
+        mLangCmb = new ComboBox(LANGUE_APPLICATIONS);
+        mLangCmb.setSelectedIndex(0);
 
         Container ctnSaisie = new Container(new BoxLayout(BoxLayout.X_AXIS));
         ctnSaisie.addComponent(lLabelDecalage);
-        ctnSaisie.addComponent(mDecalage);
+        ctnSaisie.addComponent(mLangCmb);
         ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
@@ -94,17 +90,17 @@ public class MenuConfigHeureLocale extends Menu {
             public void actionPerformed(ActionEvent ae) {
                 // On vérifie la saisie
                 boolean contenuOk = true;
-                int decalage = 0;
+                String s_lang = Preferences.LANGUE_EN;
+
                 try {
-                    String s_decalage = mDecalage.getText();
-                    if (!StringOutilClient.isEmpty(s_decalage)) {
-                        decalage = Integer.parseInt(s_decalage);
-                        if (Math.abs(decalage) > 12) {
-                            throw new AthanException("> 12");
-                        }
-                    } else {
-                        throw new AthanException("empty");
+                    int i_lang = mLangCmb.getSelectedIndex();
+                    
+                    if (i_lang == 0) {
+                        s_lang = Preferences.LANGUE_EN;
+                    } else if (i_lang == 1) {
+                        s_lang = Preferences.LANGUE_FR;
                     }
+                    
                 } catch(Exception exc) {
                     contenuOk = false;
                 }
@@ -115,7 +111,8 @@ public class MenuConfigHeureLocale extends Menu {
 
                     // Message d'erreur
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
-                    Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorTimeLagParameters"), okCommand,
+                    Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorLangApplicationParameters"),
+                            okCommand,
                             new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                     return;
@@ -123,15 +120,23 @@ public class MenuConfigHeureLocale extends Menu {
 
                 try {
                     ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sDecalageHoraire, Integer.toString(decalage));
+                        .set(Preferences.sLangue, s_lang);
 
                     ServiceFactory.getFactory().getPreferences()
                             .save();
 
+                    /*
+                    // On recharge les paramètres linguistiques de l'application
+                    ServiceFactory.getFactory().setResourceReader(
+                        new ResourceReader(ServiceFactory.getFactory()
+                                                            .getPreferences())
+                    );
+                    */
+
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
-                    Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
+                    Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("warningLangChanging"), okCommand,
+                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                 } catch (Exception exc) {
                     exc.printStackTrace();
@@ -140,29 +145,25 @@ public class MenuConfigHeureLocale extends Menu {
         };
 
         f.addCommand(mOK);
-        initialiserInfosDecalage();
-        initialiserClaviers();
+        initialiserInfosLangue();
     }
-    
-    private void initialiserInfosDecalage() {
 
-        String lDecalage = "0";
+    private void initialiserInfosLangue() {
+
+        String lLang = Preferences.LANGUE_EN;
 
         try {
-            lDecalage = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sDecalageHoraire);
+            lLang = ServiceFactory.getFactory().getPreferences()
+                        .get(Preferences.sLangue);
 
         } catch (Exception exc) {
             exc.printStackTrace();
         }
 
-        mDecalage.setText(lDecalage);
-    }
-
-    private void initialiserClaviers() {
-        VirtualKeyboard vkbEntier = new VirtualKeyboard();
-        vkbEntier.addInputMode(KB_INTEGER_MODE, KB_INTEGER);
-        vkbEntier.setInputModeOrder(new String[]{KB_INTEGER_MODE});
-        VirtualKeyboard.bindVirtualKeyboard(mDecalage, vkbEntier);
+        if (lLang.equals(Preferences.LANGUE_EN)) {
+            mLangCmb.setSelectedIndex(0);
+        } else if (lLang.equals(Preferences.LANGUE_FR)) {
+            mLangCmb.setSelectedIndex(1);
+        }
     }
 }

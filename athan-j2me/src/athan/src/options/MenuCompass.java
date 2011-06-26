@@ -4,6 +4,7 @@
 package athan.src.options;
 
 import athan.src.Client.Menu;
+import athan.src.Factory.ServiceFactory;
 import com.sun.lwuit.Button;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
@@ -14,14 +15,16 @@ import com.sun.lwuit.layouts.BoxLayout;
  * 
  * @author Saad BENBOUZID
  */
-public class MenuAffichageCompas extends Menu {
-
-    public String getName() {
-        return "Compas";
-    }
+public class MenuCompass extends Menu {
 
     protected String getHelp() {
-        return "Aide";
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("Menu.Help");
+    }
+
+    protected String getName() {
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("MenuCompass");
     }
 
     protected void execute(final Form f) {
@@ -50,7 +53,7 @@ public class MenuAffichageCompas extends Menu {
         f.addComponent(new Label("Test"));
     }
 
-    public String getIconBaseName() {
+    protected String getIconBaseName() {
         return MENU_AFFICHAGE_COMPAS;
     }
 }

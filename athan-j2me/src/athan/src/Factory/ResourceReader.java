@@ -29,23 +29,6 @@ public class ResourceReader implements AthanConstantes {
     private String mLocale;
     private String xmlFileName;
 
-    /*
-    // Prières
-    private String sobh;
-    private String chourouk;
-    private String dohr;
-    private String asr;
-    private String maghreb;
-    private String ishaa;
-
-    // Menus
-    private String menu_about;
-    private String menu_retour;
-    private String menu_aide;
-
-    // Titres fenêtres
-    private String fenetre_aide;
-    */
     // Contenus
     private String contenu_about;
     private String contenu_consignesGeocoding;

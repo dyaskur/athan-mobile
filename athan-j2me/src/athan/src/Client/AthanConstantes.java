@@ -26,6 +26,12 @@ public interface AthanConstantes {
         "fr"
     };
 
+    // Langues
+    public static final String [] LANGUE_APPLICATIONS = {
+        "English",
+        "Français"
+    };
+
     // Méthodes de calcul
     public static final String [] CALCULATION_METHOD_FR = {
         "Jafari",
