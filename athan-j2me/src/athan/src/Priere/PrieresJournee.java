@@ -37,9 +37,8 @@ public class PrieresJournee {
                             Horaire pAsr,
                             Horaire pMaghreb,
                             Horaire pIshaa) {
-        
-        mCalendar = Calendar.getInstance(TimeZone.getDefault());
-        mCalendar.setTime(pDateJour);
+
+        setDateJour(pDateJour);
 
         mSobh = pSohb;
         mChourouk = pChourouk;
@@ -80,10 +79,6 @@ public class PrieresJournee {
                     + ":" + retournerNombre(mCalendar.get(Calendar.MINUTE))
                     + ":" + retournerNombre(mCalendar.get(Calendar.SECOND));
 
-        } else if (formatHoraire == TimeFormat.H12NS.getValue()) {
-            return retournerNombre(mCalendar.get(Calendar.HOUR))
-                    + ":" + retournerNombre(mCalendar.get(Calendar.MINUTE))
-                    + ":" + retournerNombre(mCalendar.get(Calendar.SECOND));
         } else if (formatHoraire == TimeFormat.H24.getValue()) {
             return retournerNombre(mCalendar.get(Calendar.HOUR_OF_DAY))
                     + ":" + retournerNombre(mCalendar.get(Calendar.MINUTE))
@@ -167,5 +162,10 @@ public class PrieresJournee {
      */
     public Horaire getIshaa() {
         return mIshaa;
+    }
+
+    public void setDateJour(Date pDateJour) {
+        mCalendar = Calendar.getInstance(TimeZone.getDefault());
+        mCalendar.setTime(pDateJour);
     }
 }

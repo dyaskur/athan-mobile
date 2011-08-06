@@ -18,6 +18,7 @@ import com.sun.lwuit.Label;
 import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.events.ActionEvent;
+import java.util.Date;
 
 /**
  * Menu choix de la langue de l'application
@@ -51,14 +52,7 @@ public class MenuApplicationLanguage extends Menu {
         final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                             .getResourceReader();
 
-        if (Main.isTactile()) {
-            f.setTactileTouch(true);
-            f.setSmoothScrolling(true);
-        } else {
-            f.setTactileTouch(false);
-            f.setSmoothScrolling(false);
-            f.setFocusScrolling(true);
-        }
+        applyTactileSettings(f);
 
         Label lLabelDecalage = new Label(RESSOURCE.get("LanguageChoice"));
         lLabelDecalage.setUIID(UIID_LABEL_INFO_NAME);
@@ -122,8 +116,13 @@ public class MenuApplicationLanguage extends Menu {
                     ServiceFactory.getFactory().getPreferences()
                         .set(Preferences.sLangue, s_lang);
 
+                    // On enregistre les paramètres dans la mémoire du téléphone
                     ServiceFactory.getFactory().getPreferences()
                             .save();
+
+                    // On rafraîchit l'affichage des prières
+                    ServiceFactory.getFactory().getVuePrincipale()
+                            .rafraichir(new Date(), true, true);
 
                     /*
                     // On recharge les paramètres linguistiques de l'application

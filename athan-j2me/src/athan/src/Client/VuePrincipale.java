@@ -14,8 +14,8 @@ import athan.src.SalaahCalc.CalculationCustomParams;
 import athan.src.SalaahCalc.CalculationMethods;
 import athan.src.SalaahCalc.JuristicMethods;
 import athan.src.SalaahCalc.SalaahTimeCalculator;
-import com.sun.lwuit.Font;
 import com.sun.lwuit.Label;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,11 +26,13 @@ import java.util.Date;
 public class VuePrincipale implements AthanConstantes {
 
     private PrieresJournee mPrieresJournee;
+    private boolean mProchainePriereRenseignee;
+    private String[] mHorairesPrieres;
 
     public VuePrincipale() {
     }
 
-    public void rafraichir(Date pDate, boolean isHeureCourante) {
+    public void rafraichir(Date pDate, boolean isHeureCourante, boolean pForcerCalcul) {
 
         String sLatitude = StringOutilClient.EMPTY;
         String sLongitude = StringOutilClient.EMPTY;
@@ -41,49 +43,54 @@ public class VuePrincipale implements AthanConstantes {
         CalculationCustomParams customParams;
 
         try {
-            sLatitude = ServiceFactory.getFactory().getPreferences()
+
+            if (estMinuitPile(pDate) || pForcerCalcul) {
+                sLatitude = ServiceFactory.getFactory().getPreferences()
                                 .get(Preferences.sLatitude);
-            sLongitude = ServiceFactory.getFactory().getPreferences()
-                                .get(Preferences.sLongitude);
-            formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                .get(Preferences.sFormatHoraire));
-            methodeJuridiqueAsr = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                .get(Preferences.sMethodeJuridiqueAsr));
-            decalageHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                .get(Preferences.sDecalageHoraire));
-            calculationMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                .get(Preferences.sCalculationMethod));
-            customParams = ServiceFactory.getFactory().getPreferences()
-                                .getCalculationCustomParams();
+                sLongitude = ServiceFactory.getFactory().getPreferences()
+                                    .get(Preferences.sLongitude);
+                formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                                    .get(Preferences.sFormatHoraire));
+                methodeJuridiqueAsr = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                                    .get(Preferences.sMethodeJuridiqueAsr));
+                decalageHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                                    .get(Preferences.sDecalageHoraire));
+                calculationMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                                    .get(Preferences.sCalculationMethod));
+                customParams = ServiceFactory.getFactory().getPreferences()
+                                    .getCalculationCustomParams();
 
-            // Calcul des prières
-            SalaahTimeCalculator calc = new SalaahTimeCalculator();
-            calc.setCalculationMethod(new CalculationMethods(calculationMethod), customParams);
-            calc.setAsrJurusticType(new JuristicMethods(methodeJuridiqueAsr));
-            calc.setTimeFormat(formatHoraire);
+                // Calcul des prières
+                SalaahTimeCalculator calc = new SalaahTimeCalculator();
+                calc.setCalculationMethod(new CalculationMethods(calculationMethod), customParams);
+                calc.setAsrJurusticType(new JuristicMethods(methodeJuridiqueAsr));
+                calc.setTimeFormat(formatHoraire);
 
-            String[] lesHoraires = calc.getPrayerTimes(pDate,
-                                            Double.parseDouble(sLatitude),
-                                            Double.parseDouble(sLongitude),
-                                            new Integer(SalaahTimeCalculator.getTimeZone() + decalageHoraire));
+                mHorairesPrieres = calc.getPrayerTimes(pDate,
+                                                Double.parseDouble(sLatitude),
+                                                Double.parseDouble(sLongitude),
+                                                new Integer(SalaahTimeCalculator.getTimeZone() + decalageHoraire));
 
-            mPrieresJournee = new PrieresJournee(
-                     pDate,
-                     new Horaire(lesHoraires[0], formatHoraire),
-                     new Horaire(lesHoraires[1], formatHoraire),
-                     new Horaire(lesHoraires[2], formatHoraire),
-                     new Horaire(lesHoraires[3], formatHoraire),
-                     new Horaire(lesHoraires[4], formatHoraire),
-                     new Horaire(lesHoraires[6], formatHoraire));
+                mPrieresJournee = new PrieresJournee(
+                         pDate,
+                         new Horaire(mHorairesPrieres[0], formatHoraire),
+                         new Horaire(mHorairesPrieres[1], formatHoraire),
+                         new Horaire(mHorairesPrieres[2], formatHoraire),
+                         new Horaire(mHorairesPrieres[3], formatHoraire),
+                         new Horaire(mHorairesPrieres[4], formatHoraire),
+                         new Horaire(mHorairesPrieres[6], formatHoraire));
+            } else {
+                formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                                    .get(Preferences.sFormatHoraire));
+
+                mPrieresJournee.setDateJour(pDate);
+            }
 
             // Rafaîchit tous les composants
             afficherLogo();
             renseignerLieu();
-            renseignerPrieres();
+            renseignerPrieres(isHeureCourante);
             renseignerDate(isHeureCourante);
-            if (isHeureCourante) {
-                rafraichirProchainePriere();
-            }
 
             // Redessine le panel
             Main.getMainForm().getForm().repaint();
@@ -129,70 +136,67 @@ public class VuePrincipale implements AthanConstantes {
         String[] dateJour = mPrieresJournee.getDateFormattee();
 
         if (isHeureCourante) {
-            dateJour[1] += " " + mPrieresJournee.getHoraire();
+            dateJour[1] += "\n" + mPrieresJournee.getHoraire();
         }
-
-        Main.getMainForm().getTextAreaLibelleJour().setText(dateJour[0]
+        try {
+            Main.getMainForm().getTextAreaLibelleJour().setText(dateJour[0]
                     + "\n" + dateJour[1]);
+        } catch(Exception exc) {
+            exc.printStackTrace();
+            System.out.println("Rows = " + Main.getMainForm().getTextAreaLibelleJour()
+                            .getActualRows());
+        }        
     }
 
-    private void renseignerPrieres() {
+    private void renseignerPrieres(boolean pIsHeureCourante) {
+
+        mProchainePriereRenseignee = false;
 
         Main.getMainForm().getLabelHoraireSohb().setText(mPrieresJournee.getSobh().getHoraireFormate());
-        if (!mPrieresJournee.getSobh().isEstProchaine()) {
-            changerFontPriereNormale(Main.getMainForm().getLabelHoraireSohb());
-        }
+        changerFontPriere(Main.getMainForm().getLabelHoraireSohb(),
+                    mPrieresJournee.getSobh().isEstProchaine(),
+                    pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireChourouk().setText(mPrieresJournee.getChourouk().getHoraireFormate());
-        if (!mPrieresJournee.getChourouk().isEstProchaine()) {
-            changerFontPriereNormale(Main.getMainForm().getLabelHoraireChourouk());
-        }
+        changerFontPriere(Main.getMainForm().getLabelHoraireChourouk(),
+                    mPrieresJournee.getChourouk().isEstProchaine(),
+                    pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireDohr().setText(mPrieresJournee.getDohr().getHoraireFormate());
-        if (!mPrieresJournee.getDohr().isEstProchaine()) {
-            changerFontPriereNormale(Main.getMainForm().getLabelHoraireDohr());
-        }
+        changerFontPriere(Main.getMainForm().getLabelHoraireDohr(),
+                    mPrieresJournee.getDohr().isEstProchaine(),
+                    pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireAsr().setText(mPrieresJournee.getAsr().getHoraireFormate());
-        if (!mPrieresJournee.getAsr().isEstProchaine()) {
-            changerFontPriereNormale(Main.getMainForm().getLabelHoraireAsr());
-        }
+        changerFontPriere(Main.getMainForm().getLabelHoraireAsr(),
+                    mPrieresJournee.getAsr().isEstProchaine(),
+                    pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireMaghreb().setText(mPrieresJournee.getMaghreb().getHoraireFormate());
-        if (!mPrieresJournee.getMaghreb().isEstProchaine()) {
-            changerFontPriereNormale(Main.getMainForm().getLabelHoraireMaghreb());
-        }
+        changerFontPriere(Main.getMainForm().getLabelHoraireMaghreb(),
+                mPrieresJournee.getMaghreb().isEstProchaine(),
+                    pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireIshaa().setText(mPrieresJournee.getIshaa().getHoraireFormate());
-        if (!mPrieresJournee.getIshaa().isEstProchaine()) {
-            changerFontPriereNormale(Main.getMainForm().getLabelHoraireIshaa());
+        changerFontPriere(Main.getMainForm().getLabelHoraireIshaa(),
+                    mPrieresJournee.getIshaa().isEstProchaine(),
+                    pIsHeureCourante);
+    }
+
+    private void changerFontPriere(Label pLabel, boolean pIsProchaine, boolean pIsHeureCourante) {
+        if (pIsProchaine && !mProchainePriereRenseignee && pIsHeureCourante) {
+            pLabel.setUIID(UIID_LABEL_NEXT_PRAYER);
+            mProchainePriereRenseignee = true;
+        } else {
+            pLabel.setUIID(UIID_LABEL_PRAYER);
         }
     }
 
-    private void changerFontPriereNormale(Label pLabel) {
-        Font font = Main.theme.getFont(FONT_LABEL_PRAYER);
-        pLabel.getStyle().setFont(font);
-        pLabel.setUIID(UIID_LABEL_PRAYER);
-    }
-
-    private void changerFontProchainePriere(Label pLabel) {
-        Font font = Main.theme.getFont(FONT_LABEL_NEXT_PRAYER);
-        pLabel.getStyle().setFont(font);
-        pLabel.setUIID(UIID_LABEL_NEXT_PRAYER);
-    }
-
-    private void rafraichirProchainePriere() {
-
-        if (mPrieresJournee.getSobh().isEstProchaine()) {
-            changerFontProchainePriere(Main.getMainForm().getLabelHoraireSohb());
-        } else if (mPrieresJournee.getDohr().isEstProchaine()) {
-            changerFontProchainePriere(Main.getMainForm().getLabelHoraireDohr());
-        } else if (mPrieresJournee.getAsr().isEstProchaine()) {
-            changerFontProchainePriere(Main.getMainForm().getLabelHoraireAsr());
-        } else if (mPrieresJournee.getMaghreb().isEstProchaine()) {
-            changerFontProchainePriere(Main.getMainForm().getLabelHoraireMaghreb());
-        } else if (mPrieresJournee.getIshaa().isEstProchaine()) {
-            changerFontProchainePriere(Main.getMainForm().getLabelHoraireIshaa());
-        }
+    private boolean estMinuitPile(Date pDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(pDate);
+        return cal.get(Calendar.HOUR_OF_DAY) == 0
+                 && cal.get(Calendar.MINUTE) == 0
+                 && cal.get(Calendar.SECOND) == 0;
     }
 }

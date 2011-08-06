@@ -406,8 +406,6 @@ public class SalaahTimeCalculator {
         for (int i = 0; i < 7; i++) {
             if (this.timeFormat == TimeFormat.H12.getValue()) {
                 returnData[i] = floatToTime12(times[i], false);
-            } else if (this.timeFormat == TimeFormat.H12NS.getValue()) {
-                returnData[i] = floatToTime12(times[i], true);
             } else {
                 returnData[i] = floatToTime24(times[i]);
             }

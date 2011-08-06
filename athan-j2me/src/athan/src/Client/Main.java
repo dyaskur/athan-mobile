@@ -15,6 +15,7 @@ import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.impl.midp.VKBImplementationFactory;
 import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
+import java.util.Date;
 import java.util.Timer;
 
 /**
@@ -155,6 +156,10 @@ public class Main extends javax.microedition.midlet.MIDlet
 
         sMainForm = new MainForm(this);
         sMainForm.run(exitCommand, this, false);
+
+        // On force le premier calcul des prières
+        ServiceFactory.getFactory().getVuePrincipale()
+                .rafraichir(new Date(), true, true);
 
         // On crée le timer
         sTimer = new Timer();

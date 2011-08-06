@@ -128,4 +128,15 @@ public abstract class Menu
     public Form getForm() {
         return mForm;
     }
+
+    protected void applyTactileSettings(Form pForm) {
+        if (Main.isTactile()) {
+            pForm.setTactileTouch(true);
+            pForm.setSmoothScrolling(true);
+        } else {
+            pForm.setTactileTouch(false);
+            pForm.setSmoothScrolling(false);
+            pForm.setFocusScrolling(true);
+        }
+    }
 }

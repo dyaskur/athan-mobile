@@ -26,8 +26,7 @@ public class Horaire {
         mHoraire  = pHoraire;
         mEstProchaine = false;
 
-        ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                                        .getResourceReader();
+        ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
         Calendar calActuel = Calendar.getInstance();
         calActuel.setTime(new Date());
@@ -55,8 +54,6 @@ public class Horaire {
             if (calHoraire.getTime().getTime() > calActuel.getTime().getTime()) {
                 mEstProchaine = true;
             }
-        } else if (pTimeFormat == TimeFormat.H12NS.getValue()) {
-            // On ne peut pas calculer...
         }
     }
 

@@ -58,6 +58,12 @@ public interface AthanConstantes {
         "Hanafi"
     };
 
+    // Format horaire
+    public static final String [] TIME_FORMAT = {
+        "24",
+        "12"
+    };
+
     // Icones
     public static final String MENU_AFFICHAGE_COMPAS = "MenuAffichageCompas";
     public static final String MENU_ALARMES = "MenuAlarmes";
@@ -77,9 +83,10 @@ public interface AthanConstantes {
     // Theme
     public static final String UIID_BUTTON_OPTIONS = "DemoButton";
     public static final String UIID_LABEL_NEXT_PRAYER = "LabelNextPrayer";
-    public static final String UIID_LABEL_PRAYER = "Label";
+    public static final String UIID_LABEL_PRAYER = "LabelPrayer";
     public static final String UIID_LABEL_CURRENT_DATE = "LabelCurrentDate";
     public static final String UIID_LABEL_LOCALISATION_INFO = "LabelLocalisationInfo";
+    public static final String UIID_LABEL_ALERTSONG_INFO = "LabelAlertSongInfo";
     public static final String UIID_TEXTAREA_SEARCH_TOOLTIP = "TextAreaSearchTooltip";
     public static final String UIID_LABEL_PRAYER_NAME = "LabelPrayerName";
     public static final String UIID_LABEL_CURRENT_CITY = "LabelCurrentCity";

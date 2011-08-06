@@ -27,6 +27,7 @@ import com.sun.lwuit.impl.midp.VirtualKeyboard;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.layouts.GridLayout;
 import com.sun.lwuit.table.TableLayout;
+import java.util.Date;
 
 /**
  * Menu méthode de calcul
@@ -159,14 +160,7 @@ public class MenuCalculationMethod extends Menu {
         final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                             .getResourceReader();
 
-        if (Main.isTactile()) {
-            f.setTactileTouch(true);
-            f.setSmoothScrolling(true);
-        } else {
-            f.setTactileTouch(false);
-            f.setSmoothScrolling(false);
-            f.setFocusScrolling(true);
-        }
+        applyTactileSettings(f);
 
         Label lLabelChoixMethode = new Label(RESSOURCE.get("CalculationMethod"));
         lLabelChoixMethode.setUIID(UIID_LABEL_INFO_NAME);
@@ -341,8 +335,14 @@ public class MenuCalculationMethod extends Menu {
                                 .set(Preferences.sCustomIshaaValue, Double.toString(ishaaValue));
                     }
 
+                    // On enregistre les paramètres dans la mémoire du téléphone
                     ServiceFactory.getFactory().getPreferences()
                             .save();
+
+                    // On rafraîchit l'affichage des prières
+                    ServiceFactory.getFactory().getVuePrincipale()
+                            .rafraichir(new Date(), true, true);
+
 
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));

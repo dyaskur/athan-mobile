@@ -29,6 +29,7 @@ import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.table.TableLayout;
 import java.rmi.RemoteException;
+import java.util.Date;
 
 /**
  * Set of the button types available in the UI
@@ -67,19 +68,28 @@ public class MenuLocation extends Menu {
         return MENU_CHOISIR_VILLE;
     }
 
+    private void editerTypeLabel(Label pLabel) {
+        pLabel.setUIID(UIID_LABEL_INFO_NAME);
+        pLabel.getUnselectedStyle().setBgTransparency(0);
+        pLabel.getSelectedStyle().setBgTransparency(0);
+        pLabel.setFocusable(true);
+        pLabel.setAlignment(Component.LEFT);
+    }
+
+    private void editerTextField(TextField pTextField, int pAlignment) {
+        pTextField.setUIID(UIID_LABEL_LOCALISATION_INFO);
+        pTextField.setAlignment(pAlignment);
+        pTextField.setRows(1);
+        pTextField.setFocusable(true);
+        pTextField.setPreferredH(HAUTEUR_LABEL);
+    }
+
     protected void execute(final Form f) {
 
         final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                             .getResourceReader();
 
-        if (Main.isTactile()) {
-            f.setTactileTouch(true);
-            f.setSmoothScrolling(true);
-        } else {
-            f.setTactileTouch(false);
-            f.setSmoothScrolling(false);
-            f.setFocusScrolling(true);
-        }
+        applyTactileSettings(f);
 
         TableLayout tblLayoutInfosLocalisation = new TableLayout(5, 4);
         Container ctnInfosLocalisation = new Container();
@@ -87,67 +97,29 @@ public class MenuLocation extends Menu {
         //tblLayoutInfosLocalisation.createConstraint().setWidthPercentage(100);
 
         Label lLabelNomVille = new Label(RESSOURCE.get("CityName"));
-        lLabelNomVille.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelNomVille.getUnselectedStyle().setBgTransparency(0);
-        lLabelNomVille.getSelectedStyle().setBgTransparency(0);
-        lLabelNomVille.setFocusable(true);
-        lLabelNomVille.setAlignment(Component.LEFT);
-
+        editerTypeLabel(lLabelNomVille);
         Label lLabelNomRegion = new Label(RESSOURCE.get("RegionName"));
-        lLabelNomRegion.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelNomRegion.getUnselectedStyle().setBgTransparency(0);
-        lLabelNomRegion.getSelectedStyle().setBgTransparency(0);
-        lLabelNomRegion.setFocusable(true);
-        lLabelNomRegion.setAlignment(Component.LEFT);
-
+        editerTypeLabel(lLabelNomRegion);
         Label lLabelNomPays = new Label(RESSOURCE.get("CountryName"));
-        lLabelNomPays.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelNomPays.getUnselectedStyle().setBgTransparency(0);
-        lLabelNomPays.getSelectedStyle().setBgTransparency(0);
-        lLabelNomPays.setFocusable(true);
-        lLabelNomPays.setAlignment(Component.LEFT);
-
-        Label lLabelLat = new Label(RESSOURCE.get("LatLng"));
-        lLabelLat.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelLat.getUnselectedStyle().setBgTransparency(0);
-        lLabelLat.getSelectedStyle().setBgTransparency(0);
-        lLabelLat.setFocusable(true);
-        lLabelLat.setAlignment(Component.LEFT);
+        editerTypeLabel(lLabelNomPays);
+        Label lLabelLatLng = new Label(RESSOURCE.get("LatLng"));
+        editerTypeLabel(lLabelLatLng);
 
         mTextFieldNomVille = new TextField();
-        mTextFieldNomVille.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mTextFieldNomVille.setAlignment(TextField.LEFT);
-        mTextFieldNomVille.setRows(1);
-        mTextFieldNomVille.setPreferredH(HAUTEUR_LABEL);
-
+        editerTextField(mTextFieldNomVille, TextField.LEFT);
         mTextFieldNomRegion = new TextField();
-        mTextFieldNomRegion.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mTextFieldNomRegion.setAlignment(TextField.LEFT);
-        mTextFieldNomRegion.setRows(1);
-        mTextFieldNomRegion.setPreferredH(HAUTEUR_LABEL);
-
+        editerTextField(mTextFieldNomRegion, TextField.LEFT);
         mTextFieldNomPays = new TextField();
-        mTextFieldNomPays.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mTextFieldNomPays.setAlignment(TextField.LEFT);
-        mTextFieldNomPays.setRows(1);
-        mTextFieldNomPays.setPreferredH(HAUTEUR_LABEL);
-
+        editerTextField(mTextFieldNomPays, TextField.LEFT);
         mTextFieldLat = new TextField();
-        mTextFieldLat.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mTextFieldLat.setAlignment(TextField.RIGHT);
-        mTextFieldLat.setRows(1);
-        mTextFieldLat.setPreferredH(HAUTEUR_LABEL);
-
+        editerTextField(mTextFieldNomVille, TextField.RIGHT);
         mTextFieldLng = new TextField();
-        mTextFieldLng.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mTextFieldLng.setAlignment(TextField.RIGHT);
-        mTextFieldLng.setRows(1);
-        mTextFieldLng.setPreferredH(HAUTEUR_LABEL);
+        editerTextField(mTextFieldNomVille, TextField.RIGHT);
 
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 100, 4),
                                     new Label());
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 30, 1),
-                                    lLabelLat);
+                                    lLabelLatLng);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 34, 1),
                                     mTextFieldLat);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 2, 1),
@@ -610,8 +582,13 @@ public class MenuLocation extends Menu {
             ServiceFactory.getFactory().getPreferences()
                 .set(Preferences.sCountryName, mTextFieldNomPays.getText());
 
-            ServiceFactory.getFactory().getPreferences()
-                    .save();
+            // On enregistre les paramètres dans la mémoire du téléphone
+                    ServiceFactory.getFactory().getPreferences()
+                            .save();
+
+                    // On rafraîchit l'affichage des prières
+                    ServiceFactory.getFactory().getVuePrincipale()
+                            .rafraichir(new Date(), true, true);
 
             // Message de confirmation modif
             Command okCommand = new Command(RESSOURCE.get("Command.OK"));

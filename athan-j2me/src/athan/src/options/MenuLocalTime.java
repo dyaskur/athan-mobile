@@ -10,6 +10,7 @@ import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Outils.StringOutilClient;
+import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
@@ -21,6 +22,8 @@ import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.impl.midp.VirtualKeyboard;
 import com.sun.lwuit.layouts.BoxLayout;
+import com.sun.lwuit.layouts.GridLayout;
+import java.util.Date;
 
 /**
  * Menu de configuration de l'heure locale
@@ -30,11 +33,12 @@ import com.sun.lwuit.layouts.BoxLayout;
 public class MenuLocalTime extends Menu {
 
     private static final int HAUTEUR_LABEL = 18;
-    private static final int HAUTEUR_LABEL_TOUS = 25;
+    private static final int HAUTEUR_LABEL_TOUS = 40;
 
     private Command mOK;
 
     private TextField mDecalage;
+    private ComboBox mFormatHoraire;
 
     protected String getHelp() {
         return ServiceFactory.getFactory().getResourceReader()
@@ -54,22 +58,12 @@ public class MenuLocalTime extends Menu {
         final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                             .getResourceReader();
 
-        if (Main.isTactile()) {
-            f.setTactileTouch(true);
-            f.setSmoothScrolling(true);
-        } else {
-            f.setTactileTouch(false);
-            f.setSmoothScrolling(false);
-            f.setFocusScrolling(true);
-        }
+        applyTactileSettings(f);
 
         Label lLabelDecalage = new Label(RESSOURCE.get("TimeLag"));
-        lLabelDecalage.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelDecalage.getUnselectedStyle().setBgTransparency(0);
-        lLabelDecalage.getSelectedStyle().setBgTransparency(0);
-        lLabelDecalage.setFocusable(true);
-        lLabelDecalage.setAlignment(Component.LEFT);
-        lLabelDecalage.setPreferredH(HAUTEUR_LABEL);
+        editerLabel(lLabelDecalage);
+        Label lLabelFormatHoraire = new Label(RESSOURCE.get("TimeFormat"));
+        editerLabel(lLabelFormatHoraire);
 
         mDecalage = new TextField();
         mDecalage.setUIID(UIID_LABEL_LOCALISATION_INFO);
@@ -77,9 +71,13 @@ public class MenuLocalTime extends Menu {
         mDecalage.setRows(1);
         mDecalage.setPreferredH(HAUTEUR_LABEL);
 
-        Container ctnSaisie = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        mFormatHoraire = new ComboBox(TIME_FORMAT);
+
+        Container ctnSaisie = new Container(new GridLayout(2, 2));
         ctnSaisie.addComponent(lLabelDecalage);
         ctnSaisie.addComponent(mDecalage);
+        ctnSaisie.addComponent(lLabelFormatHoraire);
+        ctnSaisie.addComponent(mFormatHoraire);
         ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
@@ -128,7 +126,15 @@ public class MenuLocalTime extends Menu {
                         .set(Preferences.sDecalageHoraire, Integer.toString(decalage));
 
                     ServiceFactory.getFactory().getPreferences()
+                        .set(Preferences.sFormatHoraire, Integer.toString(mFormatHoraire.getSelectedIndex()));
+
+                    // On enregistre les paramètres dans la mémoire du téléphone
+                    ServiceFactory.getFactory().getPreferences()
                             .save();
+
+                    // On rafraîchit l'affichage des prières
+                    ServiceFactory.getFactory().getVuePrincipale()
+                            .rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
@@ -149,10 +155,14 @@ public class MenuLocalTime extends Menu {
     private void initialiserInfosDecalage() {
 
         String lDecalage = "0";
+        int lFormatHoraire = 0;
 
         try {
             lDecalage = ServiceFactory.getFactory().getPreferences()
                         .get(Preferences.sDecalageHoraire);
+            lFormatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                        .get(Preferences.sFormatHoraire));
+            mFormatHoraire.setSelectedIndex(lFormatHoraire);
 
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -166,5 +176,14 @@ public class MenuLocalTime extends Menu {
         vkbEntier.addInputMode(KB_INTEGER_MODE, KB_INTEGER);
         vkbEntier.setInputModeOrder(new String[]{KB_INTEGER_MODE});
         VirtualKeyboard.bindVirtualKeyboard(mDecalage, vkbEntier);
+    }
+
+    private void editerLabel(Label pLabel) {
+        pLabel.setUIID(UIID_LABEL_INFO_NAME);
+        pLabel.getUnselectedStyle().setBgTransparency(0);
+        pLabel.getSelectedStyle().setBgTransparency(0);
+        pLabel.setFocusable(true);
+        pLabel.setAlignment(Component.LEFT);
+        pLabel.setPreferredH(HAUTEUR_LABEL);
     }
 }

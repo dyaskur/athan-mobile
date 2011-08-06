@@ -132,10 +132,12 @@ public class OptionForm extends Form
         return sComponentTransitions;
     }
 
-    public OptionForm(MainForm parent, String title) {
-        setTitle(title);
+    public OptionForm(MainForm parent) {
+        //setTitle(title);
         this.parent = parent;
         RESOURCES = ServiceFactory.getFactory().getResourceReader();
+
+        RESOURCES.get("ApplicationTitle");
     }
     
     public void setDragMode(boolean dragMode) {

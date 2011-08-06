@@ -69,11 +69,11 @@ public class MainForm extends Menu
     public MainForm(Main pMain) {
         mMain = pMain;
     }
-    
+
     public static void setOptionForm(boolean pShow) {
 
         // On crée le panel d'options
-        OptionForm optionForm = new OptionForm(Main.getMainForm(), "Athan Portable");
+        OptionForm optionForm = new OptionForm(Main.getMainForm());
         if (Main.getOptionForm() != null){
             optionForm.setTransitionInAnimator(Main.getOptionForm().getTransitionInAnimator());
             optionForm.setTransitionOutAnimator(Main.getOptionForm().getTransitionOutAnimator());
@@ -193,9 +193,11 @@ public class MainForm extends Menu
         mTextAreaLibelleJour = new TextArea("");
         mTextAreaLibelleJour.setAlignment(Component.CENTER);
         mTextAreaLibelleJour.setUIID(UIID_LABEL_CURRENT_DATE);
-        mTextAreaLibelleJour.setRows(2);
+        mTextAreaLibelleJour.setGrowByContent(true);
+        //mTextAreaLibelleJour.setColumns(2);
+        mTextAreaLibelleJour.setRows(3);
         mTextAreaLibelleJour.setEditable(false);
-        mTextAreaLibelleJour.setFocusable(false);       
+        mTextAreaLibelleJour.setFocusable(false);
         mDatePrecedente = new Button(Main.icons.getImage("Previous"));
         mDatePrecedente.setFocusable(true);
         mDateSuivante = new Button(Main.icons.getImage("Next"));
@@ -259,11 +261,14 @@ public class MainForm extends Menu
         mHomeHeureCourante.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                // On redémarre le timer
+                
                 try {
+                    // On force le recalcul des horaires
+                    ServiceFactory.getFactory().getVuePrincipale()
+                            .rafraichir(new Date(), true, true);
+                    
+                    // On redémarre le timer
                     redemarrerTimer();
-
-                    System.out.println("timer redémarré !");
                 } catch(Exception exc) {
                     exc.printStackTrace();
                 }
@@ -276,15 +281,19 @@ public class MainForm extends Menu
                 // On interrompt le timer et affiche les résultats pour une date donnée
                 try {
                     Main.getTimer().cancel();
-                    System.out.println("timer arrêté !");
 
                     Date jourPrecedent = new Date(mHeureCourante.getTime() - INTERVALLE_PREC_SUIV);
 
                     if (StringOutilClient.isDateMemeJour(jourPrecedent, new Date())) {
+                        // On force le recalcul des horaires
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(new Date(), true, true);
+
+                        // On redémarre le timer
                         redemarrerTimer();
                     } else {
                         ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourPrecedent, false);
+                                .rafraichir(jourPrecedent, false, true);
                         mHomeHeureCourante.setVisible(true);
                     }
 
@@ -305,10 +314,15 @@ public class MainForm extends Menu
                     Date jourSuivant = new Date(mHeureCourante.getTime() + INTERVALLE_PREC_SUIV);
 
                     if (StringOutilClient.isDateMemeJour(jourSuivant, new Date())) {
+                        // On force le recalcul des horaires
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(new Date(), true, true);
+
+                        // On redémarre le timer
                         redemarrerTimer();
                     } else {
                         ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourSuivant, false);
+                                .rafraichir(jourSuivant, false, true);
                         mHomeHeureCourante.setVisible(true);
                     }
 

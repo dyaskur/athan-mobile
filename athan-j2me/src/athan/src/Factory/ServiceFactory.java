@@ -5,15 +5,16 @@
 package athan.src.Factory;
 
 import athan.src.Client.AthanException;
-import athan.src.Client.Main;
 import athan.src.Client.VuePrincipale;
 
 /**
+ * Factory
+ *
  * @author Saad BENBOUZID
  */
-public class ServiceFactory {
+public class ServiceFactory implements IServiceFactory {
 
-    private static ServiceFactory sFactory;
+    private static IServiceFactory sFactory;
 
     private Preferences mPreferences;
     private ResourceReader mResourceReader;
@@ -23,7 +24,7 @@ public class ServiceFactory {
      * Récupère la factory
      * @return la factory
      */
-    public static ServiceFactory getFactory() {
+    public static IServiceFactory getFactory() {
         return sFactory;
     }
 
@@ -32,7 +33,7 @@ public class ServiceFactory {
      */
     public static void newInstance() throws AthanException {
         if (sFactory == null) {
-            sFactory = new ServiceFactory();
+            sFactory = (IServiceFactory) new ServiceFactory();
         }
     }
 

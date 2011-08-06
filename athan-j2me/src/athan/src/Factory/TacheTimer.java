@@ -22,7 +22,7 @@ public class TacheTimer extends TimerTask {
             // Appel les services de calcul et d'affichage
             // à partir de la date courante
             ServiceFactory.getFactory().getVuePrincipale()
-                    .rafraichir(new Date(), true);
+                    .rafraichir(new Date(), true, false);
 
             //System.out.println("Calcul timer\n");
 
