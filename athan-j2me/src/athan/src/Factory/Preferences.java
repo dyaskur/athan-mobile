@@ -35,6 +35,8 @@ public class Preferences {
     public static final String sMethodeJuridiqueAsr = "methodeJuristiqueAsr";
     public static final String sCalculationMethod = "methodeCalcul";
     public static final String sCustomFajrAngle = "customFajrAngle";
+    public static final String sCustomImsakSelector = "customImsakSelector";
+    public static final String sCustomImsakValue = "customImsakValue";
     public static final String sCustomMaghrebSelector = "customMaghrebSelector";
     public static final String sCustomMaghrebValue = "customMaghrebValue";
     public static final String sCustomIshaaSelector = "customIshaaSelector";
@@ -65,13 +67,17 @@ public class Preferences {
         CalculationCustomParams retour = new CalculationCustomParams();
 
         double lFajrAngle = Double.parseDouble(get(sCustomFajrAngle));
+        int lImsakSelector = Integer.parseInt(get(sCustomImsakSelector));
+        double lImsakValue = Double.parseDouble(get(sCustomImsakValue));
         int lMaghrebSelector = Integer.parseInt(get(sCustomMaghrebSelector));
         double lMaghrebValue = Double.parseDouble(get(sCustomMaghrebValue));
         int lIshaaSelector = Integer.parseInt(get(sCustomIshaaSelector));
         double lIshaaValue = Double.parseDouble(get(sCustomIshaaValue));
 
         retour.setFajrAngle(lFajrAngle);
+        retour.setImsakSelector(lImsakSelector);
         retour.setMaghrebSelector(lMaghrebSelector);
+        retour.setImsakValue(lImsakValue);
         retour.setMaghrebValue(lMaghrebValue);
         retour.setIshaaSelector(lIshaaSelector);
         retour.setIshaaValue(lIshaaValue);
@@ -168,6 +174,8 @@ public class Preferences {
         put(sMethodeJuridiqueAsr, "0");
         put(sCalculationMethod, "6");
         put(sCustomFajrAngle, "12");
+        put(sCustomImsakSelector, "1");
+        put(sCustomImsakValue, "15");
         put(sCustomMaghrebSelector, "1");
         put(sCustomMaghrebValue, "0");
         put(sCustomIshaaSelector, "0");

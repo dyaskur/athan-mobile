@@ -11,9 +11,12 @@ package athan.src.SalaahCalc;
  * @author Saad BENBOUZID
  */
 public class CalculationCustomParams {
+
     private double mFajrAngle;
+    public int mImsakSelector;
     private int mMaghrebSelector;
     private int mIshaaSelector;
+    public double mImsakValue;
     private double mMaghrebValue;
     private double mIshaaValue;
 
@@ -32,6 +35,20 @@ public class CalculationCustomParams {
      */
     public void setFajrAngle(double mFajrAngle) {
         this.mFajrAngle = mFajrAngle;
+    }
+
+    /**
+     * @return the mImsakSelector
+     */
+    public int getImsakSelector() {
+        return mImsakSelector;
+    }
+
+    /**
+     * @param mImsakSelector the mImsakSelector to set
+     */
+    public void setImsakSelector(int mImsakSelector) {
+        this.mImsakSelector = mImsakSelector;
     }
 
     /**
@@ -60,6 +77,20 @@ public class CalculationCustomParams {
      */
     public void setIshaaSelector(int mIshaaSelector) {
         this.mIshaaSelector = mIshaaSelector;
+    }
+
+    /**
+     * @return the mImsakValue
+     */
+    public double getImsakValue() {
+        return mImsakValue;
+    }
+
+    /**
+     * @param mImsakValue the mImsakValue to set
+     */
+    public void setImsakValue(double mImsakValue) {
+        this.mImsakValue = mImsakValue;
     }
 
     /**

@@ -23,6 +23,7 @@ public class PrieresJournee {
 
     private Calendar mCalendar;
 
+    private Horaire mImsak;
     private Horaire mSobh;
     private Horaire mChourouk;
     private Horaire mDohr;
@@ -31,6 +32,7 @@ public class PrieresJournee {
     private Horaire mIshaa;
 
     public PrieresJournee(Date pDateJour,
+                            Horaire pImsak,
                             Horaire pSohb,
                             Horaire pChourouk,
                             Horaire pDohr,
@@ -40,6 +42,7 @@ public class PrieresJournee {
 
         setDateJour(pDateJour);
 
+        mImsak = pImsak;
         mSobh = pSohb;
         mChourouk = pChourouk;
         mDohr = pDohr;
@@ -120,6 +123,13 @@ public class PrieresJournee {
                 .getResourceReader();
         
         return RESSOURCE.getDateFormattee(mCalendar);
+    }
+
+    /**
+     * @return the mImsak
+     */
+    public Horaire getImsak() {
+        return mImsak;
     }
 
     /**

@@ -34,6 +34,8 @@ public class MainForm extends Menu
     /** Intervalle en ms entre la date courante et la date suivante */
     private static final int INTERVALLE_PREC_SUIV = 24 * 3600 * 1000;
 
+    private static final int HAUTEUR_LABEL_PRIERE = 12;
+
     private ResourceReader RESOURCES;
 
     private Date mHeureCourante;
@@ -45,6 +47,7 @@ public class MainForm extends Menu
     private TextArea mTextAreaLibelleJour;
     private Button mDateSuivante;
 
+    private Label mLabelHoraireImsak;
     private Label mLabelHoraireSohb;
     private Label mLabelHoraireChourouk;
     private Label mLabelHoraireDohr;
@@ -55,7 +58,7 @@ public class MainForm extends Menu
     private Main mMain;
 
     private TableLayout.Constraint nouvelleContrainteListePrieres(TableLayout pTB) {
-        return nouvelleContrainteListePrieres(pTB, 16);
+        return nouvelleContrainteListePrieres(pTB, HAUTEUR_LABEL_PRIERE);
     }
 
     private TableLayout.Constraint nouvelleContrainteListePrieres(TableLayout pTB, int pHauteur) {
@@ -103,6 +106,13 @@ public class MainForm extends Menu
      */
     public TextArea getTextAreaLibelleJour() {
         return mTextAreaLibelleJour;
+    }
+
+    /**
+     * @return the mLabelHoraireImsak
+     */
+    public Label getLabelHoraireImsak() {
+        return mLabelHoraireImsak;
     }
 
     /**
@@ -209,9 +219,11 @@ public class MainForm extends Menu
         ctnDates.addComponent(BorderLayout.EAST, mDateSuivante);        
 
         // Conteneur des horaires de prières
-        TableLayout tbCtnPrieres = new TableLayout(6, 2);
+        TableLayout tbCtnPrieres = new TableLayout(8, 2);
         Container ctnPrieres = new Container();
         ctnPrieres.setLayout(tbCtnPrieres);
+        mLabelHoraireImsak = new Label("");
+        mLabelHoraireImsak.setAlignment(Component.RIGHT);
         mLabelHoraireSohb = new Label("");
         mLabelHoraireSohb.setAlignment(Component.RIGHT);
         mLabelHoraireChourouk = new Label("");
@@ -224,8 +236,10 @@ public class MainForm extends Menu
         mLabelHoraireMaghreb.setAlignment(Component.RIGHT);
         mLabelHoraireIshaa = new Label("");
         mLabelHoraireIshaa.setAlignment(Component.RIGHT);
-        //ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, 5), new Label());
-        //ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, 5), new Label());
+        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, 10), new Label());
+        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, 10), new Label());
+        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Imsak")));
+        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireImsak);
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Sobh")));
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireSohb);
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Chourouk")));
@@ -238,10 +252,11 @@ public class MainForm extends Menu
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireMaghreb);
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Ishaa")));
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireIshaa);
+        ctnPrieres.setPreferredH(100);
 
         // Conteneur des horaires de prières + décor
-        Image imgBdLeft = Main.icons.getImage("Border_left");
-        Image imgBdRight = Main.icons.getImage("Border_right");
+        Image imgBdLeft = Main.icons.getImage("Border_left").scaled(16, -1);
+        Image imgBdRight = Main.icons.getImage("Border_right").scaled(16, -1);
         Container ctnPrieresEtContour = new Container(new BorderLayout());
         ctnPrieresEtContour.addComponent(BorderLayout.WEST, new Label(imgBdLeft));
         ctnPrieresEtContour.addComponent(BorderLayout.CENTER, ctnPrieres);

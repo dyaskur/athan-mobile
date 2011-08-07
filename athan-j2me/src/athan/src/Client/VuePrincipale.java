@@ -73,12 +73,13 @@ public class VuePrincipale implements AthanConstantes {
 
                 mPrieresJournee = new PrieresJournee(
                          pDate,
-                         new Horaire(mHorairesPrieres[0], formatHoraire),
-                         new Horaire(mHorairesPrieres[1], formatHoraire),
-                         new Horaire(mHorairesPrieres[2], formatHoraire),
-                         new Horaire(mHorairesPrieres[3], formatHoraire),
-                         new Horaire(mHorairesPrieres[4], formatHoraire),
-                         new Horaire(mHorairesPrieres[6], formatHoraire));
+                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.IMSAK], formatHoraire),
+                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.FAJR], formatHoraire),
+                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.SUNRISE], formatHoraire),
+                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.DOHR], formatHoraire),
+                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.ASR], formatHoraire),
+                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.MAGHRIB], formatHoraire),
+                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.ISHAA], formatHoraire));
             } else {
                 formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
                                     .get(Preferences.sFormatHoraire));
@@ -152,6 +153,11 @@ public class VuePrincipale implements AthanConstantes {
 
         mProchainePriereRenseignee = false;
 
+        Main.getMainForm().getLabelHoraireImsak().setText(mPrieresJournee.getImsak().getHoraireFormate());
+        changerFontPriere(Main.getMainForm().getLabelHoraireImsak(),
+                    mPrieresJournee.getImsak().isEstProchaine(),
+                    false); // afin de ne pas compter l'Imsak comme une prière
+
         Main.getMainForm().getLabelHoraireSohb().setText(mPrieresJournee.getSobh().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireSohb(),
                     mPrieresJournee.getSobh().isEstProchaine(),
@@ -160,7 +166,7 @@ public class VuePrincipale implements AthanConstantes {
         Main.getMainForm().getLabelHoraireChourouk().setText(mPrieresJournee.getChourouk().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireChourouk(),
                     mPrieresJournee.getChourouk().isEstProchaine(),
-                    pIsHeureCourante);
+                    false); // afin de ne pas compter le Chourouk comme une prière
 
         Main.getMainForm().getLabelHoraireDohr().setText(mPrieresJournee.getDohr().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireDohr(),

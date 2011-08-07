@@ -43,11 +43,13 @@ public class MenuCalculationMethod extends Menu {
     private Command mOK;
 
     private ComboBox mChoixMethode;
+    private ComboBox mImsakSelector;
     private ComboBox mMaghrebSelector;
     private ComboBox mIshaaSelector;
     private ComboBox mAsrJuridiqueMethode;
 
     private TextField mFajrAngle;
+    private TextField mImsakValue;
     private TextField mMaghrebValue;
     private TextField mIshaaValue;
 
@@ -84,6 +86,8 @@ public class MenuCalculationMethod extends Menu {
         if (mChoixMethode.getSelectedIndex()
                 != CalculationMethods.Custom.getValue()) {
             mFajrAngle.setEditable(false);
+            mImsakSelector.setEnabled(false);
+            mImsakValue.setEnabled(false);
             mMaghrebSelector.setEnabled(false);
             mMaghrebValue.setEditable(false);
             mIshaaSelector.setEnabled(false);
@@ -93,6 +97,8 @@ public class MenuCalculationMethod extends Menu {
                 // Jafari
                 case 0:
                     mFajrAngle.setText("16");
+                    mImsakSelector.setSelectedIndex(0);
+                    mImsakValue.setText("19.5");
                     mMaghrebSelector.setSelectedIndex(0);
                     mMaghrebValue.setText("4");
                     mIshaaSelector.setSelectedIndex(0);
@@ -101,6 +107,8 @@ public class MenuCalculationMethod extends Menu {
                 // Karachi
                 case 1:
                     mFajrAngle.setText("18");
+                    mImsakSelector.setSelectedIndex(0);
+                    mImsakValue.setText("19.5");
                     mMaghrebSelector.setSelectedIndex(1);
                     mMaghrebValue.setText("0");
                     mIshaaSelector.setSelectedIndex(0);
@@ -109,6 +117,8 @@ public class MenuCalculationMethod extends Menu {
                 // ISNA
                 case 2:
                     mFajrAngle.setText("15");
+                    mImsakSelector.setSelectedIndex(0);
+                    mImsakValue.setText("19.5");
                     mMaghrebSelector.setSelectedIndex(1);
                     mMaghrebValue.setText("0");
                     mIshaaSelector.setSelectedIndex(0);
@@ -117,6 +127,8 @@ public class MenuCalculationMethod extends Menu {
                 // MWL
                 case 3:
                     mFajrAngle.setText("18");
+                    mImsakSelector.setSelectedIndex(0);
+                    mImsakValue.setText("19.5");
                     mMaghrebSelector.setSelectedIndex(1);
                     mMaghrebValue.setText("0");
                     mIshaaSelector.setSelectedIndex(0);
@@ -125,6 +137,8 @@ public class MenuCalculationMethod extends Menu {
                 // Makkah
                 case 4:
                     mFajrAngle.setText("19");
+                    mImsakSelector.setSelectedIndex(0);
+                    mImsakValue.setText("19.5");
                     mMaghrebSelector.setSelectedIndex(1);
                     mMaghrebValue.setText("0");
                     mIshaaSelector.setSelectedIndex(1);
@@ -133,6 +147,8 @@ public class MenuCalculationMethod extends Menu {
                 // Egypt
                 case 5:
                     mFajrAngle.setText("19.5");
+                    mImsakSelector.setSelectedIndex(0);
+                    mImsakValue.setText("19.5");
                     mMaghrebSelector.setSelectedIndex(1);
                     mMaghrebValue.setText("0");
                     mIshaaSelector.setSelectedIndex(0);
@@ -140,6 +156,8 @@ public class MenuCalculationMethod extends Menu {
                     break;
                 default:
                     mFajrAngle.setText("");
+                    mImsakSelector.setSelectedIndex(1);
+                    mImsakValue.setText("");
                     mMaghrebSelector.setSelectedIndex(0);
                     mMaghrebValue.setText("");
                     mIshaaSelector.setSelectedIndex(0);
@@ -148,6 +166,8 @@ public class MenuCalculationMethod extends Menu {
             }
         } else {
             mFajrAngle.setEditable(true);
+            mImsakSelector.setEnabled(true);
+            mImsakValue.setEditable(true);
             mMaghrebSelector.setEnabled(true);
             mMaghrebValue.setEditable(true);
             mIshaaSelector.setEnabled(true);
@@ -157,6 +177,15 @@ public class MenuCalculationMethod extends Menu {
         }
     }
 
+    private void editerLabelCombo(Label pLabel) {
+        pLabel.setUIID(UIID_LABEL_INFO_NAME);
+        pLabel.getUnselectedStyle().setBgTransparency(0);
+        pLabel.getSelectedStyle().setBgTransparency(0);
+        pLabel.setFocusable(true);
+        pLabel.setAlignment(Component.LEFT);
+        pLabel.setPreferredH(HAUTEUR_LABEL);
+    }
+
     protected void execute(final Form f) {
         final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                             .getResourceReader();
@@ -164,21 +193,12 @@ public class MenuCalculationMethod extends Menu {
         applyTactileSettings(f);
 
         Label lLabelChoixMethode = new Label(RESSOURCE.get("CalculationMethod"));
-        lLabelChoixMethode.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelChoixMethode.getUnselectedStyle().setBgTransparency(0);
-        lLabelChoixMethode.getSelectedStyle().setBgTransparency(0);
-        lLabelChoixMethode.setFocusable(true);
-        lLabelChoixMethode.setAlignment(Component.LEFT);
-        lLabelChoixMethode.setPreferredH(HAUTEUR_LABEL);
+        editerLabelCombo(lLabelChoixMethode);
 
         Label lLabelAsrMethod = new Label(RESSOURCE.get("AsrJuristicMethod"));
-        lLabelAsrMethod.setUIID(UIID_LABEL_INFO_NAME);
-        lLabelAsrMethod.getUnselectedStyle().setBgTransparency(0);
-        lLabelAsrMethod.getSelectedStyle().setBgTransparency(0);
-        lLabelAsrMethod.setFocusable(true);
-        lLabelAsrMethod.setAlignment(Component.LEFT);
-        lLabelAsrMethod.setPreferredH(HAUTEUR_LABEL);
+        editerLabelCombo(lLabelAsrMethod);
 
+        String [] imsakValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesBF") };
         String [] maghrebValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAS") };
         String [] ishaaValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAM") };
 
@@ -205,6 +225,8 @@ public class MenuCalculationMethod extends Menu {
         mAsrJuridiqueMethode = new ComboBox(CALCULATION_ASR_METHOD);
         mAsrJuridiqueMethode.setSelectedIndex(0);
 
+        mImsakSelector = new ComboBox(imsakValues);
+        mImsakSelector.setSelectedIndex(0);
         mMaghrebSelector = new ComboBox(maghrebValues);
         mMaghrebSelector.setSelectedIndex(0);
         mIshaaSelector = new ComboBox(ishaaValues);
@@ -212,10 +234,12 @@ public class MenuCalculationMethod extends Menu {
 
         mFajrAngle = new TextField();
         editerParametrerLabel(mFajrAngle);
+        mImsakValue = new TextField();
+        editerParametrerLabel(mImsakValue);
         mMaghrebValue = new TextField();
-        editerParametrerLabel(mFajrAngle);
+        editerParametrerLabel(mMaghrebValue);
         mIshaaValue = new TextField();
-        editerParametrerLabel(mFajrAngle);
+        editerParametrerLabel(mIshaaValue);
 
         Container ctnSaisie = new Container(new GridLayout(2, 2));
         ctnSaisie.addComponent(lLabelChoixMethode);
@@ -226,18 +250,28 @@ public class MenuCalculationMethod extends Menu {
 
         TableLayout tblLayoutParams = new TableLayout(3, 3);
         Container lCtnParams = new Container();
+
         lCtnParams.setLayout(tblLayoutParams);
 
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 60, 2),
                                     retournerLabelParam(RESSOURCE.get("fajrAngle")));
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 40, 1),
                                     mFajrAngle);
+
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
+                                    retournerLabelParam(RESSOURCE.get("imsakParam")));
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
+                                    mImsakSelector);
+        lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 20, 1),
+                                    mImsakValue);
+
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
                                     retournerLabelParam(RESSOURCE.get("maghrebParam")));
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
                                     mMaghrebSelector);
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 20, 1),
                                     mMaghrebValue);
+
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
                                     retournerLabelParam(RESSOURCE.get("ishaaParam")));
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
@@ -249,11 +283,6 @@ public class MenuCalculationMethod extends Menu {
         f.addComponent(ctnSaisie);
         f.addComponent(lCtnParams);
 
-        // Gestion du comportement (ergonomie)
-        if (!Main.isTactile()) {
-           //mOK.setFocusable(true);
-        }
-
         mOK = new Command(RESSOURCE.get("Command.OK")) {
 
             public void actionPerformed(ActionEvent ae) {
@@ -262,34 +291,41 @@ public class MenuCalculationMethod extends Menu {
                 int calculationMethod = mChoixMethode.getSelectedIndex();
 
                 double fajrAngle = 0.0;
+                int imsakSelector = mImsakSelector.getSelectedIndex();
                 int maghrebSelector = mMaghrebSelector.getSelectedIndex();
                 int ishaaSelector = mIshaaSelector.getSelectedIndex();
+                double imsakValue = 0.0;
                 double maghrebValue = 0.0;
                 double ishaaValue = 0.0;
 
                 if (calculationMethod == CalculationMethods.Custom.getValue()) {
                     try {
                         String s_fajrAngle = mFajrAngle.getText();
+                        String s_imsakValue = mImsakValue.getText();
                         String s_maghrebValue = mMaghrebValue.getText();
                         String s_ishaaValue = mIshaaValue.getText();
                         if (!StringOutilClient.isEmpty(s_fajrAngle)
+                                && !StringOutilClient.isEmpty(s_imsakValue)
                                 && !StringOutilClient.isEmpty(s_maghrebValue)
                                 && !StringOutilClient.isEmpty(s_ishaaValue)) {
 
                             fajrAngle = Double.parseDouble(s_fajrAngle);
+                            imsakValue = Double.parseDouble(s_imsakValue);
                             maghrebValue = Double.parseDouble(s_maghrebValue);
                             ishaaValue = Double.parseDouble(s_ishaaValue);
 
                             if (!estAngleCorrect(fajrAngle)
+                                    || (imsakSelector == 0 && !estAngleCorrect(imsakValue))
+                                    || (imsakSelector == 1 && !estMinutesCorrect(imsakValue))
                                     || (maghrebSelector == 0 && !estAngleCorrect(maghrebValue))
                                     || (maghrebSelector == 1 && !estMinutesCorrect(maghrebValue))
                                     || (ishaaSelector == 0 && !estAngleCorrect(ishaaValue))
                                     || (ishaaSelector == 1 && !estMinutesCorrect(ishaaValue))) {
-                                throw new AthanException("outbound values");
+                                throw new AthanException("Out of bound values");
                             }
 
                         } else {
-                            throw new AthanException("empty values");
+                            throw new AthanException("Empty values");
                         }
                     } catch(Exception exc) {
                         contenuOk = false;
@@ -315,6 +351,10 @@ public class MenuCalculationMethod extends Menu {
                     if (calculationMethod == CalculationMethods.Custom.getValue()) {
                         ServiceFactory.getFactory().getPreferences()
                                 .set(Preferences.sCustomFajrAngle, Double.toString(fajrAngle));
+                        ServiceFactory.getFactory().getPreferences()
+                                .set(Preferences.sCustomImsakSelector, Integer.toString(imsakSelector));
+                        ServiceFactory.getFactory().getPreferences()
+                                .set(Preferences.sCustomImsakValue, Double.toString(imsakValue));
                         ServiceFactory.getFactory().getPreferences()
                                 .set(Preferences.sCustomMaghrebSelector, Integer.toString(maghrebSelector));
                         ServiceFactory.getFactory().getPreferences()
@@ -355,7 +395,6 @@ public class MenuCalculationMethod extends Menu {
     }
 
     private boolean estMinutesCorrect(double pMinutes) {
-        System.out.println("pMinutes - Math.floor(pMinutes) " + (pMinutes - Math.floor(pMinutes)));
         return (pMinutes - Math.floor(pMinutes) == 0.0)
                     &&  pMinutes >= 0 && pMinutes <= 120;
     }
