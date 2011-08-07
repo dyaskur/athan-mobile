@@ -152,7 +152,8 @@ public class MainForm extends Menu
     }
 
     public String getName() {
-        return "Athan";
+        return ServiceFactory.getFactory().getResourceReader()
+                .get("ApplicationTitle");
     }
 
     public String getIconBaseName() {

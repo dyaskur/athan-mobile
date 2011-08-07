@@ -19,6 +19,7 @@ import com.sun.lwuit.Container;
 import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Label;
+import com.sun.lwuit.TextArea;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.events.ActionEvent;
@@ -44,7 +45,7 @@ public class MenuCalculationMethod extends Menu {
     private ComboBox mChoixMethode;
     private ComboBox mMaghrebSelector;
     private ComboBox mIshaaSelector;
-    private ComboBox mAsrJuristicMethode;
+    private ComboBox mAsrJuridiqueMethode;
 
     private TextField mFajrAngle;
     private TextField mMaghrebValue;
@@ -123,7 +124,7 @@ public class MenuCalculationMethod extends Menu {
                     break;
                 // Makkah
                 case 4:
-                    mFajrAngle.setText("18.5");
+                    mFajrAngle.setText("19");
                     mMaghrebSelector.setSelectedIndex(1);
                     mMaghrebValue.setText("0");
                     mIshaaSelector.setSelectedIndex(1);
@@ -201,8 +202,8 @@ public class MenuCalculationMethod extends Menu {
             }
         });
 
-        mAsrJuristicMethode = new ComboBox(CALCULATION_ASR_METHOD);
-        mAsrJuristicMethode.setSelectedIndex(0);
+        mAsrJuridiqueMethode = new ComboBox(CALCULATION_ASR_METHOD);
+        mAsrJuridiqueMethode.setSelectedIndex(0);
 
         mMaghrebSelector = new ComboBox(maghrebValues);
         mMaghrebSelector.setSelectedIndex(0);
@@ -210,28 +211,17 @@ public class MenuCalculationMethod extends Menu {
         mIshaaSelector.setSelectedIndex(0);
 
         mFajrAngle = new TextField();
-        mFajrAngle.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mFajrAngle.setAlignment(TextField.LEFT);
-        mFajrAngle.setRows(1);
-        mFajrAngle.setPreferredH(HAUTEUR_LABEL);
-
+        editerParametrerLabel(mFajrAngle);
         mMaghrebValue = new TextField();
-        mMaghrebValue.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mMaghrebValue.setAlignment(TextField.LEFT);
-        mMaghrebValue.setRows(1);
-        mMaghrebValue.setPreferredH(HAUTEUR_LABEL);
-
+        editerParametrerLabel(mFajrAngle);
         mIshaaValue = new TextField();
-        mIshaaValue.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mIshaaValue.setAlignment(TextField.LEFT);
-        mIshaaValue.setRows(1);
-        mIshaaValue.setPreferredH(HAUTEUR_LABEL);
+        editerParametrerLabel(mFajrAngle);
 
         Container ctnSaisie = new Container(new GridLayout(2, 2));
         ctnSaisie.addComponent(lLabelChoixMethode);
         ctnSaisie.addComponent(mChoixMethode);
         ctnSaisie.addComponent(lLabelAsrMethod);
-        ctnSaisie.addComponent(mAsrJuristicMethode);
+        ctnSaisie.addComponent(mAsrJuridiqueMethode);
         ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
 
         TableLayout tblLayoutParams = new TableLayout(3, 3);
@@ -370,6 +360,13 @@ public class MenuCalculationMethod extends Menu {
                     &&  pMinutes >= 0 && pMinutes <= 120;
     }
 
+    private void editerParametrerLabel(TextArea pTextArea) {
+        pTextArea.setUIID(UIID_LABEL_LOCALISATION_INFO);
+        pTextArea.setAlignment(TextField.LEFT);
+        pTextArea.setRows(1);
+        pTextArea.setPreferredH(HAUTEUR_LABEL);
+    }
+
     private void initialiserInfosParam() {
 
         initialiserCustomParams();
@@ -386,7 +383,7 @@ public class MenuCalculationMethod extends Menu {
             exc.printStackTrace();
         }
 
-        mAsrJuristicMethode.setSelectedIndex(lAsrMethod);
+        mAsrJuridiqueMethode.setSelectedIndex(lAsrMethod);
 
         mChoixMethode.setSelectedIndex(lCalcMethod);
         choixSelectionChange();

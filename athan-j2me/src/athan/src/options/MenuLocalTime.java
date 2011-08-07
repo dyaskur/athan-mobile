@@ -33,7 +33,7 @@ import java.util.Date;
 public class MenuLocalTime extends Menu {
 
     private static final int HAUTEUR_LABEL = 18;
-    private static final int HAUTEUR_LABEL_TOUS = 40;
+    private static final int HAUTEUR_LABEL_TOUS = 60;
 
     private Command mOK;
 
@@ -54,6 +54,13 @@ public class MenuLocalTime extends Menu {
         return MENU_CONFIG_HEURE_LOCALE;
     }
 
+    private void editerTextField(TextField pTextField) {
+        pTextField.setUIID(UIID_LABEL_LOCALISATION_INFO);
+        pTextField.setAlignment(TextField.LEFT);
+        pTextField.setRows(1);
+        pTextField.setPreferredH(HAUTEUR_LABEL);
+    }
+
     protected void execute(final Form f) {
         final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                             .getResourceReader();
@@ -66,19 +73,19 @@ public class MenuLocalTime extends Menu {
         editerLabel(lLabelFormatHoraire);
 
         mDecalage = new TextField();
-        mDecalage.setUIID(UIID_LABEL_LOCALISATION_INFO);
-        mDecalage.setAlignment(TextField.LEFT);
-        mDecalage.setRows(1);
-        mDecalage.setPreferredH(HAUTEUR_LABEL);
+        editerTextField(mDecalage);
 
         mFormatHoraire = new ComboBox(TIME_FORMAT);
 
         Container ctnSaisie = new Container(new GridLayout(2, 2));
         ctnSaisie.addComponent(lLabelDecalage);
         ctnSaisie.addComponent(mDecalage);
+        ctnSaisie.addComponent(new Label(""));
+        ctnSaisie.addComponent(new Label(""));
         ctnSaisie.addComponent(lLabelFormatHoraire);
         ctnSaisie.addComponent(mFormatHoraire);
         ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
+        //ctnSaisie.setScrollable(true);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         f.addComponent(new Label());

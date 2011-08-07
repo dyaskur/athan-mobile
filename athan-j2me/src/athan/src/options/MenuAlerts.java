@@ -148,6 +148,7 @@ public class MenuAlerts extends Menu {
         pTextField.setRows(1);
         pTextField.setFocusable(true);
         pTextField.setPreferredH(HAUTEUR_LABEL);
+        pTextField.setWidth(40);
     }
 
     private TableLayout.Constraint getCtnLayoutAlerts(TableLayout pTB,

@@ -135,9 +135,9 @@ public class OptionForm extends Form
     public OptionForm(MainForm parent) {
         //setTitle(title);
         this.parent = parent;
-        RESOURCES = ServiceFactory.getFactory().getResourceReader();
 
-        RESOURCES.get("ApplicationTitle");
+        RESOURCES = ServiceFactory.getFactory().getResourceReader();
+        setTitle(RESOURCES.get("OptionForm"));
     }
     
     public void setDragMode(boolean dragMode) {

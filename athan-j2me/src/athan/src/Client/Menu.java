@@ -44,9 +44,9 @@ public abstract class Menu
                                 ActionListener commandListener,
                                 boolean showHelp) {
         System.gc();
-        
+
         final ResourceReader RESOURCE = ServiceFactory.getFactory().getResourceReader();
-        
+
         mForm = new Form(getName());
 
         if (showHelp) {
