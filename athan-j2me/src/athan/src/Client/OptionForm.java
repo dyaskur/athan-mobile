@@ -13,6 +13,7 @@ import athan.src.options.MenuLocalTime;
 import athan.src.options.MenuCalendarCorrection;
 import athan.src.options.MenuApplicationLanguage;
 import athan.src.options.MenuCalculationMethod;
+import athan.src.options.MenuPrayers;
 import athan.src.options.MenuSettingsSummary;
 import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
@@ -79,6 +80,7 @@ public class OptionForm extends Form
         new MenuCalendarCorrection(),
         new MenuApplicationLanguage(),
         new MenuCalculationMethod(),
+        new MenuPrayers(),
         new MenuSettingsSummary()
     };
 

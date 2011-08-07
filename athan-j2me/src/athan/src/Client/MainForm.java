@@ -3,6 +3,7 @@
  */
 package athan.src.Client;
 
+import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Factory.TacheTimer;
@@ -36,6 +37,17 @@ public class MainForm extends Menu
 
     private static final int HAUTEUR_LABEL_PRIERE = 12;
 
+    private static final int HAUTEUR_LABEL_HEADER_PRIERE = 10;
+
+    /**  Décalages dans le redimensionnement des bannières verticales
+     * et des espacement des horaires des prières
+     * une prière en moins */
+    private static final int SCALE_GAP_UNITAIRE = 30;
+    private static final int LABEL_GAP_UNITAIRE = 3;
+    private static final int HEADER_LABEL_GAP_UNITAIRE = 3;
+    private static final int HAUTEUR_BANNIERE = 160;
+    private int mLabelGap = 0;
+
     private ResourceReader RESOURCES;
 
     private Date mHeureCourante;
@@ -58,7 +70,7 @@ public class MainForm extends Menu
     private Main mMain;
 
     private TableLayout.Constraint nouvelleContrainteListePrieres(TableLayout pTB) {
-        return nouvelleContrainteListePrieres(pTB, HAUTEUR_LABEL_PRIERE);
+        return nouvelleContrainteListePrieres(pTB, HAUTEUR_LABEL_PRIERE + mLabelGap);
     }
 
     private TableLayout.Constraint nouvelleContrainteListePrieres(TableLayout pTB, int pHauteur) {
@@ -236,14 +248,36 @@ public class MainForm extends Menu
         mLabelHoraireMaghreb.setAlignment(Component.RIGHT);
         mLabelHoraireIshaa = new Label("");
         mLabelHoraireIshaa.setAlignment(Component.RIGHT);
-        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, 10), new Label());
-        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, 10), new Label());
-        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Imsak")));
-        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireImsak);
+
+        boolean isImsakSelected = isImsakSelected();
+        boolean isChouroukSelected = isChouroukSelected();
+        int scaleGap = 0;
+        mLabelGap = 0;
+        int headerGap = 0;
+
+        if (!isImsakSelected) {
+            scaleGap += SCALE_GAP_UNITAIRE;
+            mLabelGap += LABEL_GAP_UNITAIRE;
+            headerGap += HEADER_LABEL_GAP_UNITAIRE;
+        }
+        if (!isChouroukSelected) {
+            scaleGap += SCALE_GAP_UNITAIRE;
+            mLabelGap += LABEL_GAP_UNITAIRE;
+            headerGap += HEADER_LABEL_GAP_UNITAIRE;
+        }
+
+        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, HAUTEUR_LABEL_HEADER_PRIERE - headerGap), new Label());
+        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres, HAUTEUR_LABEL_HEADER_PRIERE - headerGap), new Label());
+        if (isImsakSelected) {
+            ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Imsak")));
+            ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireImsak);
+        }
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Sobh")));
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireSohb);
-        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Chourouk")));
-        ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireChourouk);
+        if (isChouroukSelected) {
+            ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Chourouk")));
+            ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireChourouk);
+        }
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Dohr")));
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), mLabelHoraireDohr);
         ctnPrieres.addComponent(nouvelleContrainteListePrieres(tbCtnPrieres), renvoyerLabelNomPriere(RESOURCES.get("Asr")));
@@ -255,8 +289,8 @@ public class MainForm extends Menu
         ctnPrieres.setPreferredH(100);
 
         // Conteneur des horaires de prières + décor
-        Image imgBdLeft = Main.icons.getImage("Border_left").scaled(16, -1);
-        Image imgBdRight = Main.icons.getImage("Border_right").scaled(16, -1);
+        Image imgBdLeft = Main.icons.getImage("Border_left").scaled(-1, HAUTEUR_BANNIERE - scaleGap);
+        Image imgBdRight = Main.icons.getImage("Border_right").scaled(-1, HAUTEUR_BANNIERE - scaleGap);
         Container ctnPrieresEtContour = new Container(new BorderLayout());
         ctnPrieresEtContour.addComponent(BorderLayout.WEST, new Label(imgBdLeft));
         ctnPrieresEtContour.addComponent(BorderLayout.CENTER, ctnPrieres);
@@ -351,6 +385,34 @@ public class MainForm extends Menu
         f.addCommand(Main.optionsCommand);
         f.addCommand(Main.exitCommand);
         f.setBackCommand(Main.exitCommand);
+    }
+
+    private boolean isImsakSelected() {
+        boolean ret = false;
+
+        try {
+            ret = StringOutilClient.getValeurBooleenne(
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                        .get(Preferences.sDisplayImsak)));
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    private boolean isChouroukSelected() {
+        boolean ret = false;
+
+        try {
+            ret = StringOutilClient.getValeurBooleenne(
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                        .get(Preferences.sDisplayChourouk)));
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+
+        return ret;
     }
 
     private Label renvoyerLabelNomPriere(String pNomPriere) {

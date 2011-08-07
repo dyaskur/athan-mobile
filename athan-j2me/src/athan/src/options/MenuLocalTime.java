@@ -169,13 +169,12 @@ public class MenuLocalTime extends Menu {
                         .get(Preferences.sDecalageHoraire);
             lFormatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
                         .get(Preferences.sFormatHoraire));
-            mFormatHoraire.setSelectedIndex(lFormatHoraire);
-
         } catch (Exception exc) {
             exc.printStackTrace();
         }
 
         mDecalage.setText(lDecalage);
+        mFormatHoraire.setSelectedIndex(lFormatHoraire);
     }
 
     private void initialiserClaviers() {

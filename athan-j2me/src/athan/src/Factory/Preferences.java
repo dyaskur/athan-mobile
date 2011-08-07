@@ -41,6 +41,8 @@ public class Preferences {
     public static final String sCustomMaghrebValue = "customMaghrebValue";
     public static final String sCustomIshaaSelector = "customIshaaSelector";
     public static final String sCustomIshaaValue = "customIshaaValue";
+    public static final String sDisplayImsak = "displayImsak";
+    public static final String sDisplayChourouk = "displayChourouk";
     public static final String sLangue = "langue";
 
     private String mRecordStoreName;
@@ -173,13 +175,15 @@ public class Preferences {
         put(sFormatHoraire, "0");
         put(sMethodeJuridiqueAsr, "0");
         put(sCalculationMethod, "6");
-        put(sCustomFajrAngle, "12");
+        put(sCustomFajrAngle, "15");
         put(sCustomImsakSelector, "1");
         put(sCustomImsakValue, "15");
         put(sCustomMaghrebSelector, "1");
         put(sCustomMaghrebValue, "0");
         put(sCustomIshaaSelector, "0");
         put(sCustomIshaaValue, "12");
+        put(sDisplayImsak, Integer.toString(StringOutilClient.FALSE));
+        put(sDisplayChourouk, Integer.toString(StringOutilClient.FALSE));
         put(sLangue, LANGUE_EN);
     }
 

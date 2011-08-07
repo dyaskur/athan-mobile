@@ -87,7 +87,7 @@ public class MenuCalculationMethod extends Menu {
                 != CalculationMethods.Custom.getValue()) {
             mFajrAngle.setEditable(false);
             mImsakSelector.setEnabled(false);
-            mImsakValue.setEnabled(false);
+            mImsakValue.setEditable(false);
             mMaghrebSelector.setEnabled(false);
             mMaghrebValue.setEditable(false);
             mIshaaSelector.setEnabled(false);
@@ -248,7 +248,7 @@ public class MenuCalculationMethod extends Menu {
         ctnSaisie.addComponent(mAsrJuridiqueMethode);
         ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
 
-        TableLayout tblLayoutParams = new TableLayout(3, 3);
+        TableLayout tblLayoutParams = new TableLayout(4, 3);
         Container lCtnParams = new Container();
 
         lCtnParams.setLayout(tblLayoutParams);
@@ -431,14 +431,20 @@ public class MenuCalculationMethod extends Menu {
     private void initialiserCustomParams() {
 
         String lFajrValue = "0";
+        int lImsakSelector = 0;
         int lMaghrebSelector = 0;
         int lIshaaSelector = 0;
+        String lImsakValue = "0";
         String lMaghrebValue = "0";
         String lIshaaValue = "0";
 
         try {
             lFajrValue = ServiceFactory.getFactory().getPreferences()
                             .get(Preferences.sCustomFajrAngle);
+            lImsakSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCustomImsakSelector));
+            lImsakValue = ServiceFactory.getFactory().getPreferences()
+                            .get(Preferences.sCustomImsakValue);
             lMaghrebSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
                             .get(Preferences.sCustomMaghrebSelector));
             lMaghrebValue = ServiceFactory.getFactory().getPreferences()
@@ -453,6 +459,13 @@ public class MenuCalculationMethod extends Menu {
         }
 
         mFajrAngle.setText(lFajrValue);
+        mImsakSelector.setSelectedIndex(lImsakSelector);
+        if (lImsakSelector == 0) {
+            mImsakValue.setText(lImsakValue);
+        } else {
+            Real rImsakValue = new Real(lImsakValue);
+            mImsakValue.setText(new Integer(rImsakValue.toInteger()).toString());
+        }
         mMaghrebSelector.setSelectedIndex(lMaghrebSelector);
         if (lMaghrebSelector == 0) {
             mMaghrebValue.setText(lMaghrebValue);
@@ -474,6 +487,7 @@ public class MenuCalculationMethod extends Menu {
         vkbAngles.addInputMode(KB_FLOATS_MODE, KB_FLOATS);
         vkbAngles.setInputModeOrder(new String[]{KB_FLOATS_MODE});
         VirtualKeyboard.bindVirtualKeyboard(mFajrAngle, vkbAngles);
+        VirtualKeyboard.bindVirtualKeyboard(mImsakValue, vkbAngles);
         VirtualKeyboard.bindVirtualKeyboard(mMaghrebValue, vkbAngles);
         VirtualKeyboard.bindVirtualKeyboard(mIshaaValue, vkbAngles);
     }

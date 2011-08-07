@@ -66,6 +66,7 @@ public interface AthanConstantes {
 
     // Icones
     public static final String MENU_AFFICHAGE_COMPAS = "MenuAffichageCompas";
+    public static final String MENU_PRAYERS = "MenuPrayers";
     public static final String MENU_ALARMES = "MenuAlarmes";
     public static final String MENU_CHOISIR_VILLE = "MenuChoisirVille";
     public static final String MENU_CONFIG_HEURE_LOCALE = "MenuConfigHeureLocale";
