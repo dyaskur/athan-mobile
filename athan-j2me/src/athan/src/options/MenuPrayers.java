@@ -3,7 +3,6 @@
  */
 package athan.src.options;
 
-import athan.src.Client.AthanException;
 import athan.src.Client.Main;
 import athan.src.Client.Menu;
 import athan.src.Factory.Preferences;
@@ -30,8 +29,8 @@ import java.util.Date;
  */
 public class MenuPrayers extends Menu {
 
-    private static final int HAUTEUR_LABEL = 18;
-    private static final int HAUTEUR_LABEL_TOUS = 60;
+    private static final int HAUTEUR_LABEL = 22;
+    private static final int HAUTEUR_LABEL_TOUS = 70;
 
     private CheckBox mImsak;
     private CheckBox mChourouk;
@@ -54,9 +53,9 @@ public class MenuPrayers extends Menu {
 
         applyTactileSettings(f);
 
-        Label lLabelImsak = new Label(RESSOURCE.get("Imsak"));
+        Label lLabelImsak = new Label(RESSOURCE.get("DisplayImsak"));
         editerLabel(lLabelImsak);
-        Label lLabelChourouk = new Label(RESSOURCE.get("Chourouk"));
+        Label lLabelChourouk = new Label(RESSOURCE.get("DisplayChourouk"));
         editerLabel(lLabelChourouk);
 
         mImsak = new CheckBox();
@@ -64,7 +63,7 @@ public class MenuPrayers extends Menu {
         mChourouk = new CheckBox();
         editerCheckBox(mChourouk);
 
-        Container ctnSaisie = new Container(new GridLayout(2, 2));
+        Container ctnSaisie = new Container(new GridLayout(3, 2));
         ctnSaisie.addComponent(lLabelImsak);
         ctnSaisie.addComponent(mImsak);
         ctnSaisie.addComponent(new Label(""));
@@ -77,11 +76,6 @@ public class MenuPrayers extends Menu {
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         f.addComponent(new Label());
         f.addComponent(ctnSaisie);
-
-        // Gestion du comportement (ergonomie)
-        if (!Main.isTactile()) {
-           //mOK.setFocusable(true);
-        }
 
         mOK = new Command(RESSOURCE.get("Command.OK")) {
 

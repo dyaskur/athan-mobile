@@ -23,7 +23,7 @@ import com.sun.lwuit.geom.Dimension;
  * @author BENBOUZID
  */
 public abstract class Menu
-           implements AthanConstantes {
+           extends AthanConstantes {
 
     private Form mForm;
 

@@ -23,7 +23,7 @@ import java.util.Timer;
  * @author BENBOUZID
  */
 public class Main extends javax.microedition.midlet.MIDlet
-        implements ActionListener, AthanConstantes {
+                    implements ActionListener {
 
     private static final int OPTIONS_COMMAND = 1;
     public static final Command optionsCommand = new Command("", OPTIONS_COMMAND);
@@ -111,10 +111,10 @@ public class Main extends javax.microedition.midlet.MIDlet
             }
 
             // Traite les ressources de l'application
-            theme = Resources.open("/" + RESSOURCE_THEME);
+            theme = Resources.open("/" + AthanConstantes.RESSOURCE_THEME);
             UIManager.getInstance().setThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-            icons = Resources.open("/" + RESSOURCE_ICONS);
-            languages = Resources.open("/" + RESSOURCE_LANGUAGES);
+            icons = Resources.open("/" + AthanConstantes.RESSOURCE_ICONS);
+            languages = Resources.open("/" + AthanConstantes.RESSOURCE_LANGUAGES);
 
             // On crée la factory
             try {

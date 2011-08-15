@@ -21,7 +21,7 @@ import org.kxml.parser.XmlParser;
  *
  * @author Saad BENBOUZID
  */
-public class ResourceReader implements AthanConstantes {
+public class ResourceReader extends AthanConstantes {
 
     private final static String RESOURCE_FR = "properties_fr-FR.xml";
     private final static String RESOURCE_EN = "properties_en-US.xml";

@@ -22,6 +22,10 @@ public class Preferences {
     public static final String LANGUE_FR = "fr";
     public static final String LANGUE_EN = "en";
 
+    public static final String MODE_NONE = "N";
+    public static final String MODE_VIBRATE = "V";
+    public static final String MODE_SONG = "S";
+
     public static final String RECORD_STORE_NAME = "preferences";
     
     public static final String sCountryName = "countryName";
@@ -44,6 +48,13 @@ public class Preferences {
     public static final String sDisplayImsak = "displayImsak";
     public static final String sDisplayChourouk = "displayChourouk";
     public static final String sLangue = "langue";
+    public static final String sAlertSobh = "alertSobh";
+    public static final String sAlertDohr = "alertDohr";
+    public static final String sAlertAsr = "alertAsr";
+    public static final String sAlertMaghreb = "alertMaghreb";
+    public static final String sAlertIshaa = "alertIshaa";
+    public static final String sAlertMode = "alertMode";
+    public static final String sAlertFile = "alertFile";
 
     private String mRecordStoreName;
     private Hashtable mHashtable;
@@ -184,7 +195,14 @@ public class Preferences {
         put(sCustomIshaaValue, "12");
         put(sDisplayImsak, Integer.toString(StringOutilClient.FALSE));
         put(sDisplayChourouk, Integer.toString(StringOutilClient.FALSE));
-        put(sLangue, LANGUE_EN);
+        put(sLangue, LANGUE_FR);
+        put(sAlertSobh, Integer.toString(StringOutilClient.FALSE));
+        put(sAlertDohr, Integer.toString(StringOutilClient.FALSE));
+        put(sAlertAsr, Integer.toString(StringOutilClient.FALSE));
+        put(sAlertMaghreb, Integer.toString(StringOutilClient.FALSE));
+        put(sAlertIshaa, Integer.toString(StringOutilClient.FALSE));
+        put(sAlertMode, MODE_NONE);
+        put(sAlertFile, StringOutilClient.EMPTY);
     }
 
     public String getLangue() {

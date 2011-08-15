@@ -29,8 +29,7 @@ import java.util.Timer;
  * 
  * @author Saad BENBOUZID
  */
-public class MainForm extends Menu
-           implements AthanConstantes {
+public class MainForm extends Menu {
 
     /** Intervalle en ms entre la date courante et la date suivante */
     private static final int INTERVALLE_PREC_SUIV = 24 * 3600 * 1000;

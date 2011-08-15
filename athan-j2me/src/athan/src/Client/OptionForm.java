@@ -48,7 +48,7 @@ import java.util.Vector;
  * @author Chen Fishbein
  */
 public class OptionForm extends Form
-           implements ActionListener, AthanConstantes {
+           implements ActionListener {
     
     private static final int EXIT_COMMAND = 1;
     private static final int BACK_COMMAND = 3;
@@ -381,7 +381,7 @@ public class OptionForm extends Form
             imgDeselectionnee = imgSelectionnee;
 
             final Button b = new Button(DEMOS[i].getName(), imgDeselectionnee);
-            b.setUIID(UIID_BUTTON_OPTIONS);
+            b.setUIID(AthanConstantes.UIID_BUTTON_OPTIONS);
             b.setRolloverIcon(imgSelectionnee);
             b.setAlignment(Label.CENTER);
             b.setTextPosition(Label.BOTTOM);

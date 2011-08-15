@@ -9,7 +9,7 @@ package athan.src.Client;
  *
  * @author Saad BENBOUZID
  */
-public interface AthanConstantes {
+public class AthanConstantes {
 
     // Variables
     public static final int TIMEOUT_GPS = 15; // en secondes

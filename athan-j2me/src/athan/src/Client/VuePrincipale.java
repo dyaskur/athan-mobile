@@ -23,7 +23,7 @@ import java.util.Date;
  *
  * @author BENBOUZID
  */
-public class VuePrincipale implements AthanConstantes {
+public class VuePrincipale extends AthanConstantes {
 
     private PrieresJournee mPrieresJournee;
     private boolean mProchainePriereRenseignee;
