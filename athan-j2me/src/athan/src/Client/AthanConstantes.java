@@ -17,6 +17,10 @@ public class AthanConstantes {
     public static final int TIMEOUT_CONFIRMATION_MODIF = 2000; // en ms
     public static final String PATTERN_LIBELLE = "%s"; // en secondes
 
+    // Constantes
+    public static final String FORMAT_WAV = ".wav";
+    public static final String FORMAT_MP3 = ".mp3";
+
     // Geocoding
     public static final String [] INDICATIF_PAYS = {
         "ar",

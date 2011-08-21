@@ -19,20 +19,23 @@ import javax.microedition.io.file.FileSystemRegistry;
 public class FileTreeModel implements TreeModel {
     
     public Vector getChildren(Object parent) {
+
         Vector response = new Vector();
 
         try {
-            if(parent == null) {
+            if (parent == null) {
                 Enumeration e = FileSystemRegistry.listRoots();
                 while(e.hasMoreElements()) {
-                    response.addElement("file:///" + e.nextElement());
+                    Object obj = e.nextElement();
+                    response.addElement("file:///" + obj);
                 }
             } else {
                 String name = (String)parent;
                 FileConnection c = (FileConnection)Connector.open(name, Connector.READ);
                 Enumeration e = c.list();
                 while(e.hasMoreElements()) {
-                    response.addElement(name + e.nextElement());
+                    Object obj = e.nextElement();
+                    response.addElement(name + obj);
                 }
                 c.close();
             }

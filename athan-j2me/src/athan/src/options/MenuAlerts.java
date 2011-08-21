@@ -29,9 +29,13 @@ import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.layouts.GridLayout;
 import com.sun.lwuit.tree.Tree;
+import java.io.InputStream;
 import java.util.Date;
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
+import javax.microedition.media.Manager;
+import javax.microedition.media.Player;
+import javax.microedition.media.control.VolumeControl;
 
 /**
  * Menu réglages des alarmes
@@ -47,7 +51,6 @@ public class MenuAlerts extends Menu {
     private static final String IMAGE_FOLDER = "Folder";
     private static final String IMAGE_FOLDER_CLOSED = "FolderClosed";
     private static final String IMAGE_FILE = "File";
-    private static final String IMAGE_BROWSE_UP = "BrowseUp";
 
     private CheckBox mAlerterSobh;
     private CheckBox mAlerterDohr;
@@ -65,25 +68,6 @@ public class MenuAlerts extends Menu {
 
     private final ResourceReader RESSOURCE = ServiceFactory.getFactory()
                                             .getResourceReader();
-
-    /** Parcours des fichier */
-    // For our file system, this will be our root
-    private final static String ROOT = "/";
-    // Definitions for directories
-    private final static String DIRECTORY_INDICATOR = "/";
-    private final static String UP_DIRECTORY_INDICATOR = "..";
-    // Holds the full path to the current directory.
-    // Point to the root at app startup
-    private String fullPath = ROOT;
-    // List of files/directories in the current directory
-    List lstDirectory = null;
-    // Icons for directory, file, and move-up-one directory
-    Image imgDirectory = null;
-    Image imgFile = null;
-    Image imgUpDirectory = null;
-    private Command cmExit; // Command to exit
-    private Command cmSelect; // Command to select dir or file
-    private Command cmBack; // Command to "go back" one "screen"
 
     protected String getHelp() {
         return ServiceFactory.getFactory().getResourceReader()
@@ -141,7 +125,7 @@ public class MenuAlerts extends Menu {
             public void actionPerformed(ActionEvent evt) {
                 // Sélection d'un fichier son
                 try {
-                    String urlFichier = renvoyerUrlFichier(f);
+                    renvoyerUrlFichier(f);
 
                 } catch(Exception exc) {
                     exc.printStackTrace();
@@ -237,13 +221,60 @@ public class MenuAlerts extends Menu {
         initialiserInfosSelections();
     }
 
-    private String renvoyerUrlFichier(final Form pFormCourante) {
-        String retour = null;
+    private void jouerMusique(String url) {
+        String musicEncoding = StringOutilClient.EMPTY;
+
+        if (url.endsWith("wav")) {
+             musicEncoding = "audio/x-wav";
+        } else {
+            musicEncoding = "audio/mp3";
+        }
+
+        try {
+            // loads the InputStream for the sound
+            FileConnection fc = (FileConnection)Connector.open(url, Connector.READ);
+            InputStream inputStream = (InputStream)fc.openInputStream();
+            System.out.println(inputStream.toString());
+
+            // create the standard Player
+            final Player musicPlayer = Manager.createPlayer(inputStream, musicEncoding);
+            musicPlayer.prefetch();
+
+            // add player listener to access sound events
+            //musicPlayer.addPlayerListener(this);
+
+            // The set occurs twice to prevent sound spikes at the very
+            // beginning of the sound.
+            VolumeControl volumeControl =
+               (VolumeControl) musicPlayer.getControl("VolumeControl");
+            volumeControl.setLevel(100);
+
+            // finally start the piece of music
+            musicPlayer.start();
+
+            // set the volume once more
+            volumeControl = (VolumeControl) musicPlayer.getControl( "VolumeControl" );
+            volumeControl.setLevel(100);
+
+            // finally, delete the input stream to save on resources
+            inputStream.close();
+            inputStream = null;
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    private void renvoyerUrlFichier(final Form pFormCourante) {
 
         // Création de l'arbre
         Tree.setFolderIcon(Main.icons.getImage(IMAGE_FOLDER_CLOSED));
         Tree.setFolderOpenIcon(Main.icons.getImage(IMAGE_FOLDER));
-        Tree tree = new Tree(new FileTreeModel()) {
+        Tree.setNodeIcon(Main.icons.getImage(IMAGE_FILE));
+
+        final FileTreeModel model = new FileTreeModel();
+
+        final Tree tree = new Tree(model) {
             protected String childToDisplayLabel(Object child) {
                 if (((String) child).endsWith("/")) {
                     return ((String) child).substring(((String) child).lastIndexOf('/', ((String) child).length() - 2));
@@ -257,16 +288,52 @@ public class MenuAlerts extends Menu {
         treeForm.setLayout(new BorderLayout());
         treeForm.setScrollable(false);
         treeForm.addComponent(BorderLayout.CENTER, tree);
-        Command c = new Command(RESSOURCE.get("Menu.Back")) {
+        Command back = new Command(RESSOURCE.get("Command.Back")) {
             public void actionPerformed(ActionEvent evt) {
-                pFormCourante.show();
+                pFormCourante.showBack();
             }
         };
-        treeForm.addCommand(c);
-        treeForm.setBackCommand(c);
-        treeForm.show();
+        Command ok = new Command(RESSOURCE.get("Command.Select")) {
+            public void actionPerformed(ActionEvent evt) {
 
-        return retour;
+                boolean ok = true;
+
+                Object elem = tree.getSelectedItem();
+                // On vérifie qu'il s'agit d'un fichier et non d'un dossier
+                if (model.isLeaf(elem)) {
+                    // On vérifie qu'il s'agit d'un fichier au bon format
+                    if (!((String) elem).endsWith(FORMAT_WAV)
+                            && !((String) elem).endsWith(FORMAT_MP3)) {
+                        ok = false;
+                    }
+                } else {
+                    ok = false;
+                }
+
+                if (ok) {
+                    mFichierSon.setText((String) tree.getSelectedItem());
+                    pFormCourante.showBack();
+                } else {
+                    // Message d'erreur
+                    Command okCommand = new Command(RESSOURCE.get("Command.OK"));
+                    Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorSongFileFormat"),
+                            okCommand,
+                            new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                            CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                }
+            }
+        };
+
+        tree.addLeafListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+                
+            }
+        });
+
+        treeForm.addCommand(back);
+        treeForm.addCommand(ok);
+        treeForm.setBackCommand(back);
+        treeForm.show();
     }
 
     private void initialiserInfosSelections() {
@@ -339,5 +406,21 @@ public class MenuAlerts extends Menu {
         pTextField.setFocusable(true);
         pTextField.setPreferredH(HAUTEUR_LABEL);
         pTextField.setWidth(40);
+    }
+
+    public class FichierSon {
+        public String mFichierSon;
+
+        public String getFichierSon() {
+            return mFichierSon;
+        }
+
+        public void setFichierSon(String pFichierSon) {
+            mFichierSon = pFichierSon;
+        }
+
+        public boolean isAssigned() {
+            return !StringOutilClient.isEmpty(mFichierSon);
+        }
     }
 }
