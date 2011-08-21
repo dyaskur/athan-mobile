@@ -103,6 +103,8 @@ public class MenuPrayers extends Menu {
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
                             new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+
+                    f.showBack();
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }

@@ -29,6 +29,8 @@ public class Main extends javax.microedition.midlet.MIDlet
     public static final Command optionsCommand = new Command("", OPTIONS_COMMAND);
     private static final int EXIT_COMMAND = 2;
     public static final Command exitCommand = new Command("", EXIT_COMMAND);
+    private static final int MINIMIZE_COMMAND = 3;
+    public static final Command minimizeCommand = new Command("", MINIMIZE_COMMAND);
 
     public static Resources theme;
     public static Resources icons;
@@ -128,6 +130,7 @@ public class Main extends javax.microedition.midlet.MIDlet
             ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
             optionsCommand.setCommandName(RESSOURCE.get("Command.Options"));
             exitCommand.setCommandName(RESSOURCE.get("Command.Exit"));
+            minimizeCommand.setCommandName("Command.Minimize");
 
             //although calling directly to setMainForm(res) will work on
             //most devices, a good coding practice will be to allow the midp
@@ -177,6 +180,13 @@ public class Main extends javax.microedition.midlet.MIDlet
                     Main.getTimer().cancel();
                     // On affiche les options
                     getMainForm().setOptionForm(true);
+                }
+                break;
+            case MINIMIZE_COMMAND:
+                // On minimise l'application
+                boolean retour = Display.getInstance().minimizeApplication();
+                if (!retour) {
+                    javax.microedition.lcdui.Display.getDisplay(this).setCurrent(null);
                 }
                 break;
             case EXIT_COMMAND:

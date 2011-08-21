@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.TimerTask;
 
 /**
- * Tâche principale du timer
+ * Tâche principale du timer de rafraîchissement de l'heure
  *
  * @author BENBOUZID
  */

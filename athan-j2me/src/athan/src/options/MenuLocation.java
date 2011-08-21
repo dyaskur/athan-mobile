@@ -186,7 +186,7 @@ public class MenuLocation extends Menu {
         mOK.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                if (sauvegarderParametresEcran()) {
+                if (sauvegarderParametresEcran(f)) {
                     changerModeEdition(false, f);
                     initialiserInfosLocalisation();
                 }
@@ -536,7 +536,7 @@ public class MenuLocation extends Menu {
         form.repaint();
     }
 
-    private boolean sauvegarderParametresEcran() {
+    private boolean sauvegarderParametresEcran(Form pFormAppelante) {
         // On vérifie que les paramètres sont corrects
         double latitude = 0.0;
         double longitude = 0.0;
@@ -595,6 +595,8 @@ public class MenuLocation extends Menu {
             Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
                     new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                     CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+
+            pFormAppelante.showBack();
         } catch (Exception exc) {
             exc.printStackTrace();
         }

@@ -341,7 +341,6 @@ public class MenuCalculationMethod extends Menu {
                     Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorCalculationParameters"), okCommand,
                             new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
-                    return;
                 }
 
                 try {
@@ -373,12 +372,13 @@ public class MenuCalculationMethod extends Menu {
                     ServiceFactory.getFactory().getVuePrincipale()
                             .rafraichir(new Date(), true, true);
 
-
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
                             new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+
+                    f.showBack();
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }

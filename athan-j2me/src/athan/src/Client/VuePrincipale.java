@@ -25,9 +25,14 @@ import java.util.Date;
  */
 public class VuePrincipale extends AthanConstantes {
 
+    /** Intervalle en ms entre 1 heure */
+    private static final int INTERVALLE_HEURE = 3600 * 1000;
+
     private PrieresJournee mPrieresJournee;
     private boolean mProchainePriereRenseignee;
     private String[] mHorairesPrieres;
+
+    private Calendar mHoraireDernierAppel;
 
     public VuePrincipale() {
     }
@@ -80,6 +85,15 @@ public class VuePrincipale extends AthanConstantes {
                          new Horaire(mHorairesPrieres[SalaahTimeCalculator.ASR], formatHoraire),
                          new Horaire(mHorairesPrieres[SalaahTimeCalculator.MAGHRIB], formatHoraire),
                          new Horaire(mHorairesPrieres[SalaahTimeCalculator.ISHAA], formatHoraire));
+
+                // Affecte l'horaire du dernier appel à l'heure courante
+                // Ce qui permet par ailleurs de ne pas sonner dès le
+                // rafraîchissement s'il y a une coïncidence à ce
+                // moment-là
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(pDate);
+                mHoraireDernierAppel = cal;
+
             } else {
                 formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
                                     .get(Preferences.sFormatHoraire));
@@ -99,8 +113,59 @@ public class VuePrincipale extends AthanConstantes {
             // Affecte l'heure courante
             Main.getMainForm().setHeureCourante(pDate);
 
+            // Vérifie s'il y a une alarme
+            traiterAlarmes(pDate);
+
         } catch (Exception exc) {
             exc.printStackTrace();
+        }
+    }
+
+    private boolean memeHoraire(Calendar pCal1, Calendar pCal2) {
+
+        return (pCal1.get(Calendar.YEAR) == pCal2.get(Calendar.YEAR)
+                && pCal1.get(Calendar.MONTH) == pCal2.get(Calendar.MONTH)
+                && pCal1.get(Calendar.DAY_OF_MONTH) == pCal2.get(Calendar.DAY_OF_MONTH)
+                && pCal1.get(Calendar.HOUR_OF_DAY) == pCal2.get(Calendar.HOUR_OF_DAY)
+                && pCal1.get(Calendar.MINUTE) == pCal2.get(Calendar.MINUTE));
+    }
+
+    private boolean faireSonner(String pPreferenceKey) {
+        return (Integer.parseInt(ServiceFactory.getFactory()
+                .getPreferences().get(pPreferenceKey)) == StringOutilClient.TRUE);
+    }
+
+    private boolean traiterAlarmePriere(Calendar pHeureCourante,
+                                        Horaire pHoraire,
+                                        String pPreferenceKey) {
+
+        boolean retour = false;
+
+        if (memeHoraire(pHeureCourante, pHoraire.getHoraireDate())
+                && !memeHoraire(pHeureCourante, mHoraireDernierAppel)) {
+            if (faireSonner(pPreferenceKey)) {
+                retour = true;
+            }
+        }
+        return retour;
+    }
+
+    private void traiterAlarmes(Date pDate) {
+
+        Calendar pHeureCourante = Calendar.getInstance();
+        pHeureCourante.setTime(pDate);
+
+        // On parcourt toutes les prières
+        if (traiterAlarmePriere(pHeureCourante, mPrieresJournee.getSobh(), Preferences.sAlertSobh)) {
+            Main.getMainForm().traiterAlarme(Preferences.sAlertSobh);
+        } else if (traiterAlarmePriere(pHeureCourante, mPrieresJournee.getDohr(), Preferences.sAlertDohr)) {
+            Main.getMainForm().traiterAlarme(Preferences.sAlertDohr);
+        } else if (traiterAlarmePriere(pHeureCourante, mPrieresJournee.getAsr(), Preferences.sAlertAsr)) {
+            Main.getMainForm().traiterAlarme(Preferences.sAlertAsr);
+        } else if (traiterAlarmePriere(pHeureCourante, mPrieresJournee.getMaghreb(), Preferences.sAlertMaghreb)) {
+            Main.getMainForm().traiterAlarme(Preferences.sAlertMaghreb);
+        } else if (traiterAlarmePriere(pHeureCourante, mPrieresJournee.getIshaa(), Preferences.sAlertIshaa)) {
+            Main.getMainForm().traiterAlarme(Preferences.sAlertIshaa);
         }
     }
     

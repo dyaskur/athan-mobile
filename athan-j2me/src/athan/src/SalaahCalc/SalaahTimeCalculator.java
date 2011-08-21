@@ -272,7 +272,7 @@ public class SalaahTimeCalculator {
             _time = this.fixhour(_time + 0.5 / 60);  // add 0.5 minutes to round
             double hours = Math.floor(_time);
             double minutes = Math.floor((_time - hours) * 60);
-            return this.twoDigitsFormat(new Double(hours).intValue()) + ":" + this.twoDigitsFormat(new Double(minutes).intValue());
+            return this.twoDigitsFormat(new Double(hours).intValue()) + TimeFormat.TIME_SEPARATOR + this.twoDigitsFormat(new Double(minutes).intValue());
         }
     }
 
@@ -294,7 +294,7 @@ public class SalaahTimeCalculator {
             double minutes = Math.floor((_time - hours) * 60);
             String suffix = hours >= 12 ? " " + RESSOURCE.get("PM") : " " + RESSOURCE.get("AM");
             hours = (hours + 12 - 1) % 12 + 1;
-            return this.twoDigitsFormat(new Double(hours).intValue()) + ":" + this.twoDigitsFormat(new Double(minutes).intValue()) + (noSuffix ? "" : suffix);
+            return this.twoDigitsFormat(new Double(hours).intValue()) + TimeFormat.TIME_SEPARATOR + this.twoDigitsFormat(new Double(minutes).intValue()) + (noSuffix ? "" : suffix);
         }
     }
 

@@ -7,6 +7,7 @@ package athan.src.Priere;
 
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
+import athan.src.Outils.StringOutilClient;
 import athan.src.SalaahCalc.TimeFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class Horaire {
 
     private String mHoraire;
     private boolean mEstProchaine;
+    private Calendar mHoraireDate;
 
     public Horaire(String pHoraire, int pTimeFormat) {
 
@@ -55,26 +57,39 @@ public class Horaire {
                 mEstProchaine = true;
             }
         }
+
+        mHoraireDate = calHoraire;
     }
 
-    /**
-     * @return the mHoraire
-     */
+    public static String renvoieHeureMinute(Date pDate, int pTimeFormat) {
+
+        String retour = StringOutilClient.EMPTY;
+
+        Calendar calActuel = Calendar.getInstance();
+        calActuel.setTime(pDate);
+
+        if (pTimeFormat == TimeFormat.H24.getValue()) {
+            retour += calActuel.get(Calendar.HOUR_OF_DAY);
+            retour += TimeFormat.TIME_SEPARATOR;
+            retour += calActuel.get(Calendar.MINUTE);
+        } else if (pTimeFormat == TimeFormat.H12.getValue()) {
+            retour += calActuel.get(Calendar.HOUR);
+            retour += TimeFormat.TIME_SEPARATOR;
+            retour += calActuel.get(Calendar.MINUTE);
+        }
+
+        return retour;
+    }
+
     public String getHoraireFormate() {
         return mHoraire;
     }
 
-    /**
-     * @return the mEstProchaine
-     */
     public boolean isEstProchaine() {
         return mEstProchaine;
     }
 
-    /**
-     * @param mEstProchaine the mEstProchaine to set
-     */
-    public void setEstProchaine(boolean mEstProchaine) {
-        this.mEstProchaine = mEstProchaine;
+    public Calendar getHoraireDate() {
+        return mHoraireDate;
     }
 }

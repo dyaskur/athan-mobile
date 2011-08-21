@@ -137,6 +137,8 @@ public class MenuApplicationLanguage extends Menu {
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("warningLangChanging"), okCommand,
                             new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+
+                    f.showBack();
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }

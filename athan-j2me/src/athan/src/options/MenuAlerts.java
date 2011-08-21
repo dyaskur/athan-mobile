@@ -164,6 +164,8 @@ public class MenuAlerts extends Menu {
 
             public void actionPerformed(ActionEvent ae) {
 
+                boolean contenuOk = true;
+
                 try {
                     ServiceFactory.getFactory().getPreferences()
                         .set(Preferences.sAlertSobh, Integer.toString(
@@ -199,6 +201,20 @@ public class MenuAlerts extends Menu {
                     ServiceFactory.getFactory().getPreferences()
                                             .set(Preferences.sAlertFile, mFichierSon.getText());
 
+                    if (mChoixAlerte.getSelectedIndex() == 1
+                         && StringOutilClient.isEmpty(mFichierSon.getText())) {
+                         contenuOk = false;
+                    }
+
+                    if (!contenuOk) {
+                        // Message d'erreur
+                        Command okCommand = new Command(RESSOURCE.get("Command.OK"));
+                        Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorSongAlertNoFile"), okCommand,
+                                new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                                CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                        return;
+                    }
+
                     // On enregistre les paramètres dans la mémoire du téléphone
                     ServiceFactory.getFactory().getPreferences().save();
 
@@ -211,6 +227,8 @@ public class MenuAlerts extends Menu {
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
                             new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+
+                    f.showBack();
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }
@@ -311,6 +329,7 @@ public class MenuAlerts extends Menu {
                 }
 
                 if (ok) {
+                    // Assigne le nom du fichier son aux propriétés de la fenêtre
                     mFichierSon.setText((String) tree.getSelectedItem());
                     pFormCourante.showBack();
                 } else {

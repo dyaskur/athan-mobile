@@ -10,6 +10,8 @@ package athan.src.SalaahCalc;
  */
 public class TimeFormat {
 
+    public static final String TIME_SEPARATOR = ":";
+
     private final int value;
 
     protected static final int Time24 = 0;      // 24-hour format

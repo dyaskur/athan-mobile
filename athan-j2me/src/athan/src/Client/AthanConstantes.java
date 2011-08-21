@@ -16,10 +16,12 @@ public class AthanConstantes {
     public static final int TIMEOUT_FENETRE_ERROR = 0; // en ms
     public static final int TIMEOUT_CONFIRMATION_MODIF = 2000; // en ms
     public static final String PATTERN_LIBELLE = "%s"; // en secondes
+    public static final int DUREE_VIBRATION_UNITAIRE = 500; // en ms
 
     // Constantes
     public static final String FORMAT_WAV = ".wav";
     public static final String FORMAT_MP3 = ".mp3";
+    
 
     // Geocoding
     public static final String [] INDICATIF_PAYS = {
@@ -96,6 +98,7 @@ public class AthanConstantes {
     public static final String UIID_LABEL_PRAYER_NAME = "LabelPrayerName";
     public static final String UIID_LABEL_CURRENT_CITY = "LabelCurrentCity";
     public static final String UIID_LABEL_INFO_NAME = "LabelInfoName";
+    public static final String UIID_LABEL_PRAYER_NAME_RINGING = "LabelRingingPrayerName";
 
     public static final String FONT_LABEL_NEXT_PRAYER = "NextPrayer";
     public static final String FONT_LABEL_PRAYER = "Prayer";
