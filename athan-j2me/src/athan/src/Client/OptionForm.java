@@ -193,7 +193,7 @@ public class OptionForm extends Form
                 }
             };
             setGlassPane(glassPane);
-            cmpTransition = this.getComponentTransition();
+            cmpTransition = getComponentTransition();
             this.setComponentTransition(null);
             return;
         }

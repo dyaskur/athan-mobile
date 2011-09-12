@@ -202,15 +202,20 @@ public class VuePrincipale extends AthanConstantes {
         String[] dateJour = mPrieresJournee.getDateFormattee();
 
         if (isHeureCourante) {
-            dateJour[1] += "\n" + mPrieresJournee.getHoraire();
+            Main.getMainForm().getTextAreaLibelleHeure().setText(mPrieresJournee.getHoraire());
+            Main.getMainForm().getTextAreaLibelleHeure().setVisible(true);
+        } else {
+            Main.getMainForm().getTextAreaLibelleHeure().setText(StringOutilClient.EMPTY);
+            Main.getMainForm().getTextAreaLibelleHeure().setVisible(false);
         }
+
         try {
-            Main.getMainForm().getTextAreaLibelleJour().setText(dateJour[0]
-                    + "\n" + dateJour[1]);
+            // Libellé de la date
+            Main.getMainForm().getTextAreaLibelleDate().setText(dateJour[0]);
+            // Jour de la semaine
+            Main.getMainForm().getTextAreaLibelleJourSemaine().setText(dateJour[1]);            
         } catch(Exception exc) {
             exc.printStackTrace();
-            System.out.println("Rows = " + Main.getMainForm().getTextAreaLibelleJour()
-                            .getActualRows());
         }        
     }
 

@@ -27,7 +27,7 @@ import java.util.Date;
  */
 public class MenuApplicationLanguage extends Menu {
 
-    private static final int HAUTEUR_LABEL = 18;
+    private static final int HAUTEUR_LABEL = 20;
     private static final int HAUTEUR_LABEL_TOUS = 25;
 
     private Command mOK;

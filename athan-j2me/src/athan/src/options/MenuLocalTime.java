@@ -32,7 +32,7 @@ import java.util.Date;
  */
 public class MenuLocalTime extends Menu {
 
-    private static final int HAUTEUR_LABEL = 18;
+    private static final int HAUTEUR_LABEL = 20;
     private static final int HAUTEUR_LABEL_TOUS = 60;
 
     private Command mOK;

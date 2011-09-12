@@ -40,6 +40,7 @@ import javax.microedition.media.control.VolumeControl;
  */
 public class MainForm extends Menu {
 
+    private static final int HAUTEUR_LABEL_DATE = 14;
     private static final int HAUTEUR_LABEL_PRIERE = 12;
     private static final int HAUTEUR_LABEL_HEADER_PRIERE = 10;
 
@@ -58,11 +59,13 @@ public class MainForm extends Menu {
     private Date mHeureCourante;
     
     private Label mLabelLieu;
-    private Button mHomeHeureCourante;
+    private Command mCmdHomeHeureCourante;
 
-    private Button mDatePrecedente;
-    private TextArea mTextAreaLibelleJour;
-    private Button mDateSuivante;
+    private Command mCmdDatePrecedente;
+    private TextArea mTextAreaLibelleDate;
+    private TextArea mTextAreaLibelleJourSemaine;
+    private TextArea mTextAreaLibelleHeure;
+    private Command mCmdDateSuivante;
 
     private Label mLabelHoraireImsak;
     private Label mLabelHoraireSohb;
@@ -124,6 +127,17 @@ public class MainForm extends Menu {
         return MENU_AFFICHAGE_COMPAS;
     }
 
+    private void editerTextAreaLibelleDate(TextArea ta) {
+        ta.setAlignment(TextArea.CENTER);
+        ta.setUIID(UIID_LABEL_CURRENT_DATE);
+        ta.setGrowByContent(true);
+        //mTextAreaLibelleJour.setColumns(2);
+        //mTextAreaLibelleDate.setRows(3);
+        ta.setEditable(false);
+        ta.setFocusable(false);
+        ta.setPreferredH(HAUTEUR_LABEL_DATE);
+    }
+
     protected void execute(Form f) {
         
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
@@ -143,32 +157,99 @@ public class MainForm extends Menu {
         mLabelLieu.setFocusable(true);
         mLabelLieu.setUIID(UIID_LABEL_CURRENT_CITY);
         mLabelLieu.getUnselectedStyle().setBgTransparency(0);
-        mLabelLieu.getSelectedStyle().setBgTransparency(0);        
-        mHomeHeureCourante = new Button(Main.icons.getImage("Home"));
+        mLabelLieu.getSelectedStyle().setBgTransparency(0);
+
         Container ctnVilleHome = new Container(new BorderLayout());
         ctnVilleHome.addComponent(BorderLayout.WEST, mLabelLieu);
-        ctnVilleHome.addComponent(BorderLayout.EAST, mHomeHeureCourante);
-        mHomeHeureCourante.setVisible(false);
-        mHomeHeureCourante.setFocusable(true);
         ctnVilleHome.setPreferredH(30);
 
         // Conteneur de parcours des dates
-        mTextAreaLibelleJour = new TextArea("");
-        mTextAreaLibelleJour.setAlignment(Component.CENTER);
-        mTextAreaLibelleJour.setUIID(UIID_LABEL_CURRENT_DATE);
-        mTextAreaLibelleJour.setGrowByContent(true);
-        //mTextAreaLibelleJour.setColumns(2);
-        mTextAreaLibelleJour.setRows(3);
-        mTextAreaLibelleJour.setEditable(false);
-        mTextAreaLibelleJour.setFocusable(false);
-        mDatePrecedente = new Button(Main.icons.getImage("Previous"));
-        mDatePrecedente.setFocusable(true);
-        mDateSuivante = new Button(Main.icons.getImage("Next"));
-        mDateSuivante.setFocusable(true);
-        Container ctnDates = new Container(new BorderLayout());
-        ctnDates.addComponent(BorderLayout.WEST, mDatePrecedente);
-        ctnDates.addComponent(BorderLayout.CENTER, mTextAreaLibelleJour);
-        ctnDates.addComponent(BorderLayout.EAST, mDateSuivante);        
+        mTextAreaLibelleDate = new TextArea();
+        mTextAreaLibelleJourSemaine = new TextArea();
+        mTextAreaLibelleHeure = new TextArea();
+        editerTextAreaLibelleDate(mTextAreaLibelleDate);
+        editerTextAreaLibelleDate(mTextAreaLibelleJourSemaine);
+        editerTextAreaLibelleDate(mTextAreaLibelleHeure);
+        Container ctnDates = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        ctnDates.addComponent(mTextAreaLibelleDate);
+        ctnDates.addComponent(mTextAreaLibelleJourSemaine);
+        ctnDates.addComponent(mTextAreaLibelleHeure);
+        ctnDates.setPreferredH(3 * (HAUTEUR_LABEL_DATE + 5));
+
+        // Commandes
+        mCmdHomeHeureCourante = new Command(RESOURCES.get("CurrentDay")) {
+             
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    // On force le recalcul des horaires
+                    ServiceFactory.getFactory().getVuePrincipale()
+                            .rafraichir(new Date(), true, true);
+
+                    // On redémarre le timer
+                    redemarrerTimer();
+                } catch(Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
+        };
+
+
+
+        mCmdDatePrecedente = new Command(RESOURCES.get("PrevDay")) {
+
+            public void actionPerformed(ActionEvent ae) {
+                // On interrompt le timer et affiche les résultats pour une date donnée
+                try {
+                    Main.getTimer().cancel();
+
+                    Date jourPrecedent = new Date(mHeureCourante.getTime() - INTERVALLE_PREC_SUIV);
+
+                    if (StringOutilClient.isDateMemeJour(jourPrecedent, new Date())) {
+                        // On force le recalcul des horaires
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(new Date(), true, true);
+
+                        // On redémarre le timer
+                        redemarrerTimer();
+                    } else {
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(jourPrecedent, false, true);
+                        //mCmdHomeHeureCourante.setVisible(true);
+                    }
+
+                } catch(Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
+        };
+
+        mCmdDateSuivante = new Command(RESOURCES.get("NextDay")) {
+
+            public void actionPerformed(ActionEvent ae) {
+                // On interrompt le timer et affiche les résultats pour une date donnée
+                try {
+                    Main.getTimer().cancel();
+
+                    Date jourSuivant = new Date(mHeureCourante.getTime() + INTERVALLE_PREC_SUIV);
+
+                    if (StringOutilClient.isDateMemeJour(jourSuivant, new Date())) {
+                        // On force le recalcul des horaires
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(new Date(), true, true);
+
+                        // On redémarre le timer
+                        redemarrerTimer();
+                    } else {
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(jourSuivant, false, true);
+                        //mCmdHomeHeureCourante.setVisible(true);
+                    }
+
+                } catch(Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
+        };
 
         // Conteneur des horaires de prières
         TableLayout tbCtnPrieres = new TableLayout(8, 2);
@@ -243,87 +324,15 @@ public class MainForm extends Menu {
 
         // Gestion du comportement (ergonomie)
         if (!Main.isTactile()) {
-           mDatePrecedente.setFocusable(true);
-           mDateSuivante.setFocusable(true);
-           mHomeHeureCourante.setFocusable(true);
+           // RàF
         }
 
-        mHomeHeureCourante.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent ae) {
-                
-                try {
-                    // On force le recalcul des horaires
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
-                    
-                    // On redémarre le timer
-                    redemarrerTimer();
-                } catch(Exception exc) {
-                    exc.printStackTrace();
-                }
-            }
-        });
-
-        mDatePrecedente.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent ae) {
-                // On interrompt le timer et affiche les résultats pour une date donnée
-                try {
-                    Main.getTimer().cancel();
-
-                    Date jourPrecedent = new Date(mHeureCourante.getTime() - INTERVALLE_PREC_SUIV);
-
-                    if (StringOutilClient.isDateMemeJour(jourPrecedent, new Date())) {
-                        // On force le recalcul des horaires
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(new Date(), true, true);
-
-                        // On redémarre le timer
-                        redemarrerTimer();
-                    } else {
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourPrecedent, false, true);
-                        mHomeHeureCourante.setVisible(true);
-                    }
-
-                } catch(Exception exc) {
-                    exc.printStackTrace();
-                }
-            }
-        });
-
-        mDateSuivante.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent ae) {
-                // On interrompt le timer et affiche les résultats pour une date donnée
-                try {
-                    Main.getTimer().cancel();
-
-                    Date jourSuivant = new Date(mHeureCourante.getTime() + INTERVALLE_PREC_SUIV);
-
-                    if (StringOutilClient.isDateMemeJour(jourSuivant, new Date())) {
-                        // On force le recalcul des horaires
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(new Date(), true, true);
-
-                        // On redémarre le timer
-                        redemarrerTimer();
-                    } else {
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourSuivant, false, true);
-                        mHomeHeureCourante.setVisible(true);
-                    }
-
-                } catch(Exception exc) {
-                    exc.printStackTrace();
-                }
-            }
-        });
-
-        f.addCommand(Main.optionsCommand);
-        f.addCommand(Main.exitCommand);
-        f.addCommand(Main.minimizeCommand);
+        f.addCommand(mCmdHomeHeureCourante, 0);
+        f.addCommand(mCmdDatePrecedente, 1);
+        f.addCommand(mCmdDateSuivante, 2);
+        f.addCommand(Main.optionsCommand, 3);
+        f.addCommand(Main.minimizeCommand, 4);
+        f.addCommand(Main.exitCommand, 5);
         f.setBackCommand(Main.exitCommand);
 
         currentForm = f;
@@ -374,7 +383,7 @@ public class MainForm extends Menu {
         Main.setTimer(new Timer());
         Main.getTimer().schedule(new TacheTimer(), 0, TacheTimer.DUREE_CYCLE);
 
-        mHomeHeureCourante.setVisible(false);
+        //mCmdHomeHeureCourante.setVisible(false);
     }
 
     public void traiterAlarme(String pPreferenceKey) {
@@ -528,10 +537,24 @@ public class MainForm extends Menu {
     }
 
     /**
-     * @return the mTextAreaLibelleJour
+     * @return the mTextAreaLibelleDate
      */
-    public TextArea getTextAreaLibelleJour() {
-        return mTextAreaLibelleJour;
+    public TextArea getTextAreaLibelleDate() {
+        return mTextAreaLibelleDate;
+    }
+
+    /**
+     * @return the mTextAreaLibelleJourSemaine
+     */
+    public TextArea getTextAreaLibelleJourSemaine() {
+        return mTextAreaLibelleJourSemaine;
+    }
+
+    /**
+     * @return the mTextAreaLibelleHeure
+     */
+    public TextArea getTextAreaLibelleHeure() {
+        return mTextAreaLibelleHeure;
     }
 
     /**
@@ -586,4 +609,73 @@ public class MainForm extends Menu {
     public void setHeureCourante(Date pHeureCourante) {
         mHeureCourante = pHeureCourante;
     }
+
+    /*
+    public void actionPerformed(ActionEvent evt) {
+        Command cmd = evt.getCommand();
+        System.out.println(cmd.getId());
+        switch (cmd.getId()) {
+            case COMMAND_JOUR_COUR:
+                try {
+                    // On force le recalcul des horaires
+                    ServiceFactory.getFactory().getVuePrincipale()
+                            .rafraichir(new Date(), true, true);
+
+                    // On redémarre le timer
+                    redemarrerTimer();
+                } catch(Exception exc) {
+                    exc.printStackTrace();
+                }
+                break;
+            case COMMAND_JOUR_PREC:
+                // On interrompt le timer et affiche les résultats pour une date donnée
+                try {
+                    Main.getTimer().cancel();
+
+                    Date jourPrecedent = new Date(mHeureCourante.getTime() - INTERVALLE_PREC_SUIV);
+
+                    if (StringOutilClient.isDateMemeJour(jourPrecedent, new Date())) {
+                        // On force le recalcul des horaires
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(new Date(), true, true);
+
+                        // On redémarre le timer
+                        redemarrerTimer();
+                    } else {
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(jourPrecedent, false, true);
+                        //mCmdHomeHeureCourante.setVisible(true);
+                    }
+
+                } catch(Exception exc) {
+                    exc.printStackTrace();
+                }
+                break;
+            case COMMAND_JOUR_SUIV:
+                // On interrompt le timer et affiche les résultats pour une date donnée
+                try {
+                    Main.getTimer().cancel();
+
+                    Date jourSuivant = new Date(mHeureCourante.getTime() + INTERVALLE_PREC_SUIV);
+
+                    if (StringOutilClient.isDateMemeJour(jourSuivant, new Date())) {
+                        // On force le recalcul des horaires
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(new Date(), true, true);
+
+                        // On redémarre le timer
+                        redemarrerTimer();
+                    } else {
+                        ServiceFactory.getFactory().getVuePrincipale()
+                                .rafraichir(jourSuivant, false, true);
+                        //mCmdHomeHeureCourante.setVisible(true);
+                    }
+
+                } catch(Exception exc) {
+                    exc.printStackTrace();
+                }
+                break;
+        }
+    }
+    */
 }
