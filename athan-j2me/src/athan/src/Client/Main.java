@@ -179,7 +179,7 @@ public class Main extends javax.microedition.midlet.MIDlet
                     // On arrête le timer
                     Main.getTimer().cancel();
                     // On affiche les options
-                    getMainForm().setOptionForm(true);
+                    sMainForm.setOptionForm(true);
                 }
                 break;
             case MINIMIZE_COMMAND:

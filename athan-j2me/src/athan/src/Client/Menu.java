@@ -1,5 +1,5 @@
 /*
- * Copyright � 2008, 2010, Oracle and/or its affiliates. All rights reserved
+ * Copyright © 2008, 2010, Oracle and/or its affiliates. All rights reserved
  */
 package athan.src.Client;
 
@@ -27,6 +27,9 @@ public abstract class Menu
 
     private Form mForm;
 
+    private Command mBackCommand;
+    private Command mHelpCommand;
+
     /**
      * returns the name of the icon base
      */
@@ -50,7 +53,8 @@ public abstract class Menu
         mForm = new Form(getName());
 
         if (showHelp) {
-            mForm.addCommand(new Command(RESOURCE.get("Menu.Help")) {
+
+            mHelpCommand = new Command(RESOURCE.get("Menu.Help")) {
                 public void actionPerformed(ActionEvent evt) {
                     Form helpForm = new Form(RESOURCE.get("Window.Help"));
                     helpForm.setLayout(new BorderLayout());
@@ -67,13 +71,41 @@ public abstract class Menu
                     helpForm.setBackCommand(c);
                     helpForm.show();
                 }
-            });
+            };
         }
-        mForm.addCommand(backCommand);
-        mForm.setCommandListener(commandListener);
+
+        // Commandes
+        int posCmd = 0;
+        mBackCommand = backCommand;
+
+        mForm.addCommandListener(commandListener);
+        
+        if (mHelpCommand != null) {
+            mForm.addCommand(mHelpCommand, posCmd++);
+        }        
+        mForm.addCommand(mBackCommand, posCmd++);
         mForm.setBackCommand(backCommand);
         execute(mForm);
         mForm.show();
+    }
+
+    /**
+     * Replace les commandes principales (retour et help)
+     * en fin de panel menu, afin qu'au moins la commande de
+     * retour soit la (dernière) plus visible
+     */
+    public void replacerCommandesPrincipales() {
+
+        mForm.removeCommand(mBackCommand);
+        if (mHelpCommand != null) {
+             mForm.removeCommand(mHelpCommand);
+        }
+
+        int posCmd = mForm.getCommandCount();
+        if (mHelpCommand != null) {
+            mForm.addCommand(mHelpCommand, posCmd++);
+        }
+        mForm.addCommand(mBackCommand, posCmd++);
     }
     
     /**
@@ -96,7 +128,7 @@ public abstract class Menu
     /**
      * The demo should place its UI into the given form 
      */
-    protected abstract void execute(Form f);
+    protected abstract void execute(final Form f);
 
   
     /**

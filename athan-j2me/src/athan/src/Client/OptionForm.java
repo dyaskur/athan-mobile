@@ -53,22 +53,10 @@ public class OptionForm extends Form
     private static final int EXIT_COMMAND = 1;
     private static final int BACK_COMMAND = 3;
     private static final int ABOUT_COMMAND = 4;
-    /*
-    private static final int RUN_COMMAND = 2;
-    private static final int DRAG_MODE_COMMAND = 5;
-    private static final int SCROLL_MODE_COMMAND = 6;
-    private static final int RTL_COMMAND = 7;
-    */
 
     private static final Command exitCommand = new Command("", EXIT_COMMAND);
     private static final Command backCommand = new Command("", BACK_COMMAND);
     private static final Command aboutCommand = new Command("", ABOUT_COMMAND);
-    /*
-    private static final Command runCommand = new Command("Run", RUN_COMMAND);
-    private static final Command dragModeCommand = new Command("Drag Mode", DRAG_MODE_COMMAND);
-    private static final Command scrollModeCommand = new Command("Scroll Mode", SCROLL_MODE_COMMAND);
-    private static final Command rtlCommand = new Command("RTL", RTL_COMMAND);
-    */
 
     private static Transition sComponentTransitions;
 

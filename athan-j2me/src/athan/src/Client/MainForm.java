@@ -40,7 +40,7 @@ import javax.microedition.media.control.VolumeControl;
  */
 public class MainForm extends Menu {
 
-    private static final int HAUTEUR_LABEL_DATE = 14;
+    private static final int HAUTEUR_LABEL_DATE = 18;
     private static final int HAUTEUR_LABEL_PRIERE = 12;
     private static final int HAUTEUR_LABEL_HEADER_PRIERE = 10;
 
@@ -138,7 +138,7 @@ public class MainForm extends Menu {
         ta.setPreferredH(HAUTEUR_LABEL_DATE);
     }
 
-    protected void execute(Form f) {
+    protected void execute(final Form f) {
         
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
@@ -187,6 +187,10 @@ public class MainForm extends Menu {
 
                     // On redémarre le timer
                     redemarrerTimer();
+
+                    // On supprime l'entrée du menu de commande
+                    f.removeCommand(mCmdHomeHeureCourante);
+                    
                 } catch(Exception exc) {
                     exc.printStackTrace();
                 }
@@ -211,10 +215,16 @@ public class MainForm extends Menu {
 
                         // On redémarre le timer
                         redemarrerTimer();
+
+                        // On supprime l'entrée du menu de commande
+                        f.removeCommand(mCmdHomeHeureCourante);
+
                     } else {
                         ServiceFactory.getFactory().getVuePrincipale()
                                 .rafraichir(jourPrecedent, false, true);
-                        //mCmdHomeHeureCourante.setVisible(true);
+
+                        // On ajoute l'entrée du menu de commande
+                        f.addCommand(mCmdHomeHeureCourante, 0);
                     }
 
                 } catch(Exception exc) {
@@ -223,7 +233,7 @@ public class MainForm extends Menu {
             }
         };
 
-        mCmdDateSuivante = new Command(RESOURCES.get("NextDay")) {
+        mCmdDateSuivante = new Command("Jour +") {// new Command(RESOURCES.get("NextDay")) {
 
             public void actionPerformed(ActionEvent ae) {
                 // On interrompt le timer et affiche les résultats pour une date donnée
@@ -239,10 +249,16 @@ public class MainForm extends Menu {
 
                         // On redémarre le timer
                         redemarrerTimer();
+
+                        // On supprime l'entrée du menu de commande
+                        f.removeCommand(mCmdHomeHeureCourante);
+                        
                     } else {
                         ServiceFactory.getFactory().getVuePrincipale()
                                 .rafraichir(jourSuivant, false, true);
-                        //mCmdHomeHeureCourante.setVisible(true);
+
+                        // On ajoute l'entrée du menu de commande
+                        f.addCommand(mCmdHomeHeureCourante, 0);
                     }
 
                 } catch(Exception exc) {
@@ -327,12 +343,12 @@ public class MainForm extends Menu {
            // RàF
         }
 
-        f.addCommand(mCmdHomeHeureCourante, 0);
-        f.addCommand(mCmdDatePrecedente, 1);
-        f.addCommand(mCmdDateSuivante, 2);
-        f.addCommand(Main.optionsCommand, 3);
-        f.addCommand(Main.minimizeCommand, 4);
-        f.addCommand(Main.exitCommand, 5);
+        int posCmd = 0;
+        f.addCommand(mCmdDatePrecedente, posCmd++);
+        f.addCommand(mCmdDateSuivante, posCmd++);
+        f.addCommand(Main.optionsCommand, posCmd++);
+        f.addCommand(Main.minimizeCommand, posCmd++);
+        f.addCommand(Main.exitCommand, posCmd++);
         f.setBackCommand(Main.exitCommand);
 
         currentForm = f;
@@ -609,73 +625,4 @@ public class MainForm extends Menu {
     public void setHeureCourante(Date pHeureCourante) {
         mHeureCourante = pHeureCourante;
     }
-
-    /*
-    public void actionPerformed(ActionEvent evt) {
-        Command cmd = evt.getCommand();
-        System.out.println(cmd.getId());
-        switch (cmd.getId()) {
-            case COMMAND_JOUR_COUR:
-                try {
-                    // On force le recalcul des horaires
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
-
-                    // On redémarre le timer
-                    redemarrerTimer();
-                } catch(Exception exc) {
-                    exc.printStackTrace();
-                }
-                break;
-            case COMMAND_JOUR_PREC:
-                // On interrompt le timer et affiche les résultats pour une date donnée
-                try {
-                    Main.getTimer().cancel();
-
-                    Date jourPrecedent = new Date(mHeureCourante.getTime() - INTERVALLE_PREC_SUIV);
-
-                    if (StringOutilClient.isDateMemeJour(jourPrecedent, new Date())) {
-                        // On force le recalcul des horaires
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(new Date(), true, true);
-
-                        // On redémarre le timer
-                        redemarrerTimer();
-                    } else {
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourPrecedent, false, true);
-                        //mCmdHomeHeureCourante.setVisible(true);
-                    }
-
-                } catch(Exception exc) {
-                    exc.printStackTrace();
-                }
-                break;
-            case COMMAND_JOUR_SUIV:
-                // On interrompt le timer et affiche les résultats pour une date donnée
-                try {
-                    Main.getTimer().cancel();
-
-                    Date jourSuivant = new Date(mHeureCourante.getTime() + INTERVALLE_PREC_SUIV);
-
-                    if (StringOutilClient.isDateMemeJour(jourSuivant, new Date())) {
-                        // On force le recalcul des horaires
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(new Date(), true, true);
-
-                        // On redémarre le timer
-                        redemarrerTimer();
-                    } else {
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourSuivant, false, true);
-                        //mCmdHomeHeureCourante.setVisible(true);
-                    }
-
-                } catch(Exception exc) {
-                    exc.printStackTrace();
-                }
-                break;
-        }
-    }
-    */
 }
