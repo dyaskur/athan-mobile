@@ -15,6 +15,7 @@ import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.impl.midp.VKBImplementationFactory;
 import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
 
@@ -95,51 +96,56 @@ public class Main extends javax.microedition.midlet.MIDlet
     protected void startApp() {
         try {
 
-            //By using the VKBImplementationFactory.init() we automatically
-            //bundle the LWUIT Virtual Keyboard.
-            //If your application is not aimed to touch screen devices,
-            //this line of code should be removed.
-            VKBImplementationFactory.init();
-            Display.init(this);
+            if (sMainForm == null) {
+                
+                //By using the VKBImplementationFactory.init() we automatically
+                //bundle the LWUIT Virtual Keyboard.
+                //If your application is not aimed to touch screen devices,
+                //this line of code should be removed.
+                VKBImplementationFactory.init();
+                Display.init(this);
+
             
-            // Test sur le type de téléphone
-            sIsTactile = Display.getInstance().isTouchScreenDevice();
-            if (sIsTactile) {
-                UIManager.getInstance().getLookAndFeel().setTouchMenus(true);
-                UIManager.getInstance().getLookAndFeel().setTactileTouchDuration(100);
-                System.out.println("TELEPHONE TACTILE");
-            } else {
-                System.out.println("TELEPHONE NON TACTILE");
-            }
-
-            // Traite les ressources de l'application
-            theme = Resources.open("/" + AthanConstantes.RESSOURCE_THEME);
-            UIManager.getInstance().setThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-            icons = Resources.open("/" + AthanConstantes.RESSOURCE_ICONS);
-            languages = Resources.open("/" + AthanConstantes.RESSOURCE_LANGUAGES);
-
-            // On crée la factory
-            try {
-                ServiceFactory.newInstance();
-            } catch (Exception exc) {
-                exc.printStackTrace();
-                // On quitte l'application
-                quitter();
-            }
-
-            ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
-            optionsCommand.setCommandName(RESSOURCE.get("Command.Options"));
-            exitCommand.setCommandName(RESSOURCE.get("Command.Exit"));
-            minimizeCommand.setCommandName("Command.Minimize");
-
-            //although calling directly to setMainForm(res) will work on
-            //most devices, a good coding practice will be to allow the midp
-            //thread to return and to do all the UI on the EDT.
-            Display.getInstance().callSerially(new Runnable() {
-                public void run() {
-                    setMainForm(icons);
+                // Test sur le type de téléphone
+                sIsTactile = Display.getInstance().isTouchScreenDevice();
+                if (sIsTactile) {
+                    UIManager.getInstance().getLookAndFeel().setTouchMenus(true);
+                    UIManager.getInstance().getLookAndFeel().setTactileTouchDuration(100);
+                    System.out.println("TELEPHONE TACTILE");
+                } else {
+                    System.out.println("TELEPHONE NON TACTILE");
                 }
-            });
+
+                // Traite les ressources de l'application
+                theme = Resources.open("/" + AthanConstantes.RESSOURCE_THEME);
+                UIManager.getInstance().setThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+                icons = Resources.open("/" + AthanConstantes.RESSOURCE_ICONS);
+                languages = Resources.open("/" + AthanConstantes.RESSOURCE_LANGUAGES);
+
+                // On crée la factory
+                try {
+                    ServiceFactory.newInstance();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                    // On quitte l'application
+                    quitter();
+                }
+
+                ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
+                optionsCommand.setCommandName(RESSOURCE.get("Command.Options"));
+                exitCommand.setCommandName(RESSOURCE.get("Command.Exit"));
+                minimizeCommand.setCommandName("Command.Minimize");
+
+                //although calling directly to setMainForm(res) will work on
+                //most devices, a good coding practice will be to allow the midp
+                //thread to return and to do all the UI on the EDT.
+                Display.getInstance().callSerially(new Runnable() {
+                    public void run() {
+                        setMainForm(icons);
+                    }
+                });
+                
+            }
 
         } catch (Throwable ex) {
             ex.printStackTrace();
@@ -173,7 +179,8 @@ public class Main extends javax.microedition.midlet.MIDlet
 
         Command cmd = pActionEvent.getCommand();
         switch (cmd.getId()) {
-            case OPTIONS_COMMAND: 
+
+            case OPTIONS_COMMAND:
                 // On affiche le menu des commandes
                 if (getMainForm() != null) {
                     // On arrête le timer
@@ -182,17 +189,22 @@ public class Main extends javax.microedition.midlet.MIDlet
                     sMainForm.setOptionForm(true);
                 }
                 break;
+
             case MINIMIZE_COMMAND:
+
                 // On minimise l'application
                 boolean retour = Display.getInstance().minimizeApplication();
                 if (!retour) {
                     javax.microedition.lcdui.Display.getDisplay(this).setCurrent(null);
                 }
+
                 break;
+
             case EXIT_COMMAND:
                 // On quitte l'application
                 quitter();
                 break;
+
             default: 
                 // Commande inconnue
                 break;

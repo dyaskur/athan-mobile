@@ -196,12 +196,12 @@ public class Preferences {
         put(sDisplayImsak, Integer.toString(StringOutilClient.FALSE));
         put(sDisplayChourouk, Integer.toString(StringOutilClient.FALSE));
         put(sLangue, LANGUE_FR);
-        put(sAlertSobh, Integer.toString(StringOutilClient.FALSE));
+        put(sAlertSobh, Integer.toString(StringOutilClient.TRUE));
         put(sAlertDohr, Integer.toString(StringOutilClient.FALSE));
         put(sAlertAsr, Integer.toString(StringOutilClient.FALSE));
         put(sAlertMaghreb, Integer.toString(StringOutilClient.FALSE));
         put(sAlertIshaa, Integer.toString(StringOutilClient.FALSE));
-        put(sAlertMode, MODE_NONE);
+        put(sAlertMode, MODE_VIBRATE);
         put(sAlertFile, StringOutilClient.EMPTY);
     }
 

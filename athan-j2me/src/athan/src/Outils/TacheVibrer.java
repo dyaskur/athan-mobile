@@ -24,8 +24,16 @@ public class TacheVibrer extends TimerTask {
     public final void run() {
         try {
             if (nbVibrations < NB_VIBRATIONS) {
+
                 // Fait vibrer le téléphone
                 Display.getInstance().vibrate(AthanConstantes.DUREE_VIBRATION_UNITAIRE);
+
+                this.wait(AthanConstantes.DUREE_ATTENTE_VIBRATION_UNITAIRE);
+
+                nbVibrations++;
+
+                System.out.println("Je vibre !!!");
+                
             } else {
                 // Arrête sa propre tâche
                 this.cancel();

@@ -4,7 +4,6 @@
 package athan.src.options;
 
 import athan.src.Client.AthanException;
-import athan.src.Client.Main;
 import athan.src.Client.Menu;
 import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;

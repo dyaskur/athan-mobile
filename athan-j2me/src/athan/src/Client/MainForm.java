@@ -13,6 +13,7 @@ import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
+import com.sun.lwuit.Display;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Image;
 import com.sun.lwuit.Label;
@@ -398,8 +399,6 @@ public class MainForm extends Menu {
     private void redemarrerTimer() {
         Main.setTimer(new Timer());
         Main.getTimer().schedule(new TacheTimer(), 0, TacheTimer.DUREE_CYCLE);
-
-        //mCmdHomeHeureCourante.setVisible(false);
     }
 
     public void traiterAlarme(String pPreferenceKey) {
@@ -412,8 +411,35 @@ public class MainForm extends Menu {
 
         } else if (alertMode.equals(Preferences.MODE_VIBRATE)) {
             // Vibrer
-            Timer timerVibrer = new Timer();
-            timerVibrer.schedule(new TacheVibrer(), 0, TacheVibrer.DUREE_CYCLE);
+//            Timer timerVibrer = new Timer();
+//            timerVibrer.schedule(new TacheVibrer(), 0);
+
+            new Thread(new Runnable() {
+
+                public void run() {
+                    int nbVibrations = 0;
+
+                    while (nbVibrations < NB_VIBRATIONS) {
+
+                        try {
+                            // Fait vibrer le téléphone
+                            Display.getInstance().vibrate(AthanConstantes.DUREE_VIBRATION_UNITAIRE);
+
+                            System.out.println("Je vibre !!!");
+
+                            // Attend un instant
+                            synchronized(this) {
+                                this.wait(DUREE_ATTENTE_VIBRATION_UNITAIRE);
+                            }
+
+                        } catch (Exception exc) {
+                            exc.printStackTrace();
+                        }
+
+                        nbVibrations++;
+                    }
+                }
+            }).start();
 
         } else if (alertMode.equals(Preferences.MODE_SONG)) {
 
@@ -438,7 +464,7 @@ public class MainForm extends Menu {
             try {
 
                 // Charge la stream du fichier son à jouer
-                FileConnection fc = (FileConnection)Connector.open(urlSon, Connector.READ);
+                FileConnection fc = (FileConnection) Connector.open(urlSon, Connector.READ);
                 InputStream inputStream = (InputStream)fc.openInputStream();
 
                 // Crée le player
@@ -514,6 +540,8 @@ public class MainForm extends Menu {
                 };
                 stopForm.addCommand(fermer);
                 stopForm.setBackCommand(fermer);
+
+                // Affiche la fenêtre
                 stopForm.show();
 
             } catch (Exception exc) {

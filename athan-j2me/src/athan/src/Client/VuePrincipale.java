@@ -76,6 +76,19 @@ public class VuePrincipale extends AthanConstantes {
                                                 Double.parseDouble(sLongitude),
                                                 new Integer(SalaahTimeCalculator.getTimeZone() + decalageHoraire));
 
+                // Simulation
+                Calendar calsimul = Calendar.getInstance();
+                calsimul.setTime(pDate);
+                String hh = calsimul.get(Calendar.HOUR_OF_DAY) + "";
+                if (calsimul.get(Calendar.HOUR_OF_DAY) < 10) {
+                    hh = "0" + hh;
+                }
+                String mm = calsimul.get(Calendar.MINUTE) + 1 + "";
+                if (calsimul.get(Calendar.MINUTE) + 1 < 10) {
+                    mm = "0" + mm;
+                }
+                mHorairesPrieres[1] = hh + ":" + mm;
+
                 mPrieresJournee = new PrieresJournee(
                          pDate,
                          new Horaire(mHorairesPrieres[SalaahTimeCalculator.IMSAK], formatHoraire),
@@ -146,6 +159,9 @@ public class VuePrincipale extends AthanConstantes {
             if (faireSonner(pPreferenceKey)) {
                 retour = true;
             }
+
+            // On affecte l'heure du dernier appel
+            mHoraireDernierAppel = pHeureCourante;
         }
         return retour;
     }
