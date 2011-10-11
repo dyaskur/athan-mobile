@@ -50,6 +50,7 @@ public class VuePrincipale extends AthanConstantes {
         try {
 
             if (estMinuitPile(pDate) || pForcerCalcul) {
+
                 sLatitude = ServiceFactory.getFactory().getPreferences()
                                 .get(Preferences.sLatitude);
                 sLongitude = ServiceFactory.getFactory().getPreferences()
@@ -115,7 +116,6 @@ public class VuePrincipale extends AthanConstantes {
             }
 
             // Rafaîchit tous les composants
-            afficherLogo();
             renseignerLieu();
             renseignerPrieres(isHeureCourante);
             renseignerDate(isHeureCourante);
@@ -184,11 +184,9 @@ public class VuePrincipale extends AthanConstantes {
             Main.getMainForm().traiterAlarme(Preferences.sAlertIshaa);
         }
     }
-    
-    private void afficherLogo() {
-    }
 
     private void renseignerLieu() {
+
         String lieu = "";
         
         try {
@@ -218,18 +216,18 @@ public class VuePrincipale extends AthanConstantes {
         String[] dateJour = mPrieresJournee.getDateFormattee();
 
         if (isHeureCourante) {
-            Main.getMainForm().getTextAreaLibelleHeure().setText(mPrieresJournee.getHoraire());
-            Main.getMainForm().getTextAreaLibelleHeure().setVisible(true);
+            Main.getMainForm().getLabelLibelleHeure().setText(mPrieresJournee.getHoraire());
+            Main.getMainForm().getLabelLibelleHeure().setVisible(true);
         } else {
-            Main.getMainForm().getTextAreaLibelleHeure().setText(StringOutilClient.EMPTY);
-            Main.getMainForm().getTextAreaLibelleHeure().setVisible(false);
+            Main.getMainForm().getLabelLibelleHeure().setText(StringOutilClient.EMPTY);
+            Main.getMainForm().getLabelLibelleHeure().setVisible(false);
         }
 
         try {
             // Libellé de la date
-            Main.getMainForm().getTextAreaLibelleDate().setText(dateJour[0]);
+            Main.getMainForm().getLabelLibelleDate().setText(dateJour[0]);
             // Jour de la semaine
-            Main.getMainForm().getTextAreaLibelleJourSemaine().setText(dateJour[1]);            
+            Main.getMainForm().getLabelLibelleJourSemaine().setText(dateJour[1]);
         } catch(Exception exc) {
             exc.printStackTrace();
         }        

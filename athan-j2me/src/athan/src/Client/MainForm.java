@@ -6,9 +6,7 @@ package athan.src.Client;
 import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
-import athan.src.Factory.TacheTimer;
 import athan.src.Outils.StringOutilClient;
-import athan.src.Outils.TacheVibrer;
 import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
@@ -26,7 +24,6 @@ import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.table.TableLayout;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.Timer;
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
 import javax.microedition.media.Manager;
@@ -44,10 +41,8 @@ public class MainForm extends Menu {
     private static final int HAUTEUR_LABEL_DATE = 18;
     private static final int HAUTEUR_LABEL_PRIERE = 12;
     private static final int HAUTEUR_LABEL_HEADER_PRIERE = 10;
-
     /** Intervalle en ms entre la date courante et la date suivante */
     private static final int INTERVALLE_PREC_SUIV = 24 * 3600 * 1000;
-
     /**  Décalages dans le redimensionnement des bannières verticales
      * et des espacement des horaires des prières
      * une prière en moins */
@@ -56,18 +51,14 @@ public class MainForm extends Menu {
     private static final int HEADER_LABEL_GAP_UNITAIRE = 3;
     private static final int HAUTEUR_BANNIERE = 160;
     private int mLabelGap = 0;
-
     private Date mHeureCourante;
-    
     private Label mLabelLieu;
     private Command mCmdHomeHeureCourante;
-
     private Command mCmdDatePrecedente;
-    private TextArea mTextAreaLibelleDate;
-    private TextArea mTextAreaLibelleJourSemaine;
-    private TextArea mTextAreaLibelleHeure;
+    private Label mLabelLibelleDate;
+    private Label mLabelLibelleJourSemaine;
+    private Label mLabelLibelleHeure;
     private Command mCmdDateSuivante;
-
     private Label mLabelHoraireImsak;
     private Label mLabelHoraireSohb;
     private Label mLabelHoraireChourouk;
@@ -75,12 +66,11 @@ public class MainForm extends Menu {
     private Label mLabelHoraireAsr;
     private Label mLabelHoraireMaghreb;
     private Label mLabelHoraireIshaa;
-
     private Main mMain;
     private Form currentForm;
-
     // Récupération du bundle de ressources
     private ResourceReader RESOURCES = ServiceFactory.getFactory().getResourceReader();
+    public boolean timerHeureCourante = true;
 
     private TableLayout.Constraint nouvelleContrainteListePrieres(TableLayout pTB) {
         return nouvelleContrainteListePrieres(pTB, HAUTEUR_LABEL_PRIERE + mLabelGap);
@@ -102,7 +92,7 @@ public class MainForm extends Menu {
 
         // On crée le panel d'options
         OptionForm optionForm = new OptionForm(Main.getMainForm());
-        if (Main.getOptionForm() != null){
+        if (Main.getOptionForm() != null) {
             optionForm.setTransitionInAnimator(Main.getOptionForm().getTransitionInAnimator());
             optionForm.setTransitionOutAnimator(Main.getOptionForm().getTransitionOutAnimator());
         } else {
@@ -120,27 +110,36 @@ public class MainForm extends Menu {
     }
 
     public String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("ApplicationTitle");
+        return ServiceFactory.getFactory().getResourceReader().get("ApplicationTitle");
     }
 
     public String getIconBaseName() {
         return MENU_AFFICHAGE_COMPAS;
     }
 
-    private void editerTextAreaLibelleDate(TextArea ta) {
-        ta.setAlignment(TextArea.CENTER);
-        ta.setUIID(UIID_LABEL_CURRENT_DATE);
-        ta.setGrowByContent(true);
+//    private void editerTextAreaLibelleDate(TextArea ta) {
+//        ta.setAlignment(TextArea.CENTER);
+//        ta.setUIID(UIID_LABEL_CURRENT_DATE);
+//        ta.setGrowByContent(true);
+//        //mTextAreaLibelleJour.setColumns(2);
+//        //mTextAreaLibelleDate.setRows(3);
+//        ta.setEditable(false);
+//        ta.setFocusable(false);
+//        ta.setPreferredH(HAUTEUR_LABEL_DATE);
+//    }
+    private void editerLabelLibelleDate(Label la) {
+        la.setAlignment(TextArea.CENTER);
+        la.setUIID(UIID_LABEL_CURRENT_DATE);
+        //la.setGrowByContent(true);
         //mTextAreaLibelleJour.setColumns(2);
         //mTextAreaLibelleDate.setRows(3);
-        ta.setEditable(false);
-        ta.setFocusable(false);
-        ta.setPreferredH(HAUTEUR_LABEL_DATE);
+        //la.setEditable(false);
+        la.setFocusable(false);
+        la.setPreferredH(HAUTEUR_LABEL_DATE);
     }
 
     protected void execute(final Form f) {
-        
+
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
         if (Main.isTactile()) {
@@ -165,34 +164,34 @@ public class MainForm extends Menu {
         ctnVilleHome.setPreferredH(30);
 
         // Conteneur de parcours des dates
-        mTextAreaLibelleDate = new TextArea();
-        mTextAreaLibelleJourSemaine = new TextArea();
-        mTextAreaLibelleHeure = new TextArea();
-        editerTextAreaLibelleDate(mTextAreaLibelleDate);
-        editerTextAreaLibelleDate(mTextAreaLibelleJourSemaine);
-        editerTextAreaLibelleDate(mTextAreaLibelleHeure);
+        mLabelLibelleDate = new Label();
+        mLabelLibelleJourSemaine = new Label();
+        mLabelLibelleHeure = new Label();
+        editerLabelLibelleDate(mLabelLibelleDate);
+        editerLabelLibelleDate(mLabelLibelleJourSemaine);
+        editerLabelLibelleDate(mLabelLibelleHeure);
         Container ctnDates = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        ctnDates.addComponent(mTextAreaLibelleDate);
-        ctnDates.addComponent(mTextAreaLibelleJourSemaine);
-        ctnDates.addComponent(mTextAreaLibelleHeure);
+        ctnDates.addComponent(mLabelLibelleDate);
+        ctnDates.addComponent(mLabelLibelleJourSemaine);
+        ctnDates.addComponent(mLabelLibelleHeure);
         ctnDates.setPreferredH(3 * (HAUTEUR_LABEL_DATE + 5));
 
         // Commandes
         mCmdHomeHeureCourante = new Command(RESOURCES.get("CurrentDay")) {
-             
+
             public void actionPerformed(ActionEvent ae) {
                 try {
+
                     // On force le recalcul des horaires
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
+                    ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // On redémarre le timer
-                    redemarrerTimer();
+                    Main.demarrerTimer();
 
                     // On supprime l'entrée du menu de commande
-                    f.removeCommand(mCmdHomeHeureCourante);
-                    
-                } catch(Exception exc) {
+                    cacherCmdHeureCourante();
+
+                } catch (Exception exc) {
                     exc.printStackTrace();
                 }
             }
@@ -205,30 +204,30 @@ public class MainForm extends Menu {
             public void actionPerformed(ActionEvent ae) {
                 // On interrompt le timer et affiche les résultats pour une date donnée
                 try {
-                    Main.getTimer().cancel();
+
+                    // On arrête le timer
+                    Main.arreterTimer();
 
                     Date jourPrecedent = new Date(mHeureCourante.getTime() - INTERVALLE_PREC_SUIV);
 
                     if (StringOutilClient.isDateMemeJour(jourPrecedent, new Date())) {
                         // On force le recalcul des horaires
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(new Date(), true, true);
+                        ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                         // On redémarre le timer
-                        redemarrerTimer();
+                        Main.demarrerTimer();
 
                         // On supprime l'entrée du menu de commande
-                        f.removeCommand(mCmdHomeHeureCourante);
+                        cacherCmdHeureCourante();
 
                     } else {
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourPrecedent, false, true);
+                        ServiceFactory.getFactory().getVuePrincipale().rafraichir(jourPrecedent, false, true);
 
                         // On ajoute l'entrée du menu de commande
-                        f.addCommand(mCmdHomeHeureCourante, 0);
+                        montrerCmdHeureCourante();
                     }
 
-                } catch(Exception exc) {
+                } catch (Exception exc) {
                     exc.printStackTrace();
                 }
             }
@@ -239,30 +238,30 @@ public class MainForm extends Menu {
             public void actionPerformed(ActionEvent ae) {
                 // On interrompt le timer et affiche les résultats pour une date donnée
                 try {
-                    Main.getTimer().cancel();
+
+                    // On arrête le timer
+                    Main.arreterTimer();
 
                     Date jourSuivant = new Date(mHeureCourante.getTime() + INTERVALLE_PREC_SUIV);
 
                     if (StringOutilClient.isDateMemeJour(jourSuivant, new Date())) {
                         // On force le recalcul des horaires
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(new Date(), true, true);
+                        ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                         // On redémarre le timer
-                        redemarrerTimer();
+                        Main.demarrerTimer();
 
                         // On supprime l'entrée du menu de commande
-                        f.removeCommand(mCmdHomeHeureCourante);
-                        
+                        cacherCmdHeureCourante();
+
                     } else {
-                        ServiceFactory.getFactory().getVuePrincipale()
-                                .rafraichir(jourSuivant, false, true);
+                        ServiceFactory.getFactory().getVuePrincipale().rafraichir(jourSuivant, false, true);
 
                         // On ajoute l'entrée du menu de commande
-                        f.addCommand(mCmdHomeHeureCourante, 0);
+                        montrerCmdHeureCourante();
                     }
 
-                } catch(Exception exc) {
+                } catch (Exception exc) {
                     exc.printStackTrace();
                 }
             }
@@ -341,7 +340,7 @@ public class MainForm extends Menu {
 
         // Gestion du comportement (ergonomie)
         if (!Main.isTactile()) {
-           // RàF
+            // RàF
         }
 
         int posCmd = 0;
@@ -355,13 +354,22 @@ public class MainForm extends Menu {
         currentForm = f;
     }
 
+    public void montrerCmdHeureCourante() {
+        // On ajoute l'entrée du menu de commande
+        currentForm.addCommand(mCmdHomeHeureCourante, 0);
+    }
+
+    public void cacherCmdHeureCourante() {
+        // On supprime l'entrée du menu de commande
+        currentForm.removeCommand(mCmdHomeHeureCourante);
+    }
+
     private boolean isImsakSelected() {
         boolean ret = false;
 
         try {
             ret = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sDisplayImsak)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sDisplayImsak)));
         } catch (Exception exc) {
             exc.printStackTrace();
         }
@@ -374,8 +382,7 @@ public class MainForm extends Menu {
 
         try {
             ret = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sDisplayChourouk)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sDisplayChourouk)));
         } catch (Exception exc) {
             exc.printStackTrace();
         }
@@ -396,23 +403,16 @@ public class MainForm extends Menu {
         return retour;
     }
 
-    private void redemarrerTimer() {
-        Main.setTimer(new Timer());
-        Main.getTimer().schedule(new TacheTimer(), 0, TacheTimer.DUREE_CYCLE);
-    }
-
     public void traiterAlarme(String pPreferenceKey) {
 
-        String alertMode = ServiceFactory.getFactory().getPreferences()
-                .get(Preferences.sAlertMode);
+        String alertMode = ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertMode);
 
         if (alertMode.equals(Preferences.MODE_NONE)) {
             // RàF
-
         } else if (alertMode.equals(Preferences.MODE_VIBRATE)) {
             // Vibrer
-//            Timer timerVibrer = new Timer();
-//            timerVibrer.schedule(new TacheVibrer(), 0);
+
+//            mLabelLieu.setText(mLabelLibelleHeure.getText());
 
             new Thread(new Runnable() {
 
@@ -428,7 +428,7 @@ public class MainForm extends Menu {
                             System.out.println("Je vibre !!!");
 
                             // Attend un instant
-                            synchronized(this) {
+                            synchronized (this) {
                                 this.wait(DUREE_ATTENTE_VIBRATION_UNITAIRE);
                             }
 
@@ -446,8 +446,7 @@ public class MainForm extends Menu {
             // Jouer l'appel
 
             // On récupère l'url du fichier son
-            String urlSon = ServiceFactory.getFactory().getPreferences()
-                    .get(Preferences.sAlertFile);
+            String urlSon = ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertFile);
 
             if (StringOutilClient.isEmpty(urlSon)) {
                 // Rien à jouer
@@ -456,7 +455,7 @@ public class MainForm extends Menu {
 
             String musicEncoding = StringOutilClient.EMPTY;
             if (urlSon.endsWith(FORMAT_WAV)) {
-                 musicEncoding = "audio/x-wav";
+                musicEncoding = "audio/x-wav";
             } else {
                 musicEncoding = "audio/mp3";
             }
@@ -465,7 +464,7 @@ public class MainForm extends Menu {
 
                 // Charge la stream du fichier son à jouer
                 FileConnection fc = (FileConnection) Connector.open(urlSon, Connector.READ);
-                InputStream inputStream = (InputStream)fc.openInputStream();
+                InputStream inputStream = (InputStream) fc.openInputStream();
 
                 // Crée le player
                 final Player musicPlayer = Manager.createPlayer(inputStream, musicEncoding);
@@ -473,6 +472,7 @@ public class MainForm extends Menu {
 
                 // Ajoute un listener
                 musicPlayer.addPlayerListener(new PlayerListener() {
+
                     public void playerUpdate(Player player, String event, Object eventData) {
                         if (event.equals(PlayerListener.END_OF_MEDIA)) {
                             // Ferme la fenêtre
@@ -483,8 +483,8 @@ public class MainForm extends Menu {
 
                 // Empêche les pics de volume au début de la musique
                 VolumeControl volumeControl =
-                            (VolumeControl) musicPlayer.getControl("VolumeControl");
-                                    volumeControl.setLevel(100);
+                        (VolumeControl) musicPlayer.getControl("VolumeControl");
+                volumeControl.setLevel(100);
 
                 // Joue le son
                 musicPlayer.start();
@@ -518,7 +518,7 @@ public class MainForm extends Menu {
                     }
                 });
 
-                Image imgAllahAkbar  = Main.icons.getImage("AllahAkbar");
+                Image imgAllahAkbar = Main.icons.getImage("AllahAkbar");
                 Label lLabelPrayerRinging = new Label(retournerNomPriereAlerte(pPreferenceKey));
                 lLabelPrayerRinging.setUIID(UIID_LABEL_PRAYER_NAME_RINGING);
                 lLabelPrayerRinging.getUnselectedStyle().setBgTransparency(0);
@@ -534,6 +534,7 @@ public class MainForm extends Menu {
                 stopForm.setScrollable(false);
 
                 Command fermer = new Command(RESOURCES.get("Menu.Close")) {
+
                     public void actionPerformed(ActionEvent evt) {
                         currentForm.showBack();
                     }
@@ -581,24 +582,24 @@ public class MainForm extends Menu {
     }
 
     /**
-     * @return the mTextAreaLibelleDate
+     * @return the mLabelLibelleDate
      */
-    public TextArea getTextAreaLibelleDate() {
-        return mTextAreaLibelleDate;
+    public Label getLabelLibelleDate() {
+        return mLabelLibelleDate;
     }
 
     /**
-     * @return the mTextAreaLibelleJourSemaine
+     * @return the mLabelLibelleJourSemaine
      */
-    public TextArea getTextAreaLibelleJourSemaine() {
-        return mTextAreaLibelleJourSemaine;
+    public Label getLabelLibelleJourSemaine() {
+        return mLabelLibelleJourSemaine;
     }
 
     /**
-     * @return the mTextAreaLibelleHeure
+     * @return the mLabelLibelleHeure
      */
-    public TextArea getTextAreaLibelleHeure() {
-        return mTextAreaLibelleHeure;
+    public Label getLabelLibelleHeure() {
+        return mLabelLibelleHeure;
     }
 
     /**
@@ -652,5 +653,19 @@ public class MainForm extends Menu {
 
     public void setHeureCourante(Date pHeureCourante) {
         mHeureCourante = pHeureCourante;
+    }
+
+    /**
+     * @return the timerHeureCourante
+     */
+    public boolean isTimerHeureCourante() {
+        return timerHeureCourante;
+    }
+
+    /**
+     * @param timerHeureCourante the timerHeureCourante to set
+     */
+    public void setTimerHeureCourante(boolean timerHeureCourante) {
+        this.timerHeureCourante = timerHeureCourante;
     }
 }

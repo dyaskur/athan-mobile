@@ -5,7 +5,7 @@ package athan.src.Client;
 
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
-import athan.src.Factory.TacheTimer;
+import athan.src.Factory.ThreadTimer;
 import athan.src.options.MenuCompass;
 import athan.src.options.MenuAlerts;
 import athan.src.options.MenuLocation;
@@ -38,7 +38,6 @@ import com.sun.lwuit.layouts.GridLayout;
 import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
 import java.util.Hashtable;
-import java.util.Timer;
 import java.util.Vector;
 
 /**
@@ -317,17 +316,24 @@ public class OptionForm extends Form
     public void actionPerformed(ActionEvent evt) {
         Command cmd = evt.getCommand();
         switch (cmd.getId()) {
+
             case EXIT_COMMAND:
+
                 Main.getMainForm().run(Main.exitCommand,
                         Main.getMainForm().getMain(),
                         false);
-                Main.setTimer(new Timer());
-                Main.getTimer().schedule(new TacheTimer(), 0, TacheTimer.DUREE_CYCLE);
+                
+                // On démarre le timer
+                Main.demarrerTimer();
+
                 break;
+
             case BACK_COMMAND:
+
                 mCurrentMenu.cleanup();
                 this.show();
                 break;
+                
             case ABOUT_COMMAND:
                 Form aboutForm = new Form(RESOURCES.get("Menu.About"));
                 aboutForm.setScrollable(false);

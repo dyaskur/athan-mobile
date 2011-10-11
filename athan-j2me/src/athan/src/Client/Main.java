@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package athan.src.Client;
 
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
-import athan.src.Factory.TacheTimer;
+import athan.src.Factory.ThreadTimer;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Display;
 import com.sun.lwuit.events.ActionEvent;
@@ -24,7 +23,7 @@ import java.util.Timer;
  * @author BENBOUZID
  */
 public class Main extends javax.microedition.midlet.MIDlet
-                    implements ActionListener {
+        implements ActionListener {
 
     private static final int OPTIONS_COMMAND = 1;
     public static final Command optionsCommand = new Command("", OPTIONS_COMMAND);
@@ -32,31 +31,13 @@ public class Main extends javax.microedition.midlet.MIDlet
     public static final Command exitCommand = new Command("", EXIT_COMMAND);
     private static final int MINIMIZE_COMMAND = 3;
     public static final Command minimizeCommand = new Command("", MINIMIZE_COMMAND);
-
     public static Resources theme;
     public static Resources icons;
     public static Resources languages;
-
     public static boolean sIsTactile;
-
     private static OptionForm sOptionForm;
     private static MainForm sMainForm;
-
-    private static Timer sTimer;
-
-    /**
-     * Affecte un nouveau marqueur
-     */
-    public static void setTimer(Timer pTimer) {
-        sTimer = pTimer;
-    }
-
-    /**
-     * @return le timer
-     */
-    public static Timer getTimer() {
-        return sTimer;
-    }
+    private static Thread sTimer;
 
     /**
      * @return le panel d'options
@@ -64,7 +45,7 @@ public class Main extends javax.microedition.midlet.MIDlet
     public static OptionForm getOptionForm() {
         return sOptionForm;
     }
-    
+
     /**
      * Affecte le panel d'options
      */
@@ -97,7 +78,7 @@ public class Main extends javax.microedition.midlet.MIDlet
         try {
 
             if (sMainForm == null) {
-                
+
                 //By using the VKBImplementationFactory.init() we automatically
                 //bundle the LWUIT Virtual Keyboard.
                 //If your application is not aimed to touch screen devices,
@@ -105,7 +86,7 @@ public class Main extends javax.microedition.midlet.MIDlet
                 VKBImplementationFactory.init();
                 Display.init(this);
 
-            
+
                 // Test sur le type de téléphone
                 sIsTactile = Display.getInstance().isTouchScreenDevice();
                 if (sIsTactile) {
@@ -123,13 +104,7 @@ public class Main extends javax.microedition.midlet.MIDlet
                 languages = Resources.open("/" + AthanConstantes.RESSOURCE_LANGUAGES);
 
                 // On crée la factory
-                try {
-                    ServiceFactory.newInstance();
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                    // On quitte l'application
-                    quitter();
-                }
+                ServiceFactory.newInstance();
 
                 ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
                 optionsCommand.setCommandName(RESSOURCE.get("Command.Options"));
@@ -140,15 +115,17 @@ public class Main extends javax.microedition.midlet.MIDlet
                 //most devices, a good coding practice will be to allow the midp
                 //thread to return and to do all the UI on the EDT.
                 Display.getInstance().callSerially(new Runnable() {
+
                     public void run() {
                         setMainForm(icons);
                     }
                 });
-                
+
             }
 
         } catch (Throwable ex) {
-            ex.printStackTrace();
+            // On quitte l'application
+            quitter();
         }
     }
 
@@ -156,6 +133,8 @@ public class Main extends javax.microedition.midlet.MIDlet
     }
 
     protected void destroyApp(boolean arg0) {
+
+        arreterTimer();
     }
 
     void setMainForm(Resources r) {
@@ -167,30 +146,75 @@ public class Main extends javax.microedition.midlet.MIDlet
         sMainForm.run(exitCommand, this, false);
 
         // On force le premier calcul des prières
-        ServiceFactory.getFactory().getVuePrincipale()
-                .rafraichir(new Date(), true, true);
+        ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
-        // On crée le timer
-        sTimer = new Timer();
-        sTimer.schedule(new TacheTimer(), 0, TacheTimer.DUREE_CYCLE);
+        // On démarre le timers
+        demarrerTimer();
     }
 
-     public void actionPerformed(ActionEvent pActionEvent) {
+    public static void arreterTimer() {
+        
+        synchronized (sMainForm) {
+
+            sMainForm.setTimerHeureCourante(false);
+
+            if (sTimer != null) {
+                //sTimer = null;
+                try {
+                    System.out.println("je veux mourir...");
+                    sTimer.join();
+                    sTimer = null;
+                    System.out.println("je suis mort !");
+                } catch (InterruptedException ex) {
+                    //ex.printStackTrace();
+                }
+            }
+        }
+
+        if (sMainForm != null) {
+            sMainForm.montrerCmdHeureCourante();
+        }
+    }
+
+    public static void demarrerTimer() {
+
+        synchronized (sMainForm) {
+
+            sMainForm.setTimerHeureCourante(true);
+
+            if (sTimer == null) {
+                sTimer = new ThreadTimer();
+            }
+        }
+        sTimer.start();
+
+        if (sMainForm != null) {
+            sMainForm.cacherCmdHeureCourante();
+        }
+    }
+
+    public void actionPerformed(ActionEvent pActionEvent) {
 
         Command cmd = pActionEvent.getCommand();
         switch (cmd.getId()) {
 
             case OPTIONS_COMMAND:
+
                 // On affiche le menu des commandes
                 if (getMainForm() != null) {
+
                     // On arrête le timer
-                    Main.getTimer().cancel();
+                    arreterTimer();
+                    
                     // On affiche les options
                     sMainForm.setOptionForm(true);
                 }
                 break;
 
             case MINIMIZE_COMMAND:
+
+                // On fait en sorte que le timer soit actif
+                demarrerTimer();
 
                 // On minimise l'application
                 boolean retour = Display.getInstance().minimizeApplication();
@@ -201,11 +225,13 @@ public class Main extends javax.microedition.midlet.MIDlet
                 break;
 
             case EXIT_COMMAND:
+
                 // On quitte l'application
                 quitter();
                 break;
 
-            default: 
+            default:
+
                 // Commande inconnue
                 break;
         }
