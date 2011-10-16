@@ -156,10 +156,11 @@ public class MenuAlerts extends Menu {
         ctnFichierSon.addComponent(BorderLayout.EAST, mChoixFichier);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        f.addComponent(mCtnPrieres);
-        f.addComponent(new Label());
+        
         f.addComponent(ctnChoix);
         f.addComponent(ctnFichierSon);
+        f.addComponent(new Label());
+        f.addComponent(mCtnPrieres);
 
         mOK = new Command(RESSOURCE.get("Command.OK")) {
 

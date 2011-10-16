@@ -125,7 +125,7 @@ public class AthanConstantes {
     public static final String[][] KB_NOMS_fr = new String[][]{
         {"\u0061", "\u007A", "\u0065", "\u0072", "\u0074", "\u0079",
          "\u0075", "\u0069", "\u006F", "\u0070"},
-        {"\u0061", "\u0073", "\u0064", "\u0066", "\u0067", "\u0068",
+        {"\u0071", "\u0073", "\u0064", "\u0066", "\u0067", "\u0068",
          "\u006A", "\u006B", "\u006C", "\u006D"},
         {"$Shift$", "\u0077", "\u0078", "\u0063", "\u0076", "\u0062",
          "\u006E", "$Delete$"},
@@ -134,7 +134,7 @@ public class AthanConstantes {
     public static final String[][] KB_NOMS_FR = new String[][]{
         {"\u0041", "\u005A", "\u0045", "\u0052", "\u0054", "\u0059",
          "\u0055", "\u0049", "\u004F", "\u0050"},
-        {"\u0041", "\u0053", "\u0044", "\u0046", "\u0047", "\u0048",
+        {"\u0051", "\u0053", "\u0044", "\u0046", "\u0047", "\u0048",
          "\u004A", "\u004B", "\u004C", "\u004D"},
         {"$Shift$", "\u0057", "\u0058", "\u0043", "\u0056", "\u0042",
          "\u004E", "$Delete$"},
@@ -144,7 +144,7 @@ public class AthanConstantes {
     public static final String KB_NOMS_FR_MODE = "A-Z";
 
     public static final String[][] KB_NOMS_us = new String[][]{
-         {"\u0061", "\u007A", "\u0065", "\u0072", "\u0074", "\u0079",
+         {"\u0071", "\u007A", "\u0065", "\u0072", "\u0074", "\u0079",
          "\u0075", "\u0069", "\u006F", "\u0070"},
         {"\u0061", "\u0073", "\u0064", "\u0066", "\u0067", "\u0068",
          "\u006A", "\u006B", "\u006C", "\u006D"},
@@ -153,7 +153,7 @@ public class AthanConstantes {
         {"$Mode$", "$Space$", "$OK$"}
     };
     public static final String[][] KB_NOMS_US = new String[][]{
-        {"\u0041", "\u005A", "\u0045", "\u0052", "\u0054", "\u0059",
+        {"\u0051", "\u005A", "\u0045", "\u0052", "\u0054", "\u0059",
          "\u0055", "\u0049", "\u004F", "\u0050"},
         {"\u0041", "\u0053", "\u0044", "\u0046", "\u0047", "\u0048",
          "\u004A", "\u004B", "\u004C", "\u004D"},

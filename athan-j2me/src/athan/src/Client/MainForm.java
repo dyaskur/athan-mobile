@@ -491,6 +491,7 @@ public class MainForm extends Menu {
 
                 Button btnStop = new Button(Main.icons.getImage("Stop"));
                 btnStop.setAlignment(Button.CENTER);
+                btnStop.setPreferredW(90);
 
                 btnStop.addActionListener(new ActionListener() {
 
@@ -526,14 +527,24 @@ public class MainForm extends Menu {
 
                 stopForm.addComponent(BorderLayout.NORTH, lLabelPrayerRinging);
                 stopForm.addComponent(BorderLayout.CENTER, btnStop);
-                stopForm.addComponent(BorderLayout.SOUTH, new Label(imgAllahAkbar));
+                stopForm.addComponent(BorderLayout.SOUTH, lblAllahAkbar);
 
                 stopForm.setScrollable(false);
 
-                Command fermer = new Command(RESOURCES.get("Menu.Close")) {
+                Command fermer = new Command(RESOURCES.get("Command.Stop")) {
 
                     public void actionPerformed(ActionEvent evt) {
-                        currentForm.showBack();
+                        try {
+
+                            // Arrête la musique
+                            musicPlayer.stop();
+
+                            // Ferme la fenêtre
+                            currentForm.showBack();
+
+                        } catch (Exception exc) {
+                            exc.printStackTrace();
+                        }
                     }
                 };
                 stopForm.addCommand(fermer);
