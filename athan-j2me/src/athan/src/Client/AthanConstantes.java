@@ -17,8 +17,8 @@ public class AthanConstantes {
     public static final int TIMEOUT_CONFIRMATION_MODIF = 2000; // en ms
     public static final String PATTERN_LIBELLE = "%s"; // en secondes
     public static final int DUREE_VIBRATION_UNITAIRE = 500; // en ms
-    public static final int DUREE_ATTENTE_VIBRATION_UNITAIRE = 1000; // en ms
-    public static final int NB_VIBRATIONS = 5;
+    public static final int DUREE_ATTENTE_FLASH_UNITAIRE = 1000; // en ms
+    public static final int NB_FLASHS = 5;
 
     // Constantes
     public static final String FORMAT_WAV = ".wav";

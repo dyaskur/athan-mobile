@@ -14,6 +14,7 @@ import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
 
 /**
+ * Sauvegardes et restauration des préférences
  *
  * @author Saad BENBOUZID
  */
@@ -23,7 +24,7 @@ public class Preferences {
     public static final String LANGUE_EN = "en";
 
     public static final String MODE_NONE = "N";
-    public static final String MODE_VIBRATE = "V";
+    public static final String MODE_FLASH = "V";
     public static final String MODE_SONG = "S";
 
     public static final String RECORD_STORE_NAME = "preferences";
@@ -201,7 +202,7 @@ public class Preferences {
         put(sAlertAsr, Integer.toString(StringOutilClient.FALSE));
         put(sAlertMaghreb, Integer.toString(StringOutilClient.FALSE));
         put(sAlertIshaa, Integer.toString(StringOutilClient.FALSE));
-        put(sAlertMode, MODE_VIBRATE);
+        put(sAlertMode, MODE_FLASH);
         put(sAlertFile, StringOutilClient.EMPTY);
     }
 

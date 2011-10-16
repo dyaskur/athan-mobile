@@ -117,18 +117,8 @@ public class MainForm extends Menu {
         return MENU_AFFICHAGE_COMPAS;
     }
 
-//    private void editerTextAreaLibelleDate(TextArea ta) {
-//        ta.setAlignment(TextArea.CENTER);
-//        ta.setUIID(UIID_LABEL_CURRENT_DATE);
-//        ta.setGrowByContent(true);
-//        //mTextAreaLibelleJour.setColumns(2);
-//        //mTextAreaLibelleDate.setRows(3);
-//        ta.setEditable(false);
-//        ta.setFocusable(false);
-//        ta.setPreferredH(HAUTEUR_LABEL_DATE);
-//    }
     private void editerLabelLibelleDate(Label la) {
-        la.setAlignment(TextArea.CENTER);
+        la.setAlignment(Label.CENTER);
         la.setUIID(UIID_LABEL_CURRENT_DATE);
         //la.setGrowByContent(true);
         //mTextAreaLibelleJour.setColumns(2);
@@ -409,34 +399,32 @@ public class MainForm extends Menu {
 
         if (alertMode.equals(Preferences.MODE_NONE)) {
             // R‡F
-        } else if (alertMode.equals(Preferences.MODE_VIBRATE)) {
+        } else if (alertMode.equals(Preferences.MODE_FLASH)) {
             // Vibrer
-
-//            mLabelLieu.setText(mLabelLibelleHeure.getText());
 
             new Thread(new Runnable() {
 
                 public void run() {
-                    int nbVibrations = 0;
 
-                    while (nbVibrations < NB_VIBRATIONS) {
+                    int nbFlashs = 0;
+
+                    while (nbFlashs < NB_FLASHS) {
 
                         try {
-                            // Fait vibrer le tÈlÈphone
-                            Display.getInstance().vibrate(AthanConstantes.DUREE_VIBRATION_UNITAIRE);
 
-                            System.out.println("Je vibre !!!");
+                            // Fait flasher le tÈlÈphone
+                            Display.getInstance().flashBacklight(AthanConstantes.DUREE_VIBRATION_UNITAIRE);
 
                             // Attend un instant
                             synchronized (this) {
-                                this.wait(DUREE_ATTENTE_VIBRATION_UNITAIRE);
+                                this.wait(DUREE_ATTENTE_FLASH_UNITAIRE);
                             }
 
                         } catch (Exception exc) {
                             exc.printStackTrace();
                         }
 
-                        nbVibrations++;
+                        nbFlashs++;
                     }
                 }
             }).start();
@@ -498,20 +486,23 @@ public class MainForm extends Menu {
                 inputStream = null;
 
                 // CrÈe une fenÍtre avec possibilitÈ d'arrÍt
-                Form stopForm = new Form(RESOURCES.get("Window.Help"));
+                Form stopForm = new Form(RESOURCES.get("Window.PrayerTime"));
                 stopForm.setLayout(new BorderLayout());
 
                 Button btnStop = new Button(Main.icons.getImage("Stop"));
+                btnStop.setAlignment(Button.CENTER);
 
                 btnStop.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent evt) {
                         try {
+
                             // ArrÍte la musique
                             musicPlayer.stop();
 
                             // Ferme la fenÍtre
                             currentForm.showBack();
+
                         } catch (Exception exc) {
                             exc.printStackTrace();
                         }
@@ -519,10 +510,16 @@ public class MainForm extends Menu {
                 });
 
                 Image imgAllahAkbar = Main.icons.getImage("AllahAkbar");
+                Label lblAllahAkbar = new Label(imgAllahAkbar);
+                lblAllahAkbar.setAlignment(Label.CENTER);
+                lblAllahAkbar.getStyle().setPadding(Label.TOP, 6);
+
                 Label lLabelPrayerRinging = new Label(retournerNomPriereAlerte(pPreferenceKey));
                 lLabelPrayerRinging.setUIID(UIID_LABEL_PRAYER_NAME_RINGING);
+                lLabelPrayerRinging.setAlignment(Label.CENTER);
                 lLabelPrayerRinging.getUnselectedStyle().setBgTransparency(0);
                 lLabelPrayerRinging.getSelectedStyle().setBgTransparency(0);
+
                 if (!Main.isTactile()) {
                     lLabelPrayerRinging.setFocusable(true);
                 }

@@ -25,6 +25,7 @@ import com.sun.lwuit.TextField;
 import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
+import com.sun.lwuit.events.SelectionListener;
 import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.layouts.GridLayout;
@@ -46,37 +47,30 @@ public class MenuAlerts extends Menu {
 
     private static final int HAUTEUR_LABEL = 22;
     private static final int HAUTEUR_LABEL_TOUS = 130;
-
     private static final String IMAGE_BROWSE_SONG = "BrowseSong";
     private static final String IMAGE_FOLDER = "Folder";
     private static final String IMAGE_FOLDER_CLOSED = "FolderClosed";
     private static final String IMAGE_FILE = "File";
-
     private CheckBox mAlerterSobh;
     private CheckBox mAlerterDohr;
     private CheckBox mAlerterAsr;
     private CheckBox mAlerterMaghreb;
     private CheckBox mAlerterIshaa;
-
     private ComboBox mChoixAlerte;
-
     private TextField mFichierSon;
-
     private Button mChoixFichier;
-
     private Command mOK;
 
-    private final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                                            .getResourceReader();
+    private Container mCtnPrieres;
+
+    private final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().get("Menu.Help");
     }
 
     protected String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("MenuAlerts");
+        return ServiceFactory.getFactory().getResourceReader().get("MenuAlerts");
     }
 
     protected String getIconBaseName() {
@@ -107,12 +101,19 @@ public class MenuAlerts extends Menu {
         Label lLabelAlertType = new Label(RESSOURCE.get("AlertType"));
         editerLabel(lLabelAlertType);
 
-        String [] choixAlertes = {
+        String[] choixAlertes = {
             RESSOURCE.get("AlertNone"),
             RESSOURCE.get("AlertSong"),
-            RESSOURCE.get("AlertVibration")
+            RESSOURCE.get("AlertFlashing")
         };
+
         mChoixAlerte = new ComboBox(choixAlertes);
+        mChoixAlerte.addSelectionListener(new SelectionListener() {
+
+            public void selectionChanged(int oldSelected, int newSelected) {
+                handlerChoixAlerte(newSelected);
+            }
+        });
 
         mFichierSon = new TextField();
         editerAlertSong(mFichierSon);
@@ -127,24 +128,24 @@ public class MenuAlerts extends Menu {
                 try {
                     renvoyerUrlFichier(f);
 
-                } catch(Exception exc) {
+                } catch (Exception exc) {
                     exc.printStackTrace();
                 }
             }
         });
 
-        Container ctnSaisie = new Container(new GridLayout(5, 2));
-        ctnSaisie.addComponent(lLabelSobh);
-        ctnSaisie.addComponent(mAlerterSobh);
-        ctnSaisie.addComponent(lLabelDohr);
-        ctnSaisie.addComponent(mAlerterDohr);
-        ctnSaisie.addComponent(lLabelAsr);
-        ctnSaisie.addComponent(mAlerterAsr);
-        ctnSaisie.addComponent(lLabelMaghreb);
-        ctnSaisie.addComponent(mAlerterMaghreb);
-        ctnSaisie.addComponent(lLabelIshaa);
-        ctnSaisie.addComponent(mAlerterIshaa);
-        ctnSaisie.setPreferredH(HAUTEUR_LABEL_TOUS);
+        mCtnPrieres = new Container(new GridLayout(5, 2));
+        mCtnPrieres.addComponent(lLabelSobh);
+        mCtnPrieres.addComponent(mAlerterSobh);
+        mCtnPrieres.addComponent(lLabelDohr);
+        mCtnPrieres.addComponent(mAlerterDohr);
+        mCtnPrieres.addComponent(lLabelAsr);
+        mCtnPrieres.addComponent(mAlerterAsr);
+        mCtnPrieres.addComponent(lLabelMaghreb);
+        mCtnPrieres.addComponent(mAlerterMaghreb);
+        mCtnPrieres.addComponent(lLabelIshaa);
+        mCtnPrieres.addComponent(mAlerterIshaa);
+        mCtnPrieres.setPreferredH(HAUTEUR_LABEL_TOUS);
 
         Container ctnChoix = new Container(new GridLayout(1, 2));
         ctnChoix.addComponent(lLabelAlertType);
@@ -153,9 +154,9 @@ public class MenuAlerts extends Menu {
         Container ctnFichierSon = new Container(new BorderLayout());
         ctnFichierSon.addComponent(BorderLayout.CENTER, mFichierSon);
         ctnFichierSon.addComponent(BorderLayout.EAST, mChoixFichier);
-        
+
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        f.addComponent(ctnSaisie);
+        f.addComponent(mCtnPrieres);
         f.addComponent(new Label());
         f.addComponent(ctnChoix);
         f.addComponent(ctnFichierSon);
@@ -167,50 +168,41 @@ public class MenuAlerts extends Menu {
                 boolean contenuOk = true;
 
                 try {
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sAlertSobh, Integer.toString(
-                                    StringOutilClient.getValeurBooleenne(mAlerterSobh.isSelected())));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertSobh, Integer.toString(
+                            StringOutilClient.getValeurBooleenne(mAlerterSobh.isSelected())));
 
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sAlertDohr, Integer.toString(
-                                    StringOutilClient.getValeurBooleenne(mAlerterDohr.isSelected())));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertDohr, Integer.toString(
+                            StringOutilClient.getValeurBooleenne(mAlerterDohr.isSelected())));
 
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sAlertAsr, Integer.toString(
-                                    StringOutilClient.getValeurBooleenne(mAlerterAsr.isSelected())));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertAsr, Integer.toString(
+                            StringOutilClient.getValeurBooleenne(mAlerterAsr.isSelected())));
 
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sAlertMaghreb, Integer.toString(
-                                    StringOutilClient.getValeurBooleenne(mAlerterMaghreb.isSelected())));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertMaghreb, Integer.toString(
+                            StringOutilClient.getValeurBooleenne(mAlerterMaghreb.isSelected())));
 
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sAlertIshaa, Integer.toString(
-                                    StringOutilClient.getValeurBooleenne(mAlerterIshaa.isSelected())));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertIshaa, Integer.toString(
+                            StringOutilClient.getValeurBooleenne(mAlerterIshaa.isSelected())));
 
                     if (mChoixAlerte.getSelectedIndex() == 0) {
-                        ServiceFactory.getFactory().getPreferences()
-                                            .set(Preferences.sAlertMode, Preferences.MODE_NONE);
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertMode, Preferences.MODE_NONE);
                     } else if (mChoixAlerte.getSelectedIndex() == 1) {
-                        ServiceFactory.getFactory().getPreferences()
-                                            .set(Preferences.sAlertMode, Preferences.MODE_SONG);
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertMode, Preferences.MODE_SONG);
                     } else if (mChoixAlerte.getSelectedIndex() == 2) {
-                        ServiceFactory.getFactory().getPreferences()
-                                            .set(Preferences.sAlertMode, Preferences.MODE_VIBRATE);
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertMode, Preferences.MODE_FLASH);
                     }
 
-                    ServiceFactory.getFactory().getPreferences()
-                                            .set(Preferences.sAlertFile, mFichierSon.getText());
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertFile, mFichierSon.getText());
 
                     if (mChoixAlerte.getSelectedIndex() == 1
-                         && StringOutilClient.isEmpty(mFichierSon.getText())) {
-                         contenuOk = false;
+                            && StringOutilClient.isEmpty(mFichierSon.getText())) {
+                        contenuOk = false;
                     }
 
                     if (!contenuOk) {
                         // Message d'erreur
                         Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                         Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorSongAlertNoFile"), okCommand,
-                                new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                                new Command[]{okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                                 CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                         return;
                     }
@@ -219,13 +211,12 @@ public class MenuAlerts extends Menu {
                     ServiceFactory.getFactory().getPreferences().save();
 
                     // On rafraîchit l'affichage des prières
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
+                    ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
+                            new Command[]{okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
                     f.showBack();
@@ -239,50 +230,6 @@ public class MenuAlerts extends Menu {
         initialiserInfosSelections();
     }
 
-    private void jouerMusique(String url) {
-        String musicEncoding = StringOutilClient.EMPTY;
-
-        if (url.endsWith("wav")) {
-             musicEncoding = "audio/x-wav";
-        } else {
-            musicEncoding = "audio/mp3";
-        }
-
-        try {
-            // loads the InputStream for the sound
-            FileConnection fc = (FileConnection)Connector.open(url, Connector.READ);
-            InputStream inputStream = (InputStream)fc.openInputStream();
-            System.out.println(inputStream.toString());
-
-            // create the standard Player
-            final Player musicPlayer = Manager.createPlayer(inputStream, musicEncoding);
-            musicPlayer.prefetch();
-
-            // add player listener to access sound events
-            //musicPlayer.addPlayerListener(this);
-
-            // The set occurs twice to prevent sound spikes at the very
-            // beginning of the sound.
-            VolumeControl volumeControl =
-               (VolumeControl) musicPlayer.getControl("VolumeControl");
-            volumeControl.setLevel(100);
-
-            // finally start the piece of music
-            musicPlayer.start();
-
-            // set the volume once more
-            volumeControl = (VolumeControl) musicPlayer.getControl( "VolumeControl" );
-            volumeControl.setLevel(100);
-
-            // finally, delete the input stream to save on resources
-            inputStream.close();
-            inputStream = null;
-
-        } catch (Exception exc) {
-            exc.printStackTrace();
-        }
-    }
-
     private void renvoyerUrlFichier(final Form pFormCourante) {
 
         // Création de l'arbre
@@ -293,6 +240,7 @@ public class MenuAlerts extends Menu {
         final FileTreeModel model = new FileTreeModel();
 
         final Tree tree = new Tree(model) {
+
             protected String childToDisplayLabel(Object child) {
                 if (((String) child).endsWith("/")) {
                     return ((String) child).substring(((String) child).lastIndexOf('/', ((String) child).length() - 2));
@@ -307,11 +255,13 @@ public class MenuAlerts extends Menu {
         treeForm.setScrollable(false);
         treeForm.addComponent(BorderLayout.CENTER, tree);
         Command back = new Command(RESSOURCE.get("Command.Back")) {
+
             public void actionPerformed(ActionEvent evt) {
                 pFormCourante.showBack();
             }
         };
         Command ok = new Command(RESSOURCE.get("Command.Select")) {
+
             public void actionPerformed(ActionEvent evt) {
 
                 boolean ok = true;
@@ -337,15 +287,16 @@ public class MenuAlerts extends Menu {
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorSongFileFormat"),
                             okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                            new Command[]{okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                 }
             }
         };
 
         tree.addLeafListener(new ActionListener() {
-           public void actionPerformed(ActionEvent evt) {
-                
+
+            public void actionPerformed(ActionEvent evt) {
+
             }
         });
 
@@ -368,25 +319,18 @@ public class MenuAlerts extends Menu {
 
         try {
             isSobhSelected = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sAlertSobh)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertSobh)));
             isDohrSelected = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sAlertDohr)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertDohr)));
             isAsrSelected = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sAlertAsr)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertAsr)));
             isMaghrebSelected = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sAlertMaghreb)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertMaghreb)));
             isIshaaSelected = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sAlertIshaa)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertIshaa)));
 
-            urlFichier = ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sAlertFile);
-            mode = ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sAlertMode);
+            urlFichier = ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertFile);
+            mode = ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertMode);
         } catch (Exception exc) {
             exc.printStackTrace();
         }
@@ -398,15 +342,40 @@ public class MenuAlerts extends Menu {
         mAlerterIshaa.setSelected(isIshaaSelected);
 
         mFichierSon.setText(urlFichier);
+
         if (Preferences.MODE_NONE.equals(mode)) {
             mChoixAlerte.setSelectedIndex(0);
         } else if (Preferences.MODE_SONG.equals(mode)) {
             mChoixAlerte.setSelectedIndex(1);
-        } if (Preferences.MODE_VIBRATE.equals(mode)) {
+        } else if (Preferences.MODE_FLASH.equals(mode)) {
             mChoixAlerte.setSelectedIndex(2);
         } else {
             // Par défaut si problème
             mChoixAlerte.setSelectedIndex(0);
+        }
+    }
+
+    private void handlerChoixAlerte(int index) {
+
+        if (index == 0) {
+            // Aucun
+            mCtnPrieres.setVisible(false);
+
+            mChoixFichier.setVisible(false);
+            mFichierSon.setVisible(false);
+
+        } else if (index == 1) {
+            // Son
+            mCtnPrieres.setVisible(true);
+
+            mChoixFichier.setVisible(true);
+            mFichierSon.setVisible(true);
+        } else if (index == 2) {
+            // Flash
+            mCtnPrieres.setVisible(true);
+
+            mChoixFichier.setVisible(false);
+            mFichierSon.setVisible(false);
         }
     }
 
@@ -428,6 +397,7 @@ public class MenuAlerts extends Menu {
     }
 
     public class FichierSon {
+
         public String mFichierSon;
 
         public String getFichierSon() {

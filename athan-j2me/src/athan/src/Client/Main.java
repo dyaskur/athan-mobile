@@ -186,7 +186,10 @@ public class Main extends javax.microedition.midlet.MIDlet
                 sTimer = new ThreadTimer();
             }
         }
-        sTimer.start();
+        
+        if (!sTimer.isAlive()) {
+            sTimer.start();
+        }
 
         if (sMainForm != null) {
             sMainForm.cacherCmdHeureCourante();
@@ -219,6 +222,7 @@ public class Main extends javax.microedition.midlet.MIDlet
                 // On minimise l'application
                 boolean retour = Display.getInstance().minimizeApplication();
                 if (!retour) {
+                    System.out.println("javax minimized");
                     javax.microedition.lcdui.Display.getDisplay(this).setCurrent(null);
                 }
 
