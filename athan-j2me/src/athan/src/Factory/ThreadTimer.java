@@ -27,8 +27,6 @@ public class ThreadTimer extends Thread {
                 ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, false);
 
                 Thread.sleep(DUREE_CYCLE);
-
-                System.out.println("Calcul timer\n");
             }
 
         } catch (Exception exc) {

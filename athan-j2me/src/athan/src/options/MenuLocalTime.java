@@ -35,6 +35,9 @@ public class MenuLocalTime extends Menu {
     private static final int HAUTEUR_LABEL = 18;
     private static final int HAUTEUR_LABEL_TOUS = 60;
 
+    final ResourceReader RESSOURCE = ServiceFactory.getFactory()
+                            .getResourceReader();
+
     private Command mOK;
 
     private TextField mDecalage;
@@ -55,8 +58,6 @@ public class MenuLocalTime extends Menu {
     }
 
     protected void execute(final Form f) {
-        final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                            .getResourceReader();
 
         applyTactileSettings(f);
 

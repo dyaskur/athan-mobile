@@ -161,10 +161,8 @@ public class Main extends javax.microedition.midlet.MIDlet
             if (sTimer != null) {
                 //sTimer = null;
                 try {
-                    System.out.println("je veux mourir...");
                     sTimer.join();
                     sTimer = null;
-                    System.out.println("je suis mort !");
                 } catch (InterruptedException ex) {
                     //ex.printStackTrace();
                 }
@@ -222,7 +220,6 @@ public class Main extends javax.microedition.midlet.MIDlet
                 // On minimise l'application
                 boolean retour = Display.getInstance().minimizeApplication();
                 if (!retour) {
-                    System.out.println("javax minimized");
                     javax.microedition.lcdui.Display.getDisplay(this).setCurrent(null);
                 }
 

@@ -92,7 +92,7 @@ public abstract class Menu
     /**
      * Replace les commandes principales (retour et help)
      * en fin de panel menu, afin qu'au moins la commande de
-     * retour soit la (derniÃ¨re) plus visible
+     * retour soit la (dernière) plus visible
      */
     public void replacerCommandesPrincipales() {
 
