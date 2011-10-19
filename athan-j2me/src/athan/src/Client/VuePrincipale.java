@@ -25,9 +25,6 @@ import java.util.Date;
  */
 public class VuePrincipale extends AthanConstantes {
 
-    /** Intervalle en ms entre 1 heure */
-    private static final int INTERVALLE_HEURE = 3600 * 1000;
-
     private PrieresJournee mPrieresJournee;
     private boolean mProchainePriereRenseignee;
     private String[] mHorairesPrieres;
@@ -78,17 +75,17 @@ public class VuePrincipale extends AthanConstantes {
                                                 new Integer(SalaahTimeCalculator.getTimeZone() + decalageHoraire));
 
                 // Simulation
-                Calendar calsimul = Calendar.getInstance();
-                calsimul.setTime(pDate);
-                String hh = calsimul.get(Calendar.HOUR_OF_DAY) + "";
-                if (calsimul.get(Calendar.HOUR_OF_DAY) < 10) {
-                    hh = "0" + hh;
-                }
-                String mm = calsimul.get(Calendar.MINUTE) + 1 + "";
-                if (calsimul.get(Calendar.MINUTE) + 1 < 10) {
-                    mm = "0" + mm;
-                }
-                mHorairesPrieres[1] = hh + ":" + mm;
+//                Calendar calsimul = Calendar.getInstance();
+//                calsimul.setTime(pDate);
+//                String hh = calsimul.get(Calendar.HOUR_OF_DAY) + "";
+//                if (calsimul.get(Calendar.HOUR_OF_DAY) < 10) {
+//                    hh = "0" + hh;
+//                }
+//                String mm = calsimul.get(Calendar.MINUTE) + 1 + "";
+//                if (calsimul.get(Calendar.MINUTE) + 1 < 10) {
+//                    mm = "0" + mm;
+//                }
+//                mHorairesPrieres[1] = hh + ":" + mm;
 
                 mPrieresJournee = new PrieresJournee(
                          pDate,

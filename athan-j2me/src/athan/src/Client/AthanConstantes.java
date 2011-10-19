@@ -100,6 +100,7 @@ public class AthanConstantes {
     public static final String UIID_LABEL_PRAYER_NAME = "LabelPrayerName";
     public static final String UIID_LABEL_CURRENT_CITY = "LabelCurrentCity";
     public static final String UIID_LABEL_INFO_NAME = "LabelInfoName";
+    public static final String UIID_LABEL_COMPASS_INFO = "LabelCompassInfo";
     public static final String UIID_LABEL_PRAYER_NAME_RINGING = "LabelRingingPrayerName";
 
     public static final String FONT_LABEL_NEXT_PRAYER = "NextPrayer";
