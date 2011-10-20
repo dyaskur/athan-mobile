@@ -25,18 +25,15 @@ import java.util.Date;
  * 
  * @author Saad BENBOUZID
  */
-public class MenuApplicationLanguage extends Menu {
+public class MenuLanguage extends Menu {
 
     private static final int HAUTEUR_LABEL = 23;
     private static final int HAUTEUR_LABEL_TOUS = 25;
-
     private Command mOK;
-
     private ComboBox mLangCmb;
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuLanguage();
     }
 
     protected String getIconBaseName() {
@@ -44,13 +41,11 @@ public class MenuApplicationLanguage extends Menu {
     }
 
     protected String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("MenuApplicationLanguage");
+        return ServiceFactory.getFactory().getResourceReader().get("MenuApplicationLanguage");
     }
 
     protected void execute(final Form f) {
-        final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                            .getResourceReader();
+        final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
         applyTactileSettings(f);
 
@@ -76,7 +71,7 @@ public class MenuApplicationLanguage extends Menu {
 
         // Gestion du comportement (ergonomie)
         if (!Main.isTactile()) {
-           //mOK.setFocusable(true);
+            //mOK.setFocusable(true);
         }
 
         mOK = new Command(RESSOURCE.get("Command.OK")) {
@@ -88,54 +83,50 @@ public class MenuApplicationLanguage extends Menu {
 
                 try {
                     int i_lang = mLangCmb.getSelectedIndex();
-                    
+
                     if (i_lang == 0) {
                         s_lang = Preferences.LANGUE_EN;
                     } else if (i_lang == 1) {
                         s_lang = Preferences.LANGUE_FR;
                     }
-                    
-                } catch(Exception exc) {
+
+                } catch (Exception exc) {
                     contenuOk = false;
                 }
 
                 if (!contenuOk) {
-                    final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                                    .getResourceReader();
+                    final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
                     // Message d'erreur
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorLangApplicationParameters"),
                             okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                            new Command[]{okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                     return;
                 }
 
                 try {
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sLangue, s_lang);
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sLangue, s_lang);
 
                     // On enregistre les paramètres dans la mémoire du téléphone
-                    ServiceFactory.getFactory().getPreferences()
-                            .save();
+                    ServiceFactory.getFactory().getPreferences().save();
 
                     // On rafraîchit l'affichage des prières
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
+                    ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     /*
                     // On recharge les paramètres linguistiques de l'application
                     ServiceFactory.getFactory().setResourceReader(
-                        new ResourceReader(ServiceFactory.getFactory()
-                                                            .getPreferences())
+                    new ResourceReader(ServiceFactory.getFactory()
+                    .getPreferences())
                     );
-                    */
+                     */
 
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("warningLangChanging"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_ERROR,
+                            new Command[]{okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
                     f.showBack();
@@ -154,8 +145,7 @@ public class MenuApplicationLanguage extends Menu {
         String lLang = Preferences.LANGUE_EN;
 
         try {
-            lLang = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sLangue);
+            lLang = ServiceFactory.getFactory().getPreferences().get(Preferences.sLangue);
 
         } catch (Exception exc) {
             exc.printStackTrace();

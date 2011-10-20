@@ -34,23 +34,17 @@ public class MenuLocalTime extends Menu {
 
     private static final int HAUTEUR_LABEL = 18;
     private static final int HAUTEUR_LABEL_TOUS = 60;
-
-    final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                            .getResourceReader();
-
+    final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
     private Command mOK;
-
     private TextField mDecalage;
     private ComboBox mFormatHoraire;
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuLocalTime();
     }
 
     protected String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("MenuLocalTime");
+        return ServiceFactory.getFactory().getResourceReader().get("MenuLocalTime");
     }
 
     protected String getIconBaseName() {
@@ -85,7 +79,7 @@ public class MenuLocalTime extends Menu {
 
         // Gestion du comportement (ergonomie)
         if (!Main.isTactile()) {
-           //mOK.setFocusable(true);
+            //mOK.setFocusable(true);
         }
 
         mOK = new Command(RESSOURCE.get("Command.OK")) {
@@ -104,41 +98,36 @@ public class MenuLocalTime extends Menu {
                     } else {
                         throw new AthanException("empty");
                     }
-                } catch(Exception exc) {
+                } catch (Exception exc) {
                     contenuOk = false;
                 }
 
                 if (!contenuOk) {
-                    final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                                    .getResourceReader();
+                    final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
                     // Message d'erreur
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorTimeLagParameters"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                            new Command[]{okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                     return;
                 }
 
                 try {
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sDecalageHoraire, Integer.toString(decalage));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sDecalageHoraire, Integer.toString(decalage));
 
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sFormatHoraire, Integer.toString(mFormatHoraire.getSelectedIndex()));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sFormatHoraire, Integer.toString(mFormatHoraire.getSelectedIndex()));
 
                     // On enregistre les paramètres dans la mémoire du téléphone
-                    ServiceFactory.getFactory().getPreferences()
-                            .save();
+                    ServiceFactory.getFactory().getPreferences().save();
 
                     // On rafraîchit l'affichage des prières
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
+                    ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
+                            new Command[]{okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
                     f.showBack();
@@ -152,17 +141,15 @@ public class MenuLocalTime extends Menu {
         initialiserInfosDecalage();
         initialiserClaviers();
     }
-    
+
     private void initialiserInfosDecalage() {
 
         String lDecalage = "0";
         int lFormatHoraire = 0;
 
         try {
-            lDecalage = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sDecalageHoraire);
-            lFormatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sFormatHoraire));
+            lDecalage = ServiceFactory.getFactory().getPreferences().get(Preferences.sDecalageHoraire);
+            lFormatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sFormatHoraire));
         } catch (Exception exc) {
             exc.printStackTrace();
         }

@@ -38,28 +38,23 @@ public class MenuCalculationMethod extends Menu {
 
     private static final int HAUTEUR_LABEL = 20;
     private static final int HAUTEUR_LABEL_TOUS = 50;
-
     private Command mOK;
-
     private ComboBox mChoixMethode;
     private ComboBox mImsakSelector;
     private ComboBox mMaghrebSelector;
     private ComboBox mIshaaSelector;
     private ComboBox mAsrJuridiqueMethode;
-
     private TextField mFajrAngle;
     private TextField mImsakValue;
     private TextField mMaghrebValue;
     private TextField mIshaaValue;
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuCalculationMethod();
     }
 
     protected String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("MenuCalculationMethod");
+        return ServiceFactory.getFactory().getResourceReader().get("MenuCalculationMethod");
     }
 
     protected String getIconBaseName() {
@@ -67,8 +62,8 @@ public class MenuCalculationMethod extends Menu {
     }
 
     private TableLayout.Constraint getCtnLayoutParams(TableLayout pTB,
-                                                    int pPourcentage,
-                                                    int pHorizontalSpan) {
+            int pPourcentage,
+            int pHorizontalSpan) {
         TableLayout.Constraint contrainte = pTB.createConstraint();
         if (pPourcentage == 100) {
             //contrainte.setHeightPercentage(10);
@@ -92,7 +87,7 @@ public class MenuCalculationMethod extends Menu {
             mIshaaSelector.setEnabled(false);
             mIshaaValue.setEditable(false);
 
-            switch(mChoixMethode.getSelectedIndex()) {
+            switch (mChoixMethode.getSelectedIndex()) {
                 // Jafari
                 case 0:
                     mFajrAngle.setText("16");
@@ -186,8 +181,7 @@ public class MenuCalculationMethod extends Menu {
     }
 
     protected void execute(final Form f) {
-        final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                            .getResourceReader();
+        final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
         applyTactileSettings(f);
 
@@ -197,15 +191,13 @@ public class MenuCalculationMethod extends Menu {
         Label lLabelAsrMethod = new Label(RESSOURCE.get("AsrJuristicMethod"));
         editerLabelCombo(lLabelAsrMethod);
 
-        String [] imsakValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesBF") };
-        String [] maghrebValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAS") };
-        String [] ishaaValues = { RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAM") };
+        String[] imsakValues = {RESSOURCE.get("Angle"), RESSOURCE.get("MinutesBF")};
+        String[] maghrebValues = {RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAS")};
+        String[] ishaaValues = {RESSOURCE.get("Angle"), RESSOURCE.get("MinutesAM")};
 
-        if (ServiceFactory.getFactory().getPreferences()
-                .getLangue().equals(Preferences.LANGUE_EN)) {
+        if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
             mChoixMethode = new ComboBox(CALCULATION_METHOD_EN);
-        } else if (ServiceFactory.getFactory().getPreferences()
-                .getLangue().equals(Preferences.LANGUE_FR)) {
+        } else if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_FR)) {
             mChoixMethode = new ComboBox(CALCULATION_METHOD_FR);
         } else {
             // Par défaut
@@ -253,30 +245,30 @@ public class MenuCalculationMethod extends Menu {
         lCtnParams.setLayout(tblLayoutParams);
 
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 60, 2),
-                                    retournerLabelParam(RESSOURCE.get("fajrAngle")));
+                retournerLabelParam(RESSOURCE.get("fajrAngle")));
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 40, 1),
-                                    mFajrAngle);
+                mFajrAngle);
 
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
-                                    retournerLabelParam(RESSOURCE.get("imsakParam")));
+                retournerLabelParam(RESSOURCE.get("imsakParam")));
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
-                                    mImsakSelector);
+                mImsakSelector);
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 20, 1),
-                                    mImsakValue);
+                mImsakValue);
 
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
-                                    retournerLabelParam(RESSOURCE.get("maghrebParam")));
+                retournerLabelParam(RESSOURCE.get("maghrebParam")));
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
-                                    mMaghrebSelector);
+                mMaghrebSelector);
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 20, 1),
-                                    mMaghrebValue);
+                mMaghrebValue);
 
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 30, 1),
-                                    retournerLabelParam(RESSOURCE.get("ishaaParam")));
+                retournerLabelParam(RESSOURCE.get("ishaaParam")));
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 50, 1),
-                                    mIshaaSelector);
+                mIshaaSelector);
         lCtnParams.addComponent(getCtnLayoutParams(tblLayoutParams, 20, 1),
-                                    mIshaaValue);
+                mIshaaValue);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         f.addComponent(ctnSaisie);
@@ -326,55 +318,44 @@ public class MenuCalculationMethod extends Menu {
                         } else {
                             throw new AthanException("Empty values");
                         }
-                    } catch(Exception exc) {
+                    } catch (Exception exc) {
                         contenuOk = false;
                     }
                 }
 
                 if (!contenuOk) {
-                    final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                                    .getResourceReader();
+                    final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
                     // Message d'erreur
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorCalculationParameters"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                            new Command[]{okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                 }
 
                 try {
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sCalculationMethod, Integer.toString(calculationMethod));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sCalculationMethod, Integer.toString(calculationMethod));
 
                     if (calculationMethod == CalculationMethods.Custom.getValue()) {
-                        ServiceFactory.getFactory().getPreferences()
-                                .set(Preferences.sCustomFajrAngle, Double.toString(fajrAngle));
-                        ServiceFactory.getFactory().getPreferences()
-                                .set(Preferences.sCustomImsakSelector, Integer.toString(imsakSelector));
-                        ServiceFactory.getFactory().getPreferences()
-                                .set(Preferences.sCustomImsakValue, Double.toString(imsakValue));
-                        ServiceFactory.getFactory().getPreferences()
-                                .set(Preferences.sCustomMaghrebSelector, Integer.toString(maghrebSelector));
-                        ServiceFactory.getFactory().getPreferences()
-                                .set(Preferences.sCustomMaghrebValue, Double.toString(maghrebValue));
-                        ServiceFactory.getFactory().getPreferences()
-                                .set(Preferences.sCustomIshaaSelector, Integer.toString(ishaaSelector));
-                        ServiceFactory.getFactory().getPreferences()
-                                .set(Preferences.sCustomIshaaValue, Double.toString(ishaaValue));
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomFajrAngle, Double.toString(fajrAngle));
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomImsakSelector, Integer.toString(imsakSelector));
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomImsakValue, Double.toString(imsakValue));
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomMaghrebSelector, Integer.toString(maghrebSelector));
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomMaghrebValue, Double.toString(maghrebValue));
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomIshaaSelector, Integer.toString(ishaaSelector));
+                        ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomIshaaValue, Double.toString(ishaaValue));
                     }
 
                     // On enregistre les paramètres dans la mémoire du téléphone
-                    ServiceFactory.getFactory().getPreferences()
-                            .save();
+                    ServiceFactory.getFactory().getPreferences().save();
 
                     // On rafraîchit l'affichage des prières
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
+                    ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
+                            new Command[]{okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
                     f.showBack();
@@ -395,7 +376,7 @@ public class MenuCalculationMethod extends Menu {
 
     private boolean estMinutesCorrect(double pMinutes) {
         return (pMinutes - Math.floor(pMinutes) == 0.0)
-                    &&  pMinutes >= 0 && pMinutes <= 120;
+                && pMinutes >= 0 && pMinutes <= 120;
     }
 
     private void editerParametrerLabel(TextArea pTextArea) {
@@ -413,10 +394,8 @@ public class MenuCalculationMethod extends Menu {
         int lCalcMethod = 0;
 
         try {
-            lAsrMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sMethodeJuridiqueAsr));
-            lCalcMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCalculationMethod));
+            lAsrMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sMethodeJuridiqueAsr));
+            lCalcMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sCalculationMethod));
         } catch (Exception exc) {
             exc.printStackTrace();
         }
@@ -438,20 +417,13 @@ public class MenuCalculationMethod extends Menu {
         String lIshaaValue = "0";
 
         try {
-            lFajrValue = ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCustomFajrAngle);
-            lImsakSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCustomImsakSelector));
-            lImsakValue = ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCustomImsakValue);
-            lMaghrebSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCustomMaghrebSelector));
-            lMaghrebValue = ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCustomMaghrebValue);
-            lIshaaSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCustomIshaaSelector));
-            lIshaaValue = ServiceFactory.getFactory().getPreferences()
-                            .get(Preferences.sCustomIshaaValue);
+            lFajrValue = ServiceFactory.getFactory().getPreferences().get(Preferences.sCustomFajrAngle);
+            lImsakSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sCustomImsakSelector));
+            lImsakValue = ServiceFactory.getFactory().getPreferences().get(Preferences.sCustomImsakValue);
+            lMaghrebSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sCustomMaghrebSelector));
+            lMaghrebValue = ServiceFactory.getFactory().getPreferences().get(Preferences.sCustomMaghrebValue);
+            lIshaaSelector = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sCustomIshaaSelector));
+            lIshaaValue = ServiceFactory.getFactory().getPreferences().get(Preferences.sCustomIshaaValue);
 
         } catch (Exception exc) {
             exc.printStackTrace();

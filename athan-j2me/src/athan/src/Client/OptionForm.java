@@ -5,13 +5,11 @@ package athan.src.Client;
 
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
-import athan.src.Factory.ThreadTimer;
 import athan.src.options.MenuCompass;
 import athan.src.options.MenuAlerts;
 import athan.src.options.MenuLocation;
 import athan.src.options.MenuLocalTime;
-import athan.src.options.MenuCalendarCorrection;
-import athan.src.options.MenuApplicationLanguage;
+import athan.src.options.MenuLanguage;
 import athan.src.options.MenuCalculationMethod;
 import athan.src.options.MenuPrayers;
 import athan.src.options.MenuSettingsSummary;
@@ -64,8 +62,7 @@ public class OptionForm extends Form
         new MenuLocation(),
         new MenuCompass(),
         new MenuLocalTime(),
-        new MenuCalendarCorrection(),
-        new MenuApplicationLanguage(),
+        new MenuLanguage(),
         new MenuCalculationMethod(),
         new MenuPrayers(),
         new MenuSettingsSummary()

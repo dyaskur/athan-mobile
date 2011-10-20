@@ -18,9 +18,7 @@ import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
 import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
-import com.sun.lwuit.Image;
 import com.sun.lwuit.Label;
-import com.sun.lwuit.List;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.animations.CommonTransitions;
 import com.sun.lwuit.events.ActionEvent;
@@ -30,13 +28,7 @@ import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.layouts.GridLayout;
 import com.sun.lwuit.tree.Tree;
-import java.io.InputStream;
 import java.util.Date;
-import javax.microedition.io.Connector;
-import javax.microedition.io.file.FileConnection;
-import javax.microedition.media.Manager;
-import javax.microedition.media.Player;
-import javax.microedition.media.control.VolumeControl;
 
 /**
  * Menu réglages des alarmes
@@ -60,13 +52,11 @@ public class MenuAlerts extends Menu {
     private TextField mFichierSon;
     private Button mChoixFichier;
     private Command mOK;
-
     private Container mCtnPrieres;
-
     private final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader().get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuAlerts();
     }
 
     protected String getName() {
@@ -156,7 +146,7 @@ public class MenuAlerts extends Menu {
         ctnFichierSon.addComponent(BorderLayout.EAST, mChoixFichier);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        
+
         f.addComponent(ctnChoix);
         f.addComponent(ctnFichierSon);
         f.addComponent(new Label());
@@ -297,7 +287,6 @@ public class MenuAlerts extends Menu {
         tree.addLeafListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
-
             }
         });
 

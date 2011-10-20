@@ -31,25 +31,20 @@ public class MenuPrayers extends Menu {
 
     private static final int HAUTEUR_LABEL = 22;
     private static final int HAUTEUR_LABEL_TOUS = 70;
-
     private CheckBox mImsak;
     private CheckBox mChourouk;
-
     private Command mOK;
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuPrayers();
     }
 
     protected String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("MenuPrayers");
+        return ServiceFactory.getFactory().getResourceReader().get("MenuPrayers");
     }
 
     protected void execute(final Form f) {
-        final ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                            .getResourceReader();
+        final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
         applyTactileSettings(f);
 
@@ -82,26 +77,22 @@ public class MenuPrayers extends Menu {
             public void actionPerformed(ActionEvent ae) {
 
                 try {
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sDisplayImsak, Integer.toString(
-                                    StringOutilClient.getValeurBooleenne(mImsak.isSelected())));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sDisplayImsak, Integer.toString(
+                            StringOutilClient.getValeurBooleenne(mImsak.isSelected())));
 
-                    ServiceFactory.getFactory().getPreferences()
-                        .set(Preferences.sDisplayChourouk, Integer.toString(
-                                    StringOutilClient.getValeurBooleenne(mChourouk.isSelected())));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sDisplayChourouk, Integer.toString(
+                            StringOutilClient.getValeurBooleenne(mChourouk.isSelected())));
 
                     // On enregistre les paramètres dans la mémoire du téléphone
-                    ServiceFactory.getFactory().getPreferences()
-                            .save();
+                    ServiceFactory.getFactory().getPreferences().save();
 
                     // On rafraîchit l'affichage des prières
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
+                    ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
                     Command okCommand = new Command(RESSOURCE.get("Command.OK"));
                     Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                            new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
+                            new Command[]{okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
                     f.showBack();
@@ -139,11 +130,9 @@ public class MenuPrayers extends Menu {
 
         try {
             isImsakSelected = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sDisplayImsak)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sDisplayImsak)));
             isChouroukSelected = StringOutilClient.getValeurBooleenne(
-                    Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sDisplayChourouk)));
+                    Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sDisplayChourouk)));
         } catch (Exception exc) {
             exc.printStackTrace();
         }

@@ -28,16 +28,14 @@ public class MenuCompass extends Menu {
     private static final double ERREUR_CALCUL = -1.0;
     private static final double LATITUDE_MECQUE = 21.42667;
     private static final double LONGITUDE_MECQUE = 39.82611;
-    
     private static final int INDEX_RESULTAT_ANGLE = 0;
     private static final int INDEX_RESULTAT_DISTANCE = 1;
-
     private Label mLabelDistance;
     private Label mLabelAngle;
     private final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader().get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuCompass();
     }
 
     protected String getName() {

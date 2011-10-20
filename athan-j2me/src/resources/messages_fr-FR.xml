@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings version="0.1">
+  <!-- Contents -->
+  <contenu_about>
+  Saad Benbouzid © 2010-2011
+  Compilé avec J2ME
+  </contenu_about>
+  <contenu_consignesGeocoding>
+  - Entrez les informations de localisation et laissez blancs les paramètres que vous ne souhaitez pas renseigner.
+  - Au moins un champ doit être renseigné.
+  - Mieux les champs sont remplis, meilleures seront vos chances d'obtenir le bon résultat.
+  </contenu_consignesGeocoding>
+  <helpMenuAlerts>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuAlerts>
+  <helpMenuCalculationMethod>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuCalculationMethod>
+  <helpMenuCompass>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuCompass>
+  <helpMenuLanguage>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuLanguage>
+  <helpMenuLocalTime>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuLocalTime>
+  <helpMenuLocation>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuLocation>
+  <helpMenuPrayers>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuPrayers>
+  <helpMenuSettingsSummary>
+  Help menu TO WRITE
+  // TODO
+  </helpMenuSettingsSummary>
+  <!-- Errors -->
+</strings>

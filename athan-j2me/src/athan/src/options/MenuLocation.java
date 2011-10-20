@@ -37,35 +37,27 @@ public class MenuLocation extends Menu {
 
     private static final int HAUTEUR_LABEL = 15;
     private static final int HAUTEUR_LABEL_TOUS = 70;
-
     private TextField mTextFieldNomVille;
     private TextField mTextFieldNomRegion;
     private TextField mTextFieldNomPays;
     private TextField mTextFieldLat;
     private TextField mTextFieldLng;
-
     private Command mGpsSearch;
     private Command mApiSearch;
     private Command mManualSearch;
-
     private Command mOK;
     private Command mAnnuler;
-
     private boolean utiliserGPS = false;
-    
-    private ResourceReader RESSOURCE = ServiceFactory.getFactory()
-                            .getResourceReader();
+    private ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuLocation();
     }
 
     protected String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("MenuLocation");
+        return ServiceFactory.getFactory().getResourceReader().get("MenuLocation");
     }
-    
+
     protected String getIconBaseName() {
         return MENU_CHOISIR_VILLE;
     }
@@ -116,27 +108,27 @@ public class MenuLocation extends Menu {
         editerTextField(mTextFieldNomVille, TextField.RIGHT);
 
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 100, 4),
-                                    new Label());
+                new Label());
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 30, 1),
-                                    lLabelLatLng);
+                lLabelLatLng);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 34, 1),
-                                    mTextFieldLat);
+                mTextFieldLat);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 2, 1),
-                                    new Label());
+                new Label());
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 34, 1),
-                                    mTextFieldLng);
+                mTextFieldLng);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 30, 1),
-                                    lLabelNomVille);
+                lLabelNomVille);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 70, 3),
-                                    mTextFieldNomVille);
+                mTextFieldNomVille);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 30, 1),
-                                    lLabelNomRegion);
+                lLabelNomRegion);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 70, 3),
-                                    mTextFieldNomRegion);
+                mTextFieldNomRegion);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 30, 1),
-                                    lLabelNomPays);
+                lLabelNomPays);
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 70, 3),
-                                    mTextFieldNomPays);
+                mTextFieldNomPays);
         ctnInfosLocalisation.setPreferredH(HAUTEUR_LABEL_TOUS);
 
         mGpsSearch = new Command(RESSOURCE.get("GPSSearch")) {
@@ -145,21 +137,21 @@ public class MenuLocation extends Menu {
                 handlerGpsSearch(f);
             }
         };
-        
+
         mApiSearch = new Command(RESSOURCE.get("CitySearch")) {
 
             public void actionPerformed(ActionEvent ae) {
                 handlerApiSearch(f);
             }
         };
-        
+
         mManualSearch = new Command(RESSOURCE.get("ManualSearch")) {
 
             public void actionPerformed(ActionEvent ae) {
                 changerModeEdition(true, f);
             }
         };
-        
+
         mOK = new Command(RESSOURCE.get("Command.OK")) {
 
             public void actionPerformed(ActionEvent ae) {
@@ -169,7 +161,7 @@ public class MenuLocation extends Menu {
                 }
             }
         };
-        
+
         mAnnuler = new Command(RESSOURCE.get("Command.Cancel")) {
 
             public void actionPerformed(ActionEvent ae) {
@@ -183,11 +175,11 @@ public class MenuLocation extends Menu {
 
         // Gestion du comportement (ergonomie)
         if (!Main.isTactile()) {
-           mTextFieldNomVille.setFocusable(true);
-           mTextFieldNomRegion.setFocusable(true);
-           mTextFieldNomPays.setFocusable(true);
-           mTextFieldLat.setFocusable(true);
-           mTextFieldLng.setFocusable(true);
+            mTextFieldNomVille.setFocusable(true);
+            mTextFieldNomRegion.setFocusable(true);
+            mTextFieldNomPays.setFocusable(true);
+            mTextFieldLat.setFocusable(true);
+            mTextFieldLng.setFocusable(true);
         }
 
         changerModeEdition(false, f);
@@ -266,59 +258,59 @@ public class MenuLocation extends Menu {
         lTextFieldNomPays.setRows(1);
 
         final ComboBox lCbIndicatif = new ComboBox(INDICATIF_PAYS);
-        if (ServiceFactory.getFactory().getPreferences().getLangue()
-                .equals(Preferences.LANGUE_EN)) {
+        if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
             lCbIndicatif.setSelectedIndex(2, true);
-        } else if (ServiceFactory.getFactory().getPreferences().getLangue()
-                .equals(Preferences.LANGUE_EN)) {
+        } else if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
             lCbIndicatif.setSelectedIndex(4, true);
         } else {
             lCbIndicatif.setSelectedIndex(2, true);
         }
 
         VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomVille,
-            VirtualKeyboard.getVirtualKeyboard(mTextFieldNomVille));
+                VirtualKeyboard.getVirtualKeyboard(mTextFieldNomVille));
         VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomRegion,
-            VirtualKeyboard.getVirtualKeyboard(mTextFieldNomRegion));
+                VirtualKeyboard.getVirtualKeyboard(mTextFieldNomRegion));
         VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomPays,
-            VirtualKeyboard.getVirtualKeyboard(mTextFieldNomPays));
+                VirtualKeyboard.getVirtualKeyboard(mTextFieldNomPays));
 
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lLabelNomVille);
+                lLabelNomVille);
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lTextFieldNomVille);
+                lTextFieldNomVille);
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lLabelNomRegion);
+                lLabelNomRegion);
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lTextFieldNomRegion);
+                lTextFieldNomRegion);
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lLabelNomPays);
+                lLabelNomPays);
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lTextFieldNomPays);
+                lTextFieldNomPays);
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lLabelLanguage);
+                lLabelLanguage);
         grid.addComponent(getCtnLayoutGeocoding(tbGrid, 50, 1),
-                            lCbIndicatif);
+                lCbIndicatif);
 
         //parametersForm.setScrollable(true);
         parametersForm.addComponent(BorderLayout.CENTER, grid);
 
         Command searchCommand = new Command(RESSOURCE.get("Command.Search")) {
+
             public void actionPerformed(ActionEvent evt) {
                 boolean peutChercher = false;
 
                 // Recherche
                 if ((lTextFieldNomVille.getText() != null
                         && lTextFieldNomVille.getText().trim().length() > 0)
-                || (lTextFieldNomRegion.getText() != null
+                        || (lTextFieldNomRegion.getText() != null
                         && lTextFieldNomRegion.getText().trim().length() > 0)
-                || (lTextFieldNomPays.getText() != null
+                        || (lTextFieldNomPays.getText() != null
                         && lTextFieldNomPays.getText().trim().length() > 0)) {
                     peutChercher = true;
                 }
 
                 if (!peutChercher) {
                     Command annulerCommand = new Command(RESSOURCE.get("Command.OK")) {
+
                         public void actionPerformed(ActionEvent evt) {
                             // Fail Parameters
                         }
@@ -326,8 +318,8 @@ public class MenuLocation extends Menu {
 
                     Dialog.show(RESSOURCE.get("GeocodingWindowParametersLackTitle"),
                             RESSOURCE.get("GeocodingWindowParametersLackContent"), annulerCommand,
-                    new Command[] {annulerCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_ERROR,
-                    CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                            new Command[]{annulerCommand}, Dialog.TYPE_INFO, null, TIMEOUT_FENETRE_ERROR,
+                            CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                     return;
                 } else {
                     // On lance la recherche
@@ -343,10 +335,10 @@ public class MenuLocation extends Menu {
                             try {
 
                                 athan.web.Location lLocation = service.geoname(
-                                                lTextFieldNomVille.getText(),
-                                                lTextFieldNomRegion.getText(),
-                                                lTextFieldNomPays.getText(),
-                                                INDICATIF_PAYS[lCbIndicatif.getSelectedIndex()]);
+                                        lTextFieldNomVille.getText(),
+                                        lTextFieldNomRegion.getText(),
+                                        lTextFieldNomPays.getText(),
+                                        INDICATIF_PAYS[lCbIndicatif.getSelectedIndex()]);
 
                                 mTextFieldNomVille.setText(lLocation.getCityName());
                                 mTextFieldNomRegion.setText(lLocation.getRegionName());
@@ -354,11 +346,9 @@ public class MenuLocation extends Menu {
 
                                 if (lLocation.getCoordinates() != null) {
                                     mTextFieldLat.setText(
-                                          new Double(lLocation.getCoordinates()
-                                                        .getLat()).toString());
+                                            new Double(lLocation.getCoordinates().getLat()).toString());
                                     mTextFieldLng.setText(
-                                          new Double(lLocation.getCoordinates()
-                                                        .getLng()).toString());
+                                            new Double(lLocation.getCoordinates().getLng()).toString());
                                 }
 
                                 // On bascule en demande de validation par l'utilisateur
@@ -367,32 +357,38 @@ public class MenuLocation extends Menu {
                             } catch (RemoteException exc) {
                                 //exc.printStackTrace();
                                 Command annulerCommand = new Command(RESSOURCE.get("Command.OK")) {
-                                    public void actionPerformed(ActionEvent evt) { }
+
+                                    public void actionPerformed(ActionEvent evt) {
+                                    }
                                 };
                                 Dialog.show(RESSOURCE.get("errorTitle"),
-                                    RESSOURCE.get("GeocodingWindowRemoteException"), annulerCommand,
-                                    new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
-                                    CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                                        RESSOURCE.get("GeocodingWindowRemoteException"), annulerCommand,
+                                        new Command[]{annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                                        CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                                 return;
                             } catch (AthanException exc) {
                                 //exc.printStackTrace();
                                 Command annulerCommand = new Command(RESSOURCE.get("Command.OK")) {
-                                    public void actionPerformed(ActionEvent evt) { }
+
+                                    public void actionPerformed(ActionEvent evt) {
+                                    }
                                 };
                                 Dialog.show(RESSOURCE.get("errorTitle"),
-                                    RESSOURCE.get("GeocodingWindowCustomException") + "\n" + exc.getMessage(), annulerCommand,
-                                    new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
-                                    CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                                        RESSOURCE.get("GeocodingWindowCustomException") + "\n" + exc.getMessage(), annulerCommand,
+                                        new Command[]{annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                                        CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                                 return;
                             } catch (Exception exc) {
                                 //exc.printStackTrace();
                                 Command annulerCommand = new Command(RESSOURCE.get("Command.OK")) {
-                                    public void actionPerformed(ActionEvent evt) { }
+
+                                    public void actionPerformed(ActionEvent evt) {
+                                    }
                                 };
                                 Dialog.show(RESSOURCE.get("errorTitle"),
-                                    RESSOURCE.get("GeocodingWindowUnknownException"), annulerCommand,
-                                    new Command[] {annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
-                                    CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                                        RESSOURCE.get("GeocodingWindowUnknownException"), annulerCommand,
+                                        new Command[]{annulerCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                                        CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
                                 return;
                             }
 
@@ -405,6 +401,7 @@ public class MenuLocation extends Menu {
         };
 
         Command cancelCommand = new Command(RESSOURCE.get("Command.Cancel")) {
+
             public void actionPerformed(ActionEvent evt) {
                 // Annuler
                 f.showBack();
@@ -412,17 +409,19 @@ public class MenuLocation extends Menu {
         };
 
         Command helpCommand = new Command(RESSOURCE.get("Command.Help")) {
+
             public void actionPerformed(ActionEvent evt) {
                 Form helpForm = new Form(RESSOURCE.get("Window.Help"));
                 helpForm.setLayout(new BorderLayout());
                 TextArea helpText = new TextArea(RESSOURCE.getContenu_ConsignesGeocoding(),
-                                            5, 10);
+                        5, 10);
+                helpText.setUIID(UIID_TEXTAREA_HELP);
                 helpText.setEditable(false);
                 helpForm.setScrollable(true);
                 helpText.setFocusable(true);
-                //helpText.setUIID(UIID_TEXTAREA_SEARCH_TOOLTIP);
                 helpForm.addComponent(BorderLayout.CENTER, helpText);
                 Command c = new Command(RESSOURCE.get("Menu.Back")) {
+
                     public void actionPerformed(ActionEvent evt) {
                         parametersForm.showBack();
                     }
@@ -446,7 +445,7 @@ public class MenuLocation extends Menu {
         Criteria cr = new Criteria();
         cr.setHorizontalAccuracy(500);
         LocationProvider lp;
-        */
+         */
         final String[] latLng = new String[2];
 
         try {
@@ -456,19 +455,20 @@ public class MenuLocation extends Menu {
             Coordinates c = l.getQualifiedCoordinates();
 
             if (c != null ) {
-              double lat = c.getLatitude();
-              double lon = c.getLongitude();
+            double lat = c.getLatitude();
+            double lon = c.getLongitude();
 
-              latLng[0] = Double.toString(lat);
-              latLng[1] = Double.toString(lon);
+            latLng[0] = Double.toString(lat);
+            latLng[1] = Double.toString(lon);
             }
-            */
+             */
         } catch (Exception ex) {
             ex.printStackTrace();
             success = false;
         }
 
         Command okCommand = new Command(RESSOURCE.get("Command.OK")) {
+
             public void actionPerformed(ActionEvent evt) {
                 // OK Gps
                 okGpsPerformed(latLng, f);
@@ -476,6 +476,7 @@ public class MenuLocation extends Menu {
         };
 
         Command annulerCommand = new Command(RESSOURCE.get("Command.Cancel")) {
+
             public void actionPerformed(ActionEvent evt) {
                 // Fail Gps
             }
@@ -492,16 +493,16 @@ public class MenuLocation extends Menu {
             contenuDialogue += RESSOURCE.get("Longitude") + " " + latLng[1];
 
             Dialog.show(RESSOURCE.get("fetchGPSTitle"), contenuDialogue, annulerCommand,
-            new Command[] {annulerCommand, okCommand}, dialogType, null, TIMEOUT_FENETRE_ERROR,
-            CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                    new Command[]{annulerCommand, okCommand}, dialogType, null, TIMEOUT_FENETRE_ERROR,
+                    CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
         } else {
             dialogType = Dialog.TYPE_ERROR;
             contenuDialogue = RESSOURCE.get("ErrorFetchGPS");
 
             Dialog.show(RESSOURCE.get("fetchGPSTitle"), contenuDialogue, annulerCommand,
-            new Command[] {annulerCommand}, dialogType, null, TIMEOUT_FENETRE_ERROR,
-            CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+                    new Command[]{annulerCommand}, dialogType, null, TIMEOUT_FENETRE_ERROR,
+                    CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
         }
     }
 
@@ -513,7 +514,7 @@ public class MenuLocation extends Menu {
         mTextFieldNomRegion.setEditable(editable);
         mTextFieldNomVille.setEditable(editable);
 
-       int posCmd = 0;
+        int posCmd = 0;
         if (editable) {
             form.addCommand(mOK, posCmd++);
             form.addCommand(mAnnuler, posCmd++);
@@ -562,36 +563,29 @@ public class MenuLocation extends Menu {
             // Message d'erreur
             Command okCommand = new Command(RESSOURCE.get("Command.OK"));
             Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorLocationParameters"), okCommand,
-                    new Command[] {okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
+                    new Command[]{okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                     CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
             // Sortie
             return false;
         }
 
         try {
-            ServiceFactory.getFactory().getPreferences()
-                .set(Preferences.sLatitude, Double.toString(latitude));
-            ServiceFactory.getFactory().getPreferences()
-                .set(Preferences.sLongitude, Double.toString(longitude));
-            ServiceFactory.getFactory().getPreferences()
-                .set(Preferences.sCityName, mTextFieldNomVille.getText());
-            ServiceFactory.getFactory().getPreferences()
-                .set(Preferences.sRegionName, mTextFieldNomRegion.getText());
-            ServiceFactory.getFactory().getPreferences()
-                .set(Preferences.sCountryName, mTextFieldNomPays.getText());
+            ServiceFactory.getFactory().getPreferences().set(Preferences.sLatitude, Double.toString(latitude));
+            ServiceFactory.getFactory().getPreferences().set(Preferences.sLongitude, Double.toString(longitude));
+            ServiceFactory.getFactory().getPreferences().set(Preferences.sCityName, mTextFieldNomVille.getText());
+            ServiceFactory.getFactory().getPreferences().set(Preferences.sRegionName, mTextFieldNomRegion.getText());
+            ServiceFactory.getFactory().getPreferences().set(Preferences.sCountryName, mTextFieldNomPays.getText());
 
             // On enregistre les paramètres dans la mémoire du téléphone
-                    ServiceFactory.getFactory().getPreferences()
-                            .save();
+            ServiceFactory.getFactory().getPreferences().save();
 
-                    // On rafraîchit l'affichage des prières
-                    ServiceFactory.getFactory().getVuePrincipale()
-                            .rafraichir(new Date(), true, true);
+            // On rafraîchit l'affichage des prières
+            ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
             // Message de confirmation modif
             Command okCommand = new Command(RESSOURCE.get("Command.OK"));
             Dialog.show(RESSOURCE.get("propertiesSavedTitle"), RESSOURCE.get("propertiesSavedContent"), okCommand,
-                    new Command[] {okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
+                    new Command[]{okCommand}, Dialog.TYPE_INFO, null, TIMEOUT_CONFIRMATION_MODIF,
                     CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
 
             pFormAppelante.showBack();
@@ -611,16 +605,11 @@ public class MenuLocation extends Menu {
         String lPays = StringOutilClient.EMPTY;
 
         try {
-            lLat = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sLatitude);
-            lLng = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sLongitude);
-            lVille = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sCityName);
-            lRegion = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sRegionName);
-            lPays = ServiceFactory.getFactory().getPreferences()
-                        .get(Preferences.sCountryName);
+            lLat = ServiceFactory.getFactory().getPreferences().get(Preferences.sLatitude);
+            lLng = ServiceFactory.getFactory().getPreferences().get(Preferences.sLongitude);
+            lVille = ServiceFactory.getFactory().getPreferences().get(Preferences.sCityName);
+            lRegion = ServiceFactory.getFactory().getPreferences().get(Preferences.sRegionName);
+            lPays = ServiceFactory.getFactory().getPreferences().get(Preferences.sCountryName);
 
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -634,8 +623,8 @@ public class MenuLocation extends Menu {
     }
 
     private TableLayout.Constraint getCtnLayoutLocalisation(TableLayout pTB,
-                                                    int pPourcentage,
-                                                    int pHorizontalSpan) {
+            int pPourcentage,
+            int pHorizontalSpan) {
         TableLayout.Constraint contrainte = pTB.createConstraint();
         if (pPourcentage == 100) {
             contrainte.setHeightPercentage(10);
@@ -648,8 +637,8 @@ public class MenuLocation extends Menu {
     }
 
     private TableLayout.Constraint getCtnLayoutGeocoding(TableLayout pTB,
-                                                    int pPourcentage,
-                                                    int pHorizontalSpan) {
+            int pPourcentage,
+            int pHorizontalSpan) {
         TableLayout.Constraint contrainte = pTB.createConstraint();
         if (pPourcentage == 100) {
             //contrainte.setHeightPercentage(10);
@@ -677,29 +666,27 @@ public class MenuLocation extends Menu {
         VirtualKeyboard.bindVirtualKeyboard(mTextFieldLng, vkbCoordonnees);
 
         VirtualKeyboard vkbNoms = new VirtualKeyboard();
-        if (ServiceFactory.getFactory()
-                .getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
+        if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
             vkbNoms.addInputMode(KB_NOMS_US_MODE, KB_NOMS_US);
             vkbNoms.addInputMode(KB_NOMS_us_MODE, KB_NOMS_us);
             vkbNoms.addInputMode(KB_SYMBOLS_MODE, KB_SYMBOLS);
-            vkbNoms.setInputModeOrder(new String[] { KB_NOMS_US_MODE,
+            vkbNoms.setInputModeOrder(new String[]{KB_NOMS_US_MODE,
                         KB_NOMS_us_MODE, VirtualKeyboard.NUMBERS_MODE,
-                        KB_SYMBOLS_MODE });
-        } else if (ServiceFactory.getFactory()
-                .getPreferences().getLangue().equals(Preferences.LANGUE_FR)) {
+                        KB_SYMBOLS_MODE});
+        } else if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_FR)) {
             vkbNoms.addInputMode(KB_NOMS_FR_MODE, KB_NOMS_FR);
             vkbNoms.addInputMode(KB_NOMS_fr_MODE, KB_NOMS_fr);
             vkbNoms.addInputMode(KB_SYMBOLS_MODE, KB_SYMBOLS);
-            vkbNoms.setInputModeOrder(new String[] { KB_NOMS_FR_MODE,
+            vkbNoms.setInputModeOrder(new String[]{KB_NOMS_FR_MODE,
                         KB_NOMS_fr_MODE, VirtualKeyboard.NUMBERS_MODE,
-                        KB_SYMBOLS_MODE });
+                        KB_SYMBOLS_MODE});
         } else {
             vkbNoms.addInputMode(KB_NOMS_US_MODE, KB_NOMS_US);
             vkbNoms.addInputMode(KB_NOMS_us_MODE, KB_NOMS_us);
             vkbNoms.addInputMode(KB_SYMBOLS_MODE, KB_SYMBOLS);
-            vkbNoms.setInputModeOrder(new String[] { KB_NOMS_US_MODE,
+            vkbNoms.setInputModeOrder(new String[]{KB_NOMS_US_MODE,
                         KB_NOMS_us_MODE, VirtualKeyboard.NUMBERS_MODE,
-                        KB_SYMBOLS_MODE });
+                        KB_SYMBOLS_MODE});
         }
         VirtualKeyboard.bindVirtualKeyboard(mTextFieldNomVille, vkbNoms);
         VirtualKeyboard.bindVirtualKeyboard(mTextFieldNomRegion, vkbNoms);

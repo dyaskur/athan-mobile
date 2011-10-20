@@ -18,20 +18,28 @@ import org.kxml.parser.ParseEvent;
 import org.kxml.parser.XmlParser;
 
 /**
+ * Classe d'implémentation de l'accès aux ressources de l'application (texte, images, ...)
  *
  * @author Saad BENBOUZID
  */
 public class ResourceReader extends AthanConstantes {
 
-    private final static String RESOURCE_FR = "properties_fr-FR.xml";
-    private final static String RESOURCE_EN = "properties_en-US.xml";
-
+    private final static String RESOURCE_FR = "messages_fr-FR.xml";
+    private final static String RESOURCE_EN = "messages_en-US.xml";
     private String mLocale;
     private String xmlFileName;
-
     // Contenus
     private String contenu_about;
     private String contenu_consignesGeocoding;
+    // Aide
+    public String helpMenuAlerts;
+    public String helpMenuCalculationMethod;
+    public String helpMenuCompass;
+    public String helpMenuLanguage;
+    public String helpMenuLocalTime;
+    public String helpMenuLocation;
+    public String helpMenuPrayers;
+    public String helpMenuSettingsSummary;
 
     public ResourceReader(Preferences lPreferences) throws IOException {
         this(null, lPreferences);
@@ -53,19 +61,7 @@ public class ResourceReader extends AthanConstantes {
             mLocale = pLocale;
 
             // Affecte le resource bundle de localization
-            /*
-            String defaultLocale = System.getProperty("microedition.locale");
-            if (defaultLocale != null) {
-                System.out.println(defaultLocale);
-                if (defaultLocale.length() > 2) {
-                    defaultLocale = defaultLocale.substring(0,2);
-                }
-            } else {
-                defaultLocale = "en";
-            }
-            */
-            UIManager.getInstance().setResourceBundle(Main.languages
-                                        .getL10N(LOCALIZATION_BUNDLE, mLocale));
+            UIManager.getInstance().setResourceBundle(Main.languages.getL10N(LOCALIZATION_BUNDLE, mLocale));
 
         } catch (Exception exc) {
             // valeur par défaut
@@ -93,6 +89,15 @@ public class ResourceReader extends AthanConstantes {
         // Contenus
         contenu_about = lireTexte(parser);
         contenu_consignesGeocoding = lireTexte(parser);
+        // Aides
+        helpMenuAlerts = lireTexte(parser);
+        helpMenuCalculationMethod = lireTexte(parser);
+        helpMenuCompass = lireTexte(parser);
+        helpMenuLanguage = lireTexte(parser);
+        helpMenuLocalTime = lireTexte(parser);
+        helpMenuLocation = lireTexte(parser);
+        helpMenuPrayers = lireTexte(parser);
+        helpMenuSettingsSummary = lireTexte(parser);
     }
 
     private String lireTexte(XmlParser pParser) throws IOException {
@@ -100,7 +105,7 @@ public class ResourceReader extends AthanConstantes {
         String retour = StringOutilClient.EMPTY;
         boolean lire = true;
 
-        while(lire) {
+        while (lire) {
             ParseEvent pe = pParser.read();
             if (pe.getType() == Xml.START_TAG) {
                 pe = pParser.read();
@@ -112,26 +117,46 @@ public class ResourceReader extends AthanConstantes {
         return retour;
     }
 
-    /*
-    // Noms des prières
-    public String getSobh() { return sobh; }
-    public String getChourouk() { return chourouk; }
-    public String getDohr() { return dohr; }
-    public String getAsr() { return asr; }
-    public String getMaghreb() { return maghreb; }
-    public String getIshaa() { return ishaa; }
-
-    // Menus
-    public String getMenu_About() { return menu_about; }
-    public String getMenu_Retour() { return menu_retour; }
-    public String getMenu_Aide() { return menu_aide; }
-
-    // Titres des fenêtres
-    public String getFenetre_Aide() { return fenetre_aide; }
-    */
     // Contenus
-    public String getContenu_About() { return contenu_about; }
-    public String getContenu_ConsignesGeocoding() { return contenu_consignesGeocoding; }
+    public String getContenu_About() {
+        return contenu_about;
+    }
+
+    public String getContenu_ConsignesGeocoding() {
+        return contenu_consignesGeocoding;
+    }
+
+    public String getHelpMenuAlerts() {
+        return helpMenuAlerts;
+    }
+
+    public String getHelpMenuCalculationMethod() {
+        return helpMenuCalculationMethod;
+    }
+
+    public String getHelpMenuCompass() {
+        return helpMenuCompass;
+    }
+
+    public String getHelpMenuLanguage() {
+        return helpMenuLanguage;
+    }
+
+    public String getHelpMenuLocalTime() {
+        return helpMenuLocalTime;
+    }
+
+    public String getHelpMenuLocation() {
+        return helpMenuLocation;
+    }
+
+    public String getHelpMenuPrayers() {
+        return helpMenuPrayers;
+    }
+
+    public String getHelpMenuSettingsSummary() {
+        return helpMenuSettingsSummary;
+    }
 
     /**
      * 1er index : jour de la semaine
@@ -146,7 +171,7 @@ public class ResourceReader extends AthanConstantes {
 
         String jour = StringOutilClient.EMPTY;
 
-        switch(pCalendar.get(Calendar.DAY_OF_WEEK)) {
+        switch (pCalendar.get(Calendar.DAY_OF_WEEK)) {
             case Calendar.MONDAY:
                 jour = this.get("Monday");
                 break;
@@ -174,7 +199,7 @@ public class ResourceReader extends AthanConstantes {
 
         String mois = StringOutilClient.EMPTY;
 
-        switch(pCalendar.get(Calendar.MONTH)) {
+        switch (pCalendar.get(Calendar.MONTH)) {
             case Calendar.JANUARY:
                 mois = this.get("January");
                 break;
@@ -241,5 +266,4 @@ public class ResourceReader extends AthanConstantes {
 
         return retour;
     }
-
 }

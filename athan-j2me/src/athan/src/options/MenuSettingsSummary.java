@@ -15,8 +15,7 @@ import com.sun.lwuit.Form;
 public class MenuSettingsSummary extends Menu {
 
     protected String getHelp() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("Menu.Help");
+        return ServiceFactory.getFactory().getResourceReader().getHelpMenuSettingsSummary();
     }
 
     protected String getIconBaseName() {
@@ -24,8 +23,7 @@ public class MenuSettingsSummary extends Menu {
     }
 
     protected String getName() {
-        return ServiceFactory.getFactory().getResourceReader()
-                .get("MenuSettingsSummary");
+        return ServiceFactory.getFactory().getResourceReader().get("MenuSettingsSummary");
     }
 
     protected void execute(final Form f) {

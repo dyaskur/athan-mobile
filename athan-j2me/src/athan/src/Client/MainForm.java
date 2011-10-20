@@ -675,4 +675,12 @@ public class MainForm extends Menu {
     public void setTimerHeureCourante(boolean timerHeureCourante) {
         this.timerHeureCourante = timerHeureCourante;
     }
+
+    /**
+     * Ne renvoie rien car pas de menu d'aide
+     * @return
+     */
+    protected String getHelp() {
+        return StringOutilClient.EMPTY;
+    }
 }

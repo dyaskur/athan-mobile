@@ -58,9 +58,10 @@ public abstract class Menu
                 public void actionPerformed(ActionEvent evt) {
                     Form helpForm = new Form(RESOURCE.get("Window.Help"));
                     helpForm.setLayout(new BorderLayout());
-                    TextArea helpText = new TextArea(getHelpImpl(), 5, 10);
+                    TextArea helpText = new TextArea(getHelp(), 5, 10);
                     helpText.setEditable(false);
-                    helpForm.setScrollable(false);
+                    helpText.setUIID(UIID_TEXTAREA_HELP);
+                    helpForm.setScrollable(true);
                     helpForm.addComponent(BorderLayout.CENTER, helpText);
                     Command c = new Command(RESOURCE.get("Menu.Back")) {
                         public void actionPerformed(ActionEvent evt) {
@@ -111,19 +112,7 @@ public abstract class Menu
     /**
      * Returns the text that should appear in the help command
      */
-    private String getHelpImpl() {
-        String h = getHelp();
-        return UIManager.getInstance().localize(h, h);
-    }
-
-    /**
-     * Returns the text that should appear in the help command
-     */
-    protected String getHelp() {
-        // return a key value for localization
-        String n = getClass().getName();
-        return n.substring(n.lastIndexOf('.') + 1) + ".help";
-    }
+    protected abstract String getHelp();
     
     /**
      * The demo should place its UI into the given form 
