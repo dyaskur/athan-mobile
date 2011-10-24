@@ -39,7 +39,6 @@ public class ResourceReader extends AthanConstantes {
     public String helpMenuLocalTime;
     public String helpMenuLocation;
     public String helpMenuPrayers;
-    public String helpMenuSettingsSummary;
 
     public ResourceReader(Preferences lPreferences) throws IOException {
         this(null, lPreferences);
@@ -97,7 +96,6 @@ public class ResourceReader extends AthanConstantes {
         helpMenuLocalTime = lireTexte(parser);
         helpMenuLocation = lireTexte(parser);
         helpMenuPrayers = lireTexte(parser);
-        helpMenuSettingsSummary = lireTexte(parser);
     }
 
     private String lireTexte(XmlParser pParser) throws IOException {
@@ -152,10 +150,6 @@ public class ResourceReader extends AthanConstantes {
 
     public String getHelpMenuPrayers() {
         return helpMenuPrayers;
-    }
-
-    public String getHelpMenuSettingsSummary() {
-        return helpMenuSettingsSummary;
     }
 
     /**

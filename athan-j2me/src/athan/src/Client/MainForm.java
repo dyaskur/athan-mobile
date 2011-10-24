@@ -471,7 +471,9 @@ public class MainForm extends Menu {
                 // Empêche les pics de volume au début de la musique
                 VolumeControl volumeControl =
                         (VolumeControl) musicPlayer.getControl("VolumeControl");
-                volumeControl.setLevel(100);
+                if (volumeControl != null) {
+                    volumeControl.setLevel(100);
+                }
 
                 // Joue le son
                 musicPlayer.start();

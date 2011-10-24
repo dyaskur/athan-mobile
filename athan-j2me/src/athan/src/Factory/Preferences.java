@@ -187,7 +187,7 @@ public class Preferences {
         put(sFormatHoraire, "0");
         put(sMethodeJuridiqueAsr, "0");
         put(sCalculationMethod, "6");
-        put(sCustomFajrAngle, "15");
+        put(sCustomFajrAngle, "12");
         put(sCustomImsakSelector, "1");
         put(sCustomImsakValue, "15");
         put(sCustomMaghrebSelector, "1");

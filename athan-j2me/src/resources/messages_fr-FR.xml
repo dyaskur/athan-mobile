@@ -2,45 +2,58 @@
 <strings version="0.1">
   <!-- Contents -->
   <contenu_about>
-  Saad Benbouzid © 2010-2011
-  Compilé avec J2ME
+Application qui donne les horaires quotidiennes des prières pour toutes les villes du monde répertoriées.
+
+Saad Benbouzid © 2010-2011
+about.me/saad.benbouzid
+
+Développement J2ME MIDP 2.0 - CLDC 1.1
+Framework (c) Oracle LWUIT
+
+Données GPS obtenues depuis GeoNames.org
   </contenu_about>
   <contenu_consignesGeocoding>
-  - Entrez les informations de localisation et laissez blancs les paramètres que vous ne souhaitez pas renseigner.
-  - Au moins un champ doit être renseigné.
-  - Mieux les champs sont remplis, meilleures seront vos chances d'obtenir le bon résultat.
+- Entrez les informations de localisation et laissez blancs les paramètres que vous ne souhaitez pas renseigner.
+- Au moins un champ doit être renseigné.
+- Mieux les champs sont remplis, meilleures seront vos chances d'obtenir le bon résultat.
+
+Si votre requête a retourné la ville recherchée, il faut ensuite valider par "OK" le résultat.
   </contenu_consignesGeocoding>
   <helpMenuAlerts>
-  Help menu TO WRITE
-  // TODO
+- Sélectionner le type d'alerte et les prières que cela concerne.
+- Le flash consiste à activer brièvement le rétro-éclairage du téléphone 5 fois de suite.
+- Si votre téléphone en permet la lecture, les fichiers sons concernés doivent être au format WAV ou MP3.
+- Afin que la sonnerie ou le flash puissent fontionner lorsque Athan Mobile est fermée, il faut que l'application soit minimisée (et non fermée).
+- A noter que l'application, même minimisée, peut s'arrêter toute seule si votre téléphone ne dispose pas de suffisament de ressources mémoire.
   </helpMenuAlerts>
   <helpMenuCalculationMethod>
-  Help menu TO WRITE
-  // TODO
+- Effectuez vos réglages selon les paramètres de votre autorité islamique et de votre pays.
+
+Pour plus de renseignements, veuillez vous référer au site :
+http://www.uoif-online.com/v3/spip.php?article672
   </helpMenuCalculationMethod>
   <helpMenuCompass>
-  Help menu TO WRITE
-  // TODO
+Cette fenêtre vous donne la direction et la distance à la Mecque calculées à partir de la position de référence de votre configuration.
   </helpMenuCompass>
   <helpMenuLanguage>
-  Help menu TO WRITE
-  // TODO
+Sélectionner la langue de l'application.
+
+Il est conseillé de quitter puis de réouvrir Athan Mobile pour prendre en compte toutes les modifications.
   </helpMenuLanguage>
   <helpMenuLocalTime>
-  Help menu TO WRITE
-  // TODO
+Cette fenêtre vous permet de corriger d'éventuels décalages dans les horaires de prière calculées, en particulier si votre téléphone utilise une zone de temps différente ou s'il est en heure d'été s'il faut pas l'être et vice versa.
+
+Le format horaire correspond à la manière d'afficher les horaires des prières dans l'écran principal.
   </helpMenuLocalTime>
   <helpMenuLocation>
-  Help menu TO WRITE
-  // TODO
+Cette fenêtre vous permet de modifier la position de référence de la configuration.
+
+Deux méthodes s'offrent à vous :
+- Modification manuelle si vous disposez des coordonnées GPS de votre ville.
+- Recherche par nom de ville si votre abonnement mobile dispose d'un accès Internet.
   </helpMenuLocation>
   <helpMenuPrayers>
-  Help menu TO WRITE
-  // TODO
+Cette fenêtre vous permet d'afficher ou non dans l'écran principal les deux horaires rituelles Imsak et Chourouk.
   </helpMenuPrayers>
-  <helpMenuSettingsSummary>
-  Help menu TO WRITE
-  // TODO
-  </helpMenuSettingsSummary>
   <!-- Errors -->
 </strings>

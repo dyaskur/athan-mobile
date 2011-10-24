@@ -12,7 +12,6 @@ import athan.src.options.MenuLocalTime;
 import athan.src.options.MenuLanguage;
 import athan.src.options.MenuCalculationMethod;
 import athan.src.options.MenuPrayers;
-import athan.src.options.MenuSettingsSummary;
 import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
@@ -64,8 +63,7 @@ public class OptionForm extends Form
         new MenuLocalTime(),
         new MenuLanguage(),
         new MenuCalculationMethod(),
-        new MenuPrayers(),
-        new MenuSettingsSummary()
+        new MenuPrayers()
     };
 
     private Hashtable mDemosHash = new Hashtable();

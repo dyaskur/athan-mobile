@@ -81,7 +81,7 @@ public class SalaahTimeCalculator {
         new double[]{18, 0, 19.5, 1, 0, 0, 17}, //MWL
         new double[]{18.5, 0, 19.5, 1, 0, 1, 90}, //Makkah
         new double[]{19.5, 0, 19.5, 1, 0, 0, 17.5}, //Egypt
-        new double[]{15, 1, 15, 1, 0, 0, 12} //Custom
+        new double[]{12, 1, 15, 1, 0, 0, 12} //Custom
     };
     private int paramsCount = methodParams[0].length;
 

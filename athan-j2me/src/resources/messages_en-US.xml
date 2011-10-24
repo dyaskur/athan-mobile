@@ -2,45 +2,58 @@
 <strings version="0.1">
   <!-- Contents -->
   <contenu_about>
-  Saad Benbouzid © 2010-2011
-  Done using J2ME
+Application thant gives daily prayer times for all known and listed cities worldwide.
+
+Saad Benbouzid © 2010-2011
+about.me/saad.benbouzid
+
+Developed using J2ME MIDP 2.0 - CLDC 1.1
+Framework (c) Oracle LWUIT
+
+Location data provided by GeoNames.org
   </contenu_about>
   <contenu_consignesGeocoding>
-  - Type in your localization information and just leave blank the parameters you don't want to fill in.
-  - There must be at least one field filled in.
-  - The better fields are filled in, the more relevant the response will be.
+- Type some hints regarding your location and leave blank the inputs you don't want to fill in.
+- At least one field has to be filled in.
+- The better you fill in the fields, the more accurate will be your result.
+
+If the request returned your desired location, you then have to save the result by selecting "OK".
   </contenu_consignesGeocoding>
   <helpMenuAlerts>
-  Help menu TO WRITE
-  // TODO
+- Select the type of alert and the prayers it pertains to.
+- The flash consists in briefly activating the backlight of the phone 5 times in a row.
+- If your phone is able to play sound, the local files have to be in WAV or MP3 format.
+- For the ringtone or backlight features to run properly when Athan Mobile is closed, the application has to be minimized (and not closed).
+- Note that even when the application is minimized, it can stop by itself if the phone may run out of memory resource.
   </helpMenuAlerts>
   <helpMenuCalculationMethod>
-  Help menu TO WRITE
-  // TODO
+- Set your data according to the settings given by your islamic authority and your country.
+
+For further information, please visit the following site :
+http://www.salahtimes.com/Web/Pages/FaqAll.aspx
   </helpMenuCalculationMethod>
   <helpMenuCompass>
-  Help menu TO WRITE
-  // TODO
+This window gives you the direction and distance to Mekkah calculated from the location saved in the configuration.
   </helpMenuCompass>
   <helpMenuLanguage>
-  Help menu TO WRITE
-  // TODO
+Select the application language.
+
+It is highly recommended to exit and start again Ahtan Mobile to make sure all changes are accurate.
   </helpMenuLanguage>
   <helpMenuLocalTime>
-  Help menu TO WRITE
-  // TODO
+This window allows you to correct possible gap between real prayer times and the ones given, which may occurs particularly if your phone use a specific time zone different from your country, or if DST (Summer time) is on during winter or vice versa.
+
+Hour format is related to the way prayer times are displayed in the main screen.
   </helpMenuLocalTime>
   <helpMenuLocation>
-  Help menu TO WRITE
-  // TODO
+This window allows you to change the location saved in the configuration.
+
+There are two different ways of modifying your location :
+- Manually if you know the GPS coordinates of your city.
+- By searching your city from its name (or region name) if your phone subscription gives you access to Internet.
   </helpMenuLocation>
   <helpMenuPrayers>
-  Help menu TO WRITE
-  // TODO
+This window allows you to display or to hide from the main screen the two ritual hours Imsak and Chourouk.
   </helpMenuPrayers>
-  <helpMenuSettingsSummary>
-  Help menu TO WRITE
-  // TODO
-  </helpMenuSettingsSummary>
   <!-- Errors -->
 </strings>
