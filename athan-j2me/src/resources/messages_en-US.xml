@@ -11,6 +11,8 @@ Developed using J2ME MIDP 2.0 - CLDC 1.1
 Framework (c) Oracle LWUIT
 
 Location data provided by GeoNames.org
+
+Official site : http://athan-mobile.appspot.com/
   </contenu_about>
   <contenu_consignesGeocoding>
 - Type some hints regarding your location and leave blank the inputs you don't want to fill in.

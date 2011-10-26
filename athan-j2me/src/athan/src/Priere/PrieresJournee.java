@@ -190,3 +190,12 @@ public class PrieresJournee {
         mCalendar.setTime(pDateJour);
     }
 }
+/**
+    public static final int POS_FAJR_ANGLE = 0;
+    public static final int POS_IMSAK_SELECTOR = 1;
+    public static final int POS_IMSAK_VALUE = 2;
+    public static final int POS_MAGHRIB_SELECTOR = 3;
+    public static final int POS_MAGHRIB_VALUE = 4;
+    public static final int POS_ISHAA_SELECTOR = 5;
+    public static final int POS_ISHAA_VALUE = 6;
+ */

@@ -11,6 +11,8 @@ Développement J2ME MIDP 2.0 - CLDC 1.1
 Framework (c) Oracle LWUIT
 
 Données GPS obtenues depuis GeoNames.org
+
+Site officiel : http://athan-mobile.appspot.com/
   </contenu_about>
   <contenu_consignesGeocoding>
 - Entrez les informations de localisation et laissez blancs les paramètres que vous ne souhaitez pas renseigner.
@@ -53,7 +55,7 @@ Deux méthodes s'offrent à vous :
 - Recherche par nom de ville si votre abonnement mobile dispose d'un accès Internet.
   </helpMenuLocation>
   <helpMenuPrayers>
-Cette fenêtre vous permet d'afficher ou non dans l'écran principal les deux horaires rituelles Imsak et Chourouk.
+Cette fenêtre vous permet d'afficher ou non dans l'écran principal les deux horaires rituels Imsak et Chourouk.
   </helpMenuPrayers>
   <!-- Errors -->
 </strings>

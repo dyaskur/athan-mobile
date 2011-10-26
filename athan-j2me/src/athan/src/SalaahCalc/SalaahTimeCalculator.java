@@ -53,6 +53,8 @@ public class SalaahTimeCalculator {
     private static final int MIDNIGHT = 1;      // middle of night
     private static final int ONE_SEVENTH = 2;    // 1/7th of night
     private static final int ANGLE_BASED = 3;    // angle/60th of night
+    private static final int SELECTOR_ANGLE = 0;
+    private static final int SELECTOR_MINUTE = 1;
     // Time Names
     private static final String[] TIME_NAMES = new String[]{
         "Imsak",
@@ -98,13 +100,13 @@ public class SalaahTimeCalculator {
      *      iv : isha parameter value (in angle or minutes)
      */
     private double[][] methodParams = new double[][]{
-        new double[]{16, 0, 19.5, 0, 4, 0, 14}, //Jafari
-        new double[]{18, 0, 19.5, 1, 0, 0, 18}, //Karachi
-        new double[]{15, 0, 19.5, 1, 0, 0, 15}, //ISNA
-        new double[]{18, 0, 19.5, 1, 0, 0, 17}, //MWL
-        new double[]{18.5, 0, 19.5, 1, 0, 1, 90}, //Makkah
-        new double[]{19.5, 0, 19.5, 1, 0, 0, 17.5}, //Egypt
-        new double[]{12, 1, 15, 1, 0, 0, 12} //Custom
+        new double[]{16, SELECTOR_ANGLE, 19.5, SELECTOR_ANGLE, 4, SELECTOR_ANGLE, 14}, //Jafari
+        new double[]{18, SELECTOR_ANGLE, 19.5, SELECTOR_MINUTE, 0, SELECTOR_ANGLE, 18}, //Karachi
+        new double[]{15, SELECTOR_ANGLE, 19.5, SELECTOR_MINUTE, 0, SELECTOR_ANGLE, 15}, //ISNA
+        new double[]{18, SELECTOR_ANGLE, 19.5, SELECTOR_MINUTE, 0, SELECTOR_ANGLE, 17}, //MWL
+        new double[]{18.5, SELECTOR_ANGLE, 19.5, SELECTOR_MINUTE, 0, SELECTOR_MINUTE, 90}, //Makkah
+        new double[]{19.5, SELECTOR_ANGLE, 19.5, SELECTOR_MINUTE, 0, SELECTOR_ANGLE, 17.5}, //Egypt
+        new double[]{12, SELECTOR_MINUTE, 15, SELECTOR_MINUTE, 0, SELECTOR_ANGLE, 12} //Custom
     };
     private int paramsCount = methodParams[0].length;
 
@@ -175,17 +177,17 @@ public class SalaahTimeCalculator {
 
         if (CalculationMethods.Custom.getValue() == methodToUse.getValue()) {
             setFajrAngle(params.getFajrAngle());
-            if (params.getImsakSelector() == 0) {
+            if (params.getImsakSelector() == SELECTOR_ANGLE) {
                 setImsakAngle(params.getImsakValue());
             } else {
                 setImsakMinutes(params.getImsakValue());
             }
-            if (params.getMaghrebSelector() == 0) {
+            if (params.getMaghrebSelector() == SELECTOR_ANGLE) {
                 setMaghribAngle(params.getMaghrebValue());
             } else {
                 setMaghribMinutes(params.getMaghrebValue());
             }
-            if (params.getIshaaSelector() == 0) {
+            if (params.getIshaaSelector() == SELECTOR_ANGLE) {
                 setIshaAngle(params.getIshaaValue());
             } else {
                 setIshaMinutes(params.getIshaaValue());
@@ -414,11 +416,11 @@ public class SalaahTimeCalculator {
 
         double Imsak = 0;
         // Imsak angle
-        if (this.methodParams[this.calcMethod][1] == 0) {
-            Imsak = this.computeTime(180 - this.methodParams[this.calcMethod][2], t[IMSAK].doubleValue());
+        if (this.methodParams[this.calcMethod][POS_IMSAK_SELECTOR] == SELECTOR_ANGLE) {
+            Imsak = this.computeTime(180 - this.methodParams[this.calcMethod][POS_IMSAK_VALUE], t[IMSAK].doubleValue());
         }
 
-        double Fajr = this.computeTime(180 - this.methodParams[this.calcMethod][0], t[FAJR].doubleValue());
+        double Fajr = this.computeTime(180 - this.methodParams[this.calcMethod][POS_FAJR_ANGLE], t[FAJR].doubleValue());
         double Sunrise = this.computeTime(180 - 0.833, t[SUNRISE].doubleValue());
         double Dhuhr = this.computeMidDay(t[DOHR].doubleValue());
         double Asr = this.computeAsr(1 + this.asrJuristic, t[ASR].doubleValue());
@@ -429,13 +431,13 @@ public class SalaahTimeCalculator {
         double Isha = 0;
 
         // Maghreb angle
-        if (this.methodParams[this.calcMethod][3] == 0) {
-            Maghrib = this.computeTime(this.methodParams[this.calcMethod][4], t[MAGHRIB].doubleValue());
+        if (this.methodParams[this.calcMethod][POS_MAGHRIB_SELECTOR] == SELECTOR_ANGLE) {
+            Maghrib = this.computeTime(this.methodParams[this.calcMethod][POS_MAGHRIB_VALUE], t[MAGHRIB].doubleValue());
         }
 
         // Ishaa angle
-        if (this.methodParams[this.calcMethod][5] == 0) {
-            Isha = this.computeTime(this.methodParams[this.calcMethod][6], t[ISHAA].doubleValue());
+        if (this.methodParams[this.calcMethod][POS_ISHAA_SELECTOR] == SELECTOR_ANGLE) {
+            Isha = this.computeTime(this.methodParams[this.calcMethod][POS_ISHAA_VALUE], t[ISHAA].doubleValue());
         }
 
         return new Double[]{new Double(Imsak), new Double(Fajr), new Double(Sunrise), new Double(Dhuhr),
@@ -470,21 +472,21 @@ public class SalaahTimeCalculator {
         }
 
         // Imsak minutes
-        if (this.methodParams[this.calcMethod][1] == 1) {
-            times[IMSAK] = new Double(times[FAJR].doubleValue() - this.methodParams[this.calcMethod][2] / 60);
+        if (this.methodParams[this.calcMethod][POS_IMSAK_SELECTOR] == SELECTOR_MINUTE) {
+            times[IMSAK] = new Double(times[FAJR].doubleValue() - this.methodParams[this.calcMethod][POS_IMSAK_VALUE] / 60);
         }
 
         // Dhur minutes
         times[DOHR] = new Double(times[DOHR].doubleValue() + this.dhuhrMinutes / 60); //Dhuhr
 
         // Maghrib minutes
-        if (this.methodParams[this.calcMethod][3] == 1) {
-            times[MAGHRIB] = new Double(times[SUNSET].doubleValue() + this.methodParams[this.calcMethod][4] / 60);
+        if (this.methodParams[this.calcMethod][POS_MAGHRIB_SELECTOR] == SELECTOR_MINUTE) {
+            times[MAGHRIB] = new Double(times[SUNSET].doubleValue() + this.methodParams[this.calcMethod][POS_MAGHRIB_VALUE] / 60);
         }
 
         // Ishaa minutes
-        if (this.methodParams[this.calcMethod][5] == 1) {
-            times[ISHAA] = new Double(times[MAGHRIB].doubleValue() + this.methodParams[this.calcMethod][6] / 60);
+        if (this.methodParams[this.calcMethod][POS_ISHAA_SELECTOR] == SELECTOR_MINUTE) {
+            times[ISHAA] = new Double(times[MAGHRIB].doubleValue() + this.methodParams[this.calcMethod][POS_ISHAA_VALUE] / 60);
         }
 
         if (this.adjustHighLats != NONE) {
@@ -520,21 +522,21 @@ public class SalaahTimeCalculator {
         double nightTime = this.timeDiff(times[SUNSET].doubleValue(), times[SUNRISE].doubleValue()); // sunset to sunrise
 
         // Adjust Fajr
-        double FajrDiff = this.nightPortion(methodParams[this.calcMethod][0]) * nightTime;
+        double FajrDiff = this.nightPortion(methodParams[this.calcMethod][POS_FAJR_ANGLE]) * nightTime;
         if (times[FAJR].isNaN() || this.timeDiff(times[FAJR].doubleValue(), times[SUNRISE].doubleValue()) > FajrDiff) {
             times[FAJR] = new Double(times[SUNRISE].doubleValue() - FajrDiff);
             times[IMSAK] = new Double(times[FAJR].doubleValue() - FajrDiff);
         }
 
         // Adjust Ishaa
-        double IshaAngle = (this.methodParams[this.calcMethod][5] == 0) ? this.methodParams[this.calcMethod][6] : 18;
+        double IshaAngle = (this.methodParams[this.calcMethod][POS_ISHAA_SELECTOR] == SELECTOR_ANGLE) ? this.methodParams[this.calcMethod][POS_ISHAA_VALUE] : 18;
         double IshaDiff = this.nightPortion(IshaAngle) * nightTime;
         if (times[ISHAA].isNaN() || this.timeDiff(times[SUNSET].doubleValue(), times[ISHAA].doubleValue()) > IshaDiff) {
             times[ISHAA] = new Double(times[SUNSET].doubleValue() + IshaDiff);
         }
 
         // Adjust Maghrib
-        double MaghribAngle = (this.methodParams[this.calcMethod][3] == 0) ? this.methodParams[this.calcMethod][4] : 4;
+        double MaghribAngle = (this.methodParams[this.calcMethod][POS_MAGHRIB_SELECTOR] == SELECTOR_ANGLE) ? this.methodParams[this.calcMethod][POS_MAGHRIB_VALUE] : 4;
         double MaghribDiff = this.nightPortion(MaghribAngle) * nightTime;
         if (times[MAGHRIB].isNaN() || this.timeDiff(times[SUNSET].doubleValue(), times[MAGHRIB].doubleValue()) > MaghribDiff) {
             times[MAGHRIB] = new Double(times[SUNSET].doubleValue() + MaghribDiff);
