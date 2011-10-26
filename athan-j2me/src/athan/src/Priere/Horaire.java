@@ -1,8 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+//    Athan Mobile - Prayer Times Software
+//    Copyright (C) 2011 - Saad BENBOUZID
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package athan.src.Priere;
 
 import athan.src.Factory.ResourceReader;
@@ -13,7 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Contient une horaire de prière
+ * Classe représentant une horaire de prière.
  *
  * @author Saad BENBOUZID
  */
@@ -25,21 +35,21 @@ public class Horaire {
 
     public Horaire(String pHoraire, int pTimeFormat) {
 
-        mHoraire  = pHoraire;
+        mHoraire = pHoraire;
         mEstProchaine = false;
 
         ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
         Calendar calActuel = Calendar.getInstance();
         calActuel.setTime(new Date());
-        
+
         Calendar calHoraire = Calendar.getInstance();
         calHoraire.setTime(new Date());
 
         if (pTimeFormat == TimeFormat.H24.getValue()) {
             calHoraire.set(Calendar.HOUR_OF_DAY, Integer.parseInt(pHoraire.substring(0, 2)));
             calHoraire.set(Calendar.MINUTE, Integer.parseInt(pHoraire.substring(3, 5)));
-            
+
             if (calHoraire.getTime().getTime() > calActuel.getTime().getTime()) {
                 mEstProchaine = true;
             }
@@ -47,7 +57,7 @@ public class Horaire {
             calHoraire.set(Calendar.HOUR, Integer.parseInt(pHoraire.substring(0, 2)));
             calHoraire.set(Calendar.MINUTE, Integer.parseInt(pHoraire.substring(3, 5)));
 
-            if (pHoraire.substring(6,8).equals(RESSOURCE.get("PM"))) {
+            if (pHoraire.substring(6, 8).equals(RESSOURCE.get("PM"))) {
                 calHoraire.set(Calendar.AM_PM, Calendar.PM);
             } else {
                 calHoraire.set(Calendar.AM_PM, Calendar.AM);

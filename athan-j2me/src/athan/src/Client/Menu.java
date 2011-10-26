@@ -1,6 +1,18 @@
-/*
- * Copyright Â© 2008, 2010, Oracle and/or its affiliates. All rights reserved
- */
+//    Athan Mobile - Prayer Times Software
+//    Copyright (C) 2011 - Saad BENBOUZID
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package athan.src.Client;
 
 import athan.src.Factory.ResourceReader;
@@ -14,19 +26,18 @@ import com.sun.lwuit.TextArea;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BorderLayout;
-import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.geom.Dimension;
 
 /**
- * Base class for a demo contains common code for all demo pages
+ * Classe parente de toutes les fenêtres de l'application,
+ * dont la fenêtre principale et les fenêtres de menus.
  * 
- * @author BENBOUZID
+ * @author Saad BENBOUZID
  */
 public abstract class Menu
-           extends AthanConstantes {
+        extends AthanConstantes {
 
     private Form mForm;
-
     private Command mBackCommand;
     private Command mHelpCommand;
 
@@ -44,8 +55,8 @@ public abstract class Menu
      * Invoked by the main code to start the demo
      */
     public final void run(final Command backCommand,
-                                ActionListener commandListener,
-                                boolean showHelp) {
+            ActionListener commandListener,
+            boolean showHelp) {
         System.gc();
 
         final ResourceReader RESOURCE = ServiceFactory.getFactory().getResourceReader();
@@ -55,6 +66,7 @@ public abstract class Menu
         if (showHelp) {
 
             mHelpCommand = new Command(RESOURCE.get("Menu.Help")) {
+
                 public void actionPerformed(ActionEvent evt) {
                     Form helpForm = new Form(RESOURCE.get("Window.Help"));
                     helpForm.setLayout(new BorderLayout());
@@ -64,6 +76,7 @@ public abstract class Menu
                     helpForm.setScrollable(true);
                     helpForm.addComponent(BorderLayout.CENTER, helpText);
                     Command c = new Command(RESOURCE.get("Menu.Back")) {
+
                         public void actionPerformed(ActionEvent evt) {
                             mForm.show();
                         }
@@ -80,10 +93,10 @@ public abstract class Menu
         mBackCommand = backCommand;
 
         mForm.addCommandListener(commandListener);
-        
+
         if (mHelpCommand != null) {
             mForm.addCommand(mHelpCommand, posCmd++);
-        }        
+        }
         mForm.addCommand(mBackCommand, posCmd++);
         mForm.setBackCommand(backCommand);
         execute(mForm);
@@ -99,7 +112,7 @@ public abstract class Menu
 
         mForm.removeCommand(mBackCommand);
         if (mHelpCommand != null) {
-             mForm.removeCommand(mHelpCommand);
+            mForm.removeCommand(mHelpCommand);
         }
 
         int posCmd = mForm.getCommandCount();
@@ -108,43 +121,42 @@ public abstract class Menu
         }
         mForm.addCommand(mBackCommand, posCmd++);
     }
-    
+
     /**
      * Returns the text that should appear in the help command
      */
     protected abstract String getHelp();
-    
+
     /**
      * The demo should place its UI into the given form 
      */
     protected abstract void execute(final Form f);
 
-  
     /**
      * Helper method that allows us to create a pair of components label and the given
      * component in a horizontal layout with a minimum label width
      */
     protected Container createPair(String label, Component c, int minWidth) {
         Container pair = new Container(new BorderLayout());
-        Label l =  new Label(label);
+        Label l = new Label(label);
         Dimension d = l.getPreferredSize();
         d.setWidth(Math.max(d.getWidth(), minWidth));
         l.setPreferredSize(d);
-        pair.addComponent(BorderLayout.WEST,l);
+        pair.addComponent(BorderLayout.WEST, l);
         pair.addComponent(BorderLayout.CENTER, c);
         return pair;
     }
-    
-      /**
+
+    /**
      * Helper method that allows us to create a pair of components label and the given
      * component in a horizontal layout
      */
-     protected Container createPair(String label, Component c) {
-         return createPair(label,c,0);
-     }
-    
-     public void cleanup() {
-     }
+    protected Container createPair(String label, Component c) {
+        return createPair(label, c, 0);
+    }
+
+    public void cleanup() {
+    }
 
     public Form getForm() {
         return mForm;

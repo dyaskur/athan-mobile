@@ -1,8 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+//    Athan Mobile - Prayer Times Software
+//    Copyright (C) 2011 - Saad BENBOUZID
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package athan.src.Client;
 
 import athan.src.Factory.Preferences;
@@ -19,16 +29,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Accès aux éléments graphiques de la page principale
+ * Classe utilisée en singleton pour l'acccès aux éléments graphiques
+ * de la page principale {@link MainForm}.
  *
- * @author BENBOUZID
+ * @author Saad BENBOUZID
  */
 public class VuePrincipale extends AthanConstantes {
 
     private PrieresJournee mPrieresJournee;
     private boolean mProchainePriereRenseignee;
     private String[] mHorairesPrieres;
-
     private Calendar mHoraireDernierAppel;
 
     public VuePrincipale() {
@@ -48,20 +58,13 @@ public class VuePrincipale extends AthanConstantes {
 
             if (estMinuitPile(pDate) || pForcerCalcul) {
 
-                sLatitude = ServiceFactory.getFactory().getPreferences()
-                                .get(Preferences.sLatitude);
-                sLongitude = ServiceFactory.getFactory().getPreferences()
-                                    .get(Preferences.sLongitude);
-                formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                    .get(Preferences.sFormatHoraire));
-                methodeJuridiqueAsr = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                    .get(Preferences.sMethodeJuridiqueAsr));
-                decalageHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                    .get(Preferences.sDecalageHoraire));
-                calculationMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                    .get(Preferences.sCalculationMethod));
-                customParams = ServiceFactory.getFactory().getPreferences()
-                                    .getCalculationCustomParams();
+                sLatitude = ServiceFactory.getFactory().getPreferences().get(Preferences.sLatitude);
+                sLongitude = ServiceFactory.getFactory().getPreferences().get(Preferences.sLongitude);
+                formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sFormatHoraire));
+                methodeJuridiqueAsr = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sMethodeJuridiqueAsr));
+                decalageHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sDecalageHoraire));
+                calculationMethod = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sCalculationMethod));
+                customParams = ServiceFactory.getFactory().getPreferences().getCalculationCustomParams();
 
                 // Calcul des prières
                 SalaahTimeCalculator calc = new SalaahTimeCalculator();
@@ -70,9 +73,9 @@ public class VuePrincipale extends AthanConstantes {
                 calc.setTimeFormat(formatHoraire);
 
                 mHorairesPrieres = calc.getPrayerTimes(pDate,
-                                                Double.parseDouble(sLatitude),
-                                                Double.parseDouble(sLongitude),
-                                                new Integer(SalaahTimeCalculator.getTimeZone() + decalageHoraire));
+                        Double.parseDouble(sLatitude),
+                        Double.parseDouble(sLongitude),
+                        new Integer(SalaahTimeCalculator.getTimeZone() + decalageHoraire));
 
                 // Simulation
 //                Calendar calsimul = Calendar.getInstance();
@@ -88,14 +91,14 @@ public class VuePrincipale extends AthanConstantes {
 //                mHorairesPrieres[1] = hh + ":" + mm;
 
                 mPrieresJournee = new PrieresJournee(
-                         pDate,
-                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.IMSAK], formatHoraire),
-                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.FAJR], formatHoraire),
-                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.SUNRISE], formatHoraire),
-                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.DOHR], formatHoraire),
-                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.ASR], formatHoraire),
-                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.MAGHRIB], formatHoraire),
-                         new Horaire(mHorairesPrieres[SalaahTimeCalculator.ISHAA], formatHoraire));
+                        pDate,
+                        new Horaire(mHorairesPrieres[SalaahTimeCalculator.IMSAK], formatHoraire),
+                        new Horaire(mHorairesPrieres[SalaahTimeCalculator.FAJR], formatHoraire),
+                        new Horaire(mHorairesPrieres[SalaahTimeCalculator.SUNRISE], formatHoraire),
+                        new Horaire(mHorairesPrieres[SalaahTimeCalculator.DOHR], formatHoraire),
+                        new Horaire(mHorairesPrieres[SalaahTimeCalculator.ASR], formatHoraire),
+                        new Horaire(mHorairesPrieres[SalaahTimeCalculator.MAGHRIB], formatHoraire),
+                        new Horaire(mHorairesPrieres[SalaahTimeCalculator.ISHAA], formatHoraire));
 
                 // Affecte l'horaire du dernier appel à l'heure courante
                 // Ce qui permet par ailleurs de ne pas sonner dès le
@@ -106,8 +109,7 @@ public class VuePrincipale extends AthanConstantes {
                 mHoraireDernierAppel = cal;
 
             } else {
-                formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences()
-                                    .get(Preferences.sFormatHoraire));
+                formatHoraire = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sFormatHoraire));
 
                 mPrieresJournee.setDateJour(pDate);
             }
@@ -141,13 +143,12 @@ public class VuePrincipale extends AthanConstantes {
     }
 
     private boolean faireSonner(String pPreferenceKey) {
-        return (Integer.parseInt(ServiceFactory.getFactory()
-                .getPreferences().get(pPreferenceKey)) == StringOutilClient.TRUE);
+        return (Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(pPreferenceKey)) == StringOutilClient.TRUE);
     }
 
     private boolean traiterAlarmePriere(Calendar pHeureCourante,
-                                        Horaire pHoraire,
-                                        String pPreferenceKey) {
+            Horaire pHoraire,
+            String pPreferenceKey) {
 
         boolean retour = false;
 
@@ -185,20 +186,17 @@ public class VuePrincipale extends AthanConstantes {
     private void renseignerLieu() {
 
         String lieu = "";
-        
+
         try {
-            String ville = ServiceFactory.getFactory().getPreferences()
-                                     .get(Preferences.sCityName);
+            String ville = ServiceFactory.getFactory().getPreferences().get(Preferences.sCityName);
             if (!StringOutilClient.isEmpty(ville)) {
                 lieu += ville;
             }
-            String region = ServiceFactory.getFactory().getPreferences()
-                                     .get(Preferences.sRegionName);
+            String region = ServiceFactory.getFactory().getPreferences().get(Preferences.sRegionName);
             if (!StringOutilClient.isEmpty(region)) {
                 lieu += ", " + region;
             }
-            String pays = ServiceFactory.getFactory().getPreferences()
-                                     .get(Preferences.sCountryName);
+            String pays = ServiceFactory.getFactory().getPreferences().get(Preferences.sCountryName);
             if (!StringOutilClient.isEmpty(pays)) {
                 lieu += ", " + pays;
             }
@@ -225,9 +223,9 @@ public class VuePrincipale extends AthanConstantes {
             Main.getMainForm().getLabelLibelleDate().setText(dateJour[0]);
             // Jour de la semaine
             Main.getMainForm().getLabelLibelleJourSemaine().setText(dateJour[1]);
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             exc.printStackTrace();
-        }        
+        }
     }
 
     private void renseignerPrieres(boolean pIsHeureCourante) {
@@ -236,38 +234,38 @@ public class VuePrincipale extends AthanConstantes {
 
         Main.getMainForm().getLabelHoraireImsak().setText(mPrieresJournee.getImsak().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireImsak(),
-                    mPrieresJournee.getImsak().isEstProchaine(),
-                    false); // afin de ne pas compter l'Imsak comme une prière
+                mPrieresJournee.getImsak().isEstProchaine(),
+                false); // afin de ne pas compter l'Imsak comme une prière
 
         Main.getMainForm().getLabelHoraireSohb().setText(mPrieresJournee.getSobh().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireSohb(),
-                    mPrieresJournee.getSobh().isEstProchaine(),
-                    pIsHeureCourante);
+                mPrieresJournee.getSobh().isEstProchaine(),
+                pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireChourouk().setText(mPrieresJournee.getChourouk().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireChourouk(),
-                    mPrieresJournee.getChourouk().isEstProchaine(),
-                    false); // afin de ne pas compter le Chourouk comme une prière
+                mPrieresJournee.getChourouk().isEstProchaine(),
+                false); // afin de ne pas compter le Chourouk comme une prière
 
         Main.getMainForm().getLabelHoraireDohr().setText(mPrieresJournee.getDohr().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireDohr(),
-                    mPrieresJournee.getDohr().isEstProchaine(),
-                    pIsHeureCourante);
+                mPrieresJournee.getDohr().isEstProchaine(),
+                pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireAsr().setText(mPrieresJournee.getAsr().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireAsr(),
-                    mPrieresJournee.getAsr().isEstProchaine(),
-                    pIsHeureCourante);
+                mPrieresJournee.getAsr().isEstProchaine(),
+                pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireMaghreb().setText(mPrieresJournee.getMaghreb().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireMaghreb(),
                 mPrieresJournee.getMaghreb().isEstProchaine(),
-                    pIsHeureCourante);
+                pIsHeureCourante);
 
         Main.getMainForm().getLabelHoraireIshaa().setText(mPrieresJournee.getIshaa().getHoraireFormate());
         changerFontPriere(Main.getMainForm().getLabelHoraireIshaa(),
-                    mPrieresJournee.getIshaa().isEstProchaine(),
-                    pIsHeureCourante);
+                mPrieresJournee.getIshaa().isEstProchaine(),
+                pIsHeureCourante);
     }
 
     private void changerFontPriere(Label pLabel, boolean pIsProchaine, boolean pIsHeureCourante) {
@@ -283,7 +281,7 @@ public class VuePrincipale extends AthanConstantes {
         Calendar cal = Calendar.getInstance();
         cal.setTime(pDate);
         return cal.get(Calendar.HOUR_OF_DAY) == 0
-                 && cal.get(Calendar.MINUTE) == 0
-                 && cal.get(Calendar.SECOND) == 0;
+                && cal.get(Calendar.MINUTE) == 0
+                && cal.get(Calendar.SECOND) == 0;
     }
 }

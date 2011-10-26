@@ -1,6 +1,18 @@
-/*
- * Copyright © 2008, 2010, Oracle and/or its affiliates. All rights reserved
- */
+//    Athan Mobile - Prayer Times Software
+//    Copyright (C) 2011 - Saad BENBOUZID
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package athan.src.Client;
 
 import athan.src.Factory.Preferences;
@@ -31,7 +43,8 @@ import javax.microedition.media.PlayerListener;
 import javax.microedition.media.control.VolumeControl;
 
 /**
- * Fenêtre principale
+ * Fenêtre principale qui contient principalement les horaires des prières
+ * ainsi que la navigation dans les jours et l'accès aux menus de configuration.
  * 
  * @author Saad BENBOUZID
  */
@@ -119,10 +132,6 @@ public class MainForm extends Menu {
     private void editerLabelLibelleDate(Label la) {
         la.setAlignment(Label.CENTER);
         la.setUIID(UIID_LABEL_CURRENT_DATE);
-        //la.setGrowByContent(true);
-        //mTextAreaLibelleJour.setColumns(2);
-        //mTextAreaLibelleDate.setRows(3);
-        //la.setEditable(false);
         la.setFocusable(false);
         la.setPreferredH(HAUTEUR_LABEL_DATE);
     }
@@ -131,14 +140,7 @@ public class MainForm extends Menu {
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
-        if (Main.isTactile()) {
-            f.setTactileTouch(true);
-            f.setSmoothScrolling(true);
-        } else {
-            f.setTactileTouch(false);
-            f.setSmoothScrolling(false);
-            f.setFocusScrolling(true);
-        }
+        applyTactileSettings(f);
 
         // Conteneur du haut : lieu + home
         mLabelLieu = new Label("");

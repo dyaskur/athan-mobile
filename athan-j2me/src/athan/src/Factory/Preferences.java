@@ -1,7 +1,18 @@
-/*
- * Gère les sauvegardes et chargements des préférences utilisateurs
- */
-
+//    Athan Mobile - Prayer Times Software
+//    Copyright (C) 2011 - Saad BENBOUZID
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package athan.src.Factory;
 
 import athan.src.SalaahCalc.SalaahTimeCalculator;
@@ -14,7 +25,8 @@ import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
 
 /**
- * Sauvegardes et restauration des préférences
+ * Gestion de la sauvegarde et de la restauration des préférences utilisateurs
+ * pour l'ensemble de l'application.
  *
  * @author Saad BENBOUZID
  */
@@ -22,13 +34,10 @@ public class Preferences {
 
     public static final String LANGUE_FR = "fr";
     public static final String LANGUE_EN = "en";
-
     public static final String MODE_NONE = "N";
     public static final String MODE_FLASH = "V";
     public static final String MODE_SONG = "S";
-
     public static final String RECORD_STORE_NAME = "preferences";
-    
     public static final String sCountryName = "countryName";
     public static final String sRegionName = "regionName";
     public static final String sCityName = "cityName";
@@ -56,7 +65,6 @@ public class Preferences {
     public static final String sAlertIshaa = "alertIshaa";
     public static final String sAlertMode = "alertMode";
     public static final String sAlertFile = "alertFile";
-
     private String mRecordStoreName;
     private Hashtable mHashtable;
 
@@ -95,10 +103,10 @@ public class Preferences {
         retour.setMaghrebValue(lMaghrebValue);
         retour.setIshaaSelector(lIshaaSelector);
         retour.setIshaaValue(lIshaaValue);
-        
+
         return retour;
     }
-    
+
     public void set(String key, String value) {
         mHashtable.put(key, value);
         System.out.println("Attribut \"" + key + "\" changé en \""
@@ -129,7 +137,7 @@ public class Preferences {
                 if (!StringOutilClient.isEmpty(value)) {
                     put(name, value);
                     System.out.println("Attribut \"" + name + "\" chargé en \""
-                        + value + "\"");
+                            + value + "\"");
                 }
             }
         } finally {
@@ -217,4 +225,3 @@ public class Preferences {
         return retour;
     }
 }
-

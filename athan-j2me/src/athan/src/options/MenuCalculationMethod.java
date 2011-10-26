@@ -1,6 +1,18 @@
-/*
- * Copyright © 2008, 2010, Oracle and/or its affiliates. All rights reserved
- */
+//    Athan Mobile - Prayer Times Software
+//    Copyright (C) 2011 - Saad BENBOUZID
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package athan.src.options;
 
 import athan.src.Client.AthanException;
@@ -10,6 +22,7 @@ import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Outils.StringOutilClient;
 import athan.src.SalaahCalc.CalculationMethods;
+import athan.src.SalaahCalc.SalaahTimeCalculator;
 import athan.src.microfloat.Real;
 import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
@@ -30,7 +43,7 @@ import com.sun.lwuit.table.TableLayout;
 import java.util.Date;
 
 /**
- * Menu méthode de calcul
+ * Menu méthodes de calcul.
  * 
  * @author Saad BENBOUZID
  */
@@ -79,6 +92,7 @@ public class MenuCalculationMethod extends Menu {
 
         if (mChoixMethode.getSelectedIndex()
                 != CalculationMethods.Custom.getValue()) {
+
             mFajrAngle.setEditable(false);
             mImsakSelector.setEnabled(false);
             mImsakValue.setEditable(false);
@@ -87,77 +101,47 @@ public class MenuCalculationMethod extends Menu {
             mIshaaSelector.setEnabled(false);
             mIshaaValue.setEditable(false);
 
+            int methode = CalculationMethods.Jafari.getValue();
+
             switch (mChoixMethode.getSelectedIndex()) {
                 // Jafari
                 case 0:
-                    mFajrAngle.setText("16");
-                    mImsakSelector.setSelectedIndex(0);
-                    mImsakValue.setText("19.5");
-                    mMaghrebSelector.setSelectedIndex(0);
-                    mMaghrebValue.setText("4");
-                    mIshaaSelector.setSelectedIndex(0);
-                    mIshaaValue.setText("14");
+                    methode = CalculationMethods.Jafari.getValue();
                     break;
                 // Karachi
                 case 1:
-                    mFajrAngle.setText("18");
-                    mImsakSelector.setSelectedIndex(0);
-                    mImsakValue.setText("19.5");
-                    mMaghrebSelector.setSelectedIndex(1);
-                    mMaghrebValue.setText("0");
-                    mIshaaSelector.setSelectedIndex(0);
-                    mIshaaValue.setText("18");
+                    methode = CalculationMethods.Karachi.getValue();
                     break;
                 // ISNA
                 case 2:
-                    mFajrAngle.setText("15");
-                    mImsakSelector.setSelectedIndex(0);
-                    mImsakValue.setText("19.5");
-                    mMaghrebSelector.setSelectedIndex(1);
-                    mMaghrebValue.setText("0");
-                    mIshaaSelector.setSelectedIndex(0);
-                    mIshaaValue.setText("15");
+                    methode = CalculationMethods.ISNA.getValue();
                     break;
                 // MWL
                 case 3:
-                    mFajrAngle.setText("18");
-                    mImsakSelector.setSelectedIndex(0);
-                    mImsakValue.setText("19.5");
-                    mMaghrebSelector.setSelectedIndex(1);
-                    mMaghrebValue.setText("0");
-                    mIshaaSelector.setSelectedIndex(0);
-                    mIshaaValue.setText("17");
+                    methode = CalculationMethods.MWL.getValue();
                     break;
                 // Makkah
                 case 4:
-                    mFajrAngle.setText("19");
-                    mImsakSelector.setSelectedIndex(0);
-                    mImsakValue.setText("19.5");
-                    mMaghrebSelector.setSelectedIndex(1);
-                    mMaghrebValue.setText("0");
-                    mIshaaSelector.setSelectedIndex(1);
-                    mIshaaValue.setText("90");
+                    methode = CalculationMethods.Makkah.getValue();
                     break;
                 // Egypt
                 case 5:
-                    mFajrAngle.setText("19.5");
-                    mImsakSelector.setSelectedIndex(0);
-                    mImsakValue.setText("19.5");
-                    mMaghrebSelector.setSelectedIndex(1);
-                    mMaghrebValue.setText("0");
-                    mIshaaSelector.setSelectedIndex(0);
-                    mIshaaValue.setText("17.5");
+                    methode = CalculationMethods.Egypt.getValue();
                     break;
                 default:
-                    mFajrAngle.setText("");
-                    mImsakSelector.setSelectedIndex(1);
-                    mImsakValue.setText("");
-                    mMaghrebSelector.setSelectedIndex(0);
-                    mMaghrebValue.setText("");
-                    mIshaaSelector.setSelectedIndex(0);
-                    mIshaaValue.setText("");
+                    // type inconnu...
+                    methode = CalculationMethods.Jafari.getValue();
                     break;
             }
+
+            mFajrAngle.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_FAJR_ANGLE]));
+            mImsakSelector.setSelectedIndex((int) new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_IMSAK_SELECTOR]);
+            mImsakValue.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_IMSAK_VALUE]));
+            mMaghrebSelector.setSelectedIndex((int) new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_MAGHRIB_SELECTOR]);
+            mMaghrebValue.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_MAGHRIB_VALUE]));
+            mIshaaSelector.setSelectedIndex((int) new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_ISHAA_SELECTOR]);
+            mIshaaValue.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_ISHAA_VALUE]));
+
         } else {
             mFajrAngle.setEditable(true);
             mImsakSelector.setEnabled(true);

@@ -38,24 +38,23 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 /**
- * LWUIT Demo main Form, this special Form allows drag&drop on top of it. 
- * 
+ * LWUIT Demo main Form, this special Form allows drag&drop on top of it.
+ * <br>
+ * <b>Fenêtre modifiée de la démo officielle LWUIT pour contenir les fenêtres de menus de l'application.</b>
  * 
  * @author Chen Fishbein
+ * @author Saad BENBOUZID
  */
 public class OptionForm extends Form
-           implements ActionListener {
-    
+        implements ActionListener {
+
     private static final int EXIT_COMMAND = 1;
     private static final int BACK_COMMAND = 3;
     private static final int ABOUT_COMMAND = 4;
-
     private static final Command exitCommand = new Command("", EXIT_COMMAND);
     private static final Command backCommand = new Command("", BACK_COMMAND);
     private static final Command aboutCommand = new Command("", ABOUT_COMMAND);
-
     private static Transition sComponentTransitions;
-
     private static final Menu[] DEMOS = new Menu[]{
         new MenuAlerts(),
         new MenuLocation(),
@@ -65,11 +64,9 @@ public class OptionForm extends Form
         new MenuCalculationMethod(),
         new MenuPrayers()
     };
-
     private Hashtable mDemosHash = new Hashtable();
     private int mCols = 0;
     private int mElementWidth;
-
     private Component dragged;
     private int oldx;
     private int oldy;
@@ -81,24 +78,23 @@ public class OptionForm extends Form
     private MainForm parent;
     private boolean dragMode;
     private Menu mCurrentMenu;
-
     private ResourceReader RESOURCES;
 
     public static void setTransition(Transition in, Transition out) {
         /*
         if (Main.getOptionForm() != null) {
-            Main.getMainForm().setTransitionInAnimator(in);
-            Main.getMainForm().setTransitionOutAnimator(out);
+        Main.getMainForm().setTransitionInAnimator(in);
+        Main.getMainForm().setTransitionOutAnimator(out);
         }
-        */
+         */
     }
 
     public static void setMenuTransition(Transition in, Transition out) {
         /*
         if (Main.getOptionForm() != null) {
-            Main.getMainForm().setMenuTransitions(in, out);
+        Main.getMainForm().setMenuTransitions(in, out);
         }
-        */
+         */
         UIManager.getInstance().getLookAndFeel().setDefaultMenuTransitionIn(in);
         UIManager.getInstance().getLookAndFeel().setDefaultMenuTransitionOut(out);
     }
@@ -123,12 +119,12 @@ public class OptionForm extends Form
         RESOURCES = ServiceFactory.getFactory().getResourceReader();
         setTitle(RESOURCES.get("OptionForm"));
     }
-    
+
     public void setDragMode(boolean dragMode) {
         this.dragMode = dragMode;
         setSmoothScrolling(!dragMode);
     }
-    
+
     protected void sizeChanged(int w, int h) {
         super.sizeChanged(w, h);
         try {
@@ -139,7 +135,7 @@ public class OptionForm extends Form
     }
 
     public void pointerDragged(int x, int y) {
-        if(!dragMode) {
+        if (!dragMode) {
             super.pointerDragged(x, y);
             return;
         }
@@ -160,7 +156,7 @@ public class OptionForm extends Form
             g.translate(dragged.getX(), dragged.getY());
 
             //remove all occurences of the rare color
-            draggedImage = draggedImage.modifyAlpha((byte)0x55, 0xff7777);
+            draggedImage = draggedImage.modifyAlpha((byte) 0x55, 0xff7777);
 
             oldx = x;
             oldy = y;
@@ -168,6 +164,7 @@ public class OptionForm extends Form
             draggedy = dragged.getAbsoluteY();
             dragged.setVisible(false);
             Painter glassPane = new Painter() {
+
                 public void paint(Graphics g, Rectangle rect) {
                     if (draggedImage != null) {
                         g.drawImage(draggedImage, draggedx, draggedy);
@@ -191,7 +188,7 @@ public class OptionForm extends Form
     }
 
     public void pointerReleased(int x, int y) {
-        if(!dragMode) {
+        if (!dragMode) {
             super.pointerReleased(x, y);
             return;
         }
@@ -223,11 +220,11 @@ public class OptionForm extends Form
             layoutContainer();
 
             LayoutAnimation la = new LayoutAnimation(dragged);
-            int dx= Math.max(0, draggedx - (dragged.getAbsoluteX() - dragged.getX()));
-            int dy= Math.max(0, draggedy - (dragged.getAbsoluteY() - dragged.getY()));
-            dx= Math.min(dx, getContentPane().getPreferredW() - dragged.getWidth());
-            dy= Math.min(dy, getContentPane().getPreferredH() - dragged.getHeight());
-            
+            int dx = Math.max(0, draggedx - (dragged.getAbsoluteX() - dragged.getX()));
+            int dy = Math.max(0, draggedy - (dragged.getAbsoluteY() - dragged.getY()));
+            dx = Math.min(dx, getContentPane().getPreferredW() - dragged.getWidth());
+            dy = Math.min(dy, getContentPane().getPreferredH() - dragged.getHeight());
+
             la.setFrom(new Dimension(dx, dy));
             la.setTo(new Dimension(dragged.getX(), dragged.getY()));
             la.init();
@@ -249,6 +246,7 @@ public class OptionForm extends Form
         }
 
         registerAnimated(new Animation() {
+
             public boolean animate() {
                 boolean retVal = false;
                 for (int i = 0; i < cmps.size(); i++) {
@@ -260,7 +258,7 @@ public class OptionForm extends Form
                 //if finished
                 if (!retVal) {
                     deregisterAnimated(this);
-                    if(getContentPane().contains(dragged)){
+                    if (getContentPane().contains(dragged)) {
                         removeComponent(dragged);
                         addComponent(index, dragged);
                     }
@@ -317,7 +315,7 @@ public class OptionForm extends Form
                 Main.getMainForm().run(Main.exitCommand,
                         Main.getMainForm().getMain(),
                         false);
-                
+
                 // On démarre le timer
                 Main.demarrerTimer();
 
@@ -328,7 +326,7 @@ public class OptionForm extends Form
                 mCurrentMenu.cleanup();
                 this.show();
                 break;
-                
+
             case ABOUT_COMMAND:
                 Form aboutForm = new Form(RESOURCES.get("Menu.About"));
                 aboutForm.setScrollable(false);
@@ -376,8 +374,9 @@ public class OptionForm extends Form
             b.setTextPosition(Label.BOTTOM);
             this.addComponent(b);
             b.addActionListener(bAListner);
-            final OptionForm self = this ;
+            final OptionForm self = this;
             b.addFocusListener(new FocusListener() {
+
                 public void focusGained(Component cmp) {
                     if (sComponentTransitions != null) {
                         self.replace(b, b, sComponentTransitions);
@@ -394,7 +393,7 @@ public class OptionForm extends Form
 
         //Calculate the number of columns for the GridLayout according to the
         //screen width
-        if(mCols == 0) {
+        if (mCols == 0) {
             mCols = width / mElementWidth;
         }
         int rows = DEMOS.length / mCols;
@@ -407,7 +406,7 @@ public class OptionForm extends Form
         exitCommand.setCommandName(RESOURCES.get("Command.Back"));
         aboutCommand.setCommandName(RESOURCES.get("Command.About"));
         backCommand.setCommandName(RESOURCES.get("Command.Back"));
-        
+
         this.addCommand(exitCommand);
         this.addCommand(aboutCommand);
         this.setBackCommand(exitCommand);
@@ -427,6 +426,7 @@ public class OptionForm extends Form
     }
 
     class LayoutAnimation implements Animation {
+
         private Component toAnimate;
         private Dimension from;
         private Dimension to;
