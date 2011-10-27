@@ -134,13 +134,14 @@ public class MenuCalculationMethod extends Menu {
                     break;
             }
 
-            mFajrAngle.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_FAJR_ANGLE]));
-            mImsakSelector.setSelectedIndex((int) new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_IMSAK_SELECTOR]);
-            mImsakValue.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_IMSAK_VALUE]));
-            mMaghrebSelector.setSelectedIndex((int) new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_MAGHRIB_SELECTOR]);
-            mMaghrebValue.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_MAGHRIB_VALUE]));
-            mIshaaSelector.setSelectedIndex((int) new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_ISHAA_SELECTOR]);
-            mIshaaValue.setText(Double.toString(new SalaahTimeCalculator().getMethodParams()[methode][SalaahTimeCalculator.POS_ISHAA_VALUE]));
+            double[] valeurs = new SalaahTimeCalculator().getMethodParams()[methode];
+            mFajrAngle.setText(Double.toString(valeurs[SalaahTimeCalculator.POS_FAJR_ANGLE]));
+            mImsakSelector.setSelectedIndex((int) valeurs[SalaahTimeCalculator.POS_IMSAK_SELECTOR]);
+            mImsakValue.setText(Double.toString(valeurs[SalaahTimeCalculator.POS_IMSAK_VALUE]));
+            mMaghrebSelector.setSelectedIndex((int) valeurs[SalaahTimeCalculator.POS_MAGHRIB_SELECTOR]);
+            mMaghrebValue.setText(Double.toString(valeurs[SalaahTimeCalculator.POS_MAGHRIB_VALUE]));
+            mIshaaSelector.setSelectedIndex((int) valeurs[SalaahTimeCalculator.POS_ISHAA_SELECTOR]);
+            mIshaaValue.setText(Double.toString(valeurs[SalaahTimeCalculator.POS_ISHAA_VALUE]));
 
         } else {
             mFajrAngle.setEditable(true);
