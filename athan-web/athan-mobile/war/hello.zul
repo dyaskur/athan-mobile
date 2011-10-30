@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title="Hello"?>
+
+<?script src="./test.js"?>
+
+<window title="My First window at GAE" border="normal" width="200px"
+	apply="com.athan.mobile.HelloViewCtrl">
+	Hello, World!
+	<button id="btnHi" label="Hi" />
+	<label id="lblGreetings" value="initValue"></label>
+</window>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+
+	<!-- <listener> -->
+	<!-- <description>Desktop Init</description> -->
+	<!-- <listener-class>com.athan.mobile.init.MyDesktopInit</listener-class> -->
+	<!-- </listener> -->
+
+	<!-- clustering environment -->
+	<system-config>
+		<disable-event-thread />
+		<ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory
+		</ui-factory-class>
+	</system-config>
+
+	<!-- clustering environment (available since ZK 5.0.8) -->
+	<listener>
+		<listener-class>org.zkoss.zkplus.cluster.ClusterSessionPatch
+		</listener-class>
+	</listener>
+
+	<!-- disable the use of LogManager (prohibited by GAE) -->
+	<library-property>
+		<name>org.zkoss.util.logging.hierarchy.disabled</name>
+		<value>true</value>
+	</library-property>
+
+	<!-- To disable the serialization of BeanShell method(s) -->
+	<library-property>
+		<name>org.zkoss.zk.scripting.bsh.method.serializable</name>
+		<value>false</value>
+	</library-property>
+
+	<!-- GAE doesn't allow user's thread -->
+	<client-config>
+		<resend-delay>-1</resend-delay>
+	</client-config>
+</zk>

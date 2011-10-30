@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+composer5.zul
+
+	Purpose:
+		
+	Description:
+		
+Copyright (C) 2009 Potix Corporation. All Rights Reserved.
+
+-->
+<window title="composer5 example" border="normal" apply="com.athan.mobile.Composer5">
+	Please enter the first and last name below.
+    <grid>
+        <rows>
+            <row>First Name: <textbox id="firstName"/></row>
+            <row>Last Name: <textbox id="lastName"/></row>
+            <row>Full Name: <label id="fullName"/></row>
+        </rows>
+    </grid>
+    This is an example copied from
+	<toolbarbutton href="http://docs.zkoss.org/wiki/ZK_MVC_Made_Easy#Get_Rid_of_Those_.22forward.22_Attributes" label="here"/>.
+</window>
