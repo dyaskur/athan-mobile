@@ -6,11 +6,83 @@
 	<!-- <listener-class>com.athan.mobile.init.MyDesktopInit</listener-class> -->
 	<!-- </listener> -->
 
+	<listener>
+		<listener-class>com.athan.mobile.init.MyLocaleProvider
+		</listener-class>
+	</listener>
+
 	<!-- clustering environment -->
 	<system-config>
 		<disable-event-thread />
 		<ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory
 		</ui-factory-class>
+		<!-- labels -->
+		<!-- home -->
+		<label-location>/WEB-INF/labels/home/i3-home.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/home/i3-home_fr.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/home/i3-home_fr_FR.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/home/i3-home_en.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/home/i3-home_en_EN.properties
+		</label-location>
+		<!-- download -->
+		<label-location>/WEB-INF/labels/download/i3-download.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/download/i3-download_fr.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/download/i3-download_fr_FR.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/download/i3-download_en.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/download/i3-download_en_EN.properties
+		</label-location>
+		<!-- news -->
+		<label-location>/WEB-INF/labels/news/i3-news.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/news/i3-news_fr.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/news/i3-news_fr_FR.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/news/i3-news_en.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/news/i3-news_en_EN.properties
+		</label-location>
+		<!-- resources -->
+		<label-location>/WEB-INF/labels/resources/i3-resources.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/resources/i3-resources_fr.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/resources/i3-resources_fr_FR.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/resources/i3-resources_en.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/resources/i3-resources_en_EN.properties
+		</label-location>
+		<!-- contribute -->
+		<label-location>/WEB-INF/labels/contribute/i3-contribute.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/contribute/i3-contribute_fr.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/contribute/i3-contribute_fr_FR.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/contribute/i3-contribute_en.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/contribute/i3-contribute_en_EN.properties
+		</label-location>
+		<!-- about -->
+		<label-location>/WEB-INF/labels/about/i3-about.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/about/i3-about_fr.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/about/i3-about_fr_FR.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/about/i3-about_en.properties
+		</label-location>
+		<label-location>/WEB-INF/labels/about/i3-about_en_EN.properties
+		</label-location>
 	</system-config>
 
 	<!-- clustering environment (available since ZK 5.0.8) -->
