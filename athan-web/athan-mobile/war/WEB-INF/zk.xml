@@ -7,8 +7,7 @@
 	<!-- </listener> -->
 
 	<listener>
-		<listener-class>com.athan.mobile.init.MyLocaleProvider
-		</listener-class>
+		<listener-class>com.athan.mobile.init.LocalesProvider</listener-class>
 	</listener>
 
 	<!-- clustering environment -->

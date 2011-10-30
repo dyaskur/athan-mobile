@@ -15,21 +15,61 @@
 	<classpathentry kind="lib" path="D:/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.3.0.r34v201104261921/gwt-2.3.0/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="lib" path="D:/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.3.0.r34v201104261921/gwt-2.3.0/validation-api-1.0.0.GA.jar" sourcepath="D:/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.3.0.r34v201104261921/gwt-2.3.0/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zcommon.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zk.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zul.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zweb.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/bsh.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/commons-fileupload.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/commons-io.jar"/>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zcommon.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zk.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zul.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/zweb.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/bsh.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/commons-fileupload.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/commons-io.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/groovy.jar"/>
 	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/jruby.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/js.jar"/>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/js.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/breeze.jar"/>
 	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/ckez.jar"/>
 	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/fckez.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/sapphire.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/silvertail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/sapphire.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/BENBOUZID/Documents/NetBeansProjects/athan-mobile/athan-mobile/war/WEB-INF/lib/silvertail.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.zkoss.org/javadoc/latest/zk/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>

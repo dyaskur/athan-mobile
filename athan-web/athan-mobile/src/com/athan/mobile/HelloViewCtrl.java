@@ -13,6 +13,9 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Html;
 import org.zkoss.zul.Label;
 
+import com.athan.mobile.init.CookieUtil;
+import com.athan.mobile.init.LocalesProvider;
+
 /**
  * 
  * @author BENBOUZID
@@ -39,8 +42,6 @@ public class HelloViewCtrl extends GenericForwardComposer {
 		html.setContent("<div id=\"saad\">Hello !!</div>");
 		html.setParent(comp);
 		
-//		Labels.reset();
-		
 		Clients.alert("1. " + Locales.getCurrent().getCountry());
 		Clients.alert("2. " + Locales.getCurrent().getLanguage());
 		Clients.alert("3. " + Labels.getLabel("monlabel"));
@@ -53,25 +54,13 @@ public class HelloViewCtrl extends GenericForwardComposer {
 	}
 	
 	public void onClick$btnEN() {
-		session.setAttribute(Attributes.PREFERRED_LOCALE, Locale.ENGLISH);
-		StringBuffer sb = new StringBuffer();
-		sb.append("\nA. " + Labels.getLabel("monlabel"));
-		//Labels.reset();
-//		sb.append("\nB. " + Labels.getLabel("monlabel"));
+		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME, LocalesProvider.LOCALE_EN);
 		Executions.sendRedirect(""); //reload the same page
-		sb.append("\nC. " + Labels.getLabel("monlabel"));
-		Clients.alert(sb.toString());
 	}
 	
 	public void onClick$btnFR() {
-		session.setAttribute(Attributes.PREFERRED_LOCALE, new Locale("fr","FR"));
-		StringBuffer sb = new StringBuffer();
-		sb.append("\nA. " + Labels.getLabel("monlabel"));
-		//Labels.reset();
-//		sb.append("\nB. " + Labels.getLabel("monlabel"));
+		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME, LocalesProvider.LOCALE_FR);
 		Executions.sendRedirect(""); //reload the same page
-		sb.append("\nC. " + Labels.getLabel("monlabel"));
-		Clients.alert(sb.toString());
 	}
 
 }
