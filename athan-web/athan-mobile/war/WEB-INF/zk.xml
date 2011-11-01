@@ -96,6 +96,12 @@
 		<value>true</value>
 	</library-property>
 
+	<!-- Charset -->
+	<library-property>
+		<name>org.zkoss.util.label.classpath.charset</name>
+		<value>UTF-8</value>
+	</library-property>	
+
 	<!-- To disable the serialization of BeanShell method(s) -->
 	<library-property>
 		<name>org.zkoss.zk.scripting.bsh.method.serializable</name>

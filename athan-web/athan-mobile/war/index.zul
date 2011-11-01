@@ -1,20 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<?page title="Hello"?>
+<?page title="${c:l('application.title')}"?>
 
 <?script src="./test.js"?>
 
-<window title="My First window at GAE" border="normal" width="200px"
-	apply="com.athan.mobile.HelloViewCtrl">
-	Hello, World!
-	<button id="btnHi" label="Hi" />
-	<button id="btnFR" label="Français" />
-	<button id="btnEN" label="Anglais" />
-	<vbox>
-		<label id="lblGreetings" value="initValue"></label>
-		<label value="${labels.monlabel}"></label>
-		${labels.monlabel}
-		<label value="${c:l('monlabel')}"></label>
-		${c:l('monlabel')}
-	</vbox>
+<window border="none" width="1024px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
+	
+	<style src="./css/index.css" />
+	
+	<vbox >
+	
+		<hbox width="1024px" zclass="header_layout">
+			<image src="https://www.google.com/images/logos/app_engine_logo_sm.gif"></image>
+			<button id="english_flag" zclass="english_flag-btn"></button>
+			<button id="french_flag" zclass="french_flag-btn"></button>
+		</hbox>
+	
+		<tabbox width="1024px" sclass="nav_tabs">
+	        <tabs id="tabs">
+	            <tab label="${c:l('tab.home')}" />
+	            <tab label="${c:l('tab.download')}" />
+	            <tab label="${c:l('tab.news')}" />
+	            <tab label="${c:l('tab.resources')}" />
+	            <tab label="${c:l('tab.contribute')}" />
+	            <tab label="${c:l('tab.about')}" />
+	        </tabs>
+	        <tabpanels>
+	            <tabpanel>
+	                <toolbar width="1024px">
+	                    <toolbarbutton label="${c:l('tab.home.introduction')}" />
+	                    <toolbarbutton label="${c:l('tab.home.features')}" />
+	                </toolbar>
+	            </tabpanel>
+	            <tabpanel>
+	                <toolbar width="1024px">
+	                    <toolbarbutton label="${c:l('tab.download.current')}" />
+	                    <toolbarbutton label="${c:l('tab.download.changelogs')}" />
+	                </toolbar>
+	            </tabpanel>
+	            <tabpanel>
+	                <toolbar width="1024px">
+	                    <toolbarbutton label="${c:l('tab.news.releases')}" />
+	                    <toolbarbutton label="${c:l('tab.news.nextfeatures')}" />
+	                </toolbar>
+	            </tabpanel>
+	            <tabpanel>
+	                <toolbar width="1024px">
+	                    <toolbarbutton label="${c:l('tab.resources.soundfiles')}" />
+	                    <toolbarbutton label="${c:l('tab.resources.project')}" />
+	                </toolbar>
+	            </tabpanel>
+	            <tabpanel>
+	                <toolbar width="1024px">
+	                    <toolbarbutton label="${c:l('tab.contribute.feedbacks')}" />
+	                </toolbar>
+	            </tabpanel>
+	            <tabpanel>
+	                <toolbar width="1024px">
+	                    <toolbarbutton label="${c:l('tab.about.contributor')}" />
+	                    <toolbarbutton label="${c:l('tab.about.credits')}" />
+	                    <toolbarbutton label="${c:l('tab.about.acknowledgment')}" />
+	                </toolbar>
+	            </tabpanel>
+	        </tabpanels>
+	    </tabbox>
+	    
+	    <separator height="10px"></separator>
+    
+    <hlayout>
+        <label id="current_category" sclass="nav_text nav_category" >Our Product</label>
+        <label sclass="nav_text">-</label>
+        <label id="current_subpage" sclass="nav_text">Index</label>
+    </hlayout>
+    
+    </vbox>
 </window>

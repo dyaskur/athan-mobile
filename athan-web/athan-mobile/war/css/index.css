@@ -1,0 +1,58 @@
+.window {
+	margin-top:50px;
+}
+
+.nav-tabs {
+	
+}
+
+.nav_tabs .z-tabpanel {
+	padding: 0;
+	border-bottom: 0 none;	
+}
+
+.nav_tabs .z-tabpanels .z-toolbarbutton-cnt {
+	padding: 4px;
+}
+
+.nav_category {
+	cursor: pointer;
+}
+
+.nav_text {
+	color: #696569;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.header_layout {
+}
+.header_layout-sep {
+	width: 0px;
+}
+
+.english_flag-btn {
+	height: 26px;
+    padding-top: 0;
+    text-align: center;
+    background-image: url('/images/english_flag.png');
+    background-color: #FFFFFF;
+    background-position: 3px -2px;
+    background-repeat:no-repeat;
+    width: 34px;
+    position: absolute;
+    right: 46px;
+}
+
+.french_flag-btn {
+	height: 26px;
+    padding-top: 0;
+    text-align: center;
+    background-image: url('/images/french_flag.png');
+    background-color: #FFFFFF;
+    background-position: 3px -2px;
+    background-repeat:no-repeat;
+    width: 34px;
+    position: absolute;
+    right: 4px;
+}
