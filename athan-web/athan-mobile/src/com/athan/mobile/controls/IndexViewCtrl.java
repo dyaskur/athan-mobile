@@ -3,7 +3,6 @@ package com.athan.mobile.controls;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Button;
 
 import com.athan.mobile.init.CookieUtil;
 import com.athan.mobile.init.LocalesProvider;
@@ -16,9 +15,6 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Button english_flag;
-	private Button french_flag;
-
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);

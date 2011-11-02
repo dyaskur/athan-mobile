@@ -4,17 +4,20 @@
 
 <?script src="./test.js"?>
 
-<window border="none" width="1024px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
+<window border="none" width="960px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
 	
 	<style src="./css/index.css" />
 	
 	<vbox >
 	
-		<hbox width="1024px" zclass="header_layout">
-			<image src="https://www.google.com/images/logos/app_engine_logo_sm.gif"></image>
+		<hbox width="960px" zclass="header_layout">
+			<image src="/images/site_header.jpg"></image>
 			<button id="english_flag" zclass="english_flag-btn"></button>
 			<button id="french_flag" zclass="french_flag-btn"></button>
 		</hbox>
+		
+		<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg" />
+		<label value="${labels.application.header}" height="30px" width="100%" zclass="software_purpose_header" />
 	
 		<tabbox width="1024px" sclass="nav_tabs">
 	        <tabs id="tabs">
@@ -25,21 +28,21 @@
 	            <tab label="${c:l('tab.contribute')}" />
 	            <tab label="${c:l('tab.about')}" />
 	        </tabs>
-	        <tabpanels>
+	        <tabpanels width="960px">
 	            <tabpanel>
-	                <toolbar width="1024px">
+	                <toolbar width="960px">
 	                    <toolbarbutton label="${c:l('tab.home.introduction')}" />
 	                    <toolbarbutton label="${c:l('tab.home.features')}" />
 	                </toolbar>
 	            </tabpanel>
 	            <tabpanel>
-	                <toolbar width="1024px">
+	                <toolbar width="960px">
 	                    <toolbarbutton label="${c:l('tab.download.current')}" />
 	                    <toolbarbutton label="${c:l('tab.download.changelogs')}" />
 	                </toolbar>
 	            </tabpanel>
 	            <tabpanel>
-	                <toolbar width="1024px">
+	                <toolbar width="960px">
 	                    <toolbarbutton label="${c:l('tab.news.releases')}" />
 	                    <toolbarbutton label="${c:l('tab.news.nextfeatures')}" />
 	                </toolbar>
@@ -51,12 +54,12 @@
 	                </toolbar>
 	            </tabpanel>
 	            <tabpanel>
-	                <toolbar width="1024px">
+	                <toolbar width="960px">
 	                    <toolbarbutton label="${c:l('tab.contribute.feedbacks')}" />
 	                </toolbar>
 	            </tabpanel>
 	            <tabpanel>
-	                <toolbar width="1024px">
+	                <toolbar width="960px">
 	                    <toolbarbutton label="${c:l('tab.about.contributor')}" />
 	                    <toolbarbutton label="${c:l('tab.about.credits')}" />
 	                    <toolbarbutton label="${c:l('tab.about.acknowledgment')}" />
@@ -64,8 +67,6 @@
 	            </tabpanel>
 	        </tabpanels>
 	    </tabbox>
-	    
-	    <separator height="10px"></separator>
     
     <hlayout>
         <label id="current_category" sclass="nav_text nav_category" >Our Product</label>

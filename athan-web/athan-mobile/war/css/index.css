@@ -1,9 +1,10 @@
 .window {
 	margin-top:50px;
+	background-color: #EDE9DA;
 }
 
 .nav-tabs {
-	
+	background-color: #EDE9DA;
 }
 
 .nav_tabs .z-tabpanel {
@@ -25,34 +26,116 @@
 	font-weight: bold;
 }
 
+.z-vbox-sep {
+	background-color: #EDE9DA;
+}
+
+.z-tabs {
+	background-color: #EDE9DA;
+}
+
 .header_layout {
 }
 .header_layout-sep {
 	width: 0px;
 }
 
+.english_flag-btn,
+.french_flag-btn {
+	height: 22px;
+	padding-top: 0;
+	text-align: center;
+	background-color: #FFFFFF;
+	background-position: 1px -4px;
+	background-repeat: no-repeat;
+	width: 30px;
+	position: absolute;
+	top: 4px;
+}
+
 .english_flag-btn {
-	height: 26px;
-    padding-top: 0;
-    text-align: center;
-    background-image: url('/images/english_flag.png');
-    background-color: #FFFFFF;
-    background-position: 3px -2px;
-    background-repeat:no-repeat;
-    width: 34px;
-    position: absolute;
-    right: 46px;
+	background-image: url('/images/english_flag.png');
+	right: 38px;
 }
 
 .french_flag-btn {
-	height: 26px;
-    padding-top: 0;
-    text-align: center;
-    background-image: url('/images/french_flag.png');
-    background-color: #FFFFFF;
-    background-position: 3px -2px;
-    background-repeat:no-repeat;
-    width: 34px;
-    position: absolute;
+	background-image: url('/images/french_flag.png');
     right: 4px;
+}
+
+.software_purpose_header {
+	font-family: verdana, arial,sans-serif;
+	font-size: 14pt;
+	font-weight: bold;
+	position: absolute;
+	top: 111px;
+	padding-left: 15px;
+	color: #C5E0DB;
+}
+
+.software_purpose_header_bg {
+	position: absolute;
+	top: 105px;
+	height: 42px;
+	width: 960px;
+}
+
+.z-tab,
+.z-tab-seld {
+	width: 147px;
+	height: 38px;
+}
+
+LI.z-tab,
+.z-tab-seld {
+	margin-right: 4px;
+}
+
+.z-tab .z-tab-text,
+.z-tab-seld .z-tab-text {
+	color: #555;
+	cursor: default;
+	font-weight: bold;
+	font-style: normal;
+	font-family: verdana, arial,sans-serif;
+	font-size: 14px;
+	white-space: nowrap;
+	text-align: center;
+	padding-top: 11px;
+	padding-bottom: 11px;
+}
+
+.z-tab .z-tab-text {
+	cursor: pointer;
+}
+
+.z-tab-seld .z-tab-text {
+	cursor: default;
+}
+
+.z-tab-hl {
+	position: relative;
+	padding-left: 10px;
+	background: transparent no-repeat 0 -128px;
+	background-image: url(/images/tab-corner.png);
+	-moz-outline: none;
+	outline: none;
+	cursor: pointer;
+	height: 40px;
+}
+
+.z-tab-hr {
+	background: transparent no-repeat right -128px;
+	background-image: url(/images/tab-corner.png);
+	padding-right: 10px;
+	display: block;
+}
+
+.z-tab-hm {
+	padding-left: 2px;
+	padding-right: 1px;
+	overflow: hidden;
+	cursor: pointer;
+	background: transparent repeat-x 0 -128px;
+	background-image: url(/images/tab-corner-repeat.png);
 }
