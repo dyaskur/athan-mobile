@@ -1,0 +1,9 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="" border="none" apply="com.athan.mobile.controls.home.IntroductionViewCtrl">
+
+		<style src="./css/home/features.css" />
+
+		Introduction
+	</window>
+</zk>

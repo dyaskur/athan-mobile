@@ -4,13 +4,13 @@
 
 <?script src="./test.js"?>
 
-<window border="none" width="960px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
+<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
 	
 	<style src="./css/index.css" />
 	
 	<vbox >
 	
-		<hbox width="960px" zclass="header_layout">
+		<hbox width="${indexWindow.width}" zclass="header_layout">
 			<image src="/images/site_header.jpg"></image>
 			<button id="english_flag" zclass="english_flag-btn"></button>
 			<button id="french_flag" zclass="french_flag-btn"></button>
@@ -19,59 +19,56 @@
 		<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg" />
 		<label value="${labels.application.header}" height="30px" width="100%" zclass="software_purpose_header" />
 	
-		<tabbox width="1024px" sclass="nav_tabs">
+		<tabbox width="${indexWindow.width}" sclass="nav_tabs">
 	        <tabs id="tabs">
-	            <tab label="${c:l('tab.home')}" />
-	            <tab label="${c:l('tab.download')}" />
-	            <tab label="${c:l('tab.news')}" />
-	            <tab label="${c:l('tab.resources')}" />
-	            <tab label="${c:l('tab.contribute')}" />
-	            <tab label="${c:l('tab.about')}" />
+	            <tab label="${c:l('tab.home')}" onClick="Events.postEvent(Events.ON_CLICK, homeIntroduction, null);" />
+	            <tab label="${c:l('tab.download')}" onClick="Events.postEvent(Events.ON_CLICK, downloadCurrent, null);" />
+	            <tab label="${c:l('tab.news')}" onClick="Events.postEvent(Events.ON_CLICK, newsReleases, null);" />
+	            <tab label="${c:l('tab.resources')}" onClick="Events.postEvent(Events.ON_CLICK, resourcesSoundfiles, null);" />
+	            <tab label="${c:l('tab.contribute')}" onClick="Events.postEvent(Events.ON_CLICK, contributeFeedbacks, null);" />
+	            <tab label="${c:l('tab.about')}" onClick="Events.postEvent(Events.ON_CLICK, aboutContributor, null);" />
 	        </tabs>
-	        <tabpanels width="960px">
-	            <tabpanel>
-	                <toolbar width="960px">
-	                    <toolbarbutton label="${c:l('tab.home.introduction')}" />
-	                    <toolbarbutton label="${c:l('tab.home.features')}" />
+	        <tabpanels id="tabPanels" width="${indexWindow.width}">
+	            <tabpanel id="tbpHome">
+	                <toolbar width="${indexWindow.width}">
+	                    <toolbarbutton id="homeIntroduction" label="${c:l('tab.home.introduction')}" />
+	                    <toolbarbutton id="homeFeatures" label="${c:l('tab.home.features')}" />
 	                </toolbar>
 	            </tabpanel>
-	            <tabpanel>
-	                <toolbar width="960px">
-	                    <toolbarbutton label="${c:l('tab.download.current')}" />
-	                    <toolbarbutton label="${c:l('tab.download.changelogs')}" />
+	            <tabpanel id="tbpDownload">
+	                <toolbar width="${indexWindow.width}">
+	                    <toolbarbutton id="downloadCurrent" label="${c:l('tab.download.current')}" />
+	                    <toolbarbutton id="downloadChangelogs" label="${c:l('tab.download.changelogs')}" />
 	                </toolbar>
 	            </tabpanel>
-	            <tabpanel>
-	                <toolbar width="960px">
-	                    <toolbarbutton label="${c:l('tab.news.releases')}" />
-	                    <toolbarbutton label="${c:l('tab.news.nextfeatures')}" />
+	            <tabpanel id="tbpNews">
+	                <toolbar width="${indexWindow.width}">
+	                    <toolbarbutton id="newsReleases" label="${c:l('tab.news.releases')}" />
+	                    <toolbarbutton id="newsNextfeatures" label="${c:l('tab.news.nextfeatures')}" />
 	                </toolbar>
 	            </tabpanel>
-	            <tabpanel>
-	                <toolbar width="1024px">
-	                    <toolbarbutton label="${c:l('tab.resources.soundfiles')}" />
-	                    <toolbarbutton label="${c:l('tab.resources.project')}" />
+	            <tabpanel id="tbpResources">
+	                <toolbar width="${indexWindow.width}">
+	                    <toolbarbutton id="resourcesSoundfiles" label="${c:l('tab.resources.soundfiles')}" />
+	                    <toolbarbutton id="resourcesProject" label="${c:l('tab.resources.project')}" />
 	                </toolbar>
 	            </tabpanel>
-	            <tabpanel>
-	                <toolbar width="960px">
-	                    <toolbarbutton label="${c:l('tab.contribute.feedbacks')}" />
+	            <tabpanel id="tbpContribute">
+	                <toolbar width="${indexWindow.width}">
+	                    <toolbarbutton id="contributeFeedbacks" label="${c:l('tab.contribute.feedbacks')}" />
 	                </toolbar>
 	            </tabpanel>
-	            <tabpanel>
-	                <toolbar width="960px">
-	                    <toolbarbutton label="${c:l('tab.about.contributor')}" />
-	                    <toolbarbutton label="${c:l('tab.about.credits')}" />
-	                    <toolbarbutton label="${c:l('tab.about.acknowledgment')}" />
+	            <tabpanel id="tbpAbout">
+	                <toolbar width="${indexWindow.width}">
+	                    <toolbarbutton id="aboutContributor" label="${c:l('tab.about.contributor')}" />
+	                    <toolbarbutton id="aboutCredits" label="${c:l('tab.about.credits')}" />
+	                    <toolbarbutton id="aboutAcknowledgment" label="${c:l('tab.about.acknowledgment')}" />
 	                </toolbar>
 	            </tabpanel>
 	        </tabpanels>
 	    </tabbox>
     
-    <hlayout>
-        <label id="current_category" sclass="nav_text nav_category" >Our Product</label>
-        <label sclass="nav_text">-</label>
-        <label id="current_subpage" sclass="nav_text">Index</label>
+    <hlayout id="tabContent">
     </hlayout>
     
     </vbox>
