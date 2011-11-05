@@ -8,6 +8,8 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
  */
 public class NextfeaturesViewCtrl extends GenericForwardComposer {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);

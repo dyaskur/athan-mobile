@@ -4,6 +4,8 @@
 
 		<style src="./css/home/features.css" />
 
-		Introduction
+
+		<label value="${c:l('tab.home.introduction')}" />
+		
 	</window>
 </zk>
