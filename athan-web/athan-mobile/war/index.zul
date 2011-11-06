@@ -21,12 +21,12 @@
 	
 		<tabbox width="${indexWindow.width}" sclass="nav_tabs">
 	        <tabs id="tabs">
-	            <tab label="${c:l('tab.home')}" onClick="Events.postEvent(Events.ON_CLICK, homeIntroduction, null);" />
-	            <tab label="${c:l('tab.download')}" onClick="Events.postEvent(Events.ON_CLICK, downloadCurrent, null);" />
-	            <tab label="${c:l('tab.news')}" onClick="Events.postEvent(Events.ON_CLICK, newsReleases, null);" />
-	            <tab label="${c:l('tab.resources')}" onClick="Events.postEvent(Events.ON_CLICK, resourcesSoundfiles, null);" />
-	            <tab label="${c:l('tab.contribute')}" onClick="Events.postEvent(Events.ON_CLICK, contributeFeedbacks, null);" />
-	            <tab label="${c:l('tab.about')}" onClick="Events.postEvent(Events.ON_CLICK, aboutContributor, null);" />
+	            <tab id="tabHome" label="${c:l('tab.home')}" />
+	            <tab id="tabDownload" label="${c:l('tab.download')}" />
+	            <tab id="tabNews" label="${c:l('tab.news')}" />
+	            <tab id="tabResources" label="${c:l('tab.resources')}" />
+	            <tab id="tabContribute" label="${c:l('tab.contribute')}" />
+	            <tab id="tabAbout" label="${c:l('tab.about')}" />
 	        </tabs>
 	        <tabpanels id="tabPanels" width="${indexWindow.width}">
 	            <tabpanel id="tbpHome">
@@ -69,6 +69,7 @@
 	    </tabbox>
     
     <hlayout id="tabContent">
+    	<label value="Copyright (c) 2011"></label>
     </hlayout>
     
     </vbox>

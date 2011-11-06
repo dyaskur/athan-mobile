@@ -1,11 +1,27 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="" border="none" apply="com.athan.mobile.controls.home.IntroductionViewCtrl">
+	<window title="" border="none"
+		apply="com.athan.mobile.controls.home.IntroductionViewCtrl"
+		sclass="window_introduction" height="600px" contentStyle="overflow:auto;">
 
-		<style src="./css/home/features.css" />
+		<style src="./css/home/home.css" />
 
+		<hbox>
 
-		<label value="${c:l('tab.home.introduction')}" />
-		
+			<vbox>
+				<label value="${c:l('introduction.main')}"
+					multiline="true" zclass="intro_main_content" />
+				<hbox>
+					<label value="${c:l('introduction.technical1')}"
+						multiline="true" zclass="intro_technical_content1" />
+					<label value="${c:l('introduction.technical2')}"
+						multiline="true" zclass="intro_technical_content2" />
+				</hbox>
+			</vbox>
+
+			<image src="/images/home/mobiles_1.png" class="mobiles_1" />
+
+		</hbox>
+
 	</window>
 </zk>

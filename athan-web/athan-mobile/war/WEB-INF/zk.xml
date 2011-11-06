@@ -100,7 +100,23 @@
 	<library-property>
 		<name>org.zkoss.util.label.classpath.charset</name>
 		<value>UTF-8</value>
-	</library-property>	
+	</library-property>
+	
+	<!-- Styling -->
+	<library-property>
+		<name>org.zkoss.zul.theme.fontFamilyT</name>
+		<value>Verdana</value>
+	</library-property>
+	<library-property>
+		<name>org.zkoss.zul.theme.fontFamilyC</name>
+		<value>Verdana</value>
+	</library-property>
+	
+	<!--  ZK Theme --> 
+	<library-property>
+        <name>org.zkoss.theme.preferred</name>
+        <value>breeze</value>
+    </library-property>
 
 	<!-- To disable the serialization of BeanShell method(s) -->
 	<library-property>

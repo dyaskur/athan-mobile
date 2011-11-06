@@ -1,0 +1,51 @@
+/* Windows */
+.window_introduction {
+	background-color: #EDE9DA;
+	padding-left: 30px;
+}
+
+.window_features {
+	background-color: #EDE9DA;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+
+/* Images */
+.mobiles_1 {
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-left: 15px;
+}
+
+/* Texts */
+.intro_main_content,
+.intro_technical_content1,
+.intro_technical_content2 {
+	position: relative;
+	font-family: verdana, arial,sans-serif;
+	font-size: 14px;
+}
+
+.intro_main_content {
+	top: 33px;
+}
+
+.intro_technical_content1,
+.intro_technical_content2 {
+	top: 106px;
+}
+
+.intro_technical_content1 {
+	font-weight: bold;
+	font-style: italic; 
+}
+
+.intro_technical_content2 {
+	font-weight: normal;
+	font-style: italic; 
+}
+
+.tab_features {
+	margin-top: 30px;
+}

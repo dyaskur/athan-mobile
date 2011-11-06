@@ -1,8 +1,10 @@
 package com.athan.mobile.controls;
 
+import org.zkoss.lang.Library;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.api.Tab;
 import org.zkoss.zul.api.Tabpanel;
 
 import com.athan.mobile.controls.enums.EnumZulTab;
@@ -26,19 +28,26 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	private Tabpanel tbpResources;
 	private Tabpanel tbpContribute;
 	private Tabpanel tbpAbout;
+	
+	private EnumZulTab currentTab = null;
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 
 		me = comp;
-
-		// SHows the home tab
+		
+		// Shows the home tab
 		init();
 	}
 
 	public void loadZulChild(EnumZulTab zulTab, Component container) {
 
+		if (currentTab != null && currentTab.equals(zulTab)) {
+			// Exits if it's current tab
+			return;
+		}
+		
 		// Removes previous tab content
 		for (EnumZulTab en : EnumZulTab.values()) {
 			if (container.hasFellow(en.id())) {
@@ -53,6 +62,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		// Adds created tab
 		if (zulContent != null) {
 			zulContent.setParent(container);
+			currentTab = zulTab;
 		}
 	}
 
@@ -104,8 +114,35 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		loadZulChild(EnumZulTab.ABOUT_ACKNOWLEDGMENT, tbpAbout);
 	}
 
-	private void init() {
+	public void onClick$tabHome() {
 		onClick$homeIntroduction();
+	}
+
+	public void onClick$tabDownload() {
+		onClick$downloadCurrent();
+	}
+
+	public void onClick$tabNews() {
+		onClick$newsReleases();
+	}
+
+	public void onClick$tabResources() {
+		onClick$resourcesSoundfiles();
+	}
+
+	public void onClick$tabContribute() {
+		onClick$contributeFeedbacks();
+	}
+
+	public void onClick$tabAbout() {
+		onClick$aboutContributor();
+	}
+
+	/**
+	 * Initialization function
+	 */
+	private void init() {
+		onClick$tabHome();
 	}
 
 	public void onClick$english_flag() {
