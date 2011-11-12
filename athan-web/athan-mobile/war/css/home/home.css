@@ -21,7 +21,8 @@
 /* Texts */
 .intro_main_content,
 .intro_technical_content1,
-.intro_technical_content2 {
+.intro_technical_content2,
+.features_main_content {
 	position: relative;
 	font-family: verdana, arial,sans-serif;
 	font-size: 14px;
@@ -48,4 +49,10 @@
 
 .tab_features {
 	margin-top: 30px;
+}
+
+.features_main_content {
+	top: 20px;
+	font-style: italic;
+	font-size: 1.1em;
 }

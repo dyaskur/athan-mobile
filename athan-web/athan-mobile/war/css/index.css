@@ -14,7 +14,11 @@
 }
 
 .nav_tabs .z-tabpanels .z-toolbarbutton-cnt {
-	padding: 4px;
+	font-size: 1.2em;
+	padding-right: 2px;
+	padding-left: 2px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 }
 
 .nav_category {
@@ -69,7 +73,7 @@
 	font-size: 14pt;
 	font-weight: bold;
 	position: absolute;
-	top: 111px;
+	top: 113px;
 	padding-left: 15px;
 	color: #C5E0DB;
 }

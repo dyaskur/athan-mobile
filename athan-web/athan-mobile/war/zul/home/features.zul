@@ -7,28 +7,36 @@
 		contentStyle="overflow:auto;">
 
 		<style src="./css/home/home.css" />
+		
+<!-- 		<vbox> -->
+			<hbox style="width:100%;" pack="center">
+				<label value="${c:l('features.main')}"
+					multiline="true" zclass="features_main_content" />
+			</hbox>
 
-		<tabbox id="tabFeatures" width="100%" height="500px"
-			mold="accordion" class="tab_features">
-			<tabs>
-				<tab label="${c:l('features.tab.location')}" />
-				<tab label="${c:l('features.tab.alerts')}" />
-				<tab label="${c:l('features.tab.calculation')}" />
-				<tab label="${c:l('features.tab.compass')}" />
-				<tab label="${c:l('features.tab.language')}" />
-				<tab label="${c:l('features.tab.localtime')}" />
-				<tab label="${c:l('features.tab.prayers')}" />
-			</tabs>
-			<tabpanels>
-				<tabpanel>Location</tabpanel>
-				<tabpanel>Alerts</tabpanel>
-				<tabpanel>Calculation</tabpanel>
-				<tabpanel>Compass</tabpanel>
-				<tabpanel>Language</tabpanel>
-				<tabpanel>Local time</tabpanel>
-				<tabpanel>Prayers</tabpanel>
-			</tabpanels>
-		</tabbox>
+			<tabbox id="tabFeatures" width="100%" height="500px"
+				mold="accordion" class="tab_features">
+				<tabs>
+					<tab label="${c:l('features.tab.location')}" />
+					<tab label="${c:l('features.tab.alerts')}" />
+					<tab label="${c:l('features.tab.calculation')}" />
+					<tab label="${c:l('features.tab.compass')}" />
+					<tab label="${c:l('features.tab.language')}" />
+					<tab label="${c:l('features.tab.localtime')}" />
+					<tab label="${c:l('features.tab.prayers')}" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>Location</tabpanel>
+					<tabpanel>Alerts</tabpanel>
+					<tabpanel>Calculation</tabpanel>
+					<tabpanel>Compass</tabpanel>
+					<tabpanel>Language</tabpanel>
+					<tabpanel>Local time</tabpanel>
+					<tabpanel>Prayers</tabpanel>
+				</tabpanels>
+			</tabbox>
+		
+<!-- 		</vbox> -->
 
 	</window>
 </zk>
