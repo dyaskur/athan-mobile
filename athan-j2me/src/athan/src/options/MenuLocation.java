@@ -115,9 +115,9 @@ public class MenuLocation extends Menu {
         mTextFieldNomPays = new TextField();
         editerTextField(mTextFieldNomPays, TextField.LEFT);
         mTextFieldLat = new TextField();
-        editerTextField(mTextFieldNomVille, TextField.RIGHT);
+        editerTextField(mTextFieldLat, TextField.RIGHT);
         mTextFieldLng = new TextField();
-        editerTextField(mTextFieldNomVille, TextField.RIGHT);
+        editerTextField(mTextFieldLng, TextField.RIGHT);
 
         ctnInfosLocalisation.addComponent(getCtnLayoutLocalisation(tblLayoutInfosLocalisation, 100, 4),
                 new Label());

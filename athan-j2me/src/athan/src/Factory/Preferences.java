@@ -187,15 +187,15 @@ public class Preferences {
     private void loadDefaults() throws RecordStoreException {
         put(sCountryName, "France");
         put(sRegionName, "Rhône-Alpes");
-        put(sCityName, "Villeurbanne");
-        put(sLatitude, "45.7667");
-        put(sLongitude, "4.8833");
+        put(sCityName, "Lyon");
+        put(sLatitude, "45.75");
+        put(sLongitude, "4.85");
         put(sTimeZone, String.valueOf(SalaahTimeCalculator.getTimeZone()));
         put(sDecalageHoraire, "0");
         put(sFormatHoraire, "0");
         put(sMethodeJuridiqueAsr, "0");
         put(sCalculationMethod, "6");
-        put(sCustomFajrAngle, "12");
+        put(sCustomFajrAngle, "13");
         put(sCustomImsakSelector, "1");
         put(sCustomImsakValue, "15");
         put(sCustomMaghrebSelector, "1");
@@ -204,7 +204,7 @@ public class Preferences {
         put(sCustomIshaaValue, "12");
         put(sDisplayImsak, Integer.toString(StringOutilClient.FALSE));
         put(sDisplayChourouk, Integer.toString(StringOutilClient.FALSE));
-        put(sLangue, LANGUE_FR);
+        put(sLangue, LANGUE_EN);
         put(sAlertSobh, Integer.toString(StringOutilClient.TRUE));
         put(sAlertDohr, Integer.toString(StringOutilClient.FALSE));
         put(sAlertAsr, Integer.toString(StringOutilClient.FALSE));

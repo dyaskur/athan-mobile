@@ -26,6 +26,7 @@ import com.sun.lwuit.impl.midp.VKBImplementationFactory;
 import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
 import java.util.Date;
+import javax.microedition.lcdui.game.GameCanvas;
 
 /**
  * Point d'entrée de l'application, regroupant les méthodes de d'instanciation

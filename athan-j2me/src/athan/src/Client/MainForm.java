@@ -224,7 +224,7 @@ public class MainForm extends Menu {
             }
         };
 
-        mCmdDateSuivante = new Command("Jour +") {// new Command(RESOURCES.get("NextDay")) {
+        mCmdDateSuivante = new Command(RESOURCES.get("NextDay")) {
 
             public void actionPerformed(ActionEvent ae) {
                 // On interrompt le timer et affiche les résultats pour une date donnée
@@ -388,9 +388,9 @@ public class MainForm extends Menu {
         retour.setUIID(UIID_LABEL_PRAYER_NAME);
         retour.getUnselectedStyle().setBgTransparency(0);
         retour.getSelectedStyle().setBgTransparency(0);
-        if (!Main.isTactile()) {
-            retour.setFocusable(true);
-        }
+//        if (!Main.isTactile()) {
+        retour.setFocusable(true);
+//        }
         return retour;
     }
 
