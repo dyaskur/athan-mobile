@@ -23,18 +23,40 @@ public class FeaturesViewCtrl extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		
-		tabFeatures.setSelectedIndex(0);
-		
 		// Call the first tab panel handler
-		onSelect$tabLocation();
+		onSelect$tabMainFt();
 
 	}
-
+	
+	public void onSelect$tabMainFt() {
+		allowZoomerJS();
+	}
+	
 	public void onSelect$tabLocation() {
 		allowZoomerJS();
 	}
-
+	
 	public void onSelect$tabAlerts() {
+		allowZoomerJS();
+	}
+
+	public void onSelect$tabCalculation() {
+		allowZoomerJS();
+	}
+	
+	public void onSelect$tabCompass() {
+		allowZoomerJS();
+	}
+	
+	public void onSelect$tabLanguage() {
+		allowZoomerJS();
+	}
+	
+	public void onSelect$tabLocaltime() {
+		allowZoomerJS();
+	}
+	
+	public void onSelect$tabPrayers() {
 		allowZoomerJS();
 	}
 

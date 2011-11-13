@@ -5,6 +5,10 @@
 			speedRemove : 400,
 			altAnim : false,
 			speedTitle : 400,
+			b_W : "100px",
+			b_H : "100px",
+			h_W : "200px",
+			h_H : "200px",
 			debug : false
 		}, b);
 		var d = $.extend(c, b);
@@ -22,6 +26,10 @@
 			e('speedRemove: ' + d.speedRemove);
 			e('altAnim: ' + d.altAnim);
 			e('speedTitle: ' + d.speedTitle);
+			e('b_W: ' + d.b_W);
+			e('b_H: ' + d.b_H);
+			e('h_W: ' + d.h_W);
+			e('h_H: ' + d.h_H);
 			return false
 		}
 		if (d.debug == undefined) {
@@ -29,6 +37,10 @@
 			e('speedRemove: ' + d.speedRemove);
 			e('altAnim: ' + d.altAnim);
 			e('speedTitle: ' + d.speedTitle);
+			e('b_W: ' + d.b_W);
+			e('b_H: ' + d.b_H);
+			e('h_W: ' + d.h_W);
+			e('h_H: ' + d.h_H);
 			return false
 		}
 		if (typeof d.speedView != "undefined"
@@ -39,7 +51,11 @@
 				e('speedView: ' + d.speedView);
 				e('speedRemove: ' + d.speedRemove);
 				e('altAnim: ' + d.altAnim);
-				e('speedTitle: ' + d.speedTitle)
+				e('speedTitle: ' + d.speedTitle);
+				e('b_W: ' + d.b_W);
+				e('b_H: ' + d.b_H);
+				e('h_W: ' + d.h_W);
+				e('h_H: ' + d.h_H);
 			}
 			$(this)
 					.hover(
@@ -53,8 +69,8 @@
 											marginLeft : '-110px',
 											top : '50%',
 											left : '50%',
-											width : '275px',
-											height : '281px',
+											width : d.h_W,
+											height : d.h_H,
 											padding : '20px'
 										}, d.speedView);
 								if (d.altAnim == true) {
@@ -84,8 +100,8 @@
 											marginLeft : '0',
 											top : '0',
 											left : '0',
-											width : '100px',
-											height : '100px',
+											width : d.b_W,
+											height : d.b_H,
 											padding : '5px'
 										}, d.speedRemove);
 								$(this).find('.title').remove()

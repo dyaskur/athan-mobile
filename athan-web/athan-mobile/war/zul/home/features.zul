@@ -9,10 +9,22 @@
 		
 		<script type="text/javascript" src="./js/zoomer.js" />
 		<script type="text/javascript">
-            function allowZoomer() {
-                jq("ul.img_features li").Zoomer({speedView:200,speedRemove:200,altAnim:false,speedTitle:400,debug:false});
-            }
-        </script>      
+			function allowZoomer() {
+				jq("ul.img_features li").Zoomer(
+						{
+							speedView:200,
+							speedRemove:200,
+							altAnim:false,
+							speedTitle:400,
+							b_W:"120px",
+							b_H:"205px",
+							h_W:"220px",
+							h_H:"377px",
+							debug:false
+						}
+				);
+			}
+		</script>
 
 		<style src="./css/home/home.css" />
 		
@@ -24,6 +36,7 @@
 			<tabbox id="tabFeatures" width="100%" height="500px"
 				mold="accordion" class="tab_features">
 				<tabs>
+					<tab id="tabMainFt" label="${c:l('features.tab.mainFt')}" />
 					<tab id="tabLocation" label="${c:l('features.tab.location')}" />
 					<tab id="tabAlerts" label="${c:l('features.tab.alerts')}" />
 					<tab id="tabCalculation" label="${c:l('features.tab.calculation')}" />
@@ -33,19 +46,45 @@
 					<tab id="tabPrayers" label="${c:l('features.tab.prayers')}" />
 				</tabs>
 				<tabpanels>
+					<!-- Main screens -->
 					<tabpanel>
 						
-						<label value="Location" />
-					
-						<h:ul class="img_features">
-				            <h:li>
-				                <image src="/images/home/alerts_1.png" />
-			                </h:li>
-			                <h:li>
-				                <image src="/images/home/alerts_2.png" />
-				            </h:li>
-				        </h:ul>
+						<hbox>
+							<label value="${c:l('features.mainFt.1')}"
+									multiline="true" zclass="features_content" />
+						
+							<h:ul class="img_features">
+					            <h:li>
+					                <h:img src="/images/home/options_1.png" />
+					            </h:li>
+					        </h:ul>
 				        
+				        </hbox>
+				        
+			        </tabpanel>
+					
+					<!-- Location -->
+					<tabpanel>
+								
+						<hbox>
+						<window border="none" position="left,top" width="450px" height="300px" sclass="features_window">
+							<label value="${c:l('features.location.1')}"
+								multiline="true" zclass="features_content" />
+						</window>
+						
+<!-- 						<window border="normal" position="right,top" width="100%"> -->
+							<h:ul class="img_features">
+					            <h:li>
+					                <h:img src="/images/home/alerts_1.png" />
+				                </h:li>
+				                <h:li>
+					                <image src="/images/home/alerts_2.png" />
+					            </h:li>
+					        </h:ul>	
+<!-- 						</window> -->
+						</hbox>
+						
+						
 			        </tabpanel>
 					
 					<tabpanel>Alerts</tabpanel>
