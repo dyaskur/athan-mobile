@@ -115,7 +115,7 @@
 	<!--  ZK Theme --> 
 	<library-property>
         <name>org.zkoss.theme.preferred</name>
-        <value>breeze</value>
+        <value>silvertail</value>
     </library-property>
 
 	<!-- To disable the serialization of BeanShell method(s) -->

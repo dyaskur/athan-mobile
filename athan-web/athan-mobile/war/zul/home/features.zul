@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<zk>
+<zk xmlns:h="native">
+
 	<window border="none"
 		apply="com.athan.mobile.controls.home.FeaturesViewCtrl"
 		sclass="window_features" height="600px"
 		contentStyle="overflow:auto;">
+		
+		<script type="text/javascript" src="./js/zoomer.js" />
+		<script type="text/javascript">
+            function allowZoomer() {
+                jq("ul.img_features li").Zoomer({speedView:200,speedRemove:200,altAnim:false,speedTitle:400,debug:false});
+            }
+        </script>      
 
 		<style src="./css/home/home.css" />
 		
-<!-- 		<vbox> -->
 			<hbox style="width:100%;" pack="center">
 				<label value="${c:l('features.main')}"
 					multiline="true" zclass="features_main_content" />
@@ -17,16 +24,30 @@
 			<tabbox id="tabFeatures" width="100%" height="500px"
 				mold="accordion" class="tab_features">
 				<tabs>
-					<tab label="${c:l('features.tab.location')}" />
-					<tab label="${c:l('features.tab.alerts')}" />
-					<tab label="${c:l('features.tab.calculation')}" />
-					<tab label="${c:l('features.tab.compass')}" />
-					<tab label="${c:l('features.tab.language')}" />
-					<tab label="${c:l('features.tab.localtime')}" />
-					<tab label="${c:l('features.tab.prayers')}" />
+					<tab id="tabLocation" label="${c:l('features.tab.location')}" />
+					<tab id="tabAlerts" label="${c:l('features.tab.alerts')}" />
+					<tab id="tabCalculation" label="${c:l('features.tab.calculation')}" />
+					<tab id="tabCompass" label="${c:l('features.tab.compass')}" />
+					<tab id="tabLanguage" label="${c:l('features.tab.language')}" />
+					<tab id="tabLocaltime" label="${c:l('features.tab.localtime')}" />
+					<tab id="tabPrayers" label="${c:l('features.tab.prayers')}" />
 				</tabs>
 				<tabpanels>
-					<tabpanel>Location</tabpanel>
+					<tabpanel>
+						
+						<label value="Location" />
+					
+						<h:ul class="img_features">
+				            <h:li>
+				                <image src="/images/home/alerts_1.png" />
+			                </h:li>
+			                <h:li>
+				                <image src="/images/home/alerts_2.png" />
+				            </h:li>
+				        </h:ul>
+				        
+			        </tabpanel>
+					
 					<tabpanel>Alerts</tabpanel>
 					<tabpanel>Calculation</tabpanel>
 					<tabpanel>Compass</tabpanel>
@@ -35,8 +56,6 @@
 					<tabpanel>Prayers</tabpanel>
 				</tabpanels>
 			</tabbox>
-		
-<!-- 		</vbox> -->
 
 	</window>
 </zk>

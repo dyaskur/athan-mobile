@@ -10,7 +10,6 @@
 	padding-left: 20px;
 }
 
-
 /* Images */
 .mobiles_1 {
 	padding-top: 20px;
@@ -19,12 +18,10 @@
 }
 
 /* Texts */
-.intro_main_content,
-.intro_technical_content1,
-.intro_technical_content2,
-.features_main_content {
+.intro_main_content,.intro_technical_content1,.intro_technical_content2,.features_main_content
+	{
 	position: relative;
-	font-family: verdana, arial,sans-serif;
+	font-family: verdana, arial, sans-serif;
 	font-size: 14px;
 }
 
@@ -32,19 +29,18 @@
 	top: 33px;
 }
 
-.intro_technical_content1,
-.intro_technical_content2 {
+.intro_technical_content1,.intro_technical_content2 {
 	top: 106px;
 }
 
 .intro_technical_content1 {
 	font-weight: bold;
-	font-style: italic; 
+	font-style: italic;
 }
 
 .intro_technical_content2 {
 	font-weight: normal;
-	font-style: italic; 
+	font-style: italic;
 }
 
 .tab_features {
@@ -55,4 +51,36 @@
 	top: 20px;
 	font-style: italic;
 	font-size: 1.1em;
+}
+
+.img_features {
+	padding: 0 80px;
+	zoom: 1;
+}
+
+/*Following CSS refer to Zoomer Gallery's Document'*/
+.img_features li {
+	height: 200px;
+	width: 200px;
+	position: relative;
+	float: left;
+	list-style: none outside none;
+	margin: 30px 30px 0 0;
+}
+
+.img_features li img {
+	width: 200px;
+	height: 200px;
+	border: 1px solid #ddd;
+	padding: 5px;
+	background: #f0f0f0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	-ms-interpolation-mode: bicubic;
+}
+
+.img_features li img {
+	margin-top:15px;
+	border: none;
 }
