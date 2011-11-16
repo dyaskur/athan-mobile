@@ -71,7 +71,7 @@
 											left : '50%',
 											width : d.h_W,
 											height : d.h_H,
-											padding : '20px'
+											padding : '5px'
 										}, d.speedView);
 								if (d.altAnim == true) {
 									var a = $(this).find("img").attr("alt");

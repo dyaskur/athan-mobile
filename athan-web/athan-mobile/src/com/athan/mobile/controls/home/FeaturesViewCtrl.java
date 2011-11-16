@@ -17,14 +17,9 @@ public class FeaturesViewCtrl extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Tabbox tabFeatures;
-
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		
-		// Call the first tab panel handler
-		onSelect$tabMainFt();
 
 	}
 	
