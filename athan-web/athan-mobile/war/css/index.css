@@ -145,3 +145,9 @@ LI.z-tab,
 	background: transparent repeat-x 0 -128px;
 	background-image: url(/images/tab-corner-repeat.png);
 }
+
+.application_footer {
+	margin-right: 30px;
+	font-family: verdana, arial, sans-serif;
+	font-size: 0.7em;
+}

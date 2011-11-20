@@ -68,9 +68,10 @@
 	        </tabpanels>
 	    </tabbox>
     
-    <hlayout id="tabContent">
-    	<label value="Copyright (c) 2011"></label>
-    </hlayout>
+    <hbox style="width:100%;" pack="end">
+		<label value="${c:l('application.footer.credits')}"
+				multiline="false" zclass="application_footer" />
+	</hbox>
     
     </vbox>
 </window>

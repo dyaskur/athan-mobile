@@ -99,7 +99,7 @@
 							<window border="none" position="left,top" width="450px" height="300px" class="features_window">
 								<label value="${c:l('features.calculation.1')}"
 									multiline="true" zclass="features_content" />
-								<a href="${c:l('features.calculation.link')}">${c:l('features.calculation.link')}</a>
+								<a href="${c:l('features.calculation.link')}" target="_blank">${c:l('features.calculation.link')}</a>
 							</window>
 							<h:ul class="img_features">
 					            <h:li>
@@ -116,10 +116,74 @@
 						
 			        </tabpanel>
 					
-					<tabpanel>Compass</tabpanel>
-					<tabpanel>Language</tabpanel>
-					<tabpanel>Local time</tabpanel>
-					<tabpanel>Prayers</tabpanel>
+					<!-- Compass -->
+					<tabpanel>
+								
+						<hbox>
+							<window border="none" position="left,top" width="600px" height="300px" class="features_window">
+								<label value="${c:l('features.compass.1')}"
+									multiline="true" zclass="features_content" />
+							</window>
+							<h:ul class="img_features">
+					            <h:li>
+					                <h:img src="/images/home/compass_1.png" />
+				                </h:li>
+					        </h:ul>
+						</hbox>
+						
+			        </tabpanel>
+			        
+					<!-- Language -->
+					<tabpanel>
+								
+						<hbox>
+							<window border="none" position="left,top" width="600px" height="300px" class="features_window">
+								<label value="${c:l('features.compass.1')}"
+									multiline="true" zclass="features_content" />
+							</window>
+							<h:ul class="img_features">
+					            <h:li>
+					                <h:img src="/images/home/language_1.png" />
+				                </h:li>
+					        </h:ul>
+						</hbox>
+						
+			        </tabpanel>
+			        
+					<!-- Local Time -->
+					<tabpanel>
+								
+						<hbox>
+							<window border="none" position="left,top" width="600px" height="300px" class="features_window">
+								<label value="${c:l('features.localtime.1')}"
+									multiline="true" zclass="features_content" />
+							</window>
+							<h:ul class="img_features">
+					            <h:li>
+					                <h:img src="/images/home/localtime_1.png" />
+				                </h:li>
+					        </h:ul>
+						</hbox>
+						
+			        </tabpanel>
+					
+					<!-- Display (extra times) -->
+					<tabpanel>
+								
+						<hbox>
+							<window border="none" position="left,top" width="600px" height="300px" class="features_window">
+								<label value="${c:l('features.prayers.1')}"
+									multiline="true" zclass="features_content" />
+							</window>
+							<h:ul class="img_features">
+					            <h:li>
+					                <h:img src="/images/home/display_1.png" />
+				                </h:li>
+					        </h:ul>
+						</hbox>
+						
+			        </tabpanel>
+					
 				</tabpanels>
 			</tabbox>
 
