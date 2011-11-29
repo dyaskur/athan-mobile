@@ -35,4 +35,12 @@
         <welcome-file>index.zhtml</welcome-file>
 <!--         <welcome-file>index.html</welcome-file> -->
     </welcome-file-list>
+    <mime-mapping>
+	   <extension>jad</extension>
+	   <mime-type>text/vnd.sun.j2me.app-descriptor</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+	   <extension>jar</extension>
+	   <mime-type>application/java-archive</mime-type>
+	</mime-mapping>
 </web-app>

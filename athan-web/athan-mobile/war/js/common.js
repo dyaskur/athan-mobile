@@ -27,6 +27,7 @@
 
 $(document).ready(function() {
 	jq('ul.img_features li').onShow(function() {
+		//alert('ici');
 		allowZoomer();
 	}, true);
 });

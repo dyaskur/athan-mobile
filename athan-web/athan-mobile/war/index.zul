@@ -2,8 +2,6 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <?page title="${c:l('application.title')}"?>
 
-<?script src="./test.js"?>
-
 <window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
 	
 	<style src="./css/index.css" />
