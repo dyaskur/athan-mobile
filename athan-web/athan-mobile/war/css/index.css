@@ -46,6 +46,25 @@
 }
 
 /* Buttons */
+
+/* Prevents mold outlines */
+.z-button .z-button-tm,
+.z-button .z-button-bm {
+	background-image: none;
+}
+
+.z-button .z-button-cl,
+.z-button .z-button-cr {
+	background-image: none;
+}
+
+.z-button .z-button-tl,
+.z-button .z-button-tr,
+.z-button .z-button-bl,
+.z-button .z-button-br {
+	background-image: none;
+}
+
 .english_flag-btn,
 .french_flag-btn {
 	height: 22px;
@@ -73,14 +92,26 @@
 }
 
 .jad_btn_main {
-    width: 108px;
-    height: 32px;
+    width: 118px;
+    height: 38px;
     position: absolute;
 	left: 10px;
 	top: 10px;
 	font-weight: normal;
 	font-size: 14px;
 	color: black;
+}
+.jad_btn_main .z-button-cm { 
+    background-image : url('/images/jadDownload.png');
+}
+.jad_btn_main .z-button-focus .z-button-cm {
+    background-position: 0 0;
+}
+.jad_btn_main .z-button-over .z-button-cm {
+    background-position: 0 0;
+}
+.jad_btn_main .z-button-clk .z-button-cm {
+    background-position: 0 0;
 }
 
 /* Texts */

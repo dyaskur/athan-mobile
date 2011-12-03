@@ -5,51 +5,65 @@
 }
 
 /* Texts */
-.current_version_header
-.current_date_header {
+.current_version_header,
+.current_version_header_value,
+.current_date_header,
+.current_date_header_value {
 	position: relative;
 	font-family: verdana, arial, sans-serif;
+	font-size: 16px;
 }
-
-.current_version_header {
-	top: 15px;
+.current_version_header,
+.current_version_header_value {
+	top: 20px;
 	font-style: italic;
-	font-size: 1.1em;
+	position: relative;
 }
-
-.current_date_header {
-	top: 15px;
+.current_version_header_value {
+	font-weight: bold;
+	font-style: normal;
+	padding-left: 10px;
+}
+.current_date_header,
+.current_date_header_value {
+	top: 30px;
 	font-style: italic;
-	font-size: 1.1em;
+	position: relative;
+}
+.current_date_header_value {
+	font-weight: bold;
+	font-style: normal;
+	padding-left: 10px;
 }
 
 /* Images */
 .current_qr_code {
 	position: absolute;
-	top: 105px;
+	top: 235px;
 	height: 120px;
 	width: 120px;
+	right: 10px;
 }
 
 /* Buttons */
 .jad_btn {
-    width: 110px;
-    height: 39px;
-    height: 37px\9;
+    position: relative;
+    top: 50px;
+    width: 188px;
+	height: 68px;
 }
 .jad_btn .z-button-cm {
-    height: 31px;
     color: black;
 }
 .jad_btn .z-button-cm { 
     background-image : url('/images/download/jadButton.png');
 }
 .jad_btn .z-button-focus .z-button-cm {
-    background-position: 0 -62px                    
+    background-position: 0 -120px;
 }
 .jad_btn .z-button-over .z-button-cm {
-    background-position: 0 -31px
+    background-position: 0 -60px;
 }
 .jad_btn .z-button-clk .z-button-cm {
-    background-position: 0 -93px                    
+    background-position: 0 -120px;
 }               
