@@ -1,6 +1,8 @@
 package com.athan.mobile.controls;
 
 import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
@@ -24,6 +26,8 @@ import com.athan.mobile.init.LocalesProvider;
 public class IndexViewCtrl extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger LOG = Logger.getLogger(IndexViewCtrl.class.getName());
 
 	private Component me;
 
@@ -50,9 +54,11 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		try {
 			Filedownload.save("/jar/nogps/Athan.jad", "text/vnd.sun.j2me.app-descriptor");
 		} catch (FileNotFoundException exc) {
-			Clients.alert(Labels.getLabel("current.JadFile.error"), StringUtils.EMPTY, Messagebox.ERROR);
+			Clients.alert(Labels.getLabel("current.fileDownload.error"), StringUtils.EMPTY, Messagebox.ERROR);
+			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD", exc);
 		} catch (Exception exc) {
 			exc.printStackTrace();
+			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD", exc);
 		}
 	}
 	

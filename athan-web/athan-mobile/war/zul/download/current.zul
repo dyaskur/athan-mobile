@@ -7,6 +7,8 @@
 		contentStyle="overflow:auto;">
 
 		<style src="./css/download/download.css" />
+		
+		<image src="/images/download/qrcode_mobile.png" sclass="current_qr_code" />
 
 		<hbox>
 
@@ -15,7 +17,7 @@
 				<h:table>
 					<h:tr>
 						<h:td>
-							<label value="${c:l('current.currentVersion.label')}" width="200px" hflex="1" zclass="current_version_header" />
+							<label value="${c:l('current.currentVersion.label')}" zclass="current_version_header" />
 						</h:td>
 						<h:td>
 							<label value="${c:l('current.currentVersion.value')}" zclass="current_version_header_value" />
@@ -23,7 +25,7 @@
 					</h:tr>
 					<h:tr>
 						<h:td>
-							<label value="${c:l('current.releaseDate.label')}" width="200px" hflex="1" zclass="current_date_header" />
+							<label value="${c:l('current.releaseDate.label')}" zclass="current_date_header" />
 						</h:td>
 						<h:td>
 							<label value="${c:l('current.releaseDate.value')}" zclass="current_date_header_value" />
@@ -31,10 +33,30 @@
 					</h:tr>
 				</h:table>
 
-				<hbox>
-					<button id="btnJadFile" label="${c:l('current.JadFile')}" sclass="jad_btn" />
-					<image src="/images/download/qrcode_mobile.png" sclass="current_qr_code" />
-				</hbox>
+				<h:table>
+					<h:tr>
+						<h:td>
+							<button id="btnJadFile" label="${c:l('current.JadFile')}" tooltiptext="${c:l('current.JadFile.tooltip')}" sclass="jad_btn" />
+						</h:td>
+						<h:td>
+							<button id="btnJarFile" label="${c:l('current.JarFile')}" tooltiptext="${c:l('current.JarFile.tooltip')}" sclass="jad_btn" />
+						</h:td>
+					</h:tr>
+					<h:tr>
+						<h:td>
+							<hbox style="width:100%;" pack="center">
+								<label value="${c:l('current.JadFile.size')}" zclass="current_file_size_header" />
+								<label id="lblJadSize" zclass="current_file_size_value" />
+							</hbox>
+						</h:td>
+						<h:td>
+							<hbox style="width:100%;" pack="center">
+								<label value="${c:l('current.JarFile.size')}" zclass="current_file_size_header" />
+								<label id="lblJarSize" zclass="current_file_size_value" />
+							</hbox>
+						</h:td>
+					</h:tr>
+				</h:table>
 			</vbox>
 
 		</hbox>

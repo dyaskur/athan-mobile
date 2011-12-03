@@ -36,6 +36,21 @@
 	padding-left: 10px;
 }
 
+.current_file_size_header,
+.current_file_size_value {
+	position: relative;
+	font-family: verdana, arial, sans-serif;
+	font-size: 12px;
+	text-align: center;
+	top: 45px;
+/* 	left: 20px; */
+}
+
+.current_file_size_value {
+	font-style: italic;
+	font-weight: bold;
+}
+
 /* Images */
 .current_qr_code {
 	position: absolute;
@@ -53,7 +68,9 @@
 	height: 68px;
 }
 .jad_btn .z-button-cm {
-    color: black;
+    color: #CC6600;
+    font-size: 18px;
+    font-weight: bold;
 }
 .jad_btn .z-button-cm { 
     background-image : url('/images/download/jadButton.png');
