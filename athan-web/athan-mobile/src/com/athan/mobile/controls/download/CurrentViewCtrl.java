@@ -26,7 +26,6 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		// TODO Auto-generated method stub
-
 	}
 	
 	public void onClick$btnJadFile() {

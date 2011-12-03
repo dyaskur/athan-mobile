@@ -45,6 +45,7 @@
 	width: 0px;
 }
 
+/* Buttons */
 .english_flag-btn,
 .french_flag-btn {
 	height: 22px;
@@ -71,6 +72,18 @@
 	background-image: url('/images/french_flag.png');
 }
 
+.jad_btn_main {
+    width: 108px;
+    height: 32px;
+    position: absolute;
+	left: 10px;
+	top: 10px;
+	font-weight: normal;
+	font-size: 14px;
+	color: black;
+}
+
+/* Texts */
 .software_purpose_header {
 	font-family: verdana, arial,sans-serif;
 	font-size: 14pt;

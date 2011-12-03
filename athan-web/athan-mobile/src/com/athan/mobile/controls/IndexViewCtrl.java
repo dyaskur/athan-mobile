@@ -1,8 +1,15 @@
 package com.athan.mobile.controls;
 
+import java.io.FileNotFoundException;
+
+import org.apache.commons.lang.StringUtils;
+import org.zkoss.util.resource.Labels;
+import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.api.Tabpanel;
 
 import com.athan.mobile.controls.enums.EnumZulTab;
@@ -38,6 +45,17 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		// Shows the home tab
 		init();
 	}
+	
+	public void onClick$btnJadFileMain() {
+		try {
+			Filedownload.save("/jar/nogps/Athan.jad", "text/vnd.sun.j2me.app-descriptor");
+		} catch (FileNotFoundException exc) {
+			Clients.alert(Labels.getLabel("current.JadFile.error"), StringUtils.EMPTY, Messagebox.ERROR);
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+	}
+	
 
 	public void loadZulChild(EnumZulTab zulTab, Component container) {
 

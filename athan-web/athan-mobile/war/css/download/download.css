@@ -32,24 +32,24 @@
 }
 
 /* Buttons */
-.jad_btn_main {
+.jad_btn {
     width: 110px;
     height: 39px;
     height: 37px\9;
 }
-.jad_btn_main .z-button-cm {
+.jad_btn .z-button-cm {
     height: 31px;
     color: black;
 }
-.jad_btn_main .z-button-cm { 
+.jad_btn .z-button-cm { 
     background-image : url('/images/download/jadButton.png');
 }
-.jad_btn_main .z-button-focus .z-button-cm {
+.jad_btn .z-button-focus .z-button-cm {
     background-position: 0 -62px                    
 }
-.jad_btn_main .z-button-over .z-button-cm {
+.jad_btn .z-button-over .z-button-cm {
     background-position: 0 -31px
 }
-.jad_btn_main .z-button-clk .z-button-cm {
+.jad_btn .z-button-clk .z-button-cm {
     background-position: 0 -93px                    
 }               
