@@ -19,7 +19,7 @@
 					multiline="true" zclass="current_date_header" />
 				
 				<hbox>
-					<button id="btnJadFile" label="${c:l('current.JadFile')}" sclass="myGreen" />
+					<button id="btnJadFile" label="${c:l('current.JadFile')}" sclass="jad_btn_main" />
 					<image src="/images/download/qrcode.png" sclass="current_qr_code" />
 				</hbox>
 			</vbox>

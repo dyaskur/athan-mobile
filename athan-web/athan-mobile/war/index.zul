@@ -15,8 +15,8 @@
 		
 			<hbox width="${indexWindow.width}" zclass="header_layout">
 				<image src="/images/site_header.jpg"></image>
-				<button id="english_flag" zclass="english_flag-btn"></button>
-				<button id="french_flag" zclass="french_flag-btn"></button>
+				<button id="english_flag" mold="os" sclass="english_flag-btn" />
+				<button id="french_flag" mold="os" sclass="french_flag-btn" />
 			</hbox>
 			
 			<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg" />

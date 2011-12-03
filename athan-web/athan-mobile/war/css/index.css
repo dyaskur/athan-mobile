@@ -58,15 +58,17 @@
 	top: 4px;
 	cursor: pointer;
 }
-
 .english_flag-btn {
-	background-image: url('/images/english_flag.png');
-	right: 38px;
+	right: 38px;	
 }
-
 .french_flag-btn {
+	right: 4px;	
+}
+.z-button-os.english_flag-btn {
+	background-image: url('/images/english_flag.png');
+}
+.z-button-os.french_flag-btn {
 	background-image: url('/images/french_flag.png');
-    right: 4px;
 }
 
 .software_purpose_header {
