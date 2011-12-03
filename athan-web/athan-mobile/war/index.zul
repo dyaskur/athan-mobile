@@ -2,74 +2,81 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <?page title="${c:l('application.title')}"?>
 
-<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
+<zk>
+	<!-- Prevents users from right clicking -->
+<!-- 	<popup id="rightClickPopuUp" zclass="z-popup-plain" style="height:0;width:0;overflow:hidden" /> -->
 	
-	<style src="./css/index.css" />
-	
-	<vbox >
-	
-		<hbox width="${indexWindow.width}" zclass="header_layout">
-			<image src="/images/site_header.jpg"></image>
-			<button id="english_flag" zclass="english_flag-btn"></button>
-			<button id="french_flag" zclass="french_flag-btn"></button>
-		</hbox>
+<!-- 	<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" context="rightClickPopuUp" apply="com.athan.mobile.controls.IndexViewCtrl"> -->
+	<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
 		
-		<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg" />
-		<label value="${labels.application.header}" height="30px" width="100%" zclass="software_purpose_header" />
-	
-		<tabbox width="${indexWindow.width}" sclass="nav_tabs">
-	        <tabs id="tabs">
-	            <tab id="tabHome" label="${c:l('tab.home')}" />
-	            <tab id="tabDownload" label="${c:l('tab.download')}" />
-	            <tab id="tabNews" label="${c:l('tab.news')}" />
-	            <tab id="tabResources" label="${c:l('tab.resources')}" />
-	            <tab id="tabContribute" label="${c:l('tab.contribute')}" />
-	            <tab id="tabAbout" label="${c:l('tab.about')}" />
-	        </tabs>
-	        <tabpanels id="tabPanels" width="${indexWindow.width}">
-	            <tabpanel id="tbpHome">
-	                <toolbar width="${indexWindow.width}">
-	                    <toolbarbutton id="homeIntroduction" label="${c:l('tab.home.introduction')}" />
-	                    <toolbarbutton id="homeFeatures" label="${c:l('tab.home.features')}" />
-	                </toolbar>
-	            </tabpanel>
-	            <tabpanel id="tbpDownload">
-	                <toolbar width="${indexWindow.width}">
-	                    <toolbarbutton id="downloadCurrent" label="${c:l('tab.download.current')}" />
-	                    <toolbarbutton id="downloadChangelogs" label="${c:l('tab.download.changelogs')}" />
-	                </toolbar>
-	            </tabpanel>
-	            <tabpanel id="tbpNews">
-	                <toolbar width="${indexWindow.width}">
-	                    <toolbarbutton id="newsReleases" label="${c:l('tab.news.releases')}" />
-	                    <toolbarbutton id="newsNextfeatures" label="${c:l('tab.news.nextfeatures')}" />
-	                </toolbar>
-	            </tabpanel>
-	            <tabpanel id="tbpResources">
-	                <toolbar width="${indexWindow.width}">
-	                    <toolbarbutton id="resourcesSoundfiles" label="${c:l('tab.resources.soundfiles')}" />
-	                    <toolbarbutton id="resourcesProject" label="${c:l('tab.resources.project')}" />
-	                </toolbar>
-	            </tabpanel>
-	            <tabpanel id="tbpContribute">
-	                <toolbar width="${indexWindow.width}">
-	                    <toolbarbutton id="contributeFeedbacks" label="${c:l('tab.contribute.feedbacks')}" />
-	                </toolbar>
-	            </tabpanel>
-	            <tabpanel id="tbpAbout">
-	                <toolbar width="${indexWindow.width}">
-	                    <toolbarbutton id="aboutContributor" label="${c:l('tab.about.contributor')}" />
-	                    <toolbarbutton id="aboutCredits" label="${c:l('tab.about.credits')}" />
-	                    <toolbarbutton id="aboutAcknowledgment" label="${c:l('tab.about.acknowledgment')}" />
-	                </toolbar>
-	            </tabpanel>
-	        </tabpanels>
-	    </tabbox>
-    
-    <hbox style="width:100%;" pack="end">
-		<label value="${c:l('application.footer.credits')}"
-				multiline="false" zclass="application_footer" />
-	</hbox>
-    
-    </vbox>
-</window>
+		<style src="./css/index.css" />
+		
+		<vbox >
+		
+			<hbox width="${indexWindow.width}" zclass="header_layout">
+				<image src="/images/site_header.jpg"></image>
+				<button id="english_flag" zclass="english_flag-btn"></button>
+				<button id="french_flag" zclass="french_flag-btn"></button>
+			</hbox>
+			
+			<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg" />
+			<label value="${labels.application.header}" height="30px" width="100%" zclass="software_purpose_header" />
+		
+			<tabbox width="${indexWindow.width}" sclass="nav_tabs">
+		        <tabs id="tabs">
+		            <tab id="tabHome" label="${c:l('tab.home')}" />
+		            <tab id="tabDownload" label="${c:l('tab.download')}" />
+		            <tab id="tabNews" label="${c:l('tab.news')}" />
+		            <tab id="tabResources" label="${c:l('tab.resources')}" />
+		            <tab id="tabContribute" label="${c:l('tab.contribute')}" />
+		            <tab id="tabAbout" label="${c:l('tab.about')}" />
+		        </tabs>
+		        <tabpanels id="tabPanels" width="${indexWindow.width}">
+		            <tabpanel id="tbpHome">
+		                <toolbar width="${indexWindow.width}">
+		                    <toolbarbutton id="homeIntroduction" label="${c:l('tab.home.introduction')}" />
+		                    <toolbarbutton id="homeFeatures" label="${c:l('tab.home.features')}" />
+		                </toolbar>
+		            </tabpanel>
+		            <tabpanel id="tbpDownload">
+		                <toolbar width="${indexWindow.width}">
+		                    <toolbarbutton id="downloadCurrent" label="${c:l('tab.download.current')}" />
+		                    <toolbarbutton id="downloadChangelogs" label="${c:l('tab.download.changelogs')}" />
+		                </toolbar>
+		            </tabpanel>
+		            <tabpanel id="tbpNews">
+		                <toolbar width="${indexWindow.width}">
+		                    <toolbarbutton id="newsReleases" label="${c:l('tab.news.releases')}" />
+		                    <toolbarbutton id="newsNextfeatures" label="${c:l('tab.news.nextfeatures')}" />
+		                </toolbar>
+		            </tabpanel>
+		            <tabpanel id="tbpResources">
+		                <toolbar width="${indexWindow.width}">
+		                    <toolbarbutton id="resourcesSoundfiles" label="${c:l('tab.resources.soundfiles')}" />
+		                    <toolbarbutton id="resourcesProject" label="${c:l('tab.resources.project')}" />
+		                </toolbar>
+		            </tabpanel>
+		            <tabpanel id="tbpContribute">
+		                <toolbar width="${indexWindow.width}">
+		                    <toolbarbutton id="contributeFeedbacks" label="${c:l('tab.contribute.feedbacks')}" />
+		                </toolbar>
+		            </tabpanel>
+		            <tabpanel id="tbpAbout">
+		                <toolbar width="${indexWindow.width}">
+		                    <toolbarbutton id="aboutContributor" label="${c:l('tab.about.contributor')}" />
+		                    <toolbarbutton id="aboutCredits" label="${c:l('tab.about.credits')}" />
+		                    <toolbarbutton id="aboutAcknowledgment" label="${c:l('tab.about.acknowledgment')}" />
+		                </toolbar>
+		            </tabpanel>
+		        </tabpanels>
+		    </tabbox>
+	    
+	    <hbox style="width:100%;" pack="end">
+			<label value="${c:l('application.footer.credits')}"
+					multiline="false" zclass="application_footer" />
+		</hbox>
+	    
+	    </vbox>
+	</window>
+
+</zk>

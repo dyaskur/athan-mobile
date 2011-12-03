@@ -117,6 +117,12 @@
         <name>org.zkoss.theme.preferred</name>
         <value>silvertail</value>
     </library-property>
+    
+    <!-- Buttons behaviour -->
+    <library-property>
+	    <name>org.zkoss.zul.Button.mold</name>
+	    <value>trendy</value>
+	</library-property>
 
 	<!-- To disable the serialization of BeanShell method(s) -->
 	<library-property>

@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <zk>
-	<window border="none" apply="com.athan.mobile.controls.download.CurrentViewCtrl">
+	<window border="none"
+		apply="com.athan.mobile.controls.download.CurrentViewCtrl"
+		sclass="window_introduction" height="600px"
+		contentStyle="overflow:auto;">
 
-		<style src="./css/download/cuurent.css" />
+		<style src="./css/download/download.css" />
 
-		Current version
+		<hbox>
 
+			<vbox>
+				
+				<label value="${c:l('current.currentVersion')}"
+					multiline="true" zclass="current_version_header" />
+					
+				<label value="${c:l('current.releaseDate')}"
+					multiline="true" zclass="current_date_header" />
+				
+				<hbox>
+					<button id="btnJadFile" label="${c:l('current.JadFile')}" sclass="myGreen" />
+					<image src="/images/download/qrcode.png" sclass="current_qr_code" />
+				</hbox>
+			</vbox>
+
+		</hbox>
 
 	</window>
 </zk>
