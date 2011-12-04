@@ -10,7 +10,8 @@
 		
 		<hbox>
 		
-			<label value="${c:l('current.currentVersion.label')}" zclass="current_version_header" />
+			<label value="${c:l('changeLogs.none')}" zclass="change_logs_none_header" />
+			<image src="/images/download/empty_changelogs.png" class="img_empty_change_logs" />
 			
 		</hbox>
 

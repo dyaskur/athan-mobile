@@ -8,7 +8,8 @@
 .current_version_header,
 .current_version_header_value,
 .current_date_header,
-.current_date_header_value {
+.current_date_header_value,
+.change_logs_none_header {
 	position: relative;
 	font-family: verdana, arial, sans-serif;
 	font-size: 16px;
@@ -51,6 +52,12 @@
 	font-weight: bold;
 }
 
+.change_logs_none_header {
+	top: 40px;
+	font-style: italic;
+	position: relative;
+}
+
 /* Images */
 .current_qr_code {
 	position: absolute;
@@ -83,4 +90,10 @@
 }
 .jad_btn .z-button-clk .z-button-cm {
     background-position: 0 -120px;
-}               
+}
+
+.img_empty_change_logs {
+	padding-top: 5px;
+	padding-left: 40px;
+	width: 128px;
+}
