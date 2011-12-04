@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <zk>
-	<window border="none" apply="com.athan.mobile.controls.download.ChangelogsViewCtrl">
+	<window border="none"
+		apply="com.athan.mobile.controls.download.ChangelogsViewCtrl"
+		sclass="window_introduction" height="600px"
+		contentStyle="overflow:auto;">
 
-		<style src="./css/download/changelogs.css" />
-
-		Change Logs
-
+		<style src="./css/download/download.css" />
+		
+		<hbox>
+		
+			<label value="${c:l('current.currentVersion.label')}" zclass="current_version_header" />
+			
+		</hbox>
 
 	</window>
 </zk>
