@@ -20,8 +20,29 @@
 /* Images */
 .mobiles_1 {
 	padding-top: 20px;
+	padding-left: 70px;
+	width: 140px;
+}
+
+.athan_1 {
+	width: 260px;
+}
+
+.athan_2 {
+	width: 236px;
+}
+
+.athan_1 {
+	padding-top: 15px;
 	padding-right: 20px;
-	padding-left: 15px;
+	padding-left: 70px;
+	padding-bottom: 10px;
+}
+
+.athan_2 {
+	padding-top: 15px;
+	padding-left: 100px;
+	padding-bottom: 10px;
 }
 
 /* Texts */
@@ -41,7 +62,7 @@
 
 .intro_technical_content1,
 .intro_technical_content2 {
-	top: 106px;
+	top: 76px;
 	font-size: 14px;
 	font-style: italic;
 }

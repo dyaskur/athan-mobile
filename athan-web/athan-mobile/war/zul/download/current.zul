@@ -20,12 +20,18 @@
 							<label value="${c:l('current.currentVersion.label')}" zclass="current_version_header" />
 						</h:td>
 						<h:td>
+							<label value=":" zclass="current_version_header" />
+						</h:td>
+						<h:td>
 							<label value="${c:l('current.currentVersion.value')}" zclass="current_version_header_value" />
 						</h:td>
 					</h:tr>
 					<h:tr>
 						<h:td>
 							<label value="${c:l('current.releaseDate.label')}" zclass="current_date_header" />
+						</h:td>
+						<h:td>
+							<label value=":" zclass="current_date_header" />
 						</h:td>
 						<h:td>
 							<label value="${c:l('current.releaseDate.value')}" zclass="current_date_header_value" />

@@ -34,15 +34,18 @@
 					<tabpanel>
 						
 						<hbox>
-							<window border="none" position="left,top" width="450px" height="300px" class="features_window">
+							<window border="none" position="left,top" width="550px" height="300px" class="features_window">
 								<label value="${c:l('features.mainFt.1')}"
 									multiline="true" zclass="features_content" />
 							</window>
 						
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/options_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/home_1.png" />
 				                </h:li>
+				                <h:li>
+					                <image src="/images/home/${c:l('image.subdirectory')}/options_1.png" />
+					            </h:li>
 					        </h:ul>	
 						</hbox>
 				        
@@ -59,13 +62,13 @@
 						
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/location_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/location_1.png" />
 				                </h:li>
 				                <h:li>
-					                <image src="/images/home/location_2.png" />
+					                <image src="/images/home/${c:l('image.subdirectory')}/location_2.png" />
 					            </h:li>
 					            <h:li>
-					                <image src="/images/home/location_3.png" />
+					                <image src="/images/home/${c:l('image.subdirectory')}/location_3.png" />
 					            </h:li>
 					        </h:ul>	
 						</hbox>
@@ -82,10 +85,10 @@
 							</window>
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/alerts_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/alerts_1.png" />
 				                </h:li>
 				                <h:li>
-					                <image src="/images/home/alerts_2.png" />
+					                <image src="/images/home/${c:l('image.subdirectory')}/alerts_2.png" />
 					            </h:li>
 					        </h:ul>
 						</hbox>
@@ -103,13 +106,13 @@
 							</window>
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/calculation_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/calculation_1.png" />
 				                </h:li>
 				                <h:li>
-					                <image src="/images/home/calculation_2.png" />
+					                <image src="/images/home/${c:l('image.subdirectory')}/calculation_2.png" />
 					            </h:li>
 					            <h:li>
-					                <image src="/images/home/calculation_3.png" />
+					                <image src="/images/home/${c:l('image.subdirectory')}/calculation_3.png" />
 					            </h:li>
 					        </h:ul>
 						</hbox>
@@ -126,7 +129,7 @@
 							</window>
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/compass_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/compass_1.png" />
 				                </h:li>
 					        </h:ul>
 						</hbox>
@@ -143,7 +146,7 @@
 							</window>
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/language_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/language_1.png" />
 				                </h:li>
 					        </h:ul>
 						</hbox>
@@ -160,7 +163,7 @@
 							</window>
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/localtime_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/localtime_1.png" />
 				                </h:li>
 					        </h:ul>
 						</hbox>
@@ -177,7 +180,7 @@
 							</window>
 							<h:ul class="img_features">
 					            <h:li>
-					                <h:img src="/images/home/display_1.png" />
+					                <h:img src="/images/home/${c:l('image.subdirectory')}/display_1.png" />
 				                </h:li>
 					        </h:ul>
 						</hbox>
