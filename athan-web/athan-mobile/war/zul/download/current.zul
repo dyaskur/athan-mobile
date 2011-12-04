@@ -8,7 +8,8 @@
 
 		<style src="./css/download/download.css" />
 		
-		<image src="/images/download/qrcode_mobile.png" sclass="current_qr_code" />
+		<image src="/images/download/qrcode.png" tooltiptext="QR Code" sclass="current_qr_code" />
+		<image src="/images/download/flashcode.png" tooltiptext="Flash Code" sclass="current_flash_code" />
 
 		<hbox>
 

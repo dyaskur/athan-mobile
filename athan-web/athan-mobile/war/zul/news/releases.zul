@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <zk>
-	<window border="none" apply="com.athan.mobile.controls.news.ReleasesViewCtrl">
+	<window border="none"
+		apply="com.athan.mobile.controls.news.ReleasesViewCtrl"
+		sclass="window_introduction" height="600px"
+		contentStyle="overflow:auto;">
 
-		<style src="./css/news/releases.css" />
+		<style src="./css/news/news.css" />
 
-		Releases
-
+		<vbox>
+		
+			<label value="${c:l('news.title.1')}" zclass="news_title" />
+			<label value="${c:l('news.introduction.1')}" multiline="true" zclass="news_introduction" />
+			<hbox>
+				<label value="${c:l('news.introduction.tech.header')}" zclass="news_introduction_tech_header" />
+				<label value="${c:l('news.introduction.tech.1')}" zclass="news_introduction_tech" />
+			</hbox>
+		</vbox>
 
 	</window>
 </zk>

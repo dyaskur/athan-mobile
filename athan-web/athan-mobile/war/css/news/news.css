@@ -1,0 +1,39 @@
+.news_title,
+.news_introduction,
+.news_introduction_tech_header,
+.news_introduction_tech {
+	position: relative;
+	font-family: verdana, arial, sans-serif;
+}
+
+.news_title {
+	top: 40px;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 24px;
+}
+
+.news_introduction {
+	top: 60px;
+	font-weight: normal;
+	font-style: normal;
+	margin-right: 15px;
+	font-size: 15px;
+	line-height: 90%;
+}
+
+.news_introduction_tech_header,
+.news_introduction_tech {
+	top: 80px;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 15px;
+}
+
+.news_introduction_tech_header {
+	font-weight: bold;
+}
+
+.news_introduction_tech {
+	font-weight: normal;
+}
