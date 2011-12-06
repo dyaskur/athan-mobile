@@ -39,6 +39,10 @@ import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.table.TableLayout;
 import java.rmi.RemoteException;
 import java.util.Date;
+import javax.microedition.location.Coordinates;
+import javax.microedition.location.Criteria;
+import javax.microedition.location.Location;
+import javax.microedition.location.LocationProvider;
 
 /**
  * Menu du choix de la position géographique.
@@ -59,7 +63,7 @@ public class MenuLocation extends Menu {
     private Command mManualSearch;
     private Command mOK;
     private Command mAnnuler;
-    private boolean utiliserGPS = false;
+    private boolean utiliserGPS = true;
     private ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
     protected String getHelp() {
@@ -453,27 +457,29 @@ public class MenuLocation extends Menu {
 
     private void handlerGpsSearch(final Form f) {
         boolean success = true;
-        /*
-        Criteria cr = new Criteria();
-        cr.setHorizontalAccuracy(500);
-        LocationProvider lp;
-         */
+
         final String[] latLng = new String[2];
+        latLng[0] = "0.0";
+        latLng[1] = "0.0";
 
         try {
-            /*
+
+            Criteria cr = new Criteria();
+            cr.setHorizontalAccuracy(500);
+            LocationProvider lp;
+
             lp = LocationProvider.getInstance(cr);
             Location l = lp.getLocation(TIMEOUT_GPS); // timeout de 15 secondes
             Coordinates c = l.getQualifiedCoordinates();
 
-            if (c != null ) {
-            double lat = c.getLatitude();
-            double lon = c.getLongitude();
+            if (c != null) {
+                double lat = c.getLatitude();
+                double lon = c.getLongitude();
 
-            latLng[0] = Double.toString(lat);
-            latLng[1] = Double.toString(lon);
+                latLng[0] = Double.toString(lat);
+                latLng[1] = Double.toString(lon);
             }
-             */
+
         } catch (Exception ex) {
             ex.printStackTrace();
             success = false;

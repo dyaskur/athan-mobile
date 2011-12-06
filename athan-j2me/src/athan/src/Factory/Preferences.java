@@ -109,8 +109,8 @@ public class Preferences {
 
     public void set(String key, String value) {
         mHashtable.put(key, value);
-        System.out.println("Attribut \"" + key + "\" changé en \""
-                + value + "\"");
+//        System.out.println("Attribut \"" + key + "\" changé en \""
+//                + value + "\"");
     }
 
     public void put(String key, String value) {
@@ -136,8 +136,8 @@ public class Preferences {
                 String value = pref.substring(index + 1);
                 if (!StringOutilClient.isEmpty(value)) {
                     put(name, value);
-                    System.out.println("Attribut \"" + name + "\" chargé en \""
-                            + value + "\"");
+//                    System.out.println("Attribut \"" + name + "\" chargé en \""
+//                            + value + "\"");
                 }
             }
         } finally {
@@ -171,8 +171,8 @@ public class Preferences {
                 String pref = key + "|" + value;
                 byte[] raw = pref.getBytes();
                 rs.addRecord(raw, 0, raw.length);
-                System.out.println("Attribut \"" + key + "\" sauvegardé en \""
-                        + value + "\"");
+//                System.out.println("Attribut \"" + key + "\" sauvegardé en \""
+//                        + value + "\"");
             }
         } finally {
             if (re != null) {

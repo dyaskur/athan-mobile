@@ -29,14 +29,14 @@ import java.util.Date;
  */
 public class Horaire {
 
-    private String mHoraire;
-    private boolean mEstProchaine;
-    private Calendar mHoraireDate;
+    private String horaire;
+    private Calendar horaireDate;
+    private int timeFormat;
 
-    public Horaire(String pHoraire, int pTimeFormat) {
+    public Horaire(String horaire, int timeFormat) {
 
-        mHoraire = pHoraire;
-        mEstProchaine = false;
+        this.horaire = horaire;
+        this.timeFormat = timeFormat;
 
         ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
@@ -46,29 +46,21 @@ public class Horaire {
         Calendar calHoraire = Calendar.getInstance();
         calHoraire.setTime(new Date());
 
-        if (pTimeFormat == TimeFormat.H24.getValue()) {
-            calHoraire.set(Calendar.HOUR_OF_DAY, Integer.parseInt(pHoraire.substring(0, 2)));
-            calHoraire.set(Calendar.MINUTE, Integer.parseInt(pHoraire.substring(3, 5)));
+        if (timeFormat == TimeFormat.H24.getValue()) {
+            calHoraire.set(Calendar.HOUR_OF_DAY, Integer.parseInt(horaire.substring(0, 2)));
+            calHoraire.set(Calendar.MINUTE, Integer.parseInt(horaire.substring(3, 5)));
+        } else if (timeFormat == TimeFormat.H12.getValue()) {
+            calHoraire.set(Calendar.HOUR, Integer.parseInt(horaire.substring(0, 2)));
+            calHoraire.set(Calendar.MINUTE, Integer.parseInt(horaire.substring(3, 5)));
 
-            if (calHoraire.getTime().getTime() > calActuel.getTime().getTime()) {
-                mEstProchaine = true;
-            }
-        } else if (pTimeFormat == TimeFormat.H12.getValue()) {
-            calHoraire.set(Calendar.HOUR, Integer.parseInt(pHoraire.substring(0, 2)));
-            calHoraire.set(Calendar.MINUTE, Integer.parseInt(pHoraire.substring(3, 5)));
-
-            if (pHoraire.substring(6, 8).equals(RESSOURCE.get("PM"))) {
+            if (horaire.substring(6, 8).equals(RESSOURCE.get("PM"))) {
                 calHoraire.set(Calendar.AM_PM, Calendar.PM);
             } else {
                 calHoraire.set(Calendar.AM_PM, Calendar.AM);
             }
-
-            if (calHoraire.getTime().getTime() > calActuel.getTime().getTime()) {
-                mEstProchaine = true;
-            }
         }
 
-        mHoraireDate = calHoraire;
+        horaireDate = calHoraire;
     }
 
     public static String renvoieHeureMinute(Date pDate, int pTimeFormat) {
@@ -92,14 +84,35 @@ public class Horaire {
     }
 
     public String getHoraireFormate() {
-        return mHoraire;
+        return horaire;
     }
 
+    /**
+     * Renvoie true si l'horaire est supérieure à l'heure courante
+     * 
+     * @return
+     */
     public boolean isEstProchaine() {
-        return mEstProchaine;
+        
+        boolean estProchaine = false;
+        
+        Calendar calActuel = Calendar.getInstance();
+        calActuel.setTime(new Date());
+
+        if (timeFormat == TimeFormat.H24.getValue()) {
+            if (horaireDate.getTime().getTime() > calActuel.getTime().getTime()) {
+                estProchaine = true;
+            }
+        } else if (timeFormat == TimeFormat.H12.getValue()) {
+            if (horaireDate.getTime().getTime() > calActuel.getTime().getTime()) {
+                estProchaine = true;
+            }
+        }
+
+        return estProchaine;
     }
 
     public Calendar getHoraireDate() {
-        return mHoraireDate;
+        return horaireDate;
     }
 }
