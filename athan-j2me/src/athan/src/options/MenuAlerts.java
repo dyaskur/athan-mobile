@@ -13,7 +13,6 @@
 //
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package athan.src.options;
 
 import athan.src.Client.Main;
@@ -362,23 +361,33 @@ public class MenuAlerts extends Menu {
 
         if (index == 0) {
             // Aucun
-            mCtnPrieres.setVisible(false);
+            afficherPrieres(false);
 
             mChoixFichier.setVisible(false);
             mFichierSon.setVisible(false);
 
         } else if (index == 1) {
             // Son
-            mCtnPrieres.setVisible(true);
+            afficherPrieres(true);
 
             mChoixFichier.setVisible(true);
             mFichierSon.setVisible(true);
         } else if (index == 2) {
             // Flash
-            mCtnPrieres.setVisible(true);
+            afficherPrieres(true);
 
             mChoixFichier.setVisible(false);
             mFichierSon.setVisible(false);
+        }
+    }
+
+    /**
+     * Affiche ou masque le contenu du conteneur de prières (labels + coches)
+     * @param afficher
+     */
+    private void afficherPrieres(boolean afficher) {
+        for (int i = 0; i < mCtnPrieres.getComponentCount(); i++) {
+            mCtnPrieres.getComponentAt(i).setVisible(afficher);
         }
     }
 

@@ -50,7 +50,8 @@ Le format horaire correspond à la manière d'afficher les horaires des prières
   <helpMenuLocation>
 Cette fenêtre vous permet de modifier la position de référence de la configuration.
 
-Deux méthodes s'offrent à vous :
+Trois méthodes s'offrent à vous :
+- Recherche de la position géographique via la fonctionnalité GPS de votre mobile, s'il en est doté (sinon la commande n'est pas disponible).
 - Modification manuelle si vous disposez des coordonnées GPS de votre ville.
 - Recherche par nom de ville si votre abonnement mobile dispose d'un accès Internet.
   </helpMenuLocation>

@@ -50,7 +50,9 @@ Hour format is related to the way prayer times are displayed in the main screen.
   <helpMenuLocation>
 This window allows you to change the location saved in the configuration.
 
-There are two different ways of modifying your location :
+There are three different ways of modifying your location :
+- Recherche de la position géographique via la fonctionnalité GPS de votre mobile, s'il en est doté (sinon la commande n'est pas disponible).
+- Using the GPS feature of your device is it is enabled (otherwise the command is hidden).
 - Manually if you know the GPS coordinates of your city.
 - By searching your city from its name (or region name) if your phone subscription gives you access to Internet.
   </helpMenuLocation>

@@ -22,6 +22,7 @@ import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
 import athan.src.Outils.StringOutilClient;
+import athan.src.location.LocationProvider;
 import athan.web.LocationFetcher;
 import com.sun.lwuit.ComboBox;
 import com.sun.lwuit.Command;
@@ -39,10 +40,6 @@ import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.table.TableLayout;
 import java.rmi.RemoteException;
 import java.util.Date;
-import javax.microedition.location.Coordinates;
-import javax.microedition.location.Criteria;
-import javax.microedition.location.Location;
-import javax.microedition.location.LocationProvider;
 
 /**
  * Menu du choix de la position géographique.
@@ -63,7 +60,7 @@ public class MenuLocation extends Menu {
     private Command mManualSearch;
     private Command mOK;
     private Command mAnnuler;
-    private boolean utiliserGPS = true;
+    private boolean utiliserGPS;
     private ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
     protected String getHelp() {
@@ -94,9 +91,24 @@ public class MenuLocation extends Menu {
         pTextField.setPreferredH(HAUTEUR_LABEL);
     }
 
+    /**
+     * Renseigne la variable {@link MenuLocation#utiliserGPS}
+     */
+    private void verfierGPS() {
+        try {
+            LocationProvider.getProvider();
+            utiliserGPS = true;
+        } catch (ClassNotFoundException cnfe) {
+            utiliserGPS = false;
+        }
+    }
+
     protected void execute(final Form f) {
 
         applyTactileSettings(f);
+
+        // Vérifie si l'on peut utiliser la fonctionnalité GPS
+        verfierGPS();
 
         TableLayout tblLayoutInfosLocalisation = new TableLayout(5, 4);
         Container ctnInfosLocalisation = new Container();
@@ -464,24 +476,19 @@ public class MenuLocation extends Menu {
 
         try {
 
-            Criteria cr = new Criteria();
-            cr.setHorizontalAccuracy(500);
-            LocationProvider lp;
+            LocationProvider lp = LocationProvider.getProvider();
+            
+            double lat = lp.getLatitude();
+            double lon = lp.getLongitude();
 
-            lp = LocationProvider.getInstance(cr);
-            Location l = lp.getLocation(TIMEOUT_GPS); // timeout de 15 secondes
-            Coordinates c = l.getQualifiedCoordinates();
-
-            if (c != null) {
-                double lat = c.getLatitude();
-                double lon = c.getLongitude();
-
-                latLng[0] = Double.toString(lat);
-                latLng[1] = Double.toString(lon);
-            }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            latLng[0] = Double.toString(lat);
+            latLng[1] = Double.toString(lon);
+            
+        } catch (ClassNotFoundException cnex) {
+            cnex.printStackTrace();
+            success = false;
+        } catch (Exception exc) {
+            exc.printStackTrace();
             success = false;
         }
 
