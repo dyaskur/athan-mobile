@@ -121,7 +121,8 @@
 .features_content {
 	font-style: normal;
 	font-size: 0.8em;
-	width: 60%;
+	line-height: 100%;
+	width: 90%;
 }
 
 

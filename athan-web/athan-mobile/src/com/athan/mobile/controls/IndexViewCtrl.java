@@ -14,20 +14,22 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.api.Tabpanel;
 
+import com.athan.mobile.controls.download.CurrentViewCtrl;
 import com.athan.mobile.controls.enums.EnumZulTab;
 import com.athan.mobile.init.CookieUtil;
 import com.athan.mobile.init.LocalesProvider;
 
 /**
- * Manager controler
+ * Manager Controller
  * 
  * @author BENBOUZID
  */
 public class IndexViewCtrl extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
-	
-	private static final Logger LOG = Logger.getLogger(IndexViewCtrl.class.getName());
+
+	private static final Logger LOG = Logger.getLogger(IndexViewCtrl.class
+			.getName());
 
 	private Component me;
 
@@ -37,7 +39,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	private Tabpanel tbpResources;
 	private Tabpanel tbpContribute;
 	private Tabpanel tbpAbout;
-	
+
 	private EnumZulTab currentTab = null;
 
 	@Override
@@ -45,23 +47,26 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 
 		me = comp;
-		
+
 		// Shows the home tab
 		init();
 	}
-	
+
 	public void onClick$btnJadFileMain() {
 		try {
-			Filedownload.save("/jar/nogps/Athan.jad", "text/vnd.sun.j2me.app-descriptor");
+			Filedownload.save(CurrentViewCtrl.CURRENT_ATHAN_JAD,
+					CurrentViewCtrl.MIME_TYPE_JAD);
 		} catch (FileNotFoundException exc) {
-			Clients.alert(Labels.getLabel("current.fileDownload.error"), StringUtils.EMPTY, Messagebox.ERROR);
-			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD", exc);
+			Clients.alert(Labels.getLabel("current.fileDownload.error"),
+					StringUtils.EMPTY, Messagebox.ERROR);
+			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
+					exc);
 		} catch (Exception exc) {
 			exc.printStackTrace();
-			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD", exc);
+			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
+					exc);
 		}
 	}
-	
 
 	public void loadZulChild(EnumZulTab zulTab, Component container) {
 
@@ -69,7 +74,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 			// Exits if it's current tab
 			return;
 		}
-		
+
 		// Removes previous tab content
 		for (EnumZulTab en : EnumZulTab.values()) {
 			if (container.hasFellow(en.id())) {

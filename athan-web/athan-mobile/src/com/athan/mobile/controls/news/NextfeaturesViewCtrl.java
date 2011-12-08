@@ -3,7 +3,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 
 /**
- * Nextfeatures Controler
+ * Nextfeatures Controller
  * 
  * @author Saad BENBOUZID
  */

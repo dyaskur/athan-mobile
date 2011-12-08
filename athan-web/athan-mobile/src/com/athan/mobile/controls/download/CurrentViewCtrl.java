@@ -22,14 +22,22 @@ import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Label;
 
 /**
- * Current Controler
+ * Current Controller
  * 
  * @author Saad BENBOUZID
  */
 public class CurrentViewCtrl extends GenericForwardComposer {
 
-	private static final long serialVersionUID = 1L;
+	public static final String MIME_TYPE_JAD = "text/vnd.sun.j2me.app-descriptor";
+
+	public static final String MIME_TYPE_JAR = "application/java-archive";
+
+	public static final String CURRENT_ATHAN_JAD = "/jar/current/Athan.jad";
+
+	public static final String CURRENT_ATHAN_JAR = "/jar/current/Athan.jar";
 	
+	private static final long serialVersionUID = 1L;
+
 	private static final String MIDLET_VERSION = "MIDlet-Version";
 
 	private static final Logger LOG = Logger.getLogger(CurrentViewCtrl.class
@@ -59,13 +67,13 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 		try {
 			// Gets version number
 			File jadFile = new File(desktop.getWebApp()
-					.getResource("/jar/nogps/Athan.jad").getFile());
+					.getResource(CURRENT_ATHAN_JAD).getFile());
 			
 			versionNumber = getVersionNumber(jadFile);
 			
 			// Gets version date
 			File jarFile = new File(desktop.getWebApp()
-					.getResource("/jar/nogps/Athan.jar").getFile());
+					.getResource(CURRENT_ATHAN_JAR).getFile());
 			
 			String format = Labels.getLabel("current.releaseDate.format");
 			SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -156,9 +164,9 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 		String unit = " " + Labels.getLabel("current.File.sizeUnit");
 		try {
 			File jadFile = new File(desktop.getWebApp()
-					.getResource("/jar/nogps/Athan.jad").getFile());
+					.getResource(CURRENT_ATHAN_JAD).getFile());
 			File jarFile = new File(desktop.getWebApp()
-					.getResource("/jar/nogps/Athan.jar").getFile());
+					.getResource(CURRENT_ATHAN_JAR).getFile());
 			jadSize = Long.toString(jadFile.length());
 			jarSize = Long.toString(jarFile.length());
 		} catch (Exception exc) {
@@ -174,8 +182,8 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 
 	public void onClick$btnJadFile() {
 		try {
-			Filedownload.save("/jar/nogps/Athan.jad",
-					"text/vnd.sun.j2me.app-descriptor");
+			Filedownload.save(CURRENT_ATHAN_JAD,
+					MIME_TYPE_JAD);
 		} catch (FileNotFoundException exc) {
 			Clients.alert(Labels.getLabel("current.fileDownload.error"),
 					StringUtils.EMPTY, Messagebox.ERROR);
@@ -190,8 +198,8 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 
 	public void onClick$btnJarFile() {
 		try {
-			Filedownload.save("/jar/nogps/Athan.jar",
-					"application/java-archive");
+			Filedownload.save(CURRENT_ATHAN_JAR,
+					MIME_TYPE_JAR);
 		} catch (FileNotFoundException exc) {
 			Clients.alert(Labels.getLabel("current.fileDownload.error"),
 					StringUtils.EMPTY, Messagebox.ERROR);

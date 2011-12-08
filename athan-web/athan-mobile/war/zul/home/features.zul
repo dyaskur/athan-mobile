@@ -56,8 +56,11 @@
 								
 						<hbox>
 							<window border="none" position="left,top" width="450px" height="300px" class="features_window">
-								<label value="${c:l('features.location.1')}"
-									multiline="true" zclass="features_content" />
+<!-- 								<label value="${c:l('features.location.1')}" -->
+<!-- 									multiline="true" zclass="features_content" /> -->
+							<h:p class="features_content">${c:l('features.location.1')}</h:p>
+							<h:ul class="features_content">${c:l('features.location.2')}</h:ul>
+							<h:p class="features_content">${c:l('features.location.3')}</h:p>
 							</window>
 						
 							<h:ul class="img_features">
