@@ -40,7 +40,7 @@ This window gives you the direction and distance to Mekkah calculated from the l
   <helpMenuLanguage>
 Select the application language.
 
-It is highly recommended to exit and start again Ahtan Mobile to make sure all changes are accurate.
+It is highly recommended to exit and start again Athan Mobile to make sure all changes are accurate.
   </helpMenuLanguage>
   <helpMenuLocalTime>
 This window allows you to correct possible gap between real prayer times and the ones calculated, which may occurs particularly if your phone use a specific time zone different from your country, or if DST (Summer time) was turned on during winter or vis versa.
@@ -50,9 +50,8 @@ Hour format is related to the way prayer times are displayed in the main screen.
   <helpMenuLocation>
 This window allows you to change the location saved in the configuration.
 
-There are three different ways of modifying your location :
-- Recherche de la position géographique via la fonctionnalité GPS de votre mobile, s'il en est doté (sinon la commande n'est pas disponible).
-- Using the GPS feature of your device is it is enabled (otherwise the command is hidden).
+There are three different menus made for modifying your location :
+- Using the GPS feature of your device is it is enabled (otherwise the menu is hidden).
 - Manually if you know the GPS coordinates of your city.
 - By searching your city from its name (or region name) if your phone subscription gives you access to Internet.
   </helpMenuLocation>
