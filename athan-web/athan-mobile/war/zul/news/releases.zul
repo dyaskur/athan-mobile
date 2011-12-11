@@ -8,67 +8,11 @@
 
 		<style src="./css/news/news.css" />
 		
-		<image src="/images/news/gps_icon.png" sclass="gps_icon" />
-
-		<vbox>
-			<label value="${c:l('news.title.1')}" zclass="news_title" />
-			<label value="${c:l('news.introduction.1')}" multiline="true" zclass="news_introduction" />
-			<hbox>
-				<label value="${c:l('news.introduction.tech.header')}" zclass="news_introduction_tech_header" />
-				<label value="${c:l('news.introduction.tech.1')}" zclass="news_introduction_tech" />
-			</hbox>
+		<hbox>
+		
+			<label value="${c:l('releases.none')}" zclass="releases_none_header" />
 			
-			<h:table>
-				<h:tr>
-					<h:td>
-						<label value="${c:l('current.currentVersion.label')}" zclass="releases_1_version_header" />
-					</h:td>
-					<h:td>
-						<label value=":" zclass="releases_1_version_header" />
-					</h:td>
-					<h:td>
-						<label id="lblCurrentVersion" zclass="releases_1_version_header_value" />
-					</h:td>
-				</h:tr>
-				<h:tr>
-					<h:td>
-						<label value="${c:l('current.releaseDate.label')}" zclass="releases_1_date_header" />
-					</h:td>
-					<h:td>
-						<label value=":" zclass="releases_1_date_header" />
-					</h:td>
-					<h:td>
-						<label id="lblCurrentDate" zclass="releases_1_date_header_value" />
-					</h:td>
-				</h:tr>
-			</h:table>
-
-			<h:table>
-				<h:tr>
-					<h:td>
-						<button id="btnJadFile" label="${c:l('current.JadFile')}" tooltiptext="${c:l('current.JadFile.tooltip')}" sclass="jad_btn_releases" />
-					</h:td>
-					<h:td>
-						<button id="btnJarFile" label="${c:l('current.JarFile')}" tooltiptext="${c:l('current.JarFile.tooltip')}" sclass="jad_btn_releases" />
-					</h:td>
-				</h:tr>
-				<h:tr>
-					<h:td>
-						<hbox style="width:100%;" pack="center">
-							<label value="${c:l('current.JadFile.size')}" zclass="releases_1_file_size_header" />
-							<label id="lblJadSize" zclass="releases_1_file_size_value" />
-						</hbox>
-					</h:td>
-					<h:td>
-						<hbox style="width:100%;" pack="center">
-							<label value="${c:l('current.JarFile.size')}" zclass="releases_1_file_size_header" />
-							<label id="lblJarSize" zclass="releases_1_file_size_value" />
-						</hbox>
-					</h:td>
-				</h:tr>
-			</h:table>
-			
-		</vbox>
+		</hbox>
 
 	</window>
 </zk>

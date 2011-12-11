@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<zk>
-	<window border="none" apply="com.athan.mobile.controls.news.NextfeaturesViewCtrl">
+<zk xmlns:h="native">
+	<window border="none"
+		apply="com.athan.mobile.controls.news.NextfeaturesViewCtrl"
+		sclass="window_introduction" height="600px"
+		contentStyle="overflow:auto;">
 
-		<style src="./css/news/nextfeatures.css" />
+		<style src="./css/news/news.css" />
 
-		Next features
+		<vbox>
 
+			<label value="${c:l('next.1.title')}" zclass="next_title" />
+			<label value="${c:l('next.1.purpose')}" zclass="next_purpose" />
+			
+			<h:table>
+				<h:tr>
+					<h:td>
+						<image src="/images/news/arrow.png" class="img_news_arrow" />
+					</h:td>
+					<h:td>
+						<label value="${c:l('next.1.german')}" zclass="next_summary_title" />
+					</h:td>
+					<h:td>
+						<image src="/images/news/german.png" class="img_news_lng" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<image src="/images/news/arrow.png" class="img_news_arrow" />
+					</h:td>
+					<h:td>
+						<label value="${c:l('next.1.arabic')}" zclass="next_summary_title" />
+					</h:td>
+					<h:td>
+						<image src="/images/news/arabic.png" class="img_news_lng" />
+					</h:td>
+				</h:tr>
+			</h:table>
+
+		</vbox>
 
 	</window>
 </zk>

@@ -1,120 +1,53 @@
 /* Images */
-.gps_icon {
-	position: absolute;
-	top: 250px;
+.img_news_lng {
+	position: relative;
+	top: 51px;
 	width: 100px;
-	right: 25px;
+	right: 47px;
+	opacity: 0.2;
+}
+
+.img_news_arrow {
+	position: relative;
+	top: 50px;
+	left: 10px;	
 }
 
 /* Texts */
-.news_title,
-.news_introduction,
-.news_introduction_tech_header,
-.news_introduction_tech {
+.releases_none_header,
+.next_title,
+.next_summary_title,
+.next_purpose {
 	position: relative;
 	font-family: verdana, arial, sans-serif;
 }
 
-.news_title {
+.releases_none_header {
+	top: 40px;
+	font-style: italic;
+	position: relative;
+}
+
+.next_title {
 	top: 35px;
 	font-weight: bold;
 	font-style: normal;
 	font-size: 24px;
 }
 
-.news_introduction {
-	top: 60px;
+.next_purpose {
+	top: 35px;
 	font-weight: normal;
 	font-style: normal;
-	margin-right: 15px;
-	font-size: 15px;
-	line-height: 90%;
-}
-
-.news_introduction_tech_header,
-.news_introduction_tech {
-	top: 80px;
-	font-weight: bold;
-	font-style: italic;
-	font-size: 15px;
-}
-
-.news_introduction_tech_header {
-	font-weight: bold;
-}
-
-.news_introduction_tech {
-	font-weight: normal;
-}
-
-.releases_1_version_header,
-.releases_1_version_header_value,
-.releases_1_date_header,
-.releases_1_date_header_value {
-	position: relative;
-	font-family: verdana, arial, sans-serif;
 	font-size: 16px;
 }
-.releases_1_version_header,
-.releases_1_version_header_value {
-	top: 120px;
-	font-style: italic;
-	position: relative;
-	left: 5px;
-}
-.releases_1_version_header_value {
-	font-weight: bold;
-	font-style: normal;
-	padding-left: 10px;
-}
-.releases_1_date_header,
-.releases_1_date_header_value {
-	top: 140px;
-	font-style: italic;
-	position: relative;
-	left: 5px;
-}
-.releases_1_date_header_value {
-	font-weight: bold;
-	font-style: normal;
-	padding-left: 10px;
-}
 
-.releases_1_file_size_header,
-.releases_1_file_size_value {
-	top: 145px;
-	position: relative;
-	font-family: verdana, arial, sans-serif;
-	font-size: 12px;
-	text-align: center;
-}
-
-.releases_1_file_size_value {
+.next_summary_title {
+	top: 50px;
+	font-weight: normal;
 	font-style: italic;
-	font-weight: bold;
+	font-size: 20px;
+	left: 20px;
 }
 
 /* Buttons */
-.jad_btn_releases {
-    position: relative;
-    top: 150px;
-    width: 188px;
-	height: 68px;
-}
-.jad_btn_releases .z-button-cm {
-    color: #CC6600;
-    font-size: 18px;
-    font-weight: bold;
-}
-.jad_btn_releases .z-button-cm { 
-    background-image : url('/images/download/jadButton.png');
-}
-.jad_btn_releases .z-button-focus .z-button-cm {
-    background-position: 0 -120px;
-}
-.jad_btn_releases .z-button-over .z-button-cm {
-    background-position: 0 -60px;
-}
-.jad_btn_releases .z-button-clk .z-button-cm {
-    background-position: 0 -120px;
-}
