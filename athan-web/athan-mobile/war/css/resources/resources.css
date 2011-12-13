@@ -1,0 +1,60 @@
+/* Windows */
+.window_sound {
+	background-color: #EDE9DA;
+	padding-left: 30px;
+/* 	background-image: url('/images/resources/mosque_2_resized.jpg'); */
+}
+
+/* Images */
+.img_sound_logo {
+	width: 70px;
+	position: absolute;
+	top: 245px;
+	right: 20px;
+}
+
+.img_mosque_2 {
+	width: 900px;
+	position: absolute;
+	top: 390px;
+	opacity: 0.4;
+	right: 30px;
+	border: 1px solid black;
+}
+
+/* Texts */
+.soundfiles_title,
+.soundfiles_purpose,
+.song_name {
+	position: relative;
+	font-family: verdana, arial, sans-serif;
+}
+
+.soundfiles_title {
+	top: 35px;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 20px;
+}
+
+.soundfiles_purpose {
+	top: 45px;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 12px;
+	line-height: 90%;
+	left: 0px;
+}
+
+.song_name {
+	font-weight: normal;
+	font-style: italic;
+	font-size: 12px;
+	color: black;
+}
+
+/* Tabs */
+.song_line {
+	position: relative;
+	top: 40px;
+}

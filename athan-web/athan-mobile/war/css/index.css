@@ -9,6 +9,11 @@ body {
 /* 	height: 100%;	 */
 }
 
+.window_introduction {
+	background-color: #EDE9DA;
+	padding-left: 30px;
+}
+
 .nav-tabs {
 	background-color: #EDE9DA;
 }

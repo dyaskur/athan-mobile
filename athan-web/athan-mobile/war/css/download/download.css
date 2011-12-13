@@ -1,7 +1,8 @@
-/* Windows */
-.window_introduction {
-	background-color: #EDE9DA;
-	padding-left: 30px;
+/* Images */
+.img_empty_change_logs {
+	padding-top: 5px;
+	padding-left: 40px;
+	width: 128px;
 }
 
 /* Texts */
@@ -101,8 +102,3 @@
     background-position: 0 -120px;
 }
 
-.img_empty_change_logs {
-	padding-top: 5px;
-	padding-left: 40px;
-	width: 128px;
-}

@@ -1,12 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<zk>
-	<window border="none" apply="com.athan.mobile.controls.resources.SoundfilesViewCtrl">
+<zk xmlns:h="native">
+	<window border="none" apply="com.athan.mobile.controls.resources.SoundfilesViewCtrl"
+		sclass="window_sound" height="600px"
+		contentStyle="overflow:auto;">
 
-		<style src="./css/resources/soundfiles.css" />
+		<style src="./css/resources/resources.css" />
 
-		Sound files
+		<vbox>
 
+			<label value="${c:l('soundfiles.title')}" zclass="soundfiles_title" />
+			<label value="${c:l('soundfiles.summary')}" multiline="true" zclass="soundfiles_purpose" />
+			
+			<image src="/images/resources/sound_logo.png" class="img_sound_logo" />
+			<image src="/images/resources/mosque_2.jpg" class="img_mosque_2" />
+			
+			<h:table>
+				<h:tr class="song_line">
+					<h:td>
+						<label value="Al-Aqsa" zclass="song_name" />
+					</h:td>
+					<h:td>
+						<h:object type="application/x-shockwave-flash"
+							data="/swf/dewplayer.swf" width="200" height="20" id="dewplayer"
+							name="dewplayer">
+							<h:param name="wmode" value="transparent" />
+							<h:param name="movie" value="/swf/dewplayer.swf" />
+							<h:param name="flashvars" value="mp3=/sound/mp3/Alaqsa.mp3&amp;showtime=1" />
+						</h:object>
+					</h:td>
+					<h:td>
+						<button label="MP3" />
+					</h:td>
+					<h:td>
+						<button label="WAV" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="Bosnia" zclass="song_name" />
+					</h:td>
+					<h:td>
+						<h:object type="application/x-shockwave-flash"
+							data="/swf/dewplayer.swf" width="200" height="20" id="dewplayer"
+							name="dewplayer">
+							<h:param name="wmode" value="transparent" />
+							<h:param name="movie" value="/swf/dewplayer.swf" />
+							<h:param name="flashvars" value="mp3=/sound/mp3/Bosnia.mp3&amp;showtime=1" />
+						</h:object>
+					</h:td>
+					<h:td>
+						<button label="MP3" />
+					</h:td>
+					<h:td>
+						<button label="WAV" />
+					</h:td>
+				</h:tr>
+				<h:tr class="song_line">
+					<h:td>
+						<label value="Al-Aqsa" zclass="song_name" />
+					</h:td>
+					<h:td>
+						<h:object type="application/x-shockwave-flash"
+							data="/swf/dewplayer.swf" width="200" height="20" id="dewplayer"
+							name="dewplayer">
+							<h:param name="wmode" value="transparent" />
+							<h:param name="movie" value="/swf/dewplayer.swf" />
+							<h:param name="flashvars" value="mp3=/sound/mp3/Alaqsa.mp3&amp;showtime=1" />
+						</h:object>
+					</h:td>
+					<h:td>
+						<button label="MP3" />
+					</h:td>
+					<h:td>
+						<button label="WAV" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="Bosnia" zclass="song_name" />
+					</h:td>
+					<h:td>
+						<h:object type="application/x-shockwave-flash"
+							data="/swf/dewplayer.swf" width="200" height="20" id="dewplayer"
+							name="dewplayer">
+							<h:param name="wmode" value="transparent" />
+							<h:param name="movie" value="/swf/dewplayer.swf" />
+							<h:param name="flashvars" value="mp3=/sound/mp3/Bosnia.mp3&amp;showtime=1" />
+						</h:object>
+					</h:td>
+					<h:td>
+						<button label="MP3" />
+					</h:td>
+					<h:td>
+						<button label="WAV" />
+					</h:td>
+				</h:tr>
+			</h:table>
+
+		</vbox>
 
 	</window>
 </zk>
