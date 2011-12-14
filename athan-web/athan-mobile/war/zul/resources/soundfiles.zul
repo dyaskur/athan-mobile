@@ -2,7 +2,7 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <zk xmlns:h="native">
 	<window border="none" apply="com.athan.mobile.controls.resources.SoundfilesViewCtrl"
-		sclass="window_sound" height="600px"
+		sclass="window_introduction" height="600px"
 		contentStyle="overflow:auto;">
 
 		<style src="./css/resources/resources.css" />
@@ -15,10 +15,10 @@
 			<image src="/images/resources/sound_logo.png" class="img_sound_logo" />
 			<image src="/images/resources/mosque_2.jpg" class="img_mosque_2" />
 			
-			<h:table>
-				<h:tr class="song_line">
+			<h:table class="song_tab">
+				<h:tr>
 					<h:td>
-						<label value="Al-Aqsa" zclass="song_name" />
+						<label value="${c:l('sound.alaqsa')}" zclass="song_name" />
 					</h:td>
 					<h:td>
 						<h:object type="application/x-shockwave-flash"
@@ -30,10 +30,10 @@
 						</h:object>
 					</h:td>
 					<h:td>
-						<button label="MP3" />
+						<image id="btnMp3Alaqsa" sclass="tlb_mp3" />
 					</h:td>
 					<h:td>
-						<button label="WAV" />
+						<toolbarbutton id="btnWavAlaqsa" sclass="tlb_wav" />
 					</h:td>
 				</h:tr>
 				<h:tr>
@@ -56,7 +56,7 @@
 						<button label="WAV" />
 					</h:td>
 				</h:tr>
-				<h:tr class="song_line">
+				<h:tr>
 					<h:td>
 						<label value="Al-Aqsa" zclass="song_name" />
 					</h:td>
