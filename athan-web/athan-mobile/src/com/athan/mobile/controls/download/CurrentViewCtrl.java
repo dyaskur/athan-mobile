@@ -14,12 +14,12 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Label;
+
+import com.athan.mobile.utils.Messages;
 
 /**
  * Current Controller
@@ -28,6 +28,8 @@ import org.zkoss.zul.Label;
  */
 public class CurrentViewCtrl extends GenericForwardComposer {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String MIME_TYPE_JAD = "text/vnd.sun.j2me.app-descriptor";
 
 	public static final String MIME_TYPE_JAR = "application/java-archive";
@@ -35,8 +37,6 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 	public static final String CURRENT_ATHAN_JAD = "/jar/current/Athan.jad";
 
 	public static final String CURRENT_ATHAN_JAR = "/jar/current/Athan.jar";
-	
-	private static final long serialVersionUID = 1L;
 
 	private static final String MIDLET_VERSION = "MIDlet-Version";
 
@@ -54,7 +54,7 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 
 		displayFileProperties();
-		
+
 		displayVersionProperties();
 	}
 
@@ -68,13 +68,13 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 			// Gets version number
 			File jadFile = new File(desktop.getWebApp()
 					.getResource(CURRENT_ATHAN_JAD).getFile());
-			
+
 			versionNumber = getVersionNumber(jadFile);
-			
+
 			// Gets version date
 			File jarFile = new File(desktop.getWebApp()
 					.getResource(CURRENT_ATHAN_JAR).getFile());
-			
+
 			String format = Labels.getLabel("current.releaseDate.format");
 			SimpleDateFormat sdf = new SimpleDateFormat(format);
 			versionDate = sdf.format(new Date(jarFile.lastModified()));
@@ -96,11 +96,11 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 	 * @return version number if found, {@link StringUtils#EMTPY} otherwise
 	 */
 	private String getVersionNumber(File jarFile) {
-		
+
 		String ret = null;
 
 		Scanner scanner = null;
-		
+
 		try {
 			// Note that FileReader is used, not File, since File is not
 			// Closeable
@@ -139,17 +139,17 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 		if (scanner.hasNext()) {
 			String name = scanner.next();
 			String value = scanner.next();
-			
+
 			if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(value)) {
 				name = StringUtils.trim(name);
 				value = StringUtils.trim(value);
-				
+
 				if (StringUtils.equalsIgnoreCase(name, MIDLET_VERSION)) {
 					return value;
 				}
 			}
 		}
-		
+
 		// no need to call scanner.close(), since the source is a String
 		return null;
 	}
@@ -182,11 +182,9 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 
 	public void onClick$btnJadFile() {
 		try {
-			Filedownload.save(CURRENT_ATHAN_JAD,
-					MIME_TYPE_JAD);
+			Filedownload.save(CURRENT_ATHAN_JAD, MIME_TYPE_JAD);
 		} catch (FileNotFoundException exc) {
-			Clients.alert(Labels.getLabel("current.fileDownload.error"),
-					StringUtils.EMPTY, Messagebox.ERROR);
+			Messages.error(Labels.getLabel("current.fileDownload.error"));
 			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
 					exc);
 		} catch (Exception exc) {
@@ -198,11 +196,9 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 
 	public void onClick$btnJarFile() {
 		try {
-			Filedownload.save(CURRENT_ATHAN_JAR,
-					MIME_TYPE_JAR);
+			Filedownload.save(CURRENT_ATHAN_JAR, MIME_TYPE_JAR);
 		} catch (FileNotFoundException exc) {
-			Clients.alert(Labels.getLabel("current.fileDownload.error"),
-					StringUtils.EMPTY, Messagebox.ERROR);
+			Messages.error(Labels.getLabel("current.fileDownload.error"));
 			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAR",
 					exc);
 		} catch (Exception exc) {

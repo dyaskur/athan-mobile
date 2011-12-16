@@ -46,11 +46,21 @@
 	left: 0px;
 }
 
-.song_name {
+.song_name,
+.song_name_cmpl {
 	font-weight: bold;
 	font-style: italic;
-	font-size: 14px;
 	color: #330000;
+}
+
+.song_name {
+	font-size: 14px;
+	left: 20px;
+}
+
+.song_name_cmpl {
+	font-size: 10px;
+	margin-left: 20px;
 }
 
 /* Tabs */
@@ -61,21 +71,26 @@
 }
 
 /* Buttons */
+.tlb_mp3,
+.tlb_wav {
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 22px;
+	width: 26px;
+}
+
 .tlb_mp3 {
 	background-image: url('/images/resources/mp3_icon.png');
-	background-size: 64px;
-	width: 64px;
-	background-repeat: no-repeat;
-	height: 64px;
+	margin-left: 3px;
 }
 .tlb_mp3:hover {
-	background-image: url('/images/resources/wav_icon.png');
-	background-size: 64px;
-	width: 64px;
-	background-repeat: no-repeat;
-	height: 64px;
+	background-image: url('/images/resources/mp3_icon_hover.png');
 }
 
 .tlb_wav {
 	background-image: url('/images/resources/wav_icon.png');
+	margin-left: 2px;
+}
+.tlb_wav:hover {
+	background-image: url('/images/resources/wav_icon_hover.png');
 }

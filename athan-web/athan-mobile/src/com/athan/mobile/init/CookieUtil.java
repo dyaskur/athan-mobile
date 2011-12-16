@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.zkoss.zk.ui.Executions;
 
 /**
- * Générateur de cookie
+ * Gï¿½nï¿½rateur de cookie
  * 
  * @author Saad BENBOUZID
  */
 public class CookieUtil {
-	
+
 	public static void setCookie(String name, String value) {
 		((HttpServletResponse) Executions.getCurrent().getNativeResponse())
 				.addCookie(new Cookie(name, value));

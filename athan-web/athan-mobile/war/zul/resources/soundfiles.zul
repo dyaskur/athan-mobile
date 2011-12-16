@@ -7,7 +7,7 @@
 
 		<style src="./css/resources/resources.css" />
 
-		<vbox>
+		<vbox id="vbxMain">
 
 			<label value="${c:l('soundfiles.title')}" zclass="soundfiles_title" />
 			<label value="${c:l('soundfiles.summary')}" multiline="true" zclass="soundfiles_purpose" />
@@ -15,6 +15,35 @@
 			<image src="/images/resources/sound_logo.png" class="img_sound_logo" />
 			<image src="/images/resources/mosque_2.jpg" class="img_mosque_2" />
 			
+<!-- 			<hbox style="position: relative; top: 100px;"> -->
+<!-- 				<hbox pack="left" width="120px"> -->
+<!-- 					<label value="${c:l('sound.alaqsa')}" zclass="song_name" /> -->
+<!-- 				</hbox> -->
+<!-- 				<h:object type="application/x-shockwave-flash" -->
+<!-- 					data="/swf/dewplayer.swf" width="200" height="20" id="dewplayer" -->
+<!-- 					name="dewplayer"> -->
+<!-- 					<h:param name="wmode" value="transparent" /> -->
+<!-- 					<h:param name="movie" value="/swf/dewplayer.swf" /> -->
+<!-- 					<h:param name="flashvars" value="mp3=/sound/mp3/Alaqsa.mp3" /> -->
+<!-- 				</h:object> -->
+<!-- 				<image id="btnMp3Alaqsa_" sclass="tlb_mp3" /> -->
+<!-- 				<image id="btnWavAlaqsa_" sclass="tlb_wav" /> -->
+<!-- 			</hbox> -->
+<!-- 			<hbox style="position: relative; top: 100px;"> -->
+<!-- 				<hbox pack="left" width="120px"> -->
+<!-- 					<label value="${c:l('sound.bosnia')}" zclass="song_name" /> -->
+<!-- 				</hbox> -->
+<!-- 				<h:object type="application/x-shockwave-flash" -->
+<!-- 					data="/swf/dewplayer.swf" width="200" height="20" id="dewplayer" -->
+<!-- 					name="dewplayer"> -->
+<!-- 					<h:param name="wmode" value="transparent" /> -->
+<!-- 					<h:param name="movie" value="/swf/dewplayer.swf" /> -->
+<!-- 					<h:param name="flashvars" value="mp3=/sound/mp3/Bosnia.mp3" /> -->
+<!-- 				</h:object> -->
+<!-- 				<image id="btnMp3Alaqsa__" sclass="tlb_mp3" /> -->
+<!-- 				<image id="btnWavAlaqsa__" sclass="tlb_wav" /> -->
+<!-- 			</hbox> -->
+			<!--
 			<h:table class="song_tab">
 				<h:tr>
 					<h:td>
@@ -33,7 +62,7 @@
 						<image id="btnMp3Alaqsa" sclass="tlb_mp3" />
 					</h:td>
 					<h:td>
-						<toolbarbutton id="btnWavAlaqsa" sclass="tlb_wav" />
+						<image id="btnWavAlaqsa" sclass="tlb_wav" />
 					</h:td>
 				</h:tr>
 				<h:tr>
@@ -97,7 +126,7 @@
 					</h:td>
 				</h:tr>
 			</h:table>
-
+			-->
 		</vbox>
 
 	</window>
