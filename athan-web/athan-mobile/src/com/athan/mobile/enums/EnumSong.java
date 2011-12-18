@@ -10,15 +10,15 @@ package com.athan.mobile.enums;
  */
 public enum EnumSong {
 
-	JERUSALEM("sound.alaqsa", "", "Alaqsa.mp3", "Alaqsa.wav"), BOSNIA(
-			"sound.bosnia", "", "Bosnia.mp3", "Bosnia.wav"), EGYPT(
-			"sound.egypt", "", "Egypt.mp3", "Egypt.wav"), LEBANON(
-			"sound.lebanon", "", "Lebanon.mp3", "Lebanon.wav"), MADINA("sound.madina",
-			"", "Madina.mp3", "Madina.wav"), MAKKAH1("sound.makkah1", "1",
-			"Makkah1.mp3", "Makkah1.wav"), MAKKAH2("sound.makkah2", "2",
-			"Makkah2.mp3", "Makkah2.wav"), PAKISTAN("sound.pakistan", "",
-			"Pakistan.mp3", "Pakistan.wav"), TURKEY("sound.turkey", "",
-			"Turkey.mp3", "Turkey.wav"), SHEIKH("sound.sheikh", "",
+	JERUSALEM("soundfiles.alaqsa", "", "Alaqsa.mp3", "Alaqsa.wav"), BOSNIA(
+			"soundfiles.bosnia", "", "Bosnia.mp3", "Bosnia.wav"), EGYPT(
+			"soundfiles.egypt", "", "Egypt.mp3", "Egypt.wav"), LEBANON(
+			"soundfiles.lebanon", "", "Lebanon.mp3", "Lebanon.wav"), MADINA("soundfiles.madina",
+			"", "Madina.mp3", "Madina.wav"), MAKKAH1("soundfiles.makkah1", "1",
+			"Makkah1.mp3", "Makkah1.wav"), MAKKAH2("soundfiles.makkah2", "2",
+			"Makkah2.mp3", "Makkah2.wav"), PAKISTAN("soundfiles.pakistan", "",
+			"Pakistan.mp3", "Pakistan.wav"), TURKEY("soundfiles.turkey", "",
+			"Turkey.mp3", "Turkey.wav"), SHEIKH("soundfiles.sheikh", "",
 			"Sheikh.mp3", "Sheikh.wav");
 
 	/** Key label in labels.properties */

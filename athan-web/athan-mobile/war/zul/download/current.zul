@@ -44,6 +44,7 @@
 						<button id="btnJadFile" label="${c:l('current.JadFile')}" tooltiptext="${c:l('current.JadFile.tooltip')}" sclass="jad_btn" />
 					</h:td>
 					<h:td>
+						<separator id="spcDownloadBtn" bar="false" spacing="15px" orient="vertical" />
 						<button id="btnJarFile" label="${c:l('current.JarFile')}" tooltiptext="${c:l('current.JarFile.tooltip')}" sclass="jad_btn" />
 					</h:td>
 				</h:tr>
@@ -56,6 +57,7 @@
 					</h:td>
 					<h:td>
 						<hbox style="width:100%;" pack="center">
+							<separator bar="false" spacing="${spcDownloadBtn.spacing}" orient="vertical" />
 							<label value="${c:l('current.JarFile.size')}" zclass="current_file_size_header" />
 							<label id="lblJarSize" zclass="current_file_size_value" />
 						</hbox>

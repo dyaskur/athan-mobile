@@ -4,7 +4,6 @@
 package com.athan.mobile.init;
 
 import java.util.Locale;
-import java.util.logging.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
