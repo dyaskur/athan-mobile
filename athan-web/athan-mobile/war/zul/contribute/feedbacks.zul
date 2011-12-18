@@ -1,12 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
-<zk>
-	<window border="none" apply="com.athan.mobile.controls.contribute.FeedbacksViewCtrl">
+<zk xmlns:h="native">
+	<window border="none" apply="com.athan.mobile.controls.contribute.FeedbacksViewCtrl"
+		sclass="window_introduction" height="600px"
+		contentStyle="overflow:auto;">
 
-		<style src="./css/contribute/feedbacks.css" />
+		<style src="./css/contribute/contribute.css" />
 
-		Feedbacks
+		<vbox id="vbxMain">
 
+			<label value="${c:l('contribute.title')}" multiline="true" zclass="contribute_title" />
+			<image src="/images/contribute/feedback.png" class="img_feedback_logo" />
+
+			<h:table>
+				<h:tr>
+					<h:td>
+						<label value="${c:l('contribute.yourname')}" zclass="contribute_form_item" />
+					</h:td>
+					<h:td colspan="2">
+						<textbox width="300px" zclass="contribute_form_input" />
+					</h:td>
+				</h:tr>
+				<h:tr colspan="2">
+					<h:td>
+						<separator id="sepForm" orient="horizontal" spacing="10px" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="${c:l('contribute.yourfirstname')}" zclass="contribute_form_item" />
+					</h:td>
+					<h:td colspan="2">
+						<textbox width="300px" zclass="contribute_form_input" />
+					</h:td>
+				</h:tr>
+				<h:tr colspan="2">
+					<h:td>
+						<separator orient="horizontal" spacing="${sepForm.spacing}" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="${c:l('contribute.yourlocation')}" zclass="contribute_form_item" />
+					</h:td>
+					<h:td colspan="2">
+						<textbox width="300px" zclass="contribute_form_input" />
+					</h:td>
+				</h:tr>
+				<h:tr colspan="2">
+					<h:td>
+						<separator orient="horizontal" spacing="${sepForm.spacing}" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="${c:l('contribute.yourmobile')}" zclass="contribute_form_item" />
+					</h:td>
+					<h:td colspan="2">
+						<textbox width="300px" zclass="contribute_form_input" />
+					</h:td>
+				</h:tr>
+				<h:tr colspan="2">
+					<h:td>
+						<separator orient="horizontal" spacing="${sepForm.spacing}" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="${c:l('contribute.youremailaddress')}" zclass="contribute_form_item" />
+					</h:td>
+					<h:td>
+						<textbox width="300px" zclass="contribute_form_input" />
+					</h:td>
+					<h:td style="vertical-align: bottom;">
+						<label value="${c:l('contribute.youremailaddress.recontact')}" zclass="contribute_form_item_detail" />
+					</h:td>
+				</h:tr>
+				<h:tr colspan="2">
+					<h:td>
+						<separator orient="horizontal" spacing="${sepForm.spacing}" />
+					</h:td>
+				</h:tr>
+				<h:tr>
+					<h:td>
+						<label value="${c:l('contribute.yourmessage')}" zclass="contribute_form_item" />
+					</h:td>
+					<h:td colspan="2">
+						<textbox width="500px" height="150px" multiline="true" zclass="contribute_form_input" />
+					</h:td>
+				</h:tr>
+				<h:tr colspan="2">
+					<h:td>
+						<separator orient="horizontal" spacing="${sepForm.spacing}" />
+					</h:td>
+				</h:tr>
+			</h:table>
+			
+			
+		</vbox>
 
 	</window>
 </zk>

@@ -1,0 +1,45 @@
+/* Images */
+.img_feedback_logo {
+	width: 105px;
+	position: absolute;
+	top: 235px;
+	right: 20px;
+}
+
+/* Texts */
+.contribute_title,
+.contribute_form_item,
+.contribute_form_item_detail,
+.contribute_form_input {
+	font-family: verdana, arial, sans-serif;
+	position: relative;
+}
+
+.contribute_title {
+	top: 35px;
+	font-weight: nomal;
+	font-style: normal;
+	font-size: 18px;
+	margin-right: 30px;
+}
+
+.contribute_form_item,
+.contribute_form_input {
+	top: 50px;
+}
+
+.contribute_form_item {
+	font-weight: normal;
+	font-style: normal;
+	font-size: 16px;
+}
+
+.contribute_form_item_detail {
+	font-weight: normal;
+	font-style: normal;
+	font-size: 10px;
+}
+
+.contribute_form_input {
+}
+
