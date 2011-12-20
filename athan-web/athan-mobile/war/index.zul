@@ -11,6 +11,10 @@
 		
 		<style src="./css/index.css" />
 		
+		<!-- Common Javascript functions -->
+		<script type="text/javascript" src="/js/common.js" />
+		<script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js" />
+		
 		<vbox >
 		
 			<hbox width="${indexWindow.width}" zclass="header_layout">

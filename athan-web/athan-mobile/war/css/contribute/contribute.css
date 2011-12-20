@@ -4,6 +4,7 @@
 	position: absolute;
 	top: 235px;
 	right: 20px;
+	opacity: 0.6;
 }
 
 /* Texts */
@@ -43,3 +44,21 @@
 .contribute_form_input {
 }
 
+/* Others */
+.recaptcha {
+	position: relative;
+	top: 50px;
+	width: 100%;
+	text-align: center;
+}
+
+.sending_status {
+	font-family: verdana, arial, sans-serif;
+	font-size: 13px;
+	display: none;
+}
+
+.response_status {
+	font-family: verdana, arial, sans-serif;
+	font-size: 13px;
+}

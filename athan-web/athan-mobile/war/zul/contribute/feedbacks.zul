@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <zk xmlns:h="native">
-	<window border="none" apply="com.athan.mobile.controls.contribute.FeedbacksViewCtrl"
+	<window id="feedbackController" border="none" apply="com.athan.mobile.controls.contribute.FeedbacksViewCtrl"
 		sclass="window_introduction" height="600px"
 		contentStyle="overflow:auto;">
 
-		<style src="./css/contribute/contribute.css" />
+		<style src="/css/contribute/contribute.css" />
+		<script type="text/javascript" src="/js/contribute/captcha.js" />
 
 		<vbox id="vbxMain">
 
@@ -18,12 +19,12 @@
 						<label value="${c:l('contribute.yourname')}" zclass="contribute_form_item" />
 					</h:td>
 					<h:td colspan="2">
-						<textbox width="300px" zclass="contribute_form_input" />
+						<textbox id="txtName" width="300px" zclass="contribute_form_input" />
 					</h:td>
 				</h:tr>
 				<h:tr colspan="2">
 					<h:td>
-						<separator id="sepForm" orient="horizontal" spacing="10px" />
+						<separator id="sepForm" orient="horizontal" spacing="6px" />
 					</h:td>
 				</h:tr>
 				<h:tr>
@@ -31,7 +32,7 @@
 						<label value="${c:l('contribute.yourfirstname')}" zclass="contribute_form_item" />
 					</h:td>
 					<h:td colspan="2">
-						<textbox width="300px" zclass="contribute_form_input" />
+						<textbox id="txtFirstName" width="300px" zclass="contribute_form_input" />
 					</h:td>
 				</h:tr>
 				<h:tr colspan="2">
@@ -44,7 +45,7 @@
 						<label value="${c:l('contribute.yourlocation')}" zclass="contribute_form_item" />
 					</h:td>
 					<h:td colspan="2">
-						<textbox width="300px" zclass="contribute_form_input" />
+						<textbox id="txtLocation" width="300px" zclass="contribute_form_input" />
 					</h:td>
 				</h:tr>
 				<h:tr colspan="2">
@@ -57,7 +58,7 @@
 						<label value="${c:l('contribute.yourmobile')}" zclass="contribute_form_item" />
 					</h:td>
 					<h:td colspan="2">
-						<textbox width="300px" zclass="contribute_form_input" />
+						<textbox id="txtMobile" width="300px" zclass="contribute_form_input" />
 					</h:td>
 				</h:tr>
 				<h:tr colspan="2">
@@ -70,7 +71,7 @@
 						<label value="${c:l('contribute.youremailaddress')}" zclass="contribute_form_item" />
 					</h:td>
 					<h:td>
-						<textbox width="300px" zclass="contribute_form_input" />
+						<textbox id="txtEmail" width="300px" zclass="contribute_form_input" />
 					</h:td>
 					<h:td style="vertical-align: bottom;">
 						<label value="${c:l('contribute.youremailaddress.recontact')}" zclass="contribute_form_item_detail" />
@@ -86,7 +87,7 @@
 						<label value="${c:l('contribute.yourmessage')}" zclass="contribute_form_item" />
 					</h:td>
 					<h:td colspan="2">
-						<textbox width="500px" height="150px" multiline="true" zclass="contribute_form_input" />
+						<textbox id="txtMessage" width="500px" height="150px" multiline="true" zclass="contribute_form_input" />
 					</h:td>
 				</h:tr>
 				<h:tr colspan="2">
@@ -96,6 +97,24 @@
 				</h:tr>
 			</h:table>
 			
+			<h:div class="recaptcha">
+				<h:div id="dynamic_recaptcha"></h:div>
+				<h:div id="status" class="sending_status">
+					<h:table style="display: inline-block;">
+						<h:tr>
+							<h:td>
+								<h:img src="/images/contribute/ajax-loader.gif" />
+							</h:td>
+							<h:td>
+								${c:l('contribute.submittingdata')}
+							</h:td>
+						</h:tr>
+					</h:table>
+				</h:div>
+				<h:div id="response" class="response_status"></h:div>
+			</h:div>
+			
+			<button id="btnSubmit" label="Submit" style="position:relative;top:50px;" />
 			
 		</vbox>
 

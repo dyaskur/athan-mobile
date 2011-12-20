@@ -7,8 +7,8 @@
 		sclass="window_features" height="600px"
 		contentStyle="overflow:auto;">
 		
-		<script type="text/javascript" src="./js/zoomer.js" />
-		<script type="text/javascript" src="./js/common.js" />
+		<script type="text/javascript" src="/js/zoomer.js" />
+		<script type="text/javascript" src="/js/features/features.js" />
 
 		<style src="./css/home/home.css" />
 		
