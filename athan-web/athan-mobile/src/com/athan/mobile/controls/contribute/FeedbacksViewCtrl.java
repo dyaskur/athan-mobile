@@ -47,8 +47,8 @@ public class FeedbacksViewCtrl extends GenericForwardComposer {
 	private String getPublicKey() {
 
 		try {
-			InputStream is = desktop.getWebApp().getResourceAsStream(
-					"/captcha/local.properties");
+			InputStream is = getClass()
+					.getResourceAsStream("/local.properties");
 
 			Properties prop = new Properties();
 			prop.load(is);

@@ -64,18 +64,24 @@ function state_Change() {
 	if (xmlhttp.readyState == 4) {// 4 = "loaded"
 		if (xmlhttp.status == 200) {
 			// 200 = "OK"
-			(jq('#response')[0]).style.color = "black";
+			jq('#response')[0].style.color = "black";
 		} else {
 			// KO
-			(jq('#response')[0]).style.color = "red";
+			jq('#response')[0].style.color = "red";
+		}
+		response = $.evalJSON(xmlhttp.responseText);
+		if (response.checkOK) {
+			jq('#response')[0].style.color = "black";
+		} else {
+			jq('#response')[0].style.color = "red";
 		}
 		// Hides back submitting notification
 		jq('#status')[0].style.display = "none";
 		// Shows status
-		jq('#response')[0].innerHTML = xmlhttp.responseText;
+		jq('#response')[0].innerHTML = response.message;
 		Recaptcha.reload();
 		setTimeout(function() {
 			jq('#response')[0].innerHTML = "";
-		}, 3000);
+		}, 5000);
 	}
 }

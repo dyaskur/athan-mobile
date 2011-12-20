@@ -21,7 +21,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>PostFormDataServlet</servlet-name>
-		<servlet-class>com.athan.mobile.captcha.PostFormDataServlet
+		<servlet-class>com.athan.mobile.captcha.servlet.PostFormDataServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>

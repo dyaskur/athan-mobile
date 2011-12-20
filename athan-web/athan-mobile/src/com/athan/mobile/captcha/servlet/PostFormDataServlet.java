@@ -1,4 +1,4 @@
-package com.athan.mobile.captcha;
+package com.athan.mobile.captcha.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 
+import com.athan.mobile.captcha.CaptchaForm;
+import com.athan.mobile.captcha.CaptchaResponse;
 import com.google.gson.Gson;
 
 /**
@@ -40,21 +42,21 @@ public class PostFormDataServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		response.setContentType("text/plain");
-		String strResponse = "";
-		try {
+		response.setContentType("text/json");
+		CaptchaResponse strResponse = new CaptchaResponse();
+		Gson gson = new Gson();
 
+		try {
 			/*
 			 * CAPTCHA CHECK
 			 */
 			// First validate the captcha, if not -- just get out of the loop
 			StringBuilder sb = new StringBuilder();
-
 			String s;
 			while ((s = request.getReader().readLine()) != null) {
 				sb.append(s);
 			}
-			Gson gson = new Gson();
+
 			CaptchaForm captchaForm = (CaptchaForm) gson.fromJson(
 					sb.toString(), CaptchaForm.class);
 
@@ -80,12 +82,18 @@ public class PostFormDataServlet extends HttpServlet {
 						"Your words did not match. Please try submitting again.");
 			}
 
-			strResponse = "Your record has been accepted and you did a good job entering the two words. Thank you";
+			strResponse
+					.setMessage("Your record has been accepted and you did a good job entering the two words. Thank you");
+			strResponse.setCheckOK(true);
+
 		} catch (Exception ex) {
-			strResponse = "You record was not accepted. Reason : "
-					+ ex.getMessage();
+			strResponse.setMessage("You record was not accepted. Reason : "
+					+ ex.getMessage());
+			strResponse.setCheckOK(false);
 		}
-		response.getWriter().println(strResponse);
+
+		// Returns response
+		response.getWriter().print(gson.toJson(strResponse));
 	}
 
 	/**
@@ -96,8 +104,8 @@ public class PostFormDataServlet extends HttpServlet {
 	private String getPrivateKey() {
 
 		try {
-			InputStream is = getClass().getResourceAsStream(
-					"/captcha/local.properties");
+			InputStream is = getClass()
+					.getResourceAsStream("/local.properties");
 
 			Properties prop = new Properties();
 			prop.load(is);
