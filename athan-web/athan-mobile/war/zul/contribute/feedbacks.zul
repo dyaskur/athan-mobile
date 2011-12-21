@@ -9,8 +9,9 @@
 		<script type="text/javascript" src="/js/contribute/captcha.js" />
 
 		<vbox id="vbxMain">
-
-			<label value="${c:l('contribute.title')}" multiline="true" zclass="contribute_title" />
+			<hbox width="90%" pack="left">
+				<label value="${c:l('contribute.title')}" multiline="true" zclass="contribute_title" />
+			</hbox>
 			<image src="/images/contribute/feedback.png" class="img_feedback_logo" />
 
 			<h:table>
@@ -24,7 +25,7 @@
 				</h:tr>
 				<h:tr colspan="2">
 					<h:td>
-						<separator id="sepForm" orient="horizontal" spacing="6px" />
+						<separator id="sepForm" orient="horizontal" spacing="3px" />
 					</h:td>
 				</h:tr>
 				<h:tr>
@@ -87,7 +88,7 @@
 						<label value="${c:l('contribute.yourmessage')}" zclass="contribute_form_item" />
 					</h:td>
 					<h:td colspan="2">
-						<textbox id="txtMessage" width="500px" height="150px" multiline="true" zclass="contribute_form_input" />
+						<textbox id="txtMessage" width="500px" height="100px" maxlength="500" multiline="true" zclass="contribute_form_input" />
 					</h:td>
 				</h:tr>
 				<h:tr colspan="2">
@@ -114,7 +115,9 @@
 				<h:div id="response" class="response_status"></h:div>
 			</h:div>
 			
-			<button id="btnSubmit" label="Submit" style="position:relative;top:50px;" />
+			<hbox width="100%" pack="center">
+				<button id="btnSubmit" label="${c:l('contribute.submit')}" style="position:relative;top:50px;" mold="os" />
+			</hbox>
 			
 		</vbox>
 

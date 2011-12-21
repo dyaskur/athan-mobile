@@ -22,6 +22,9 @@ public class CaptchaForm implements Serializable {
 	private String email;
 	private String challengeField;
 	private String responseField;
+	private String successMessage;
+	private String errorMessage;
+	private String captchaMessage;
 
 	public String getName() {
 		return name;
@@ -85,6 +88,30 @@ public class CaptchaForm implements Serializable {
 
 	public void setResponseField(String responseField) {
 		this.responseField = responseField;
+	}
+
+	public String getSuccessMessage() {
+		return successMessage;
+	}
+
+	public void setSuccessMessage(String successMessage) {
+		this.successMessage = successMessage;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+	public String getCaptchaMessage() {
+		return captchaMessage;
+	}
+
+	public void setCaptchaMessage(String captchaMessage) {
+		this.captchaMessage = captchaMessage;
 	}
 
 }

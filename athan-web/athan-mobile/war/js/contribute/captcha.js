@@ -24,7 +24,7 @@ function captchaCallback() {
 	(jq('#dynamic_recaptcha')[0]).style.display = "inline-block";
 }
 
-function submitFormData() {
+function submitFormData(successMsg, captchaMsg, errorMsg) {
 	
 	xmlhttp = null;
 	if (window.XMLHttpRequest) {// code for IE7, Firefox, Opera, etc.
@@ -35,10 +35,10 @@ function submitFormData() {
 	if (xmlhttp != null) {
 		xmlhttp.onreadystatechange = state_Change;
 		url = "postformdata";
-		params = JSON.stringify(prepareJSON());
+		params = JSON.stringify(prepareJSON(successMsg, captchaMsg, errorMsg));
 		jq('#status')[0].style.display = "inherit";
 		xmlhttp.open("POST", url, true);
-		xmlhttp.setRequestHeader("Content-type", "application/json");
+		xmlhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
 		xmlhttp.setRequestHeader("Content-length", params.length);
 		xmlhttp.setRequestHeader("Connection", "close");
 		xmlhttp.send(params);
@@ -47,7 +47,7 @@ function submitFormData() {
 	}
 }
 
-function prepareJSON() {
+function prepareJSON(successMsg, captchaMsg, errorMsg) {
 	return {
 		name: jq('$txtName')[0].value,
 		firstname: jq('$txtFirstName')[0].value,
@@ -56,7 +56,10 @@ function prepareJSON() {
 		email: jq('$txtEmail')[0].value,
 		message: jq('$txtMessage')[0].value,
 		challengeField: Recaptcha.get_challenge(),
-		responseField: Recaptcha.get_response()
+		responseField: Recaptcha.get_response(),
+		successMessage: successMsg,
+		errorMessage : errorMsg,
+		captchaMessage : captchaMsg
 	}
 }
 
@@ -71,7 +74,7 @@ function state_Change() {
 		}
 		response = $.evalJSON(xmlhttp.responseText);
 		if (response.checkOK) {
-			jq('#response')[0].style.color = "black";
+			jq('#response')[0].style.color = "green";
 		} else {
 			jq('#response')[0].style.color = "red";
 		}
@@ -82,6 +85,6 @@ function state_Change() {
 		Recaptcha.reload();
 		setTimeout(function() {
 			jq('#response')[0].innerHTML = "";
-		}, 5000);
+		}, 3000);
 	}
 }
