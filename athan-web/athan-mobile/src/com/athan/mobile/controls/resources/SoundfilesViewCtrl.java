@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Html;
@@ -99,6 +100,7 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 
 				@Override
 				public void onEvent(Event event) throws Exception {
+					Clients.alert("ici");
 					fileDownlad(enumSong.mp3File());
 				}
 			});
