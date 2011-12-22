@@ -1,6 +1,5 @@
 package com.athan.mobile.controls;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,10 +7,9 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.api.Tabpanel;
 
-import com.athan.mobile.controls.download.CurrentViewCtrl;
+import com.athan.mobile.constants.AthanConstants;
 import com.athan.mobile.controls.enums.EnumZulTab;
 import com.athan.mobile.init.CookieUtil;
 import com.athan.mobile.init.LocalesProvider;
@@ -52,14 +50,15 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 	public void onClick$btnJadFileMain() {
 		try {
-			Filedownload.save(CurrentViewCtrl.CURRENT_ATHAN_JAD,
-					CurrentViewCtrl.MIME_TYPE_JAD);
-		} catch (FileNotFoundException exc) {
-			Messages.error(Labels.getLabel("current.fileDownload.error"));
-			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
-					exc);
+
+			Executions.getCurrent().sendRedirect(
+					AthanConstants.DOWNLOAD_SERVLET + "?"
+							+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
+							+ AthanConstants.DOWNLOAD_JAD, null);
+			LOG.log(Level.FINE, "Téléchargement du fichier JAD");
+
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			Messages.error(Labels.getLabel("current.fileDownload.error"));
 			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
 					exc);
 		}

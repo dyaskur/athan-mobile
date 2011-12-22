@@ -3,18 +3,17 @@
  */
 package com.athan.mobile.controls.resources;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Html;
 import org.zkoss.zul.Image;
@@ -22,6 +21,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Vbox;
 
+import com.athan.mobile.constants.AthanConstants;
 import com.athan.mobile.controls.download.CurrentViewCtrl;
 import com.athan.mobile.enums.EnumSong;
 import com.athan.mobile.utils.Messages;
@@ -43,10 +43,6 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 	private static final String ZCLASS_SONG_NAME = "song_name";
 	private static final String ZCLASS_SONG_NAME_CMPL = "song_name_cmpl";
 	private static final String CLASS_IMAGE_MP3 = "tlb_mp3";
-	private static final String CLASS_IMAGE_WAV = "tlb_wav";
-
-	private static final String MIME_TYPE_MP3 = "audio/mpeg";
-	private static final String MIME_TYPE_WAV = "audio/x-wav";
 
 	private Vbox vbxMain;
 
@@ -89,8 +85,8 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 			sb.append("	name=\"dewplayer\">");
 			sb.append("	<param name=\"wmode\" value=\"transparent\" />");
 			sb.append("	<param name=\"movie\" value=\"/swf/dewplayer.swf\" />");
-			sb.append("	<param name=\"flashvars\" value=\"mp3="
-					+ enumSong.mp3Url() + "\" />");
+			sb.append("	<param name=\"flashvars\" value=\"mp3=" + "file://"
+					+ AthanConstants.MP3_PATH + enumSong.mp3File() + "\" />");
 			sb.append("</object>");
 			htmlPlayer.setContent(sb.toString());
 			htmlPlayer.setParent(mainHbox);
@@ -103,19 +99,7 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 
 				@Override
 				public void onEvent(Event event) throws Exception {
-					fileDownlad(enumSong.mp3Url(), MIME_TYPE_MP3);
-				}
-			});
-
-			/* WAV button */
-			Image imgWav = new Image();
-			imgWav.setSclass(CLASS_IMAGE_WAV);
-			imgWav.setParent(mainHbox);
-			imgWav.addEventListener(Events.ON_CLICK, new EventListener() {
-
-				@Override
-				public void onEvent(Event event) throws Exception {
-					fileDownlad(enumSong.wavUrl(), MIME_TYPE_WAV);
+					fileDownlad(enumSong.mp3File());
 				}
 			});
 
@@ -130,20 +114,41 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 	}
 
 	/**
-	 * File downloading handler
+	 * Returns file url on classpath
 	 * 
-	 * @param uri
-	 * @param mime
+	 * @return
 	 */
-	private void fileDownlad(String uri, String mime) {
+	private String getMp3FileUrl(String fileName) {
+
 		try {
-			Filedownload.save(uri, mime);
-		} catch (FileNotFoundException exc) {
-			Messages.error(Labels.getLabel("sound.download.error"));
-			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier son",
-					exc);
+			String url = getClass().getResource(
+					AthanConstants.MP3_PATH + fileName).getFile();
+			return url;
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			LOG.log(Level.SEVERE, "Problème à la récupération du mp3 "
+					+ fileName + " pour player", exc);
+			return StringUtils.EMPTY;
+		}
+	}
+
+	/**
+	 * File downloading handler. <br>
+	 * Can't handle wav files, as GAE doesn't allow to upload big files.
+	 * 
+	 * @param fileName
+	 */
+	private void fileDownlad(String fileName) {
+		try {
+			Executions.getCurrent().sendRedirect(
+					AthanConstants.DOWNLOAD_SERVLET + "?"
+							+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
+							+ AthanConstants.DOWNLOAD_MP3 + "&"
+							+ AthanConstants.DOWNLOAD_FILE_PARAM + "="
+							+ fileName, null);
+			LOG.log(Level.FINE, "Téléchargement du fichier JAD");
+
+		} catch (Exception exc) {
+			Messages.error(Labels.getLabel("soundfiles.download.error"));
 			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier son",
 					exc);
 		}

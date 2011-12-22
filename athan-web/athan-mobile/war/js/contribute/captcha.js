@@ -75,6 +75,7 @@ function state_Change() {
 		response = $.evalJSON(xmlhttp.responseText);
 		if (response.checkOK) {
 			jq('#response')[0].style.color = "green";
+			resetFields();
 		} else {
 			jq('#response')[0].style.color = "red";
 		}
@@ -87,4 +88,15 @@ function state_Change() {
 			jq('#response')[0].innerHTML = "";
 		}, 3000);
 	}
+}
+
+function resetFields() {
+	jq('$txtName')[0].value = '';
+	jq('$txtFirstName')[0].value = '';
+	jq('$txtLocation')[0].value = '';
+	jq('$txtMobile')[0].value = '';
+	jq('$txtEmail')[0].value = '';
+	jq('$txtMessage')[0].value = '';
+	
+	
 }

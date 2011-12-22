@@ -15,10 +15,11 @@ import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Label;
 
+import com.athan.mobile.constants.AthanConstants;
 import com.athan.mobile.utils.Messages;
 
 /**
@@ -29,14 +30,6 @@ import com.athan.mobile.utils.Messages;
 public class CurrentViewCtrl extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
-
-	public static final String MIME_TYPE_JAD = "text/vnd.sun.j2me.app-descriptor";
-
-	public static final String MIME_TYPE_JAR = "application/java-archive";
-
-	public static final String CURRENT_ATHAN_JAD = "/jar/current/Athan.jad";
-
-	public static final String CURRENT_ATHAN_JAR = "/jar/current/Athan.jar";
 
 	private static final String MIDLET_VERSION = "MIDlet-Version";
 
@@ -66,14 +59,14 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 		String versionDate = StringUtils.EMPTY;
 		try {
 			// Gets version number
-			File jadFile = new File(desktop.getWebApp()
-					.getResource(CURRENT_ATHAN_JAD).getFile());
+			File jadFile = new File(getClass().getResource(
+					AthanConstants.CURRENT_ATHAN_JAD).getFile());
 
 			versionNumber = getVersionNumber(jadFile);
 
 			// Gets version date
-			File jarFile = new File(desktop.getWebApp()
-					.getResource(CURRENT_ATHAN_JAR).getFile());
+			File jarFile = new File(getClass().getResource(
+					AthanConstants.CURRENT_ATHAN_JAR).getFile());
 
 			String format = Labels.getLabel("current.releaseDate.format");
 			SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -163,10 +156,10 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 		String jarSize = Labels.getLabel("current.fileSize.unknown");
 		String unit = " " + Labels.getLabel("current.File.sizeUnit");
 		try {
-			File jadFile = new File(desktop.getWebApp()
-					.getResource(CURRENT_ATHAN_JAD).getFile());
-			File jarFile = new File(desktop.getWebApp()
-					.getResource(CURRENT_ATHAN_JAR).getFile());
+			File jadFile = new File(getClass().getResource(
+					AthanConstants.CURRENT_ATHAN_JAD).getFile());
+			File jarFile = new File(getClass().getResource(
+					AthanConstants.CURRENT_ATHAN_JAR).getFile());
 			jadSize = Long.toString(jadFile.length());
 			jarSize = Long.toString(jarFile.length());
 		} catch (Exception exc) {
@@ -182,13 +175,14 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 
 	public void onClick$btnJadFile() {
 		try {
-			Filedownload.save(CURRENT_ATHAN_JAD, MIME_TYPE_JAD);
-		} catch (FileNotFoundException exc) {
-			Messages.error(Labels.getLabel("current.fileDownload.error"));
-			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
-					exc);
+			Executions.getCurrent().sendRedirect(
+					AthanConstants.DOWNLOAD_SERVLET + "?"
+							+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
+							+ AthanConstants.DOWNLOAD_JAD, null);
+			LOG.log(Level.FINE, "Téléchargement du fichier JAD");
+
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			Messages.error(Labels.getLabel("current.fileDownload.error"));
 			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
 					exc);
 		}
@@ -196,13 +190,13 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 
 	public void onClick$btnJarFile() {
 		try {
-			Filedownload.save(CURRENT_ATHAN_JAR, MIME_TYPE_JAR);
-		} catch (FileNotFoundException exc) {
-			Messages.error(Labels.getLabel("current.fileDownload.error"));
-			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAR",
-					exc);
+			Executions.getCurrent().sendRedirect(
+					AthanConstants.DOWNLOAD_SERVLET + "?"
+							+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
+							+ AthanConstants.DOWNLOAD_JAR, null);
+			LOG.log(Level.FINE, "Téléchargement du fichier JAR");
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			Messages.error(Labels.getLabel("current.fileDownload.error"));
 			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAR",
 					exc);
 		}

@@ -24,6 +24,11 @@
 		<servlet-class>com.athan.mobile.captcha.servlet.PostFormDataServlet
 		</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<servlet-class>com.athan.mobile.download.servlet.FileDownloadServlet
+		</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>zkLoader</servlet-name>
 		<url-pattern>*.zul</url-pattern>
@@ -39,6 +44,10 @@
 	<servlet-mapping>
 		<servlet-name>PostFormDataServlet</servlet-name>
 		<url-pattern>/postformdata</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<url-pattern>/download</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.zul</welcome-file>
