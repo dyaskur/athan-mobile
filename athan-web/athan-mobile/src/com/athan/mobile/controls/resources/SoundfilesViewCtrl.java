@@ -85,7 +85,7 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 			sb.append("	name=\"dewplayer\">");
 			sb.append("	<param name=\"wmode\" value=\"transparent\" />");
 			sb.append("	<param name=\"movie\" value=\"/swf/dewplayer.swf\" />");
-			sb.append("	<param name=\"flashvars\" value=\"mp3=" + "file://"
+			sb.append("	<param name=\"flashvars\" value=\"mp3="
 					+ AthanConstants.MP3_PATH + enumSong.mp3File() + "\" />");
 			sb.append("</object>");
 			htmlPlayer.setContent(sb.toString());
@@ -110,24 +110,6 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 			Separator sep = new Separator();
 			sep.setSpacing(SEPARATOR_SPACING);
 			sep.setParent(vbxMain);
-		}
-	}
-
-	/**
-	 * Returns file url on classpath
-	 * 
-	 * @return
-	 */
-	private String getMp3FileUrl(String fileName) {
-
-		try {
-			String url = getClass().getResource(
-					AthanConstants.MP3_PATH + fileName).getFile();
-			return url;
-		} catch (Exception exc) {
-			LOG.log(Level.SEVERE, "Problème à la récupération du mp3 "
-					+ fileName + " pour player", exc);
-			return StringUtils.EMPTY;
 		}
 	}
 
