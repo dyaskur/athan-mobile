@@ -3,29 +3,18 @@
  */
 package com.athan.mobile.controls.resources;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Html;
-import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Vbox;
 
 import com.athan.mobile.constants.AthanConstants;
-import com.athan.mobile.controls.download.CurrentViewCtrl;
 import com.athan.mobile.enums.EnumSong;
-import com.athan.mobile.utils.Messages;
 
 /**
  * Soundfiles Controller
@@ -35,9 +24,6 @@ import com.athan.mobile.utils.Messages;
 public class SoundfilesViewCtrl extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOG = Logger.getLogger(CurrentViewCtrl.class
-			.getName());
 
 	private static final String SEPARATOR_SPACING = "5px";
 	private static final String SONG_NAME_WIDTH = "120px";
@@ -60,7 +46,7 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 	private void displayPlayers() {
 		for (final EnumSong enumSong : EnumSong.values()) {
 			Hbox mainHbox = new Hbox();
-			mainHbox.setStyle("position: relative; top: 110px;");
+			mainHbox.setStyle("position:relative; top:110px;");
 
 			/* Song name */
 			Hbox labelHbox = new Hbox();
@@ -93,17 +79,11 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 			htmlPlayer.setParent(mainHbox);
 
 			/* MP3 button */
-			Image imgMp3 = new Image();
-			imgMp3.setSclass(CLASS_IMAGE_MP3);
-			imgMp3.setParent(mainHbox);
-			imgMp3.addEventListener(Events.ON_CLICK, new EventListener() {
-
-				@Override
-				public void onEvent(Event event) throws Exception {
-					Clients.alert("ici");
-					fileDownlad(enumSong.mp3File());
-				}
-			});
+			Html mp3Download = new Html();
+			mp3Download.setContent("<img class=\"" + CLASS_IMAGE_MP3
+					+ "\" onClick=\"" + getMp3DownloadUrl(enumSong.mp3File())
+					+ "\" />");
+			mp3Download.setParent(mainHbox);
 
 			/* Attaches line to container */
 			mainHbox.setParent(vbxMain);
@@ -116,25 +96,18 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 	}
 
 	/**
-	 * File downloading handler. <br>
+	 * Provides file downloading link. <br>
 	 * Can't handle wav files, as GAE doesn't allow to upload big files.
 	 * 
 	 * @param fileName
 	 */
-	private void fileDownlad(String fileName) {
-		try {
-			Executions.getCurrent().sendRedirect(
-					AthanConstants.DOWNLOAD_SERVLET + "?"
-							+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
-							+ AthanConstants.DOWNLOAD_MP3 + "&"
-							+ AthanConstants.DOWNLOAD_FILE_PARAM + "="
-							+ fileName, null);
-			LOG.log(Level.FINE, "Téléchargement du fichier JAD");
+	private String getMp3DownloadUrl(String fileName) {
 
-		} catch (Exception exc) {
-			Messages.error(Labels.getLabel("soundfiles.download.error"));
-			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier son",
-					exc);
-		}
+		return "javascript:window.location.replace('"
+				+ AthanConstants.DOWNLOAD_SERVLET + "?"
+				+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
+				+ AthanConstants.DOWNLOAD_MP3 + "&"
+				+ AthanConstants.DOWNLOAD_FILE_PARAM + "=" + fileName + "');";
 	}
+
 }

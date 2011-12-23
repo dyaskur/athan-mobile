@@ -7,7 +7,9 @@
 
 /* Texts */
 .contributor_title,
-.contributor_author {
+.contributor_author,
+.credits_title,
+.credits_technology {
 	font-family: verdana, arial, sans-serif;
 	position: relative;
 }
@@ -26,4 +28,34 @@
 	font-style: italic;
 	font-size: 15px;
 	margin-right: 30px;
+}
+
+.credits_title {
+	top: 15px;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 15px;
+	margin-right: 30px;
+}
+
+.credits_technology {
+	font-weight: bold;
+	font-style: normal;
+	font-size: 13px;
+	color: #B25306;
+}
+
+/* Others */
+.tabTechno {
+	position: relative;
+	top: 20px;
+	margin: auto;
+}
+
+.tabTechno TR TD {
+	text-align: center;
+}
+
+.tabTechno TR TD SPAN {
+	margin:auto;
 }

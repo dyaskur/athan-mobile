@@ -100,26 +100,14 @@
 }
 
 /* Buttons */
-.tlb_mp3,
-.tlb_wav {
+.tlb_mp3 {
 	background-repeat: no-repeat;
 	cursor: pointer;
 	height: 22px;
 	width: 26px;
-}
-
-.tlb_mp3 {
 	background-image: url('/images/resources/mp3_icon.png');
 	margin-left: 3px;
 }
 .tlb_mp3:hover {
 	background-image: url('/images/resources/mp3_icon_hover.png');
-}
-
-.tlb_wav {
-	background-image: url('/images/resources/wav_icon.png');
-	margin-left: 2px;
-}
-.tlb_wav:hover {
-	background-image: url('/images/resources/wav_icon_hover.png');
 }

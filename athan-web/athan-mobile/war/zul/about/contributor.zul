@@ -7,7 +7,7 @@
 
 		<style src="/css/about/about.css" />
 
-		<vbox>
+		<vbox width="100%">
 			
 			<separator orient="horizontal" spacing="10px"/>
 			

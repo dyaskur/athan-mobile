@@ -1,49 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <zk xmlns:h="native">
-	<window border="none" apply="com.athan.mobile.controls.about.CreditsViewCtrl""
+	<window border="none" apply="com.athan.mobile.controls.about.CreditsViewCtrl"
 		sclass="window_introduction" height="600px"
 		contentStyle="overflow:auto;">
 
 		<style src="/css/about/about.css" />
 
-		<vbox>
+		<vbox width="100%">
 			
 			<separator orient="horizontal" spacing="10px"/>
 			
-			<hbox>
-				<h:table>
+			<!-- Athan Mobile technologies -->			
+			<vbox width="100%">
+				<label value="${c:l('about.credits.application.title')}" multiline="false" zclass="credits_title" />
+				
+				<h:table class="tabTechno">
 					<h:tr>
 						<h:td>
-							<label value="${c:l('about.contributor.application.title')}" multiline="false" zclass="contributor_title" />
+							<h:a href="${c:l('about.credits.application.j2me.url')}" target="_blank">
+								<h:img src="/images/about/logo_J2ME.png" style="width:95px" />
+							</h:a>
 						</h:td>
 						<h:td>
-							<label value="${c:l('about.contributor.application.author')}" multiline="false" zclass="contributor_author" />
+							<h:a href="${c:l('about.credits.application.oracle.url')}" target="_blank">
+								<h:img src="/images/about/logo_oracle.png" style="width:120px" />
+							</h:a>
+						</h:td>
+						<h:td>
+							<h:a href="${c:l('about.credits.application.samsung.url')}" target="_blank">	
+								<h:img src="/images/about/logo_samsung.png" style="width:180px" />
+							</h:a>
+						</h:td>
+						<h:td>
+							<h:a href="${c:l('about.credits.application.geonames.url')}" target="_blank">
+								<h:img src="/images/about/logo_geonames.png" style="width:65px" />
+							</h:a>
 						</h:td>
 					</h:tr>
 					<h:tr>
-						<h:td colspan="2">
-							<separator orient="horizontal" spacing="6px"/>
-						</h:td>
-					</h:tr>
-					<h:tr>
 						<h:td>
-							<label value="${c:l('about.contributor.website.title')}" multiline="false" zclass="contributor_title" />
+							<label value="${c:l('about.credits.application.j2me')}" multiline="false" zclass="credits_technology" />
 						</h:td>
 						<h:td>
-							<label value="${c:l('about.contributor.website.author')}" multiline="false" zclass="contributor_author" />
+							<label value="${c:l('about.credits.application.oracle')}" multiline="false" zclass="credits_technology" />
+						</h:td>
+						<h:td>
+							<label value="${c:l('about.credits.application.samsung')}" multiline="false" zclass="credits_technology" />
+						</h:td>
+						<h:td>
+							<label value="${c:l('about.credits.application.geonames')}" multiline="false" zclass="credits_technology" />
 						</h:td>
 					</h:tr>
 				</h:table>
-			</hbox>
+			</vbox>
 			
-			<separator orient="horizontal" spacing="10px"/>
+			<separator orient="horizontal" spacing="80px"/>
 			
-			<hbox width="100%" pack="center">
-				<h:a href="${c:l('about.contributor.website')}" target="_blank">
-					<image src="/images/about/about_me.png" class="img_about_me" />
-				</h:a>
-			</hbox>
+			<!-- Website technologies -->			
+			<vbox width="100%">
+				<label value="${c:l('about.credits.website.title')}" multiline="false" zclass="credits_title" />
+				
+				<h:table class="tabTechno">
+					<h:tr>
+						<h:td>
+							<h:a href="${c:l('about.credits.website.appengine.url')}" target="_blank">
+								<h:img src="/images/about/logo_appengine.png" style="width:105px" />
+							</h:a>
+						</h:td>
+						<h:td>
+							<h:a href="${c:l('about.credits.website.analytics.url')}" target="_blank">
+								<h:img src="/images/about/logo_ga.png" style="width:140px" />
+							</h:a>
+						</h:td>
+						<h:td>
+							<h:a href="${c:l('about.credits.website.zk.url')}" target="_blank">	
+								<h:img src="/images/about/logo_zk.png" style="width:75px" />
+							</h:a>
+						</h:td>
+					</h:tr>
+					<h:tr>
+						<h:td>
+							<label value="${c:l('about.credits.website.appengine')}" multiline="false" zclass="credits_technology" />
+						</h:td>
+						<h:td>
+							<label value="${c:l('about.credits.website.analytics')}" multiline="false" zclass="credits_technology" />
+						</h:td>
+						<h:td>
+							<label value="${c:l('about.credits.website.zk')}" multiline="false" zclass="credits_technology" />
+						</h:td>
+					</h:tr>
+				</h:table>
+			</vbox>
 			
 		</vbox>
 
