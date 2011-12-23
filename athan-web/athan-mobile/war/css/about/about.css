@@ -54,6 +54,8 @@
 
 .tabTechno TR TD {
 	text-align: center;
+	padding-right: 15px;
+	padding-left: 15px;
 }
 
 .tabTechno TR TD SPAN {
