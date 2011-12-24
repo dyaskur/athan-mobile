@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.api.Tabpanel;
 
@@ -61,6 +62,8 @@ public class IndexViewCtrl extends GenericForwardComposer {
 			Messages.error(Labels.getLabel("current.fileDownload.error"));
 			LOG.log(Level.SEVERE, "Erreur au téléchargement du fichier JAD",
 					exc);
+		} finally {
+			Clients.evalJavaScript(AthanConstants.GA_JAD_DOWNLOAD);
 		}
 	}
 
