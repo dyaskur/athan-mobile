@@ -203,7 +203,9 @@ LI.z-tab,
 }
 
 .application_footer {
-	margin-right: 30px;
+	position: absolute;
+	top: 826px;
+	left: 11px;
 	font-family: verdana, arial, sans-serif;
 	font-size: 0.7em;
 }

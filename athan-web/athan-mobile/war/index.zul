@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <?page title="${c:l('application.title')}"?>
+<!-- Google Analytics -->
+<?script content="
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27900187-1']);
+  _gaq.push(['_trackPageview']);
 
-<zk>
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+"
+?>
+<!-- Google +1 -->
+<?script content="
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+"
+?>
+<?meta itemprop="name" content="Athan Mobile"?>
+<?meta itemprop="description" content="Free Prayer Times Software for mobile phones"?>
+<?meta itemprop="image" content="http://athan-mobile.appspot.com/favicon.ico"?>
+
+<zk xmlns:h="native">
 	<!-- Prevents users from right clicking -->
 <!-- 	<popup id="rightClickPopuUp" zclass="z-popup-plain" style="height:0;width:0;overflow:hidden" /> -->
 	
@@ -70,15 +95,14 @@
 		                <toolbar width="${indexWindow.width}">
 		                    <toolbarbutton id="aboutContributor" label="${c:l('tab.about.contributor')}" />
 		                    <toolbarbutton id="aboutCredits" label="${c:l('tab.about.credits')}" />
-		                    <toolbarbutton id="aboutAcknowledgment" label="${c:l('tab.about.acknowledgment')}" />
 		                </toolbar>
 		            </tabpanel>
 		        </tabpanels>
 		    </tabbox>
 	    
-	    <hbox style="width:100%;" pack="end">
-			<label value="${c:l('application.footer.credits')}"
-					multiline="false" zclass="application_footer" />
+	    <hbox style="width:100%; background-color:#F7BE81" pack="end">
+			<h:p class="application_footer">${c:l('application.footer.credits')}</h:p>
+			<h:div class="g-plusone" data-href="http://athan-mobile.appspot.com" data-size="medium" data-count="true"></h:div>
 		</hbox>
 	    
 	    </vbox>
