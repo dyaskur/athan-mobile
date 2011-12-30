@@ -106,19 +106,19 @@
 		        </tabpanels>
 		    </tabbox>
 	    
-	    <hbox style="width:100%; background-color:#F7BE81" pack="end">
+	      <hbox style="width:100%; background-color:#F7BE81" pack="end">
            <h:p class="application_footer">${c:l('application.footer.credits')}</h:p>
            <!--<h:div class="g-plusone" data-href="http://athan-mobile.appspot.com" data-size="medium" data-count="true"></h:div>-->
         
-        <!-- AddThis Button BEGIN -->
-        <h:div class="addthis_toolbox addthis_default_style">
-          <h:a class="addthis_button_facebook_like" fb:like:layout="button_count"></h:a>
-          <h:a class="addthis_button_tweet"></h:a>
-          <h:a class="addthis_button_google_plusone" g:plusone:size="medium"></h:a>
-          <h:a class="addthis_counter addthis_pill_style"></h:a>
-        </h:div>
-        <!-- AddThis Button END -->
-      </hbox>
+          <!-- AddThis Button BEGIN -->
+          <h:div class="addthis_toolbox addthis_default_style">
+            <h:a class="addthis_button_facebook_like" fb:like:layout="button_count"></h:a>
+            <h:a class="addthis_button_tweet"></h:a>
+            <h:a class="addthis_button_google_plusone" g:plusone:size="medium"></h:a>
+            <h:a class="addthis_counter addthis_pill_style"></h:a>
+          </h:div>
+          <!-- AddThis Button END -->
+        </hbox>
 	    
 	    </vbox>
 	</window>
