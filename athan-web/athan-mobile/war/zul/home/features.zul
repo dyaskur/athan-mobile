@@ -145,7 +145,7 @@
 								
 						<hbox>
 							<window border="none" position="left,top" width="600px" height="300px" class="features_window">
-								<label value="${c:l('features.compass.1')}"
+								<label value="${c:l('features.language.1')}"
 									multiline="true" zclass="features_content" />
 							</window>
 							<h:ul class="img_features">
