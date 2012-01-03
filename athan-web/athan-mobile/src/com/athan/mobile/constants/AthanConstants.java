@@ -18,7 +18,7 @@ public class AthanConstants {
 	public static final String EMAIL_ADDRESS_TO = "makavelikal@gmail.com";
 	public static final String EMAIL_SUBJECT = "Athan Mobile - Feedback";
 
-	public static final String EMAIL_BODY = "From : %s %s\n\nIP Address : %s\n\nLocation : %s\n\nMobile : %s\n\nMessage : %s\n";
+	public static final String EMAIL_BODY = "From : %s %s\n\nIP Address : %s\n\nLocation : %s\n\nMobile : %s\n\nEmail: : %s\n\nMessage : %s\n";
 
 	public static final String MIME_TYPE_JAD = "text/vnd.sun.j2me.app-descriptor";
 	public static final String MIME_TYPE_JAR = "application/java-archive";

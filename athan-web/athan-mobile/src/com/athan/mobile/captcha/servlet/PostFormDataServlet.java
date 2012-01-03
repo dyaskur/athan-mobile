@@ -96,7 +96,7 @@ public class PostFormDataServlet extends HttpServlet {
 			strResponse.setCheckOK(true);
 
 			// Sends email
-			sendMail(captchaForm);
+			sendMail(captchaForm, remoteAddr);
 
 		} catch (CaptchaException ex) {
 			// Builds the response message
@@ -117,14 +117,17 @@ public class PostFormDataServlet extends HttpServlet {
 
 	/**
 	 * Send feedback as an email
+	 * 
+	 * @param captchaForm
+	 * @param remoteAddr
 	 */
-	private void sendMail(CaptchaForm captchaForm) {
+	private void sendMail(CaptchaForm captchaForm, String remoteAddr) {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
 		// Builds the body from data sent in the form
 		String msgBody = String.format(AthanConstants.EMAIL_BODY,
-				captchaForm.getName(), captchaForm.getFirstname(),
+				captchaForm.getName(), captchaForm.getFirstname(), remoteAddr,
 				captchaForm.getLocation(), captchaForm.getMobile(),
 				captchaForm.getEmail(), captchaForm.getMessage());
 

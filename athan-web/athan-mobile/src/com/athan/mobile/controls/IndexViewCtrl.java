@@ -8,6 +8,8 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Html;
 import org.zkoss.zul.api.Tabpanel;
 
 import com.athan.mobile.constants.AthanConstants;
@@ -19,7 +21,7 @@ import com.athan.mobile.utils.Messages;
 /**
  * Manager Controller
  * 
- * @author BENBOUZID
+ * @author Saad BENBOUZID
  */
 public class IndexViewCtrl extends GenericForwardComposer {
 
@@ -36,6 +38,8 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	private Tabpanel tbpResources;
 	private Tabpanel tbpContribute;
 	private Tabpanel tbpAbout;
+
+	private Hbox hbxFooter;
 
 	private EnumZulTab currentTab = null;
 
@@ -169,6 +173,20 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	 */
 	private void init() {
 		onClick$tabHome();
+
+		// Addthis content
+		Html htmlAddThis = new Html();
+		StringBuffer sb = new StringBuffer();
+		sb.append("<!-- AddThis Button BEGIN -->");
+		sb.append("<div class=\"addthis_toolbox addthis_default_style\" style=\"padding-right: 10px;padding-top: 6px;\">");
+		sb.append("<a class=\"addthis_button_facebook_like\" fb:like:layout=\"button_count\" fb:like:action=\"recommend\"></a>");
+		sb.append("<a class=\"addthis_button_tweet\"></a>");
+		sb.append("<a class=\"addthis_button_google_plusone\" g:plusone:size=\"medium\"></a>");
+		sb.append("<a class=\"addthis_counter addthis_pill_style\"></a>");
+		sb.append("</div>");
+		sb.append("<!-- AddThis Button END -->");
+		htmlAddThis.setContent(sb.toString());
+		htmlAddThis.setParent(hbxFooter);
 	}
 
 	public void onClick$english_flag() {

@@ -28,6 +28,9 @@
 .contribute_form_input {
 	top: 50px;
 }
+.contribute_form_item_detail {
+	top: 43px;
+}
 
 .contribute_form_item {
 	font-weight: normal;
