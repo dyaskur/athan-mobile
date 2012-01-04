@@ -39,6 +39,7 @@
 <?script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js" ?>
 
 <zk xmlns:h="native">
+
 	<!-- Prevents users from right clicking -->
 <!-- 	<popup id="rightClickPopuUp" zclass="z-popup-plain" style="height:0;width:0;overflow:hidden" /> -->
 	
@@ -47,7 +48,7 @@
 		
 		<style src="./css/index.css" />
 		
-		<vbox >
+		<vbox>
 		
 			<hbox width="${indexWindow.width}" zclass="header_layout">
 				<image src="/images/site_header.jpg"></image>
