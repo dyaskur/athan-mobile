@@ -225,6 +225,20 @@ public class MenuLocation extends Menu {
         replacerCommandesPrincipales();
     }
 
+    /**
+     * Sélectionne la valeur par défaut dans la combo de sélection de la langue dans la fenêtre de recherche
+     * @param lCbIndicatif
+     */
+    private void selectionnerComboParDefautApiSearch(ComboBox lCbIndicatif) {
+        if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
+            lCbIndicatif.setSelectedIndex(2, true);
+        } else if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
+            lCbIndicatif.setSelectedIndex(4, true);
+        } else {
+            lCbIndicatif.setSelectedIndex(2, true);
+        }
+    }
+
     private void handlerApiSearch(final Form f) {
 
         final Form parametersForm = new Form(RESSOURCE.get("GeocodingWindowTitle"));
@@ -286,14 +300,8 @@ public class MenuLocation extends Menu {
         lTextFieldNomPays.setRows(1);
 
         final ComboBox lCbIndicatif = new ComboBox(INDICATIF_PAYS);
-        if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
-            lCbIndicatif.setSelectedIndex(2, true);
-        } else if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_EN)) {
-            lCbIndicatif.setSelectedIndex(4, true);
-        } else {
-            lCbIndicatif.setSelectedIndex(2, true);
-        }
-
+        selectionnerComboParDefautApiSearch(lCbIndicatif);
+        
         VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomVille,
                 VirtualKeyboard.getVirtualKeyboard(mTextFieldNomVille));
         VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomRegion,
@@ -321,6 +329,18 @@ public class MenuLocation extends Menu {
         //parametersForm.setScrollable(true);
         parametersForm.addComponent(BorderLayout.CENTER, grid);
 
+        // Commande de réinit. des champs
+        Command reinitChampsCommand = new Command(RESSOURCE.get("Command.Reset")) {
+
+            public void actionPerformed(ActionEvent evt) {
+                lTextFieldNomVille.setText("");
+                lTextFieldNomRegion.setText("");
+                lTextFieldNomPays.setText("");
+                selectionnerComboParDefautApiSearch(lCbIndicatif);
+            }
+        };
+
+        // Commande de recherche
         Command searchCommand = new Command(RESSOURCE.get("Command.Search")) {
 
             public void actionPerformed(ActionEvent evt) {
@@ -461,8 +481,9 @@ public class MenuLocation extends Menu {
         };
 
         parametersForm.addCommand(searchCommand, 0);
-        parametersForm.addCommand(helpCommand, 1);
-        parametersForm.addCommand(cancelCommand, 2);
+        parametersForm.addCommand(reinitChampsCommand, 1);
+        parametersForm.addCommand(helpCommand, 2);
+        parametersForm.addCommand(cancelCommand, 3);
         parametersForm.setBackCommand(cancelCommand);
         parametersForm.show();
     }
@@ -477,13 +498,13 @@ public class MenuLocation extends Menu {
         try {
 
             LocationProvider lp = LocationProvider.getProvider();
-            
+
             double lat = lp.getLatitude();
             double lon = lp.getLongitude();
 
             latLng[0] = Double.toString(lat);
             latLng[1] = Double.toString(lon);
-            
+
         } catch (ClassNotFoundException cnex) {
             cnex.printStackTrace();
             success = false;

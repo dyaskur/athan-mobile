@@ -9,7 +9,8 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransport;
 
 public final class LocationFetcher {
-    public  athan.web.Location geoname(java.lang.String cityName, java.lang.String countryName, java.lang.String regionName, java.lang.String language) throws Exception {
+
+    public athan.web.Location geoname(java.lang.String cityName, java.lang.String countryName, java.lang.String regionName, java.lang.String language) throws Exception {
         SoapObject _client = new SoapObject("http://web.athan/", "geoname");
         _client.addProperty("cityName", cityName);
         _client.addProperty("countryName", countryName);
@@ -25,7 +26,7 @@ public final class LocationFetcher {
         if (_envelope.getResponse() instanceof SoapPrimitive) {
             String locationException = StringOutilClient.EMPTY;
             try {
-                locationException = ((SoapPrimitive)_envelope.getResponse()).toString();
+                locationException = ((SoapPrimitive) _envelope.getResponse()).toString();
             } catch (Exception exc) {
             }
 
@@ -36,9 +37,12 @@ public final class LocationFetcher {
         int _len = _ret.getPropertyCount();
         athan.web.Location _returned = new athan.web.Location();
         for (int _i = 0; _i < _len; _i++) {
-            _returned.setProperty(_i, _ret.getProperty(_i));        }
+            _returned.setProperty(_i, _ret.getProperty(_i));
+        }
+
+        // Replaces null values
+        _returned.makeConsistentFields();
+
         return _returned;
     }
-
-
 }

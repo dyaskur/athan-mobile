@@ -5,13 +5,14 @@ import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 
 public final class Coordinate extends SoapObject {
-    private double lat;
 
+    private double lat;
     private double lng;
 
     public Coordinate() {
         super("", "");
     }
+
     public void setLat(double lat) {
         this.lat = lat;
     }
@@ -33,28 +34,36 @@ public final class Coordinate extends SoapObject {
     }
 
     public Object getProperty(int __index) {
-        switch(__index)  {
-            case 0: return new Double(lat);
-            case 1: return new Double(lng);
+        switch (__index) {
+            case 0:
+                return new Double(lat);
+            case 1:
+                return new Double(lng);
         }
         return null;
     }
 
     public void setProperty(int __index, Object __obj) {
-        switch(__index)  {
-            case 0: lat = Double.parseDouble(__obj.toString()); break;
-            case 1: lng = Double.parseDouble(__obj.toString()); break;
+        switch (__index) {
+            case 0:
+                lat = Double.parseDouble(__obj.toString());
+                break;
+            case 1:
+                lng = Double.parseDouble(__obj.toString());
+                break;
         }
     }
 
     public void getPropertyInfo(int __index, Hashtable __table, PropertyInfo __info) {
-        switch(__index)  {
-        case 0:
-            __info.name = "lat";
-            __info.type = Double.class; break;
-        case 1:
-            __info.name = "lng";
-            __info.type = Double.class; break;
+        switch (__index) {
+            case 0:
+                __info.name = "lat";
+                __info.type = Double.class;
+                break;
+            case 1:
+                __info.name = "lng";
+                __info.type = Double.class;
+                break;
         }
     }
 
@@ -65,5 +74,17 @@ public final class Coordinate extends SoapObject {
             _returned.setProperty(_i, soapObject.getProperty(_i));
         }
         return _returned;
+    }
+
+    /**
+     * Makes fields consistents by replacing null values with default values
+     */
+    public void makeConsistentFields() {
+        if (lat == Double.NaN) {
+            lat = 0.0;
+        }
+        if (lng == Double.NaN) {
+            lng = 0.0;
+        }
     }
 }
