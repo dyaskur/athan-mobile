@@ -7,15 +7,15 @@ package athan.web;
  * @author Saad BENBOUZID
  */
 public class Location {
-	
+
 	private String mCityName;
 	private String mRegionName;
-	private String mCountryName;	
+	private String mCountryName;
 	private Coordinate mCoordinates;
-	
+
 	public Location() {
 	}
-	
+
 	public Location(String pCityName, String pRegionName, String pCountryName,
 			Coordinate pCoordinates) {
 		mCityName = pCityName;
@@ -23,16 +23,16 @@ public class Location {
 		mCountryName = pCountryName;
 		mCoordinates = pCoordinates;
 	}
-	
+
 	public String toString() {
-		String retour = "";
-		
+		String retour = "\n";
+
 		retour += "CityName=[" + mCityName + "]\n";
 		retour += "RegionName=[" + mRegionName + "]\n";
 		retour += "CountryName=[" + mCountryName + "]\n";
 		retour += "Coordinates=[" + mCoordinates.toString() + "]";
-		
-		return retour;		
+
+		return retour;
 	}
 
 	public String getCityName() {
@@ -66,4 +66,5 @@ public class Location {
 	public void setCoordinates(Coordinate pCoordinates) {
 		mCoordinates = pCoordinates;
 	}
+
 }

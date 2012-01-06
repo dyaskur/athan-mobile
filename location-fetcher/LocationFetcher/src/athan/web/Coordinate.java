@@ -9,22 +9,22 @@ package athan.web;
 public class Coordinate {
 	private double mLat;
 	private double mLng;
-	
+
 	public Coordinate() {
 	}
-	
+
 	public Coordinate(double pLat, double pLng) {
 		mLat = pLat;
 		mLng = pLng;
 	}
-	
+
 	public String toString() {
 		String retour = "";
-		
+
 		retour += "Lat=[" + mLat + "] - ";
 		retour += "Long=[" + mLng + "]";
-		
-		return retour;		
+
+		return retour;
 	}
 
 	public double getLat() {
@@ -42,4 +42,5 @@ public class Coordinate {
 	public void setLng(double pLng) {
 		mLng = pLng;
 	}
+
 }

@@ -18,13 +18,14 @@ import javax.xml.soap.SOAPMessage;
 @SuppressWarnings("serial")
 public class LocationFetcherServlet extends HttpServlet {
 
-//	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-//			throws IOException {
-//		resp.setContentType("text/plain");
-//		resp.getWriter().println("Hello, world");
-//	}
-	
-	private static final Logger log = Logger.getLogger(LocationFetcherServlet.class.getName());
+	// public void doGet(HttpServletRequest req, HttpServletResponse resp)
+	// throws IOException {
+	// resp.setContentType("text/plain");
+	// resp.getWriter().println("Hello, world");
+	// }
+
+	private static final Logger log = Logger
+			.getLogger(LocationFetcherServlet.class.getName());
 
 	static final String XML_HEADER = "text/xml;charset=\"UTF-8\"";
 	static MessageFactory sMessageFactory;
@@ -43,15 +44,16 @@ public class LocationFetcherServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		try {
-			
+
 			log.info("POST Request");
-			
+
 			// Get all the headers from the HTTP request
 			MimeHeaders headers = getHeaders(req);
 
 			// Construct a SOAPMessage from the XML in the request body
 			InputStream is = req.getInputStream();
-			SOAPMessage soapRequest = sMessageFactory.createMessage(headers, is);
+			SOAPMessage soapRequest = sMessageFactory
+					.createMessage(headers, is);
 
 			// Handle soapReqest
 			SOAPMessage soapResponse = sSoapHandler
@@ -68,7 +70,6 @@ public class LocationFetcherServlet extends HttpServlet {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	static MimeHeaders getHeaders(HttpServletRequest req) {
 		Enumeration headerNames = req.getHeaderNames();
 		MimeHeaders headers = new MimeHeaders();
