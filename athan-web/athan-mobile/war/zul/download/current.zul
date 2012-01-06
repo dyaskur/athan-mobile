@@ -33,7 +33,7 @@
 						<label value=":" zclass="current_date_header" />
 					</h:td>
 					<h:td>
-						<label id="lblCurrentDate" zclass="current_date_header_value" />
+						<label value="${c:l('current.releaseDate.value')}" zclass="current_date_header_value" />
 					</h:td>
 				</h:tr>
 			</h:table>

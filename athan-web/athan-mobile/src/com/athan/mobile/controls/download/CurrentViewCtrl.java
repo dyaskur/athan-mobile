@@ -6,8 +6,6 @@ package com.athan.mobile.controls.download;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +36,6 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 			.getName());
 
 	private Label lblCurrentVersion;
-	private Label lblCurrentDate;
 
 	private Label lblJadSize;
 	private Label lblJarSize;
@@ -57,7 +54,6 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 	 */
 	private void displayVersionProperties() {
 		String versionNumber = StringUtils.EMPTY;
-		String versionDate = StringUtils.EMPTY;
 		try {
 			// Gets version number
 			File jadFile = new File(getClass().getResource(
@@ -65,21 +61,12 @@ public class CurrentViewCtrl extends GenericForwardComposer {
 
 			versionNumber = getVersionNumber(jadFile);
 
-			// Gets version date
-			File jarFile = new File(getClass().getResource(
-					AthanConstants.CURRENT_ATHAN_JAR).getFile());
-
-			String format = Labels.getLabel("current.releaseDate.format");
-			SimpleDateFormat sdf = new SimpleDateFormat(format);
-			versionDate = sdf.format(new Date(jarFile.lastModified()));
-
 		} catch (Exception exc) {
 			exc.printStackTrace();
 			LOG.log(Level.SEVERE,
 					"Erreur à la récupération des infos sur la version", exc);
 		} finally {
 			lblCurrentVersion.setValue(versionNumber);
-			lblCurrentDate.setValue(versionDate);
 		}
 	}
 

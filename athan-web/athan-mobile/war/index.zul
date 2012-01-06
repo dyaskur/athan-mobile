@@ -3,8 +3,8 @@
 <?page title="${c:l('application.title')}"?>
 
 <?meta itemprop="name" content="Athan Mobile"?>
-<?meta itemprop="description" content="Free Prayer Times Software for mobile phones"?>
-<?meta itemprop="kewords" content="free, athan, mobile, athan mobile, mobile phones, prayer, muslim, islam, prayer times, azhan, adhan, application, j2me, java, samsung, ericsson, nokia, lg, opensource, open source, free software, praying, qibla, prayer hours"?>
+<?meta itemprop="description" content="${c:l('application.title')}"?>
+<?meta itemprop="kewords" content="free, athan, mobile, athan-mobile, athan mobile, muezzin, muezzin mobile, mobile phones, prayer, muslim, islam, prayer times, azhan, adhan, application, j2me, java, samsung, ericsson, nokia, lg, opensource, open source, free software, praying, qibla, qibla locator, qibla location, prayer hours"?>
 <?meta itemprop="image" content="http://athan-mobile.appspot.com/favicon.ico"?>
 <?meta name="wot-verification" content="8b9bef73e867f824b40f"?>
 
@@ -18,15 +18,6 @@
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-"
-?>
-<!-- Google +1 -->
-<?script content="
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
 "
 ?>
