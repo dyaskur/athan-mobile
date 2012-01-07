@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Logger;
 
+import javax.jdo.PersistenceManager;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -17,6 +18,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
+import athan.web.jdo.PMF;
+import athan.web.jdo.RequestFound;
+import athan.web.jdo.RequestNotFound;
 
 /**
  * @author Saad BENBOUZID
@@ -42,10 +47,13 @@ public class HttpPortal {
 	 *            - all the request parameters (Example:
 	 *            "param1=val1&param2=val2"). Note: This method will add the
 	 *            question mark (?) to the request - DO NOT add it yourself
+	 * @param requestNotFound
+	 *            parameters originally sent by the caller to the WS
+	 * 
 	 * @return - The response from the end point
 	 */
-	public static Location sendGetRequest(String pInfoLoc, String pLang)
-			throws LocationException {
+	public static Location sendGetRequest(String pInfoLoc, String pLang,
+			RequestNotFound requestNotFound) throws LocationException {
 		String endpoint = GEONAME_URL;
 
 		endpoint = endpoint.replaceAll(INFO_LOC, pInfoLoc);
@@ -76,19 +84,42 @@ public class HttpPortal {
 			in.close();
 			connection.disconnect();
 
+			writeObject(new RequestFound(resLoc));
+
 		} catch (LocationException exc) {
+
+			// Stores the request parameters originating from the exception
+			// occured
+			writeObject(requestNotFound);
+
 			throw exc;
 		} catch (Exception exc) {
-			throw new LocationException(exc.getMessage());
+			throw new LocationException(
+					"An exception occured server side. Please contact administrator : saad.benbouzid@insalien.org");
 		}
 
 		return resLoc;
 	}
 
+	/**
+	 * Writes object in datastore using GAE built-in JDO
+	 * 
+	 * @param resLoc
+	 */
+	private static void writeObject(Object obj) {
+		// Writes object in datastore using GAE built-in JDO
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			pm.makePersistent(obj);
+		} finally {
+			pm.close();
+		}
+	}
+
 	private static Location getLocationValues(InputStreamReader pXmlContent)
-			throws LocationException {
+			throws LocationException, Exception {
 		Location loc = new Location();
-		loc.setCoordinates(new Coordinate());
+		loc.setCoordinates(new Location.Coordinate());
 
 		try {
 			InputSource is = new InputSource(pXmlContent);
@@ -106,8 +137,9 @@ public class HttpPortal {
 			if (nlGeoName != null && nlGeoName.item(0) != null) {
 				root = (Element) nlGeoName.item(0);
 			} else {
-				// No result found
-				throw new LocationException("No location found !");
+				// No results found
+				throw new LocationException(
+						"No location found ! Please check the spelling and make sure your parameters are not inconsistent.");
 			}
 
 			NodeList nlCityName = root.getElementsByTagName("name");
@@ -149,9 +181,6 @@ public class HttpPortal {
 
 		} catch (LocationException exc) {
 			throw exc;
-		} catch (Exception exc) {
-			throw new LocationException(
-					"An exception occured server side. Please contact administrator : saad.benbouzid@insalien.org");
 		}
 
 		return loc;

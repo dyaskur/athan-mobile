@@ -3,68 +3,142 @@
  */
 package athan.web;
 
+import javax.jdo.annotations.Embedded;
+import javax.jdo.annotations.EmbeddedOnly;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+import com.google.appengine.api.datastore.Key;
+
 /**
  * @author Saad BENBOUZID
  */
+@PersistenceCapable
+@Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
 public class Location {
 
-	private String mCityName;
-	private String mRegionName;
-	private String mCountryName;
-	private Coordinate mCoordinates;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
+
+	@Persistent
+	protected String cityName;
+
+	@Persistent
+	protected String regionName;
+
+	@Persistent
+	protected String countryName;
+
+	@PersistenceCapable
+	@EmbeddedOnly
+	public static class Coordinate {
+
+		@Persistent
+		private double lat;
+
+		@Persistent
+		private double lng;
+
+		public Coordinate() {
+		}
+
+		public Coordinate(double lat, double lng) {
+			this.lat = lat;
+			this.lng = lng;
+		}
+
+		public String toString() {
+			String retour = "";
+
+			retour += "Lat=[" + lat + "] - ";
+			retour += "Long=[" + lng + "]";
+
+			return retour;
+		}
+
+		public double getLat() {
+			return lat;
+		}
+
+		public void setLat(double lat) {
+			this.lat = lat;
+		}
+
+		public double getLng() {
+			return lng;
+		}
+
+		public void setLng(double lng) {
+			this.lng = lng;
+		}
+
+	}
+
+	@Persistent
+	@Embedded
+	protected Coordinate coordinates;
 
 	public Location() {
 	}
 
 	public Location(String pCityName, String pRegionName, String pCountryName,
 			Coordinate pCoordinates) {
-		mCityName = pCityName;
-		mRegionName = pRegionName;
-		mCountryName = pCountryName;
-		mCoordinates = pCoordinates;
+		cityName = pCityName;
+		regionName = pRegionName;
+		countryName = pCountryName;
+		coordinates = pCoordinates;
+	}
+
+	public Key getKey() {
+		return key;
 	}
 
 	public String toString() {
 		String retour = "\n";
 
-		retour += "CityName=[" + mCityName + "]\n";
-		retour += "RegionName=[" + mRegionName + "]\n";
-		retour += "CountryName=[" + mCountryName + "]\n";
-		retour += "Coordinates=[" + mCoordinates.toString() + "]";
+		retour += "CityName=[" + cityName + "]\n";
+		retour += "RegionName=[" + regionName + "]\n";
+		retour += "CountryName=[" + countryName + "]\n";
+		retour += "Coordinates=[" + coordinates.toString() + "]";
 
 		return retour;
 	}
 
 	public String getCityName() {
-		return mCityName;
+		return cityName;
 	}
 
-	public void setCityName(String pCityName) {
-		mCityName = pCityName;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public String getRegionName() {
-		return mRegionName;
+		return regionName;
 	}
 
-	public void setRegionName(String pRegionName) {
-		mRegionName = pRegionName;
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
 	}
 
 	public String getCountryName() {
-		return mCountryName;
+		return countryName;
 	}
 
-	public void setCountryName(String pCountryName) {
-		mCountryName = pCountryName;
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
 	}
 
 	public Coordinate getCoordinates() {
-		return mCoordinates;
+		return coordinates;
 	}
 
-	public void setCoordinates(Coordinate pCoordinates) {
-		mCoordinates = pCoordinates;
+	public void setCoordinates(Coordinate coordinates) {
+		this.coordinates = coordinates;
 	}
 
 }
