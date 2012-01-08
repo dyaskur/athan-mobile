@@ -139,7 +139,7 @@ public class HttpPortal {
 			} else {
 				// No results found
 				throw new LocationException(
-						"No location found ! Please check the spelling and make sure your parameters are not inconsistent.");
+						"No location found ! Please check the spelling. Leave some fields blank if needed and make sure all your parameters are right.");
 			}
 
 			NodeList nlCityName = root.getElementsByTagName("name");
