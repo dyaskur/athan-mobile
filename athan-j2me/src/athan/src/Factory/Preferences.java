@@ -108,15 +108,16 @@ public class Preferences {
     }
 
     public void set(String key, String value) {
+        // Replaces null value by empty string
+        if (value == null) {
+            value = "";
+        }
         mHashtable.put(key, value);
 //        System.out.println("Attribut \"" + key + "\" changé en \""
 //                + value + "\"");
     }
 
     public void put(String key, String value) {
-        if (value == null) {
-            value = "";
-        }
         mHashtable.put(key, value);
     }
 
@@ -134,11 +135,11 @@ public class Preferences {
                 int index = pref.indexOf('|');
                 String name = pref.substring(0, index);
                 String value = pref.substring(index + 1);
-                if (!StringOutilClient.isEmpty(value)) {
-                    put(name, value);
-//                    System.out.println("Attribut \"" + name + "\" chargé en \""
-//                            + value + "\"");
-                }
+
+                put(name, value);
+//                System.out.println("Attribut \"" + name + "\" chargé en \""
+//                        + value + "\"");
+
             }
         } finally {
             if (re != null) {
