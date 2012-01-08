@@ -2,7 +2,7 @@
 <strings version="0.1">
   <!-- Contents -->
   <contenu_about>
-Application thant gives daily prayer times for all known and listed cities worldwide.
+Application than gives daily prayer times for all known and listed cities worldwide.
 
 Saad Benbouzid © 2011
 about.me/saad.benbouzid
@@ -12,7 +12,7 @@ Framework (c) Oracle LWUIT
 
 Location data provided by GeoNames.org
 
-Official site : http://athan-mobile.appspot.com/
+Official website : http://athan-mobile.appspot.com/
   </contenu_about>
   <contenu_consignesGeocoding>
 - Type some hints regarding your location and leave blank the inputs you don't want to fill in.
