@@ -82,6 +82,8 @@
 		</label-location>
 		<label-location>/WEB-INF/labels/about/i3-about_en_EN.properties
 		</label-location>
+		<!-- Allows search engines by making the pages crawlable (SEO) -->
+		<crawlable>true</crawlable>
 	</system-config>
 
 	<!-- clustering environment (available since ZK 5.0.8) -->
