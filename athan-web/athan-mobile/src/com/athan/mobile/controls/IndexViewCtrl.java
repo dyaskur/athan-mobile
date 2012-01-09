@@ -49,8 +49,17 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 		me = comp;
 
-		// Shows the home tab
-		init();
+		// Get request parameters
+		try {
+			String page = Executions.getCurrent().getParameter("page");
+			Clients.alert("page");
+		} catch (Exception exc) {
+			// Shows the home tab
+			selectDefaultPage();
+		}
+
+		// Addthis + getjar footer
+		createFooter();
 	}
 
 	public void onClick$btnJadFileMain() {
@@ -171,20 +180,39 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	/**
 	 * Initialization function
 	 */
-	private void init() {
+	@Deprecated
+	private void selectDefaultPage() {
 		onClick$tabHome();
+	}
 
-		// Addthis content
+	/**
+	 * Creates footer (addthis + getjar links)
+	 */
+	private void createFooter() {
 		Html htmlAddThis = new Html();
+		// Addthis content
 		StringBuffer sb = new StringBuffer();
+		sb.append("<table>");
+		sb.append("<tr>");
+		sb.append("<td>");
 		sb.append("<!-- AddThis Button BEGIN -->");
-		sb.append("<div class=\"addthis_toolbox addthis_default_style\" style=\"padding-right: 10px;padding-top: 6px;\">");
+		sb.append("<div class=\"addthis_toolbox addthis_default_style\">");
 		sb.append("<a class=\"addthis_button_facebook_like\" fb:like:layout=\"button_count\" fb:like:action=\"recommend\"></a>");
 		sb.append("<a class=\"addthis_button_tweet\"></a>");
 		sb.append("<a class=\"addthis_button_google_plusone\" g:plusone:size=\"medium\"></a>");
 		sb.append("<a class=\"addthis_counter addthis_pill_style\"></a>");
 		sb.append("</div>");
 		sb.append("<!-- AddThis Button END -->");
+		sb.append("</td>");
+		sb.append("<td>");
+		// Getjar AppIt content
+		sb.append("<a href=\"http://getjar.com/athan-mobile\" onClick=\"_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);\" class=\"getjar_appit_footer\">");
+		sb.append("	<img src=\"/images/home/AppIt-61x23px.gif\" alt=\""
+				+ Labels.getLabel("download.appIt") + "\"/>");
+		sb.append("</a>");
+		sb.append("</td>");
+		sb.append("</tr>");
+		sb.append("</table>");
 		htmlAddThis.setContent(sb.toString());
 		htmlAddThis.setParent(hbxFooter);
 	}

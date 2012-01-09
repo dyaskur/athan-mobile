@@ -44,6 +44,9 @@
 			<hbox width="${indexWindow.width}" zclass="header_layout">
 				<image src="/images/site_header.jpg"></image>
 				<button id="btnJadFileMain" label="${c:l('download.jadFile')}" tooltiptext="${c:l('download.jadFile.tooltip')}" sclass="jad_btn_main" />
+				<h:a href="http://getjar.com/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);" class="getjar_appit_header">
+					<h:img src="/images/home/AppIt-160x27px.gif" alt="${c:l('download.appIt')}"/>
+				</h:a>
 				<button id="english_flag" mold="os" sclass="english_flag-btn" />
 				<button id="french_flag" mold="os" sclass="french_flag-btn" />
 			</hbox>
@@ -101,7 +104,9 @@
 	    
 	      <hbox id="hbxFooter" style="width:100%; background-color:#F7BE81" pack="end">
            <h:p class="application_footer">${c:l('application.footer.credits')}</h:p>
-           <!--<h:div class="g-plusone" data-href="http://athan-mobile.appspot.com" data-size="medium" data-count="true"></h:div>-->
+<!--            <h:a href="http://getjar.com/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);" class="getjar_appit_footer"> -->
+<!-- 				<h:img src="/images/home/AppIt-61x23px.gif" alt="${c:l('download.appIt')}"/> -->
+<!-- 			</h:a> -->
         </hbox>
 	    
 	    </vbox>

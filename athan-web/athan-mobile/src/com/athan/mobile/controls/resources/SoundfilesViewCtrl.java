@@ -80,9 +80,12 @@ public class SoundfilesViewCtrl extends GenericForwardComposer {
 
 			/* MP3 button */
 			Html mp3Download = new Html();
-			mp3Download.setContent("<img class=\"" + CLASS_IMAGE_MP3
-					+ "\" onClick=\"" + getMp3DownloadUrl(enumSong.mp3File())
-					+ "\" />");
+			mp3Download.setContent("<img class=\""
+					+ CLASS_IMAGE_MP3
+					+ "\" onClick=\""
+					+ getMp3DownloadUrl(enumSong.mp3File())
+					+ String.format(AthanConstants.GA_MP3_DOWNLOAD,
+							enumSong.mp3File()) + "\" />");
 			mp3Download.setParent(mainHbox);
 
 			/* Attaches line to container */

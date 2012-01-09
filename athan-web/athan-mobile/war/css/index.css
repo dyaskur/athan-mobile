@@ -4,9 +4,9 @@ body {
 }
 
 .window {
-	margin-top:20px;
+	margin-top: 20px;
 	background-color: #EDE9DA;
-/* 	height: 100%;	 */
+	/* 	height: 100%;	 */
 }
 
 .window_introduction {
@@ -20,7 +20,7 @@ body {
 
 .nav_tabs .z-tabpanel {
 	padding: 0;
-	border-bottom: 0 none;	
+	border-bottom: 0 none;
 }
 
 .nav_tabs .z-tabpanels .z-toolbarbutton-cnt {
@@ -50,7 +50,9 @@ body {
 }
 
 .header_layout {
+	
 }
+
 .header_layout-sep {
 	width: 0px;
 }
@@ -58,25 +60,20 @@ body {
 /* Buttons */
 
 /* Prevents mold outlines */
-.z-button .z-button-tm,
-.z-button .z-button-bm {
+.z-button .z-button-tm,.z-button .z-button-bm {
 	background-image: none;
 }
 
-.z-button .z-button-cl,
-.z-button .z-button-cr {
+.z-button .z-button-cl,.z-button .z-button-cr {
 	background-image: none;
 }
 
-.z-button .z-button-tl,
-.z-button .z-button-tr,
-.z-button .z-button-bl,
-.z-button .z-button-br {
+.z-button .z-button-tl,.z-button .z-button-tr,.z-button .z-button-bl,.z-button .z-button-br
+	{
 	background-image: none;
 }
 
-.english_flag-btn,
-.french_flag-btn {
+.english_flag-btn,.french_flag-btn {
 	height: 22px;
 	padding-top: 0;
 	text-align: center;
@@ -88,45 +85,65 @@ body {
 	top: 4px;
 	cursor: pointer;
 }
+
 .english_flag-btn {
-	right: 38px;	
+	right: 38px;
 }
+
 .french_flag-btn {
-	right: 4px;	
+	right: 4px;
 }
+
 .z-button-os.english_flag-btn {
 	background-image: url('/images/english_flag.png');
 }
+
 .z-button-os.french_flag-btn {
 	background-image: url('/images/french_flag.png');
 }
 
+/* Buttons */
 .jad_btn_main {
-    width: 118px;
-    height: 38px;
-    position: absolute;
+	width: 118px;
+	height: 38px;
+	position: absolute;
 	left: 10px;
 	top: 10px;
 	font-weight: normal;
 	font-size: 14px;
 	color: black;
 }
-.jad_btn_main .z-button-cm { 
-    background-image : url('/images/jadDownload.png');
+
+.jad_btn_main .z-button-cm {
+	background-image: url('/images/jadDownload.png');
 }
+
 .jad_btn_main .z-button-focus .z-button-cm {
-    background-position: 0 0;
+	background-position: 0 0;
 }
+
 .jad_btn_main .z-button-over .z-button-cm {
-    background-position: 0 0;
+	background-position: 0 0;
 }
+
 .jad_btn_main .z-button-clk .z-button-cm {
-    background-position: 0 0;
+	background-position: 0 0;
+}
+
+.getjar_appit_header {
+	position: absolute;
+	left: 134px;
+	top: 17px;
+}
+
+.getjar_appit_footer {
+	padding-right: 15px;
+	padding-left: 10px;
 }
 
 /* Texts */
 .software_purpose_header {
-	font-family: verdana, arial,sans-serif;
+	font-family: verdana, arial, sans-serif;
 	font-size: 14pt;
 	font-weight: bold;
 	position: absolute;
@@ -142,24 +159,21 @@ body {
 	width: 960px;
 }
 
-.z-tab,
-.z-tab-seld {
+.z-tab,.z-tab-seld {
 	width: 147px;
 	height: 38px;
 }
 
-LI.z-tab,
-.z-tab-seld {
+LI.z-tab,.z-tab-seld {
 	margin-right: 4px;
 }
 
-.z-tab .z-tab-text,
-.z-tab-seld .z-tab-text {
+.z-tab .z-tab-text,.z-tab-seld .z-tab-text {
 	color: #555;
 	cursor: default;
 	font-weight: bold;
 	font-style: normal;
-	font-family: verdana, arial,sans-serif;
+	font-family: verdana, arial, sans-serif;
 	font-size: 14px;
 	white-space: nowrap;
 	text-align: center;

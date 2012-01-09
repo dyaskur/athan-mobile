@@ -38,6 +38,7 @@ public class AthanConstants {
 
 	public static final String GA_JAR_DOWNLOAD = "_gaq.push(['_trackEvent', 'Files', 'Downloaded', 'Athan.jar']);";
 	public static final String GA_JAD_DOWNLOAD = "_gaq.push(['_trackEvent', 'Files', 'Downloaded', 'Athan.jad']);";
+	public static final String GA_MP3_DOWNLOAD = "_gaq.push(['_trackEvent', 'Files', 'Downloaded', '%s']);";
 
 	private AthanConstants() {
 	}
