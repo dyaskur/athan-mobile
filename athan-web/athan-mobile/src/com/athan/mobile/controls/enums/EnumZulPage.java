@@ -10,18 +10,18 @@ package com.athan.mobile.controls.enums;
  */
 public enum EnumZulPage {
 
-	HOME_INTRODUCTION("home_introduction", "/zul/home/introduction.zul"), HOME_FEATURES(
-			"home_features", "/zul/home/features.zul"), DOWNLOAD_CURRENT(
-			"download_current", "/zul/download/current.zul"), DOWNLOAD_CHANGELOGS(
-			"download_changelogs", "/zul/download/changelogs.zul"), NEWS_RELEASES(
-			"news_releases", "/zul/news/releases.zul"), NEWS_NEXTFEATURES(
-			"news_nextfeatures", "/zul/news/nextfeatures.zul"), RESOURCES_SOUNDFILES(
-			"resources_soundfiles", "/zul/resources/soundfiles.zul"), RESOURCES_PROJECT(
-			"resources_project", "/zul/resources/project.zul"), CONTRIBUTE_FEEDBACKS(
-			"contribute_feedbacks", "/zul/contribute/feedbacks.zul"), ABOUT_CONTRIBUTOR(
-			"about_contributor", "/zul/about/contributor.zul"), ABOUT_CREDITS(
-			"about_credits", "/zul/about/credits.zul"), ABOUT_ACKNOWLEDGMENT(
-			"about_acknowledgment", "/zul/about/acknowledgment.zul");
+	INTRODUCTION("introduction", "/zul/home/introduction.zul"), FEATURES(
+			"features", "/zul/home/features.zul"), CURRENT("current",
+			"/zul/download/current.zul"), CHANGELOGS("changelogs",
+			"/zul/download/changelogs.zul"), RELEASES("releases",
+			"/zul/news/releases.zul"), NEXTFEATURES("nextfeatures",
+			"/zul/news/nextfeatures.zul"), SOUNDFILES("soundfiles",
+			"/zul/resources/soundfiles.zul"), PROJECT("project",
+			"/zul/resources/project.zul"), FEEDBACKS("feedbacks",
+			"/zul/contribute/feedbacks.zul"), CONTRIBUTOR("contributor",
+			"/zul/about/contributor.zul"), CREDITS("credits",
+			"/zul/about/credits.zul"), ACKNOWLEDGMENT("acknowledgment",
+			"/zul/about/acknowledgment.zul");
 
 	private final String id;
 	private final String zulFile;

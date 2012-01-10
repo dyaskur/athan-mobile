@@ -74,10 +74,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 				if (redirectLng) {
 					// Redirect to specified URI or root URI
 					if (!StringUtils.isEmpty(tab) && !StringUtils.isEmpty(page)) {
-						// Executions.sendRedirect("/" + tab + "/" + page +
-						// "/");
-						Executions.sendRedirect("/?tab=" + tab + "&page="
-								+ page);
+						Executions.sendRedirect("/" + tab + "/" + page + "/");
 					} else {
 						Executions.sendRedirect("/");
 					}
@@ -107,6 +104,12 @@ public class IndexViewCtrl extends GenericForwardComposer {
 				}
 			}
 
+			// Default page selection if no parameters were specified
+			if (StringUtils.isEmpty(tab)) {
+				// Shows the home tab
+				selectDefaultPage();
+			}
+
 			// Clients.alert(page);
 		} catch (Exception exc) {
 			// Shows the home tab
@@ -122,7 +125,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 			Executions.getCurrent().sendRedirect(
 					AthanConstants.DOWNLOAD_SERVLET + "?"
-							+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
+							+ AthanConstants.DOWNLOAD_FILE_PARAM + "="
 							+ AthanConstants.DOWNLOAD_JAD, null);
 			LOG.log(Level.FINE, "Téléchargement du fichier JAD");
 
@@ -197,51 +200,51 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	}
 
 	public void onClick$homeIntroduction() {
-		loadZulChild(EnumZulPage.HOME_INTRODUCTION, tbpHome);
+		loadZulChild(EnumZulPage.INTRODUCTION, tbpHome);
 	}
 
 	public void onClick$homeFeatures() {
-		loadZulChild(EnumZulPage.HOME_FEATURES, tbpHome);
+		loadZulChild(EnumZulPage.FEATURES, tbpHome);
 	}
 
 	public void onClick$downloadCurrent() {
-		loadZulChild(EnumZulPage.DOWNLOAD_CURRENT, tbpDownload);
+		loadZulChild(EnumZulPage.CURRENT, tbpDownload);
 	}
 
 	public void onClick$downloadChangelogs() {
-		loadZulChild(EnumZulPage.DOWNLOAD_CHANGELOGS, tbpDownload);
+		loadZulChild(EnumZulPage.CHANGELOGS, tbpDownload);
 	}
 
 	public void onClick$newsReleases() {
-		loadZulChild(EnumZulPage.NEWS_RELEASES, tbpNews);
+		loadZulChild(EnumZulPage.RELEASES, tbpNews);
 	}
 
 	public void onClick$newsNextfeatures() {
-		loadZulChild(EnumZulPage.NEWS_NEXTFEATURES, tbpNews);
+		loadZulChild(EnumZulPage.NEXTFEATURES, tbpNews);
 	}
 
 	public void onClick$resourcesSoundfiles() {
-		loadZulChild(EnumZulPage.RESOURCES_SOUNDFILES, tbpResources);
+		loadZulChild(EnumZulPage.SOUNDFILES, tbpResources);
 	}
 
 	public void onClick$resourcesProject() {
-		loadZulChild(EnumZulPage.RESOURCES_PROJECT, tbpResources);
+		loadZulChild(EnumZulPage.PROJECT, tbpResources);
 	}
 
 	public void onClick$contributeFeedbacks() {
-		loadZulChild(EnumZulPage.CONTRIBUTE_FEEDBACKS, tbpContribute);
+		loadZulChild(EnumZulPage.FEEDBACKS, tbpContribute);
 	}
 
 	public void onClick$aboutContributor() {
-		loadZulChild(EnumZulPage.ABOUT_CONTRIBUTOR, tbpAbout);
+		loadZulChild(EnumZulPage.CONTRIBUTOR, tbpAbout);
 	}
 
 	public void onClick$aboutCredits() {
-		loadZulChild(EnumZulPage.ABOUT_CREDITS, tbpAbout);
+		loadZulChild(EnumZulPage.CREDITS, tbpAbout);
 	}
 
 	public void onClick$aboutAcknowledgment() {
-		loadZulChild(EnumZulPage.ABOUT_ACKNOWLEDGMENT, tbpAbout);
+		loadZulChild(EnumZulPage.ACKNOWLEDGMENT, tbpAbout);
 	}
 
 	public void onClick$tabHome() {
@@ -311,13 +314,13 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	public void onClick$english_flag() {
 		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
 				LocalesProvider.LOCALE_EN);
-		Executions.sendRedirect(""); // reload the same page
+		Executions.sendRedirect("/"); // reload the same page
 	}
 
 	public void onClick$french_flag() {
 		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
 				LocalesProvider.LOCALE_FR);
-		Executions.sendRedirect(""); // reload the same page
+		Executions.sendRedirect("/"); // reload the same page
 	}
 
 	public Component getMe() {

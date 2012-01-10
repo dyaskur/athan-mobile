@@ -10,10 +10,9 @@ package com.athan.mobile.controls.enums;
  */
 public enum EnumZulTab {
 
-	HOME("home", "home_introduction"), DOWNLOAD("download", "download_current"), NEWS(
-			"news", "news_releases"), RESOURCES("resources",
-			"resources_soundfiles"), CONTRIBUTE("contribute",
-			"contribute_feedbacks"), ABOUT("about", "about_contributor");
+	HOME("home", "introduction"), DOWNLOAD("download", "current"), NEWS("news",
+			"releases"), RESOURCES("resources", "soundfiles"), CONTRIBUTE(
+			"contribute", "feedbacks"), ABOUT("about", "contributor");
 
 	private final String id;
 
