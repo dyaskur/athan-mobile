@@ -74,19 +74,19 @@ http://localhost:8888/en/resources/project/
 
 	<!-- Language + Tab + Page -->
 	<rule>
-		<from>/([a-zA-Z]*)/([a-zA-Z]*)/([a-zA-Z]*)/</from>
+		<from>/([^zZ][a-zA-Z]*)/([a-zA-Z]*)/([a-zA-Z]*)/</from>
 		<to>/?lng=$1&amp;tab=$2&amp;page=$3</to>
 	</rule>
 	
 	<!-- Tab + Page -->
 	<rule>
-		<from>/([a-zA-Z]*)/([a-zA-Z]*)/</from>
+		<from>/([^zZ][a-zA-Z]*)/([a-zA-Z]*)/</from>
 		<to>/?tab=$1&amp;page=$2</to>
 	</rule>
 	
 	<!-- Language -->
 	<rule>
-		<from>/([a-zA-Z]*)/</from>
+		<from>/([^zZ][a-zA-Z]*)/</from>
 		<to>/?lng=$1</to>
 	</rule>
 	
