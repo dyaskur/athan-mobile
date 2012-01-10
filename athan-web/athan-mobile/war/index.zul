@@ -54,7 +54,7 @@
 			<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg" />
 			<label value="${labels.application.header}" height="30px" width="100%" zclass="software_purpose_header" />
 		
-			<tabbox width="${indexWindow.width}" sclass="nav_tabs">
+			<tabbox id="tab" width="${indexWindow.width}" sclass="nav_tabs">
 		        <tabs id="tabs">
 		            <tab id="tabHome" label="${c:l('tab.home')}" />
 		            <tab id="tabDownload" label="${c:l('tab.download')}" />

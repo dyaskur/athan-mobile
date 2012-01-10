@@ -3,6 +3,7 @@ package com.athan.mobile.controls;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -10,9 +11,11 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Html;
-import org.zkoss.zul.api.Tabpanel;
+import org.zkoss.zul.Tabbox;
+import org.zkoss.zul.Tabpanel;
 
 import com.athan.mobile.constants.AthanConstants;
+import com.athan.mobile.controls.enums.EnumZulPage;
 import com.athan.mobile.controls.enums.EnumZulTab;
 import com.athan.mobile.init.CookieUtil;
 import com.athan.mobile.init.LocalesProvider;
@@ -32,6 +35,8 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 	private Component me;
 
+	private Tabbox tab;
+
 	private Tabpanel tbpHome;
 	private Tabpanel tbpDownload;
 	private Tabpanel tbpNews;
@@ -41,7 +46,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 	private Hbox hbxFooter;
 
-	private EnumZulTab currentTab = null;
+	private EnumZulPage currentTab = null;
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -51,8 +56,58 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 		// Get request parameters
 		try {
+			String language = Executions.getCurrent().getParameter("lng");
+			String tab = Executions.getCurrent().getParameter("tab");
 			String page = Executions.getCurrent().getParameter("page");
-			Clients.alert("page");
+			if (!StringUtils.isEmpty(language)) {
+				// Set language
+				boolean redirectLng = true;
+				if (language.equals("en")) {
+					CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+							LocalesProvider.LOCALE_EN);
+				} else if (language.equals("fr")) {
+					CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+							LocalesProvider.LOCALE_FR);
+				} else {
+					redirectLng = false;
+				}
+				if (redirectLng) {
+					// Redirect to specified URI or root URI
+					if (!StringUtils.isEmpty(tab) && !StringUtils.isEmpty(page)) {
+						// Executions.sendRedirect("/" + tab + "/" + page +
+						// "/");
+						Executions.sendRedirect("/?tab=" + tab + "&page="
+								+ page);
+					} else {
+						Executions.sendRedirect("/");
+					}
+				}
+			}
+
+			// Proceeds tabs
+			if (!StringUtils.isEmpty(tab)) {
+				if (EnumZulTab.HOME.id().equals(tab)) {
+					this.tab.setSelectedPanel(tbpHome);
+					proceedPage(page, EnumZulTab.HOME, tbpHome);
+				} else if (EnumZulTab.DOWNLOAD.id().equals(tab)) {
+					this.tab.setSelectedPanel(tbpDownload);
+					proceedPage(page, EnumZulTab.DOWNLOAD, tbpDownload);
+				} else if (EnumZulTab.NEWS.id().equals(tab)) {
+					this.tab.setSelectedPanel(tbpNews);
+					proceedPage(page, EnumZulTab.NEWS, tbpNews);
+				} else if (EnumZulTab.RESOURCES.id().equals(tab)) {
+					this.tab.setSelectedPanel(tbpResources);
+					proceedPage(page, EnumZulTab.RESOURCES, tbpResources);
+				} else if (EnumZulTab.CONTRIBUTE.id().equals(tab)) {
+					this.tab.setSelectedPanel(tbpContribute);
+					proceedPage(page, EnumZulTab.CONTRIBUTE, tbpContribute);
+				} else if (EnumZulTab.ABOUT.id().equals(tab)) {
+					this.tab.setSelectedPanel(tbpAbout);
+					proceedPage(page, EnumZulTab.ABOUT, tbpAbout);
+				}
+			}
+
+			// Clients.alert(page);
 		} catch (Exception exc) {
 			// Shows the home tab
 			selectDefaultPage();
@@ -80,7 +135,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		}
 	}
 
-	public void loadZulChild(EnumZulTab zulTab, Component container) {
+	public void loadZulChild(EnumZulPage zulTab, Component container) {
 
 		if (currentTab != null && currentTab.equals(zulTab)) {
 			// Exits if it's current tab
@@ -88,7 +143,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		}
 
 		// Removes previous tab content
-		for (EnumZulTab en : EnumZulTab.values()) {
+		for (EnumZulPage en : EnumZulPage.values()) {
 			if (container.hasFellow(en.id())) {
 				container.removeChild(container.getFellow(en.id()));
 			}
@@ -105,52 +160,88 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		}
 	}
 
+	/**
+	 * Parses and proceeds "page" parameter from URI
+	 */
+	private void proceedPage(String page, EnumZulTab enuTab, Tabpanel tbp) {
+		if (!StringUtils.isEmpty(page)) {
+			boolean pageLoaded = false;
+			EnumZulPage enuPage = valueOfId(page);
+			if (enuPage != null) {
+				loadZulChild(enuPage, tbp);
+				pageLoaded = true;
+			}
+			if (!pageLoaded) {
+				// Loads default page
+				loadZulChild(valueOfId(enuTab.defaultSubTab()), tbp);
+			}
+		} else {
+			// Loads default page
+			loadZulChild(valueOfId(enuTab.defaultSubTab()), tbp);
+		}
+	}
+
+	/**
+	 * Get Enum from page id's name
+	 * 
+	 * @param id
+	 * @return
+	 */
+	private EnumZulPage valueOfId(String id) {
+		for (EnumZulPage enuPage : EnumZulPage.values()) {
+			if (enuPage.id().equals(id)) {
+				return enuPage;
+			}
+		}
+		return null;
+	}
+
 	public void onClick$homeIntroduction() {
-		loadZulChild(EnumZulTab.HOME_INTRODUCTION, tbpHome);
+		loadZulChild(EnumZulPage.HOME_INTRODUCTION, tbpHome);
 	}
 
 	public void onClick$homeFeatures() {
-		loadZulChild(EnumZulTab.HOME_FEATURES, tbpHome);
+		loadZulChild(EnumZulPage.HOME_FEATURES, tbpHome);
 	}
 
 	public void onClick$downloadCurrent() {
-		loadZulChild(EnumZulTab.DOWNLOAD_CURRENT, tbpDownload);
+		loadZulChild(EnumZulPage.DOWNLOAD_CURRENT, tbpDownload);
 	}
 
 	public void onClick$downloadChangelogs() {
-		loadZulChild(EnumZulTab.DOWNLOAD_CHANGELOGS, tbpDownload);
+		loadZulChild(EnumZulPage.DOWNLOAD_CHANGELOGS, tbpDownload);
 	}
 
 	public void onClick$newsReleases() {
-		loadZulChild(EnumZulTab.NEWS_RELEASES, tbpNews);
+		loadZulChild(EnumZulPage.NEWS_RELEASES, tbpNews);
 	}
 
 	public void onClick$newsNextfeatures() {
-		loadZulChild(EnumZulTab.NEWS_NEXTFEATURES, tbpNews);
+		loadZulChild(EnumZulPage.NEWS_NEXTFEATURES, tbpNews);
 	}
 
 	public void onClick$resourcesSoundfiles() {
-		loadZulChild(EnumZulTab.RESOURCES_SOUNDFILES, tbpResources);
+		loadZulChild(EnumZulPage.RESOURCES_SOUNDFILES, tbpResources);
 	}
 
 	public void onClick$resourcesProject() {
-		loadZulChild(EnumZulTab.RESOURCES_PROJECT, tbpResources);
+		loadZulChild(EnumZulPage.RESOURCES_PROJECT, tbpResources);
 	}
 
 	public void onClick$contributeFeedbacks() {
-		loadZulChild(EnumZulTab.CONTRIBUTE_FEEDBACKS, tbpContribute);
+		loadZulChild(EnumZulPage.CONTRIBUTE_FEEDBACKS, tbpContribute);
 	}
 
 	public void onClick$aboutContributor() {
-		loadZulChild(EnumZulTab.ABOUT_CONTRIBUTOR, tbpAbout);
+		loadZulChild(EnumZulPage.ABOUT_CONTRIBUTOR, tbpAbout);
 	}
 
 	public void onClick$aboutCredits() {
-		loadZulChild(EnumZulTab.ABOUT_CREDITS, tbpAbout);
+		loadZulChild(EnumZulPage.ABOUT_CREDITS, tbpAbout);
 	}
 
 	public void onClick$aboutAcknowledgment() {
-		loadZulChild(EnumZulTab.ABOUT_ACKNOWLEDGMENT, tbpAbout);
+		loadZulChild(EnumZulPage.ABOUT_ACKNOWLEDGMENT, tbpAbout);
 	}
 
 	public void onClick$tabHome() {
@@ -178,10 +269,10 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	}
 
 	/**
-	 * Initialization function
+	 * Sets default landing page (in case no parameters wee sent to URI)s
 	 */
-	@Deprecated
 	private void selectDefaultPage() {
+		tab.setSelectedPanel(tbpHome);
 		onClick$tabHome();
 	}
 
