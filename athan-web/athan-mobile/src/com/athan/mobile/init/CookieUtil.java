@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.zkoss.zk.ui.Executions;
 
 /**
- * G�n�rateur de cookie
+ * Générateur de cookie
  * 
  * @author Saad BENBOUZID
  */

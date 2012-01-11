@@ -4,7 +4,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
+import org.zkoss.util.Locales;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.web.Attributes;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
@@ -17,7 +19,6 @@ import org.zkoss.zul.Tabpanel;
 import com.athan.mobile.constants.AthanConstants;
 import com.athan.mobile.controls.enums.EnumZulPage;
 import com.athan.mobile.controls.enums.EnumZulTab;
-import com.athan.mobile.init.CookieUtil;
 import com.athan.mobile.init.LocalesProvider;
 import com.athan.mobile.utils.Messages;
 
@@ -63,14 +64,27 @@ public class IndexViewCtrl extends GenericForwardComposer {
 				// Set language
 				boolean redirectLng = true;
 				if (language.equals("en")) {
-					CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
-							LocalesProvider.LOCALE_EN);
+					Executions
+							.getCurrent()
+							.getSession()
+							.setAttribute(
+									Attributes.PREFERRED_LOCALE,
+									Locales.getLocale(LocalesProvider.LOCALE_EN));
+					// CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+					// LocalesProvider.LOCALE_EN);
 				} else if (language.equals("fr")) {
-					CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
-							LocalesProvider.LOCALE_FR);
+					Executions
+							.getCurrent()
+							.getSession()
+							.setAttribute(
+									Attributes.PREFERRED_LOCALE,
+									Locales.getLocale(LocalesProvider.LOCALE_FR));
+					// CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+					// LocalesProvider.LOCALE_FR);
 				} else {
 					redirectLng = false;
 				}
+
 				if (redirectLng) {
 					// Redirect to specified URI or root URI
 					if (!StringUtils.isEmpty(tab) && !StringUtils.isEmpty(page)) {
@@ -101,6 +115,9 @@ public class IndexViewCtrl extends GenericForwardComposer {
 				} else if (EnumZulTab.ABOUT.id().equals(tab)) {
 					this.tab.setSelectedPanel(tbpAbout);
 					proceedPage(page, EnumZulTab.ABOUT, tbpAbout);
+				} else {
+					// Shows the home tab
+					selectDefaultPage();
 				}
 			}
 
@@ -312,14 +329,24 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	}
 
 	public void onClick$english_flag() {
-		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
-				LocalesProvider.LOCALE_EN);
+		Executions
+				.getCurrent()
+				.getSession()
+				.setAttribute(Attributes.PREFERRED_LOCALE,
+						Locales.getLocale(LocalesProvider.LOCALE_EN));
+		// CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+		// LocalesProvider.LOCALE_FR);
 		Executions.sendRedirect("/"); // reload the same page
 	}
 
 	public void onClick$french_flag() {
-		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
-				LocalesProvider.LOCALE_FR);
+		Executions
+				.getCurrent()
+				.getSession()
+				.setAttribute(Attributes.PREFERRED_LOCALE,
+						Locales.getLocale(LocalesProvider.LOCALE_FR));
+		// CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+		// LocalesProvider.LOCALE_FR);
 		Executions.sendRedirect("/"); // reload the same page
 	}
 

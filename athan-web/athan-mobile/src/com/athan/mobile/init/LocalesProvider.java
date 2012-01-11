@@ -22,13 +22,13 @@ public class LocalesProvider implements org.zkoss.zk.ui.util.RequestInterceptor 
 	public static final String LOCALE_EN = "en_EN";
 	public static final String LOCALE_FR = "fr_FR";
 
-//	private static final Logger log = Logger.getLogger(LocalesProvider.class
-//			.getName());
+	// private static final Logger log = Logger.getLogger(LocalesProvider.class
+	// .getName());
 
 	public void request(org.zkoss.zk.ui.Session sess, Object request,
 			Object response) {
 
-		// R�cup�ration du cookie sur la langue pr�c�dente
+		// Récupération du cookie sur la langue précédente
 		final Cookie[] cookies = ((HttpServletRequest) request).getCookies();
 
 		if (cookies != null) {
