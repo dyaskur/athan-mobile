@@ -339,6 +339,7 @@ public class MainForm extends Menu {
         f.addCommand(mCmdDateSuivante, posCmd++);
         f.addCommand(Main.optionsCommand, posCmd++);
         f.addCommand(Main.minimizeCommand, posCmd++);
+        f.addCommand(Main.websiteCommand, posCmd++);
         f.addCommand(Main.exitCommand, posCmd++);
         f.setBackCommand(Main.exitCommand);
 

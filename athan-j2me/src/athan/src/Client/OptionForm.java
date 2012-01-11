@@ -36,6 +36,7 @@ import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
 import java.util.Hashtable;
 import java.util.Vector;
+import javax.microedition.midlet.MIDlet;
 
 /**
  * LWUIT Demo main Form, this special Form allows drag&drop on top of it.
@@ -48,6 +49,7 @@ import java.util.Vector;
 public class OptionForm extends Form
         implements ActionListener {
 
+    private static final String ABOUT_VERSION_ENTRY = "Version : ";
     private static final int EXIT_COMMAND = 1;
     private static final int BACK_COMMAND = 3;
     private static final int ABOUT_COMMAND = 4;
@@ -414,7 +416,17 @@ public class OptionForm extends Form
     }
 
     private String getAboutText() {
-        return RESOURCES.getContenu_About();
+        try {
+            // Formats help content to include version number
+            StringBuffer helpContentSb = new StringBuffer(RESOURCES.getContenu_About());
+            String helpContent = RESOURCES.getContenu_About();
+
+            helpContentSb.insert(helpContent.indexOf(ABOUT_VERSION_ENTRY) + ABOUT_VERSION_ENTRY.length(), Main.getMidletVersion());
+
+            return helpContentSb.toString();
+        } catch (Exception exc) {
+            return RESOURCES.getContenu_About();
+        }
     }
 
     private class ButtonActionListener implements ActionListener {

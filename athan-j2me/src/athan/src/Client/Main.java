@@ -26,7 +26,8 @@ import com.sun.lwuit.impl.midp.VKBImplementationFactory;
 import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
 import java.util.Date;
-import javax.microedition.lcdui.game.GameCanvas;
+import javax.microedition.io.ConnectionNotFoundException;
+import javax.microedition.midlet.MIDlet;
 
 /**
  * Point d'entrée de l'application, regroupant les méthodes de d'instanciation
@@ -44,6 +45,8 @@ public class Main extends javax.microedition.midlet.MIDlet
     public static final Command exitCommand = new Command("", EXIT_COMMAND);
     private static final int MINIMIZE_COMMAND = 3;
     public static final Command minimizeCommand = new Command("", MINIMIZE_COMMAND);
+    private static final int WEBSITE_COMMAND = 4;
+    public static final Command websiteCommand = new Command("", WEBSITE_COMMAND);
     public static Resources theme;
     public static Resources icons;
     public static Resources languages;
@@ -51,6 +54,9 @@ public class Main extends javax.microedition.midlet.MIDlet
     private static OptionForm sOptionForm;
     private static MainForm sMainForm;
     private static Thread sTimer;
+
+    /** Stores MIDlet-Version */
+    private static String midletVersion;
 
     /**
      * @return le panel d'options
@@ -87,10 +93,23 @@ public class Main extends javax.microedition.midlet.MIDlet
         return sIsTactile;
     }
 
+    /**
+     * @return the midletVersion
+     */
+    public static String getMidletVersion() {
+        return midletVersion;
+    }
+
     protected void startApp() {
         try {
 
             if (sMainForm == null) {
+
+                // Writes MIDlet-Version
+                midletVersion = getAppProperty("MIDlet-Version");
+                if (midletVersion == null) {
+                    midletVersion = "";
+                }
 
                 //By using the VKBImplementationFactory.init() we automatically
                 //bundle the LWUIT Virtual Keyboard.
@@ -123,6 +142,7 @@ public class Main extends javax.microedition.midlet.MIDlet
                 optionsCommand.setCommandName(RESSOURCE.get("Command.Options"));
                 exitCommand.setCommandName(RESSOURCE.get("Command.Exit"));
                 minimizeCommand.setCommandName("Command.Minimize");
+                websiteCommand.setCommandName("Command.Website");
 
                 //although calling directly to setMainForm(res) will work on
                 //most devices, a good coding practice will be to allow the midp
@@ -146,7 +166,6 @@ public class Main extends javax.microedition.midlet.MIDlet
     }
 
     protected void destroyApp(boolean arg0) {
-
         arreterTimer();
     }
 
@@ -242,6 +261,16 @@ public class Main extends javax.microedition.midlet.MIDlet
 
                 // On quitte l'application
                 quitter();
+                break;
+
+            case WEBSITE_COMMAND:
+
+                // On lance le site web
+                try {
+                    this.platformRequest(ServiceFactory.getFactory().getResourceReader().get("WebsiteUrl"));
+                } catch(Exception exc) {
+                    //
+                }
                 break;
 
             default:

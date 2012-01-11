@@ -3,6 +3,7 @@
   <!-- Contents -->
   <contenu_about>
 Application qui donne les horaires quotidiennes des prières pour toutes les villes du monde répertoriées.
+Version : 
 
 Saad Benbouzid © 2011
 about.me/saad.benbouzid
@@ -19,7 +20,11 @@ Site web officiel : http://athan-mobile.appspot.com/
 - Au moins un champ doit être renseigné.
 - Mieux les champs sont remplis, meilleures seront vos chances d'obtenir le bon résultat.
 
-Si votre requête a retourné la ville recherchée, il faut ensuite valider par "OK" le résultat.
+1) Saisissez UNIQUEMENT le nom de votre VILLE et lancez une recherche !
+2) Si la requête a échoué, vérifiez d'avoir saisi correctement le nom de votre ville (évitez les caractères spéciaux).
+3) Si le résultat retourné ne correspond pas à la ville que vous attendiez, affinez votre recherche en saisissant d'abord le nom de votre PAYS, et si vraiment nécessaire encore, saisissez alors le nom de votre REGION.
+
+Si votre requête a retourné la ville recherchée, n'oubliez pas de valider par "OK" le résultat.
   </contenu_consignesGeocoding>
   <helpMenuAlerts>
 - Sélectionner le type d'alerte et les prières que cela concerne.

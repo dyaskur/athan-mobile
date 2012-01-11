@@ -3,6 +3,7 @@
   <!-- Contents -->
   <contenu_about>
 Application that gives daily prayer times for all known and listed cities worldwide.
+Version : 
 
 Saad Benbouzid © 2011
 about.me/saad.benbouzid
@@ -19,7 +20,11 @@ Official website : http://athan-mobile.appspot.com/
 - At least one field has to be filled in.
 - The better you fill in the fields, the more accurate will be your result.
 
-If the request returned your desired location, you then have to save the result by selecting "OK".
+1) Fill in ONLY your CITY name and hit a search !
+2) If you don't get a result, make sure you typed your city name correctly (avoid special characters).
+3) If the returned result is not corresponding to the city you expected, refine your inputs by filling in at first COUNTRY name, then only if needed again your REGION name.
+
+If the request returned your desired location, don't forget to save the result by selecting "OK".
   </contenu_consignesGeocoding>
   <helpMenuAlerts>
 - Select the type of alert and the prayers it pertains to.

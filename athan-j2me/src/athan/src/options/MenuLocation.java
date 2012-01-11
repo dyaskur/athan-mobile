@@ -301,7 +301,7 @@ public class MenuLocation extends Menu {
 
         final ComboBox lCbIndicatif = new ComboBox(INDICATIF_PAYS);
         selectionnerComboParDefautApiSearch(lCbIndicatif);
-        
+
         VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomVille,
                 VirtualKeyboard.getVirtualKeyboard(mTextFieldNomVille));
         VirtualKeyboard.bindVirtualKeyboard(lTextFieldNomRegion,
@@ -333,10 +333,8 @@ public class MenuLocation extends Menu {
         Command reinitChampsCommand = new Command(RESSOURCE.get("Command.Reset")) {
 
             public void actionPerformed(ActionEvent evt) {
-                lTextFieldNomVille.setText("");
-                lTextFieldNomRegion.setText("");
-                lTextFieldNomPays.setText("");
-                selectionnerComboParDefautApiSearch(lCbIndicatif);
+                // Vidage des champs
+                resetFields(lTextFieldNomVille, lTextFieldNomRegion, lTextFieldNomPays, lCbIndicatif);
             }
         };
 
@@ -480,6 +478,9 @@ public class MenuLocation extends Menu {
             }
         };
 
+        // Vidage des champs
+        resetFields(lTextFieldNomVille, lTextFieldNomRegion, lTextFieldNomPays, lCbIndicatif);
+
         parametersForm.addCommand(searchCommand, 0);
         parametersForm.addCommand(reinitChampsCommand, 1);
         parametersForm.addCommand(helpCommand, 2);
@@ -488,6 +489,26 @@ public class MenuLocation extends Menu {
         parametersForm.show();
     }
 
+    /**
+     * Efface les champs de la fenêtre de recherche API
+     *
+     * @param lTextFieldNomVille
+     * @param lTextFieldNomRegion
+     * @param lTextFieldNomPays
+     * @param lCbIndicatif
+     */
+    private void resetFields(TextField lTextFieldNomVille, TextField lTextFieldNomRegion, TextField lTextFieldNomPays, ComboBox lCbIndicatif) {
+        lTextFieldNomVille.setText("");
+        lTextFieldNomRegion.setText("");
+        lTextFieldNomPays.setText("");
+        selectionnerComboParDefautApiSearch(lCbIndicatif);
+    }
+
+    /**
+     * Recherche GPS
+     *
+     * @param f
+     */
     private void handlerGpsSearch(final Form f) {
         boolean success = true;
 
