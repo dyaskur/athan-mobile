@@ -20,8 +20,7 @@ public enum EnumZulPage {
 			"/zul/resources/project.zul"), FEEDBACKS("feedbacks",
 			"/zul/contribute/feedbacks.zul"), CONTRIBUTOR("contributor",
 			"/zul/about/contributor.zul"), CREDITS("credits",
-			"/zul/about/credits.zul"), ACKNOWLEDGMENT("acknowledgment",
-			"/zul/about/acknowledgment.zul");
+			"/zul/about/credits.zul");
 
 	private final String id;
 	private final String zulFile;

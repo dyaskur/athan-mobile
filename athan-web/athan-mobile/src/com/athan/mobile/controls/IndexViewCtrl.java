@@ -260,10 +260,6 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		loadZulChild(EnumZulPage.CREDITS, tbpAbout);
 	}
 
-	public void onClick$aboutAcknowledgment() {
-		loadZulChild(EnumZulPage.ACKNOWLEDGMENT, tbpAbout);
-	}
-
 	public void onClick$tabHome() {
 		onClick$homeIntroduction();
 	}
