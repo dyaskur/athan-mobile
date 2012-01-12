@@ -2,4 +2,16 @@
 # www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
 
 User-agent: *
-Allow: /
+Allow : /
+Allow : /home/introduction/
+Allow : /home/features/
+Allow : /download/current/
+Allow : /download/changelogs/
+Allow : /news/releases/
+Allow : /news/nextfeatures/
+Allow : /resources/soundfiles/
+Allow : /resources/project/
+Allow : /contribute/feedbacks/
+Allow : /about/contributor/
+Allow : /about/credits/
+
