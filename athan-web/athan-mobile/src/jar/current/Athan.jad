@@ -2,11 +2,11 @@ MIDlet-1: Main,/icon.png,athan.src.Client.Main
 MIDlet-Description: Muslim Prayer Times Application
 MIDlet-Icon: /icon.png
 MIDlet-Info-URL: http://athan-mobile.appspot.com/
-MIDlet-Jar-Size: 988131
+MIDlet-Jar-Size: 989192
 MIDlet-Jar-URL: http://athan-mobile.appspot.com/download?type=JAR
 MIDlet-Name: Athan Mobile
 MIDlet-Touch-Support: true
 MIDlet-Vendor: Saad Benbouzid
-MIDlet-Version: 0.3.3
+MIDlet-Version: 0.3.5
 MicroEdition-Configuration: CLDC-1.1
 MicroEdition-Profile: MIDP-2.0

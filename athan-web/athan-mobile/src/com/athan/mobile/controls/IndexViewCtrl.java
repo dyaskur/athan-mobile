@@ -142,7 +142,7 @@ public class IndexViewCtrl extends GenericForwardComposer {
 
 			Executions.getCurrent().sendRedirect(
 					AthanConstants.DOWNLOAD_SERVLET + "?"
-							+ AthanConstants.DOWNLOAD_FILE_PARAM + "="
+							+ AthanConstants.DOWNLOAD_FILETYPE_PARAM + "="
 							+ AthanConstants.DOWNLOAD_JAD, null);
 			LOG.log(Level.FINE, "Téléchargement du fichier JAD");
 
