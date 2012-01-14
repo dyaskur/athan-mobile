@@ -57,8 +57,6 @@ body {
 	width: 0px;
 }
 
-/* Buttons */
-
 /* Prevents mold outlines */
 .z-button .z-button-tm,.z-button .z-button-bm {
 	background-image: none;
@@ -139,6 +137,12 @@ body {
 .getjar_appit_footer {
 	padding-right: 15px;
 	padding-left: 10px;
+}
+
+.paypal_donate {
+	position: absolute;
+	right: 1px;
+	top: 43px;
 }
 
 /* Texts */

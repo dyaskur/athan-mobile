@@ -19,6 +19,7 @@ import org.zkoss.zul.Tabpanel;
 import com.athan.mobile.constants.AthanConstants;
 import com.athan.mobile.controls.enums.EnumZulPage;
 import com.athan.mobile.controls.enums.EnumZulTab;
+import com.athan.mobile.init.CookieUtil;
 import com.athan.mobile.init.LocalesProvider;
 import com.athan.mobile.utils.Messages;
 
@@ -325,24 +326,24 @@ public class IndexViewCtrl extends GenericForwardComposer {
 	}
 
 	public void onClick$english_flag() {
-		Executions
-				.getCurrent()
-				.getSession()
-				.setAttribute(Attributes.PREFERRED_LOCALE,
-						Locales.getLocale(LocalesProvider.LOCALE_EN));
-		// CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
-		// LocalesProvider.LOCALE_FR);
+		// Executions
+		// .getCurrent()
+		// .getSession()
+		// .setAttribute(Attributes.PREFERRED_LOCALE,
+		// Locales.getLocale(LocalesProvider.LOCALE_EN));
+		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+				LocalesProvider.LOCALE_EN);
 		Executions.sendRedirect("/"); // reload the same page
 	}
 
 	public void onClick$french_flag() {
-		Executions
-				.getCurrent()
-				.getSession()
-				.setAttribute(Attributes.PREFERRED_LOCALE,
-						Locales.getLocale(LocalesProvider.LOCALE_FR));
-		// CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
-		// LocalesProvider.LOCALE_FR);
+		// Executions
+		// .getCurrent()
+		// .getSession()
+		// .setAttribute(Attributes.PREFERRED_LOCALE,
+		// Locales.getLocale(LocalesProvider.LOCALE_FR));
+		CookieUtil.setCookie(LocalesProvider.MY_LOCALE_COOKIE_NAME,
+				LocalesProvider.LOCALE_FR);
 		Executions.sendRedirect("/"); // reload the same page
 	}
 

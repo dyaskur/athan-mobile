@@ -12,6 +12,17 @@
 	margin-top: 18px;
 }
 
+/* Zk */
+.z-tab-accordion-header {
+	cursor: pointer;
+	position: relative;
+	zoom: 1;
+	border: 1px solid #CFCFCF;
+	border-top: 0;
+	background-color: #FFFEE9;
+	border-image: initial;
+}
+
 /* Images */
 .mobiles_1 {
 	padding-top: 20px;
