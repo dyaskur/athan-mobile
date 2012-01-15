@@ -3,6 +3,7 @@
  */
 package athan.web.jdo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -45,7 +46,10 @@ public class RequestNotFound {
 		this.regionName = regionName;
 		this.countryName = countryName;
 		this.language = language;
-		this.setCreationDate(new Date());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.HOUR, 1);
+		this.setCreationDate(cal.getTime());
 	}
 
 	public Key getKey() {

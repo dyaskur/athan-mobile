@@ -3,6 +3,7 @@
  */
 package athan.web.jdo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -31,7 +32,10 @@ public class RequestFound extends Location {
 		this.setRegionName(loc.getRegionName());
 		this.setCountryName(loc.getCountryName());
 		this.setCoordinates(loc.getCoordinates());
-		this.setCreationDate(new Date());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.HOUR, 1);
+		this.setCreationDate(cal.getTime());
 	}
 
 	public Date getCreationDate() {
