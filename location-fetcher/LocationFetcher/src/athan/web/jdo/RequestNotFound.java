@@ -11,6 +11,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import athan.web.Location;
+
 import com.google.appengine.api.datastore.Key;
 
 /**
@@ -48,7 +50,7 @@ public class RequestNotFound {
 		this.language = language;
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.HOUR, 1);
+		cal.add(Calendar.HOUR, Location.JDO_HOUR_LAP);
 		this.setCreationDate(cal.getTime());
 	}
 
