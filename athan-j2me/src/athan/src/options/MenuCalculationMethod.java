@@ -316,6 +316,8 @@ public class MenuCalculationMethod extends Menu {
                     Dialog.show(RESSOURCE.get("errorTitle"), RESSOURCE.get("errorCalculationParameters"), okCommand,
                             new Command[]{okCommand}, Dialog.TYPE_ERROR, null, TIMEOUT_FENETRE_ERROR,
                             CommonTransitions.createSlide(CommonTransitions.SLIDE_VERTICAL, true, 1000));
+
+                    return;
                 }
 
                 try {
