@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML_DIZ_INFO>
+	<MASTER_PAD_VERSION_INFO>
+		<MASTER_PAD_VERSION>3.11</MASTER_PAD_VERSION>
+		<MASTER_PAD_EDITOR>PADGen 3.1.1.50 http://www.padgen.org</MASTER_PAD_EDITOR>
+		<MASTER_PAD_INFO>Portable Application Description, or PAD for short, is a data set that is used by shareware authors to disseminate information to anyone interested in their software products. To find out more go to http://pad.asp-software.org</MASTER_PAD_INFO>
+	</MASTER_PAD_VERSION_INFO>
+	<Company_Info>
+		<Company_Name>Athan Mobile</Company_Name>
+		<Address_1 />
+		<Address_2 />
+		<City_Town>Lyon</City_Town>
+		<State_Province>Rhône-Alpes</State_Province>
+		<Zip_Postal_Code>69003</Zip_Postal_Code>
+		<Country>France</Country>
+		<Company_WebSite_URL>http://athan-mobile.appspot.com/</Company_WebSite_URL>
+		<Contact_Info>
+			<Author_First_Name>Saad</Author_First_Name>
+			<Author_Last_Name>Benbouzid</Author_Last_Name>
+			<Author_Email>saad.benbouzid@insalien.org</Author_Email>
+			<Contact_First_Name>Saad</Contact_First_Name>
+			<Contact_Last_Name>Benbouzid</Contact_Last_Name>
+			<Contact_Email>saad.benbouzid@insalien.org</Contact_Email>
+		</Contact_Info>
+		<Support_Info>
+			<Sales_Email>saad.benbouzid@insalien.org</Sales_Email>
+			<Support_Email>saad.benbouzid@insalien.org</Support_Email>
+			<General_Email>saad.benbouzid@insalien.org</General_Email>
+			<Sales_Phone />
+			<Support_Phone />
+			<General_Phone />
+			<Fax_Phone />
+		</Support_Info>
+	</Company_Info>
+	<Program_Info>
+		<Program_Name>Athan Mobile</Program_Name>
+		<Program_Version>0.3.5</Program_Version>
+		<Program_Release_Month>01</Program_Release_Month>
+		<Program_Release_Day>19</Program_Release_Day>
+		<Program_Release_Year>2012</Program_Release_Year>
+		<Program_Cost_Dollars>0</Program_Cost_Dollars>
+		<Program_Cost_Other_Code />
+		<Program_Cost_Other />
+		<Program_Type>Freeware</Program_Type>
+		<Program_Release_Status>New Release</Program_Release_Status>
+		<Program_Install_Support>Install and Uninstall</Program_Install_Support>
+		<Program_OS_Support>BlackBerry,Handheld/Mobile Other,Java,Symbian</Program_OS_Support>
+		<Program_Language>English,French</Program_Language>
+		<Program_Change_Info />
+		<Program_Specific_Category>Home/Hobby</Program_Specific_Category>
+		<Program_Category_Class>Home &amp; Hobby::Religion</Program_Category_Class>
+		<Program_System_Requirements>Java MIDP 2.0 - CLDC 1.1</Program_System_Requirements>
+		<File_Info>
+			<File_Size_Bytes>989201</File_Size_Bytes>
+			<File_Size_K>966</File_Size_K>
+			<File_Size_MB>0.94</File_Size_MB>
+		</File_Info>
+		<Expire_Info>
+			<Has_Expire_Info>N</Has_Expire_Info>
+			<Expire_Count />
+			<Expire_Based_On>Days</Expire_Based_On>
+			<Expire_Other_Info />
+			<Expire_Month />
+			<Expire_Day />
+			<Expire_Year />
+		</Expire_Info>
+	</Program_Info>
+	<Program_Descriptions>
+		<English>
+			<Keywords>athan,athan-mobile,azan,adhan,azhan,adan,muezzin,islam,muslim,muslims,prayer,prayers,prayer times,salat</Keywords>
+			<Char_Desc_45>Prayer times for million cities worldwide</Char_Desc_45>
+			<Char_Desc_80>Prayer times for million cities worldwide, Qibla compass, GPS detection, Alerts</Char_Desc_80>
+			<Char_Desc_250>Athan Mobile is a free software for mobile phones, which lets you know your daily prayer times.</Char_Desc_250>
+			<Char_Desc_450>Athan Mobile is a free software for mobile phones, which lets you know your daily prayer times.
+
+It supports following features : Qibla direction, Sound alarms, Customized calculation methods, GPS detection, City lookup in a million cities large database, and more...
+
+See official website : http://athan-mobile.appspot.com/</Char_Desc_450>
+			<Char_Desc_2000>- Languages available : French, English
+- Chourouk and Imsak calculation.
+
+You can just enter either a city name, a region name or even a country, and it will find the GPS coordinates which the prayer times calculation are made from.
+
+In fact, most of mobile prayer times software only propose you few cities per country. Athan Mobile proposes almost 8 millions wolrdwide if you have Internet access.
+
+Plus, if your mobile is GPS-enabled, Athan Mobile can use this feature to base prayer times calculation on.
+
+This program is made to all muslims worldwide.
+
+Please note that Athan Mobile is only based on the Gregorian calendar, and won't display any Hijri dates.
+</Char_Desc_2000>
+		</English>
+		<French>
+			<Keywords>athan,athan-mobile,azan,adhan,azhan,adan,muezzin,islam,muslim,muslims,priere,prieres,heures des prieres,salat</Keywords>
+			<Char_Desc_45>Horaires des prières quotidiennes</Char_Desc_45>
+			<Char_Desc_80>Horaires des prières quotidiennes pour plus de 8 millions de villes au monde</Char_Desc_80>
+			<Char_Desc_250>Athan Mobile est un logiciel entièrement libre et gratuit vous donnant les horaires des prières quotidiennes pour plus de 8 millions de villes au monde.</Char_Desc_250>
+			<Char_Desc_450>Athan Mobile est un logiciel entièrement libre et gratuit vous donnant les horaires des prières quotidiennes pour plus de 8 millions de villes au monde.
+
+Il offre les fonctionnalités suivantes : Direction de la Qibla, Alarmes sonores, Méthodes de calculs personnalisables, Détection GPS, Recherche par ville, région ou pays, et plus...
+
+Visitez le site officiel pour plus d'informations : http://athan-mobile.appspot.com/</Char_Desc_450>
+			<Char_Desc_2000>- Détection GPS de votre téléphone afin d'avoir les latitude et longitude les plus optimales pour les calculs des temps de prières.
+- Recherche parmi plus de 8 millions de villes
+- Direction QIbla (boussole)
+- Gestion personnalisable des décalages horaires
+- Méthodes de calculs personnalisables
+- Horaires spéciales : Imsak / Chourouk
+- Alarmes sonores personnalisables (MP3/WAV)
+</Char_Desc_2000>
+		</French>
+	</Program_Descriptions>
+	<Web_Info>
+		<Application_URLs>
+			<Application_Info_URL>http://athan-mobile.appspot.com/</Application_Info_URL>
+			<Application_Order_URL>http://athan-mobile.googlecode.com/</Application_Order_URL>
+			<Application_Screenshot_URL>http://athan-mobile.appspot.com/images/home/EN/home_1.png</Application_Screenshot_URL>
+			<Application_Icon_URL>http://code.google.com/p/athan-mobile/logo?cct=1324923422</Application_Icon_URL>
+			<Application_XML_File_URL>http://athan-mobile.appspot.com/pad_file.xml</Application_XML_File_URL>
+		</Application_URLs>
+		<Download_URLs>
+			<Primary_Download_URL>http://athan-mobile.appspot.com/?type=JAD</Primary_Download_URL>
+			<Secondary_Download_URL>http://athan-mobile.appspot.com/?type=JAR</Secondary_Download_URL>
+			<Additional_Download_URL_1>http://getjar.com/athan-mobile/</Additional_Download_URL_1>
+			<Additional_Download_URL_2 />
+		</Download_URLs>
+	</Web_Info>
+	<Permissions>
+		<Distribution_Permissions>Artistic License 2.0
+Copyright (c) 2000-2006, The Perl Foundation.
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
+http://www.opensource.org/licenses/artistic-license-2.0
+</Distribution_Permissions>
+		<EULA>Artistic License 2.0
+Copyright (c) 2000-2006, The Perl Foundation.
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
+http://www.opensource.org/licenses/artistic-license-2.0
+</EULA>
+	</Permissions>
+</XML_DIZ_INFO>
