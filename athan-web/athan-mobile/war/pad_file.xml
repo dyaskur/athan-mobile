@@ -7,7 +7,7 @@
 	</MASTER_PAD_VERSION_INFO>
 	<Company_Info>
 		<Company_Name>Athan Mobile</Company_Name>
-		<Address_1 />
+		<Address_1>Lyon</Address_1>
 		<Address_2 />
 		<City_Town>Lyon</City_Town>
 		<State_Province>Rhône-Alpes</State_Province>
@@ -17,15 +17,15 @@
 		<Contact_Info>
 			<Author_First_Name>Saad</Author_First_Name>
 			<Author_Last_Name>Benbouzid</Author_Last_Name>
-			<Author_Email>saad.benbouzid@insalien.org</Author_Email>
+			<Author_Email>athan-mobile@hotmail.fr</Author_Email>
 			<Contact_First_Name>Saad</Contact_First_Name>
 			<Contact_Last_Name>Benbouzid</Contact_Last_Name>
-			<Contact_Email>saad.benbouzid@insalien.org</Contact_Email>
+			<Contact_Email>athan-mobile@hotmail.fr</Contact_Email>
 		</Contact_Info>
 		<Support_Info>
-			<Sales_Email>saad.benbouzid@insalien.org</Sales_Email>
-			<Support_Email>saad.benbouzid@insalien.org</Support_Email>
-			<General_Email>saad.benbouzid@insalien.org</General_Email>
+			<Sales_Email>athan-mobile@hotmail.fr</Sales_Email>
+			<Support_Email>athan-mobile@hotmail.fr</Support_Email>
+			<General_Email>athan-mobile@hotmail.fr</General_Email>
 			<Sales_Phone />
 			<Support_Phone />
 			<General_Phone />
@@ -119,8 +119,8 @@ Visitez le site officiel pour plus d'informations : http://athan-mobile.appspot.
 			<Application_XML_File_URL>http://athan-mobile.appspot.com/pad_file.xml</Application_XML_File_URL>
 		</Application_URLs>
 		<Download_URLs>
-			<Primary_Download_URL>http://athan-mobile.appspot.com/?type=JAD</Primary_Download_URL>
-			<Secondary_Download_URL>http://athan-mobile.appspot.com/?type=JAR</Secondary_Download_URL>
+			<Primary_Download_URL>http://athan-mobile.appspot.com/download?type=JAD</Primary_Download_URL>
+			<Secondary_Download_URL>http://athan-mobile.appspot.com/download?type=JAR</Secondary_Download_URL>
 			<Additional_Download_URL_1>http://getjar.com/athan-mobile/</Additional_Download_URL_1>
 			<Additional_Download_URL_2 />
 		</Download_URLs>
