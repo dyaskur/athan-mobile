@@ -113,7 +113,7 @@ Visitez le site officiel pour plus d'informations : http://athan-mobile.appspot.
 	<Web_Info>
 		<Application_URLs>
 			<Application_Info_URL>http://athan-mobile.appspot.com/</Application_Info_URL>
-			<Application_Order_URL>http://athan-mobile.googlecode.com/</Application_Order_URL>
+			<Application_Order_URL />
 			<Application_Screenshot_URL>http://athan-mobile.appspot.com/images/home/EN/home_1.png</Application_Screenshot_URL>
 			<Application_Icon_URL>http://code.google.com/p/athan-mobile/logo?cct=1324923422</Application_Icon_URL>
 			<Application_XML_File_URL>http://athan-mobile.appspot.com/pad_file.xml</Application_XML_File_URL>
