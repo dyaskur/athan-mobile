@@ -43,7 +43,7 @@ import com.sun.lwuit.table.TableLayout;
 import java.util.Date;
 
 /**
- * Menu m√©thodes de calcul.
+ * Menu mÈthodes de calcul.
  * 
  * @author Saad BENBOUZID
  */
@@ -185,7 +185,7 @@ public class MenuCalculationMethod extends Menu {
         } else if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_FR)) {
             mChoixMethode = new ComboBox(CALCULATION_METHOD_FR);
         } else {
-            // Par d√©faut
+            // Par dÈfaut
             mChoixMethode = new ComboBox(CALCULATION_METHOD_EN);
         }
         mChoixMethode.setSelectedIndex(0);
@@ -262,7 +262,7 @@ public class MenuCalculationMethod extends Menu {
         mOK = new Command(RESSOURCE.get("Command.OK")) {
 
             public void actionPerformed(ActionEvent ae) {
-                // On v√©rifie la saisie
+                // On vÈrifie la saisie
                 boolean contenuOk = true;
                 int calculationMethod = mChoixMethode.getSelectedIndex();
 
@@ -333,10 +333,10 @@ public class MenuCalculationMethod extends Menu {
                         ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomIshaaValue, Double.toString(ishaaValue));
                     }
 
-                    // On enregistre les param√®tres dans la m√©moire du t√©l√©phone
+                    // On enregistre les paramËtres dans la mÈmoire du tÈlÈphone
                     ServiceFactory.getFactory().getPreferences().save();
 
-                    // On rafra√Æchit l'affichage des pri√®res
+                    // On rafra√Æchit l'affichage des priËres
                     ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif

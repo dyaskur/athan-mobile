@@ -471,11 +471,13 @@ public class MainForm extends Menu {
                     }
                 });
 
+                int volume = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sVolume));
+
                 // Empêche les pics de volume au début de la musique
                 VolumeControl volumeControl =
                         (VolumeControl) musicPlayer.getControl("VolumeControl");
                 if (volumeControl != null) {
-                    volumeControl.setLevel(100);
+                    volumeControl.setLevel(volume);
                 }
 
                 // Joue le son
@@ -483,7 +485,7 @@ public class MainForm extends Menu {
 
                 // Réassigne le volume
                 volumeControl = (VolumeControl) musicPlayer.getControl("VolumeControl");
-                volumeControl.setLevel(100);
+                volumeControl.setLevel(volume);
 
                 // Détruit la stream pour récupérer de la ressource
                 inputStream.close();

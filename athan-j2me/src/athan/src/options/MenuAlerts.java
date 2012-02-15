@@ -70,6 +70,7 @@ public class MenuAlerts extends Menu {
     private CheckBox mAlerterMaghreb;
     private CheckBox mAlerterIshaa;
     private ComboBox mChoixAlerte;
+    private ComboBox mChoixVolume;
     private TextField mFichierSon;
     private Button mChoixFichier;
     private Button mPlayStop;
@@ -77,6 +78,7 @@ public class MenuAlerts extends Menu {
 
     private Command mOK;
     private Container mCtnPrieres;
+    private Container mCtnLecture;
     private final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
 
     protected String getHelp() {
@@ -162,6 +164,15 @@ public class MenuAlerts extends Menu {
             }
         });
 
+        // Contrôle du volume
+        Label lblVolume = new Label(RESSOURCE.get("Volume"));
+        editerLabel(lblVolume);
+        String[] choixVolumes = {
+            "0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"
+        };
+        mChoixVolume = new ComboBox(choixVolumes);
+        mChoixVolume.setWidth(150);
+
         mCtnPrieres = new Container(new GridLayout(5, 2));
         mCtnPrieres.addComponent(lLabelSobh);
         mCtnPrieres.addComponent(mAlerterSobh);
@@ -183,14 +194,16 @@ public class MenuAlerts extends Menu {
         ctnFichierSon.addComponent(BorderLayout.CENTER, mFichierSon);
         ctnFichierSon.addComponent(BorderLayout.EAST, mChoixFichier);
 
-        Container ctnLecture = new Container(new BoxLayout(BoxLayout.X_AXIS));
-        ctnLecture.addComponent(mPlayStop);
+        mCtnLecture = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        mCtnLecture.addComponent(mPlayStop);
+        mCtnLecture.addComponent(lblVolume);
+        mCtnLecture.addComponent(mChoixVolume);
 
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
         f.addComponent(ctnChoix);
         f.addComponent(ctnFichierSon);
-        f.addComponent(ctnLecture);
+        f.addComponent(mCtnLecture);
         f.addComponent(new Label());
         f.addComponent(mCtnPrieres);
 
@@ -228,6 +241,7 @@ public class MenuAlerts extends Menu {
                     }
 
                     ServiceFactory.getFactory().getPreferences().set(Preferences.sAlertFile, mFichierSon.getText());
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sVolume, (String) mChoixVolume.getSelectedItem());
 
                     if (mChoixAlerte.getSelectedIndex() == 1
                             && StringOutilClient.isEmpty(mFichierSon.getText())) {
@@ -243,10 +257,10 @@ public class MenuAlerts extends Menu {
                         return;
                     }
 
-                    // On enregistre les paramÃ¨tres dans la mémoire du téléphone
+                    // On enregistre les paramètres dans la mémoire du téléphone
                     ServiceFactory.getFactory().getPreferences().save();
 
-                    // On rafraÃ®chit l'affichage des priÃ¨res
+                    // On rafraîchit l'affichage des prières
                     ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
@@ -278,7 +292,7 @@ public class MenuAlerts extends Menu {
             mPlayStop.setText(RESSOURCE.get("ButtonStop"));
         }
 
-        // RafraÃ®chit la vue suite au changement d'icone
+        // Rafraîchit la vue suite au changement d'icone
         mPlayStop.repaint();
         mPlayStop.requestFocus();
     }
@@ -309,7 +323,7 @@ public class MenuAlerts extends Menu {
 
         try {
 
-            // On arrÃªte toute éventuelle lecture précédente
+            // On arrête toute éventuelle lecture précédente
             stopperSon();
 
             if (!StringOutilClient.isEmpty(mFichierSon.getText())) {
@@ -338,11 +352,11 @@ public class MenuAlerts extends Menu {
                     }
                 });
 
-                // EmpÃªche les pics de volume au début de la musique
+                // Empêche les pics de volume au début de la musique
                 VolumeControl volumeControl =
                         (VolumeControl) mPlayer.getControl("VolumeControl");
                 if (volumeControl != null) {
-                    volumeControl.setLevel(100);
+                    volumeControl.setLevel(Integer.parseInt((String) mChoixVolume.getSelectedItem()));
                 }
 
                 // Joue le son
@@ -352,7 +366,7 @@ public class MenuAlerts extends Menu {
 
                 // Réassigne le volume
                 volumeControl = (VolumeControl) mPlayer.getControl("VolumeControl");
-                volumeControl.setLevel(100);
+                volumeControl.setLevel(Integer.parseInt((String) mChoixVolume.getSelectedItem()));
 
                 // Détruit la stream pour récupérer de la ressource
                 inputStream.close();
@@ -383,7 +397,7 @@ public class MenuAlerts extends Menu {
             }
         };
 
-        // Création de la fenÃªtre
+        // Création de la fenêtre
         Form treeForm = new Form(RESSOURCE.get("FormSongFileSelection"));
         treeForm.setLayout(new BorderLayout());
         treeForm.setScrollable(false);
@@ -413,7 +427,7 @@ public class MenuAlerts extends Menu {
                 }
 
                 if (ok) {
-                    // Assigne le nom du fichier son aux propriétés de la fenÃªtre
+                    // Assigne le nom du fichier son aux propriétés de la fenêtre
                     mFichierSon.setText((String) tree.getSelectedItem());
                     pFormCourante.showBack();
                 } else {
@@ -449,6 +463,7 @@ public class MenuAlerts extends Menu {
 
         String urlFichier = StringOutilClient.EMPTY;
         String mode = StringOutilClient.EMPTY;
+        String volume = "0";
 
         try {
             isSobhSelected = StringOutilClient.getValeurBooleenne(
@@ -464,6 +479,9 @@ public class MenuAlerts extends Menu {
 
             urlFichier = ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertFile);
             mode = ServiceFactory.getFactory().getPreferences().get(Preferences.sAlertMode);
+
+            volume = ServiceFactory.getFactory().getPreferences().get(Preferences.sVolume);
+
         } catch (Exception exc) {
             exc.printStackTrace();
         }
@@ -475,6 +493,7 @@ public class MenuAlerts extends Menu {
         mAlerterIshaa.setSelected(isIshaaSelected);
 
         mFichierSon.setText(urlFichier);
+        mChoixVolume.setSelectedItem(volume);
 
         if (Preferences.MODE_NONE.equals(mode)) {
             mChoixAlerte.setSelectedIndex(0);
@@ -483,7 +502,7 @@ public class MenuAlerts extends Menu {
         } else if (Preferences.MODE_FLASH.equals(mode)) {
             mChoixAlerte.setSelectedIndex(2);
         } else {
-            // Par défaut si problÃ¨me
+            // Par défaut si problème
             mChoixAlerte.setSelectedIndex(0);
         }
 
@@ -499,7 +518,7 @@ public class MenuAlerts extends Menu {
 
             mChoixFichier.setVisible(false);
             mFichierSon.setVisible(false);
-            mPlayStop.setVisible(false);
+            afficherGestionnaireSons(false);
             mPlayStop.setEnabled(false);
         } else if (index == 1) {
             // Son
@@ -507,7 +526,7 @@ public class MenuAlerts extends Menu {
 
             mChoixFichier.setVisible(true);
             mFichierSon.setVisible(true);
-            mPlayStop.setVisible(true);
+            afficherGestionnaireSons(true);
             mPlayStop.setEnabled(true);
             stopperSon();
         } else if (index == 2) {
@@ -516,18 +535,28 @@ public class MenuAlerts extends Menu {
 
             mChoixFichier.setVisible(false);
             mFichierSon.setVisible(false);
-            mPlayStop.setVisible(false);
+            afficherGestionnaireSons(false);
             mPlayStop.setEnabled(false);
         }
     }
 
     /**
-     * Affiche ou masque le contenu du conteneur de priÃ¨res (labels + coches)
+     * Affiche ou masque le contenu du conteneur de prières (labels + coches)
      * @param afficher
      */
     private void afficherPrieres(boolean afficher) {
         for (int i = 0; i < mCtnPrieres.getComponentCount(); i++) {
             mCtnPrieres.getComponentAt(i).setVisible(afficher);
+        }
+    }
+
+    /**
+     * Affiche ou masque le contenu du conteneur de prières (labels + coches)
+     * @param afficher
+     */
+    private void afficherGestionnaireSons(boolean afficher) {
+        for (int i = 0; i < mCtnLecture.getComponentCount(); i++) {
+            mCtnLecture.getComponentAt(i).setVisible(afficher);
         }
     }
 

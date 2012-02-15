@@ -58,6 +58,7 @@ public class Preferences {
     public static final String sDisplayImsak = "displayImsak";
     public static final String sDisplayChourouk = "displayChourouk";
     public static final String sLangue = "langue";
+    public static final String sVolume = "volume";
     public static final String sAlertSobh = "alertSobh";
     public static final String sAlertDohr = "alertDohr";
     public static final String sAlertAsr = "alertAsr";
@@ -196,7 +197,7 @@ public class Preferences {
         put(sFormatHoraire, "0");
         put(sMethodeJuridiqueAsr, "0");
         put(sCalculationMethod, "6");
-        put(sCustomFajrAngle, "13");
+        put(sCustomFajrAngle, "15");
         put(sCustomImsakSelector, "1");
         put(sCustomImsakValue, "15");
         put(sCustomMaghrebSelector, "1");
@@ -206,6 +207,7 @@ public class Preferences {
         put(sDisplayImsak, Integer.toString(StringOutilClient.FALSE));
         put(sDisplayChourouk, Integer.toString(StringOutilClient.FALSE));
         put(sLangue, LANGUE_EN);
+        put(sVolume, "50");
         put(sAlertSobh, Integer.toString(StringOutilClient.TRUE));
         put(sAlertDohr, Integer.toString(StringOutilClient.FALSE));
         put(sAlertAsr, Integer.toString(StringOutilClient.FALSE));
