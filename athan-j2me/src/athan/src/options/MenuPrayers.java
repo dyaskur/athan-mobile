@@ -152,4 +152,7 @@ public class MenuPrayers extends Menu {
         mImsak.setSelected(isImsakSelected);
         mChourouk.setSelected(isChouroukSelected);
     }
+
+    protected void cleanup() {
+    }
 }

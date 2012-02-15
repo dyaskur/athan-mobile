@@ -30,6 +30,7 @@ import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
 import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Form;
+import com.sun.lwuit.Image;
 import com.sun.lwuit.Label;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.animations.CommonTransitions;
@@ -40,7 +41,14 @@ import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 import com.sun.lwuit.layouts.GridLayout;
 import com.sun.lwuit.tree.Tree;
+import java.io.InputStream;
 import java.util.Date;
+import javax.microedition.io.Connector;
+import javax.microedition.io.file.FileConnection;
+import javax.microedition.media.Manager;
+import javax.microedition.media.Player;
+import javax.microedition.media.PlayerListener;
+import javax.microedition.media.control.VolumeControl;
 
 /**
  * Menu réglages des alarmes.
@@ -52,6 +60,7 @@ public class MenuAlerts extends Menu {
     private static final int HAUTEUR_LABEL = 22;
     private static final int HAUTEUR_LABEL_TOUS = 130;
     private static final String IMAGE_BROWSE_SONG = "BrowseSong";
+    private static final String IMAGE_PLAYSTOP_SONG = "AlertPlayStop";
     private static final String IMAGE_FOLDER = "Folder";
     private static final String IMAGE_FOLDER_CLOSED = "FolderClosed";
     private static final String IMAGE_FILE = "File";
@@ -63,6 +72,9 @@ public class MenuAlerts extends Menu {
     private ComboBox mChoixAlerte;
     private TextField mFichierSon;
     private Button mChoixFichier;
+    private Button mPlayStop;
+    private Player mPlayer;
+    private boolean playButtonState;
     private Command mOK;
     private Container mCtnPrieres;
     private final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
@@ -122,16 +134,30 @@ public class MenuAlerts extends Menu {
         mFichierSon.setEditable(false);
 
         mChoixFichier = new Button(Main.icons.getImage(IMAGE_BROWSE_SONG));
-
+        mChoixFichier.setFocusable(true);
         mChoixFichier.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
                 // Sélection d'un fichier son
                 try {
                     renvoyerUrlFichier(f);
-
                 } catch (Exception exc) {
                     exc.printStackTrace();
+                }
+            }
+        });
+
+        // Fonctionnalités sons (play/stop)
+        mPlayStop = new Button(Main.icons.getImage(IMAGE_PLAYSTOP_SONG));
+        mPlayStop.setFocusable(true);
+        mPlayStop.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent evt) {
+                // Lecture / Arrêt du fichier son
+                if (playButtonState) {
+                    jouerSon();
+                } else {
+                    stopperSon();
                 }
             }
         });
@@ -157,16 +183,23 @@ public class MenuAlerts extends Menu {
         ctnFichierSon.addComponent(BorderLayout.CENTER, mFichierSon);
         ctnFichierSon.addComponent(BorderLayout.EAST, mChoixFichier);
 
+        Container ctnLecture = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        ctnLecture.addComponent(mPlayStop);
+
         f.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
         f.addComponent(ctnChoix);
         f.addComponent(ctnFichierSon);
+        f.addComponent(ctnLecture);
         f.addComponent(new Label());
         f.addComponent(mCtnPrieres);
 
         mOK = new Command(RESSOURCE.get("Command.OK")) {
 
             public void actionPerformed(ActionEvent ae) {
+
+                // On stoppe l'éventuelle lecture
+                stopperSon();
 
                 boolean contenuOk = true;
 
@@ -231,6 +264,106 @@ public class MenuAlerts extends Menu {
 
         f.addCommand(mOK);
         initialiserInfosSelections();
+    }
+
+    /**
+     * Bascule l'icone entre Play/Stop
+     * <br>
+     * true = Play visible ; false = Stop visible
+     */
+    private void switcherIconePlayStop(boolean playEnable) {
+        if (playEnable) {
+            mPlayStop.setText(RESSOURCE.get("Play") + " ");
+        } else {
+            mPlayStop.setText(RESSOURCE.get("Stop") + " ");
+        }
+
+        playButtonState = playEnable;
+
+        // Rafraîchit la vue suite au changement d'icone
+        mPlayStop.repaint();
+        mPlayStop.requestFocus();
+    }
+
+    /**
+     * Stoppe la lecture du fichier son
+     */
+    private void stopperSon() {
+        try {
+            if (mPlayer != null) {
+
+                mPlayer.stop();
+                mPlayer = null;
+            }
+
+            switcherIconePlayStop(true);
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+            switcherIconePlayStop(true);
+        }
+    }
+
+    /**
+     * Joue le fichier son s'il existe
+     */
+    private void jouerSon() {
+
+        try {
+
+            // On arrête toute éventuelle lecture précédente
+            stopperSon();
+
+            if (!StringOutilClient.isEmpty(mFichierSon.getText())) {
+
+                // Charge la stream du fichier son à jouer
+                FileConnection fc = (FileConnection) Connector.open(mFichierSon.getText(), Connector.READ);
+                InputStream inputStream = (InputStream) fc.openInputStream();
+
+                String musicEncoding = StringOutilClient.EMPTY;
+                if (mFichierSon.getText().toLowerCase().endsWith(FORMAT_WAV)) {
+                    musicEncoding = "audio/x-wav";
+                } else {
+                    musicEncoding = "audio/mp3";
+                }
+
+                mPlayer = Manager.createPlayer(inputStream, musicEncoding);
+                mPlayer.prefetch();
+
+                // Ajoute un listener
+                mPlayer.addPlayerListener(new PlayerListener() {
+
+                    public void playerUpdate(Player player, String event, Object eventData) {
+                        if (event.equals(PlayerListener.END_OF_MEDIA)) {
+                            switcherIconePlayStop(true);
+                        }
+                    }
+                });
+
+                // Empêche les pics de volume au début de la musique
+                VolumeControl volumeControl =
+                        (VolumeControl) mPlayer.getControl("VolumeControl");
+                if (volumeControl != null) {
+                    volumeControl.setLevel(100);
+                }
+
+                // Joue le son
+                mPlayer.start();
+
+                switcherIconePlayStop(false);
+
+                // Réassigne le volume
+                volumeControl = (VolumeControl) mPlayer.getControl("VolumeControl");
+                volumeControl.setLevel(100);
+
+                // Détruit la stream pour récupérer de la ressource
+                inputStream.close();
+                inputStream = null;
+            }
+        } catch (Exception exc) {
+            exc.printStackTrace();
+            switcherIconePlayStop(true);
+        }
     }
 
     private void renvoyerUrlFichier(final Form pFormCourante) {
@@ -355,6 +488,9 @@ public class MenuAlerts extends Menu {
             // Par défaut si problème
             mChoixAlerte.setSelectedIndex(0);
         }
+
+        // On force l'appel au handler
+        handlerChoixAlerte(mChoixAlerte.getSelectedIndex());
     }
 
     private void handlerChoixAlerte(int index) {
@@ -365,19 +501,25 @@ public class MenuAlerts extends Menu {
 
             mChoixFichier.setVisible(false);
             mFichierSon.setVisible(false);
-
+            mPlayStop.setVisible(false);
+            mPlayStop.setEnabled(false);
         } else if (index == 1) {
             // Son
             afficherPrieres(true);
 
             mChoixFichier.setVisible(true);
             mFichierSon.setVisible(true);
+            mPlayStop.setVisible(true);
+            mPlayStop.setEnabled(true);
+            stopperSon();
         } else if (index == 2) {
             // Flash
             afficherPrieres(true);
 
             mChoixFichier.setVisible(false);
             mFichierSon.setVisible(false);
+            mPlayStop.setVisible(false);
+            mPlayStop.setEnabled(false);
         }
     }
 
@@ -408,20 +550,8 @@ public class MenuAlerts extends Menu {
         pTextField.setWidth(40);
     }
 
-    public class FichierSon {
-
-        public String mFichierSon;
-
-        public String getFichierSon() {
-            return mFichierSon;
-        }
-
-        public void setFichierSon(String pFichierSon) {
-            mFichierSon = pFichierSon;
-        }
-
-        public boolean isAssigned() {
-            return !StringOutilClient.isEmpty(mFichierSon);
-        }
+    protected void cleanup() {
+        // On stoppe l'éventuelle lecture en cours
+        stopperSon();
     }
 }

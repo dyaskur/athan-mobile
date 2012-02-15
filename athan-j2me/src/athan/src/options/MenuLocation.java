@@ -759,4 +759,7 @@ public class MenuLocation extends Menu {
         VirtualKeyboard.bindVirtualKeyboard(mTextFieldNomRegion, vkbNoms);
         VirtualKeyboard.bindVirtualKeyboard(mTextFieldNomPays, vkbNoms);
     }
+
+    protected void cleanup() {
+    }
 }

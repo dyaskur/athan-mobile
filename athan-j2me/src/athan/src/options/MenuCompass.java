@@ -206,4 +206,7 @@ public class MenuCompass extends Menu {
     protected String getIconBaseName() {
         return MENU_AFFICHAGE_COMPAS;
     }
+
+    protected void cleanup() {
+    }
 }

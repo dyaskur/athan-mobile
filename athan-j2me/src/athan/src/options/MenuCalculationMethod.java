@@ -461,4 +461,7 @@ public class MenuCalculationMethod extends Menu {
 
         return lLabel;
     }
+
+    protected void cleanup() {
+    }
 }

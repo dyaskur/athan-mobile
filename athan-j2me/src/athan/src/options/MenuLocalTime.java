@@ -192,4 +192,7 @@ public class MenuLocalTime extends Menu {
         pTextField.setRows(1);
         pTextField.setPreferredH(HAUTEUR_LABEL);
     }
+
+    protected void cleanup() {
+    }
 }

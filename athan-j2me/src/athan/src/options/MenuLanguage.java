@@ -169,4 +169,7 @@ public class MenuLanguage extends Menu {
             mLangCmb.setSelectedIndex(1);
         }
     }
+
+    protected void cleanup() {
+    }
 }

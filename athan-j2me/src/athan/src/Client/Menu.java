@@ -155,8 +155,10 @@ public abstract class Menu
         return createPair(label, c, 0);
     }
 
-    public void cleanup() {
-    }
+    /**
+     * Méthode de callback sur clic du bouton retour
+     */
+    protected abstract void cleanup();
 
     public Form getForm() {
         return mForm;

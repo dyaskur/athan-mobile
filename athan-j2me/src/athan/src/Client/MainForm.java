@@ -444,7 +444,7 @@ public class MainForm extends Menu {
             }
 
             String musicEncoding = StringOutilClient.EMPTY;
-            if (urlSon.endsWith(FORMAT_WAV)) {
+            if (urlSon.toLowerCase().endsWith(FORMAT_WAV)) {
                 musicEncoding = "audio/x-wav";
             } else {
                 musicEncoding = "audio/mp3";
@@ -687,5 +687,8 @@ public class MainForm extends Menu {
      */
     protected String getHelp() {
         return StringOutilClient.EMPTY;
+    }
+
+    protected void cleanup() {
     }
 }
