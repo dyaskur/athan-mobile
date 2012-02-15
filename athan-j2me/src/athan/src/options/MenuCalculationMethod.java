@@ -43,7 +43,7 @@ import com.sun.lwuit.table.TableLayout;
 import java.util.Date;
 
 /**
- * Menu méthodes de calcul.
+ * Menu mÃ©thodes de calcul.
  * 
  * @author Saad BENBOUZID
  */
@@ -185,7 +185,7 @@ public class MenuCalculationMethod extends Menu {
         } else if (ServiceFactory.getFactory().getPreferences().getLangue().equals(Preferences.LANGUE_FR)) {
             mChoixMethode = new ComboBox(CALCULATION_METHOD_FR);
         } else {
-            // Par défaut
+            // Par dÃ©faut
             mChoixMethode = new ComboBox(CALCULATION_METHOD_EN);
         }
         mChoixMethode.setSelectedIndex(0);
@@ -262,7 +262,7 @@ public class MenuCalculationMethod extends Menu {
         mOK = new Command(RESSOURCE.get("Command.OK")) {
 
             public void actionPerformed(ActionEvent ae) {
-                // On vérifie la saisie
+                // On vÃ©rifie la saisie
                 boolean contenuOk = true;
                 int calculationMethod = mChoixMethode.getSelectedIndex();
 
@@ -333,10 +333,10 @@ public class MenuCalculationMethod extends Menu {
                         ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomIshaaValue, Double.toString(ishaaValue));
                     }
 
-                    // On enregistre les paramètres dans la mémoire du téléphone
+                    // On enregistre les paramÃ¨tres dans la mÃ©moire du tÃ©lÃ©phone
                     ServiceFactory.getFactory().getPreferences().save();
 
-                    // On rafraîchit l'affichage des prières
+                    // On rafraÃ®chit l'affichage des priÃ¨res
                     ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
@@ -358,7 +358,7 @@ public class MenuCalculationMethod extends Menu {
     }
 
     private boolean estAngleCorrect(double pAngle) {
-        return pAngle >= 0.0 && pAngle <= 20.0;
+        return pAngle >= 9.0 && pAngle <= 20.0;
     }
 
     private boolean estMinutesCorrect(double pMinutes) {
