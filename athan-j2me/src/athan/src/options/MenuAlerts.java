@@ -51,7 +51,7 @@ import javax.microedition.media.PlayerListener;
 import javax.microedition.media.control.VolumeControl;
 
 /**
- * Menu rÃ©glages des alarmes.
+ * Menu réglages des alarmes.
  * 
  * @author Saad BENBOUZID
  */
@@ -140,7 +140,7 @@ public class MenuAlerts extends Menu {
         mChoixFichier.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
-                // SÃ©lection d'un fichier son
+                // Sélection d'un fichier son
                 try {
                     renvoyerUrlFichier(f);
                 } catch (Exception exc) {
@@ -149,13 +149,13 @@ public class MenuAlerts extends Menu {
             }
         });
 
-        // FonctionnalitÃ©s sons (play/stop)
+        // Fonctionnalités sons (play/stop)
         mPlayStop = new Button(Main.icons.getImage(IMAGE_PLAYSTOP_SONG));
         mPlayStop.setFocusable(true);
         mPlayStop.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
-                // Lecture / ArrÃªt du fichier son
+                // Lecture / Arrêt du fichier son
                 if (RESSOURCE.get("ButtonPlay").equals(mPlayStop.getText())) {
                     jouerSon();
                 } else if (RESSOURCE.get("ButtonStop").equals(mPlayStop.getText())) {
@@ -211,7 +211,7 @@ public class MenuAlerts extends Menu {
 
             public void actionPerformed(ActionEvent ae) {
 
-                // On stoppe l'Ã©ventuelle lecture
+                // On stoppe l'éventuelle lecture
                 stopperSon();
 
                 boolean contenuOk = true;
@@ -257,10 +257,10 @@ public class MenuAlerts extends Menu {
                         return;
                     }
 
-                    // On enregistre les paramÃ¨tres dans la mÃ©moire du tÃ©lÃ©phone
+                    // On enregistre les paramètres dans la mémoire du téléphone
                     ServiceFactory.getFactory().getPreferences().save();
 
-                    // On rafraÃ®chit l'affichage des priÃ¨res
+                    // On rafraîchit l'affichage des prières
                     ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
@@ -292,7 +292,7 @@ public class MenuAlerts extends Menu {
             mPlayStop.setText(RESSOURCE.get("ButtonStop"));
         }
 
-        // RafraÃ®chit la vue suite au changement d'icone
+        // Rafraîchit la vue suite au changement d'icone
         mPlayStop.repaint();
         mPlayStop.requestFocus();
     }
@@ -323,7 +323,7 @@ public class MenuAlerts extends Menu {
 
         try {
 
-            // On arrÃªte toute Ã©ventuelle lecture prÃ©cÃ©dente
+            // On arrête toute éventuelle lecture précédente
             stopperSon();
 
             if (!StringOutilClient.isEmpty(mFichierSon.getText())) {
@@ -352,7 +352,7 @@ public class MenuAlerts extends Menu {
                     }
                 });
 
-                // EmpÃªche les pics de volume au dÃ©but de la musique
+                // Empêche les pics de volume au début de la musique
                 VolumeControl volumeControl =
                         (VolumeControl) mPlayer.getControl("VolumeControl");
                 if (volumeControl != null) {
@@ -364,11 +364,11 @@ public class MenuAlerts extends Menu {
 
                 switcherIconePlayStop(false);
 
-                // RÃ©assigne le volume
+                // Réassigne le volume
                 volumeControl = (VolumeControl) mPlayer.getControl("VolumeControl");
                 volumeControl.setLevel(Integer.parseInt((String) mChoixVolume.getSelectedItem()));
 
-                // DÃ©truit la stream pour rÃ©cupÃ©rer de la ressource
+                // Détruit la stream pour récupérer de la ressource
                 inputStream.close();
                 inputStream = null;
             }
@@ -380,7 +380,7 @@ public class MenuAlerts extends Menu {
 
     private void renvoyerUrlFichier(final Form pFormCourante) {
 
-        // CrÃ©ation de l'arbre
+        // Création de l'arbre
         Tree.setFolderIcon(Main.icons.getImage(IMAGE_FOLDER_CLOSED));
         Tree.setFolderOpenIcon(Main.icons.getImage(IMAGE_FOLDER));
         Tree.setNodeIcon(Main.icons.getImage(IMAGE_FILE));
@@ -397,7 +397,7 @@ public class MenuAlerts extends Menu {
             }
         };
 
-        // CrÃ©ation de la fenÃªtre
+        // Création de la fenêtre
         Form treeForm = new Form(RESSOURCE.get("FormSongFileSelection"));
         treeForm.setLayout(new BorderLayout());
         treeForm.setScrollable(false);
@@ -415,11 +415,11 @@ public class MenuAlerts extends Menu {
                 boolean ok = true;
 
                 Object elem = tree.getSelectedItem();
-                // On vÃ©rifie qu'il s'agit d'un fichier et non d'un dossier
+                // On vérifie qu'il s'agit d'un fichier et non d'un dossier
                 if (model.isLeaf(elem)) {
-                    // On vÃ©rifie qu'il s'agit d'un fichier au bon format
+                    // On vérifie qu'il s'agit d'un fichier au bon format
                     if (!((String) elem).toLowerCase().endsWith(FORMAT_WAV.toLowerCase())
-                            && !((String) elem)..toLowerCase().endsWith(FORMAT_MP3.toLowerCase())) {
+                            && !((String) elem).toLowerCase().endsWith(FORMAT_MP3.toLowerCase())) {
                         ok = false;
                     }
                 } else {
@@ -427,7 +427,7 @@ public class MenuAlerts extends Menu {
                 }
 
                 if (ok) {
-                    // Assigne le nom du fichier son aux propriÃ©tÃ©s de la fenÃªtre
+                    // Assigne le nom du fichier son aux propriétés de la fenêtre
                     mFichierSon.setText((String) tree.getSelectedItem());
                     pFormCourante.showBack();
                 } else {
@@ -502,7 +502,7 @@ public class MenuAlerts extends Menu {
         } else if (Preferences.MODE_FLASH.equals(mode)) {
             mChoixAlerte.setSelectedIndex(2);
         } else {
-            // Par dÃ©faut si problÃ¨me
+            // Par défaut si problème
             mChoixAlerte.setSelectedIndex(0);
         }
 
@@ -541,7 +541,7 @@ public class MenuAlerts extends Menu {
     }
 
     /**
-     * Affiche ou masque le contenu du conteneur de priÃ¨res (labels + coches)
+     * Affiche ou masque le contenu du conteneur de prières (labels + coches)
      * @param afficher
      */
     private void afficherPrieres(boolean afficher) {
@@ -551,7 +551,7 @@ public class MenuAlerts extends Menu {
     }
 
     /**
-     * Affiche ou masque le contenu du conteneur de priÃ¨res (labels + coches)
+     * Affiche ou masque le contenu du conteneur de prières (labels + coches)
      * @param afficher
      */
     private void afficherGestionnaireSons(boolean afficher) {
@@ -578,7 +578,7 @@ public class MenuAlerts extends Menu {
     }
 
     protected void cleanup() {
-        // On stoppe l'Ã©ventuelle lecture en cours
+        // On stoppe l'éventuelle lecture en cours
         stopperSon();
     }
 }

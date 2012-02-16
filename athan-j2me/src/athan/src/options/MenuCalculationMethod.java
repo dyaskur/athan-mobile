@@ -336,7 +336,7 @@ public class MenuCalculationMethod extends Menu {
                     // On enregistre les paramètres dans la mémoire du téléphone
                     ServiceFactory.getFactory().getPreferences().save();
 
-                    // On rafraÃ®chit l'affichage des prières
+                    // On rafraîchit l'affichage des prières
                     ServiceFactory.getFactory().getVuePrincipale().rafraichir(new Date(), true, true);
 
                     // Message de confirmation modif
