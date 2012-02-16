@@ -156,9 +156,9 @@ public class IndexViewCtrl extends GenericForwardComposer {
 		}
 	}
 
-	public void loadZulChild(EnumZulPage zulTab, Component container) {
+	public void loadZulChild(EnumZulPage zulPage, Component container) {
 
-		if (currentTab != null && currentTab.equals(zulTab)) {
+		if (currentTab != null && currentTab.equals(zulPage)) {
 			// Exits if it's current tab
 			return;
 		}
@@ -170,14 +170,22 @@ public class IndexViewCtrl extends GenericForwardComposer {
 			}
 		}
 
-		Component zulContent = Executions.createComponents(zulTab.zulFile(),
+		Component zulContent = Executions.createComponents(zulPage.zulFile(),
 				container, null);
-		zulContent.setId(zulTab.id());
+		zulContent.setId(zulPage.id());
+
+		try {
+			// Changes web application title
+			me.getPage().setTitle(
+					Labels.getLabel("application.title") + " - "
+							+ Labels.getLabel("title." + zulPage.id()));
+		} catch (Exception exc) {
+		}
 
 		// Adds created tab
 		if (zulContent != null) {
 			zulContent.setParent(container);
-			currentTab = zulTab;
+			currentTab = zulPage;
 		}
 	}
 
