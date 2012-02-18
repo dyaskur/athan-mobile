@@ -203,7 +203,7 @@ public class Preferences {
         put(sCustomMaghrebSelector, "1");
         put(sCustomMaghrebValue, "0");
         put(sCustomIshaaSelector, "0");
-        put(sCustomIshaaValue, "12");
+        put(sCustomIshaaValue, "15");
         put(sDisplayImsak, Integer.toString(StringOutilClient.FALSE));
         put(sDisplayChourouk, Integer.toString(StringOutilClient.FALSE));
         put(sLangue, LANGUE_EN);

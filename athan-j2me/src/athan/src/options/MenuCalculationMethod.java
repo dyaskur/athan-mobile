@@ -265,6 +265,7 @@ public class MenuCalculationMethod extends Menu {
                 // On vérifie la saisie
                 boolean contenuOk = true;
                 int calculationMethod = mChoixMethode.getSelectedIndex();
+                int juristicMethod = mAsrJuridiqueMethode.getSelectedIndex();
 
                 double fajrAngle = 0.0;
                 int imsakSelector = mImsakSelector.getSelectedIndex();
@@ -321,7 +322,9 @@ public class MenuCalculationMethod extends Menu {
                 }
 
                 try {
+
                     ServiceFactory.getFactory().getPreferences().set(Preferences.sCalculationMethod, Integer.toString(calculationMethod));
+                    ServiceFactory.getFactory().getPreferences().set(Preferences.sMethodeJuridiqueAsr, Integer.toString(juristicMethod));
 
                     if (calculationMethod == CalculationMethods.Custom.getValue()) {
                         ServiceFactory.getFactory().getPreferences().set(Preferences.sCustomFajrAngle, Double.toString(fajrAngle));
