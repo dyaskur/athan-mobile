@@ -34,8 +34,11 @@ public class HttpPortal {
 	private static final String INFO_LOC = "INFOLOC";
 	private static final String INFO_LANG = "INFOLANG";
 
-	private static final String GEONAME_URL = "http://ws.geonames.org/search?q="
-			+ INFO_LOC + "&maxRows=1&lang=" + INFO_LANG + "&style=full";
+	private static final String GEONAME_URL = "http://api.geonames.org/search?q="
+			+ INFO_LOC
+			+ "&maxRows=1&lang="
+			+ INFO_LANG
+			+ "&style=full&username=Macadoshis";
 
 	/**
 	 * Sends an HTTP GET request to a url
