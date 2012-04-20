@@ -21,7 +21,7 @@ import com.google.appengine.api.datastore.Key;
 @Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
 public class Location {
 
-	public static final int JDO_HOUR_LAP = 1;
+	public static final int JDO_HOUR_LAP = 2;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
