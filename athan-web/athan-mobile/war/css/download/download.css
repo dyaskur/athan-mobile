@@ -1,8 +1,9 @@
 /* Images */
-.img_empty_change_logs {
-	padding-top: 5px;
-	padding-left: 40px;
-	width: 128px;
+.img_change_logs {
+	position: absolute;
+	top: 240px;
+	right: 20px;
+    width: 128px;
 }
 
 /* Texts */
@@ -10,7 +11,7 @@
 .current_version_header_value,
 .current_date_header,
 .current_date_header_value,
-.change_logs_none_header {
+.change_logs_header {
 	position: relative;
 	font-family: verdana, arial, sans-serif;
 	font-size: 16px;
@@ -55,10 +56,17 @@
 	font-weight: bold;
 }
 
-.change_logs_none_header {
+.change_logs_header {
 	top: 40px;
 	font-style: italic;
 	position: relative;
+}
+
+
+.change_logs_version {
+    font-family: verdana, arial, sans-serif;
+    font-weight: bold;
+    font-size: 0.85em;
 }
 
 /* Images */

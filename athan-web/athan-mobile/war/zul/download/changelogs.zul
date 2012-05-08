@@ -8,12 +8,26 @@
 
 		<style src="./css/download/download.css" />
 		
-		<hbox>
+		<vbox>
 		
-			<label value="${c:l('changeLogs.none')}" zclass="change_logs_none_header" />
-			<image src="/images/download/empty_changelogs.png" class="img_empty_change_logs" />
+			<hbox>
+				<label value="${c:l('changeLogs.header')}" zclass="change_logs_header" />
+				<image src="/images/download/changelogs.png" class="img_change_logs" />
+			</hbox>
+		
+			<separator spacing="85px" orient="horizontal" />
 			
-		</hbox>
+			<!-- Version 0.3.9 -->
+			<label value="Version 0.3.9" zclass="change_logs_version" />
+			<label value="${c:l('changeLogs.v0.3.9')}" multiline="true" />
+			
+			<separator spacing="15px" orient="horizontal" />
+			
+			<!-- Version 0.3.5 -->
+			<label value="Version 0.3.5" zclass="change_logs_version" />
+			<label value="${c:l('changeLogs.v0.3.5')}" multiline="true" />
+		
+		</vbox>
 
 	</window>
 </zk>
