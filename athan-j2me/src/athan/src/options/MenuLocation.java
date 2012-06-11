@@ -382,8 +382,8 @@ public class MenuLocation extends Menu {
 
                                 athan.web.Location lLocation = service.geoname(
                                         lTextFieldNomVille.getText(),
-                                        lTextFieldNomRegion.getText(),
                                         lTextFieldNomPays.getText(),
+                                        lTextFieldNomRegion.getText(),
                                         INDICATIF_PAYS[lCbIndicatif.getSelectedIndex()]);
 
                                 mTextFieldNomVille.setText(lLocation.getCityName());
@@ -614,7 +614,7 @@ public class MenuLocation extends Menu {
             latitude = Double.valueOf(mTextFieldLat.getText()).doubleValue();
             longitude = Double.valueOf(mTextFieldLng.getText()).doubleValue();
 
-            if (latitude < 0.0 || latitude > 90.0) {
+            if (latitude < -90.0 || latitude > 90.0) {
                 okDonnees = false;
             }
 
