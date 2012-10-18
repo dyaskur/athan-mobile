@@ -77,4 +77,8 @@
 		<extension>jar</extension>
 		<mime-type>application/java-archive</mime-type>
 	</mime-mapping>
+	<mime-mapping>
+		<extension>cer</extension>
+		<mime-type>application/x-x509-ca-cert</mime-type>
+	</mime-mapping>
 </web-app>
