@@ -21,6 +21,8 @@
 			<label value="Version 0.4.5" zclass="change_logs_version" />
 			<label value="${c:l('changeLogs.v0.4.5')}" multiline="true" />
 			
+			<separator spacing="15px" orient="horizontal" />
+			
 			<!-- Version 0.4.0 -->
 			<label value="Version 0.4.0" zclass="change_logs_version" />
 			<label value="${c:l('changeLogs.v0.4.0')}" multiline="true" />
