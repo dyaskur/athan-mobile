@@ -133,7 +133,7 @@ public class VuePrincipale extends AthanConstantes {
         }
     }
 
-    private boolean memeHoraire(Calendar pCal1, Calendar pCal2) {
+    private static boolean memeHoraire(Calendar pCal1, Calendar pCal2) {
 
         return (pCal1.get(Calendar.YEAR) == pCal2.get(Calendar.YEAR)
                 && pCal1.get(Calendar.MONTH) == pCal2.get(Calendar.MONTH)
@@ -183,8 +183,7 @@ public class VuePrincipale extends AthanConstantes {
         }
     }
 
-    private void renseignerLieu() {
-
+    public static String getLibelleLieu() {
         String lieu = "";
 
         try {
@@ -204,7 +203,11 @@ public class VuePrincipale extends AthanConstantes {
             exc.printStackTrace();
         }
 
-        Main.getMainForm().getLabelLieu().setText(lieu);
+        return lieu;
+    }
+
+    private static void renseignerLieu() {
+        Main.getMainForm().getLabelLieu().setText(getLibelleLieu());
     }
 
     private void renseignerDate(boolean isHeureCourante) {

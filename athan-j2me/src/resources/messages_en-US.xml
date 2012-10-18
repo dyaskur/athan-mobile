@@ -48,7 +48,7 @@ Select the application language.
 It is highly recommended to exit and start again Athan Mobile to make sure all changes are accurate.
   </helpMenuLanguage>
   <helpMenuLocalTime>
-This window allows you to correct possible gap between real prayer times and the ones calculated, which may occurs particularly if your phone use a specific time zone different from your country, or if DST (Summer time) was turned on during winter or vis versa.
+This window allows you to correct possible gap between real prayer times and the ones calculated, which may occurs particularly if your phone use a specific time zone different from your country, or if DST (Summer time) was turned on during winter or vice versa.
 
 Hour format is related to the way prayer times are displayed in the main screen.
   </helpMenuLocalTime>

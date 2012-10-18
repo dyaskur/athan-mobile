@@ -67,4 +67,21 @@ public class StringOutilClient {
 
         return retour;
     }
+
+    /**
+     * Renvoie "0x" dans le cas où x est un chiffre, et "x" dans le cas où c'est un nombre
+     *
+     * @param chiffre
+     * @return
+     */
+    public static String remplirZeroAGaucheChiffre(int chiffre) {
+
+        String retour = String.valueOf(chiffre);
+
+        if (chiffre < 10) {
+            retour = "0" + retour;
+        }
+
+        return retour;
+    }
 }

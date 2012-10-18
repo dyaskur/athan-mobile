@@ -452,9 +452,13 @@ public class MainForm extends Menu {
 
             try {
 
+                Display.getInstance().restoreMinimizedApplication();
+
                 // Charge la stream du fichier son à jouer
                 FileConnection fc = (FileConnection) Connector.open(urlSon, Connector.READ);
                 InputStream inputStream = (InputStream) fc.openInputStream();
+//                musicEncoding = "audio/mp3";
+//                InputStream inputStream = getClass().getResourceAsStream("/athan.mp3");
 
                 // Crée le player
                 final Player musicPlayer = Manager.createPlayer(inputStream, musicEncoding);
@@ -471,13 +475,11 @@ public class MainForm extends Menu {
                     }
                 });
 
-                int volume = Integer.parseInt(ServiceFactory.getFactory().getPreferences().get(Preferences.sVolume));
-
                 // Empêche les pics de volume au début de la musique
                 VolumeControl volumeControl =
                         (VolumeControl) musicPlayer.getControl("VolumeControl");
                 if (volumeControl != null) {
-                    volumeControl.setLevel(volume);
+                    volumeControl.setLevel(100);
                 }
 
                 // Joue le son
@@ -485,7 +487,7 @@ public class MainForm extends Menu {
 
                 // Réassigne le volume
                 volumeControl = (VolumeControl) musicPlayer.getControl("VolumeControl");
-                volumeControl.setLevel(volume);
+                volumeControl.setLevel(100);
 
                 // Détruit la stream pour récupérer de la ressource
                 inputStream.close();
@@ -578,7 +580,7 @@ public class MainForm extends Menu {
         } else if (Preferences.sAlertMaghreb.equals(pPreferenceKey)) {
             retour = RESOURCES.get("Maghreb");
         } else if (Preferences.sAlertIshaa.equals(pPreferenceKey)) {
-            retour = RESOURCES.get("Ihsaa");
+            retour = RESOURCES.get("Ishaa");
         }
 
         return retour;

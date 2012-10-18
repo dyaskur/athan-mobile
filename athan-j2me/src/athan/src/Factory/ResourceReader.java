@@ -247,12 +247,12 @@ public class ResourceReader extends AthanConstantes {
 
         if (mLocale.equals(Preferences.LANGUE_EN)) {
             retour[0] = jour;
-            retour[1] = mois + " the " + pCalendar.get(Calendar.DAY_OF_MONTH)
+            retour[1] = mois + " the " + StringOutilClient.remplirZeroAGaucheChiffre(pCalendar.get(Calendar.DAY_OF_MONTH))
                     + retournerSuffixeNombreEn(pCalendar.get(Calendar.DAY_OF_MONTH))
                     + " " + pCalendar.get(Calendar.YEAR);
         } else if (mLocale.equals(Preferences.LANGUE_FR)) {
             retour[0] = jour;
-            retour[1] = pCalendar.get(Calendar.DAY_OF_MONTH)
+            retour[1] = StringOutilClient.remplirZeroAGaucheChiffre(pCalendar.get(Calendar.DAY_OF_MONTH))
                     + " " + mois + " " + pCalendar.get(Calendar.YEAR);
         }
 

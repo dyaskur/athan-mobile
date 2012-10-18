@@ -17,6 +17,7 @@ package athan.src.options;
 
 import athan.src.Client.Main;
 import athan.src.Client.Menu;
+import athan.src.Client.VuePrincipale;
 import athan.src.Factory.Preferences;
 import athan.src.Factory.ResourceReader;
 import athan.src.Factory.ServiceFactory;
@@ -42,6 +43,7 @@ public class MenuCompass extends Menu {
     private static final double LONGITUDE_MECQUE = 39.82611;
     private static final int INDEX_RESULTAT_ANGLE = 0;
     private static final int INDEX_RESULTAT_DISTANCE = 1;
+    private Label mLabelLieu;
     private Label mLabelDistance;
     private Label mLabelAngle;
     private final ResourceReader RESSOURCE = ServiceFactory.getFactory().getResourceReader();
@@ -80,10 +82,15 @@ public class MenuCompass extends Menu {
         Image imgBoussole = imgBackGround;
 
         // Initialise les labels
+        mLabelLieu = new Label();
+        editerLabel(mLabelLieu);
         mLabelAngle = new Label();
         editerLabel(mLabelAngle);
         mLabelDistance = new Label();
         editerLabel(mLabelDistance);
+
+        // Lieu
+        mLabelLieu.setText(VuePrincipale.getLibelleLieu());
 
         if (calculs[INDEX_RESULTAT_ANGLE] == ERREUR_CALCUL || calculs[INDEX_RESULTAT_DISTANCE] == ERREUR_CALCUL) {
             // Erreur de calcul
@@ -115,6 +122,7 @@ public class MenuCompass extends Menu {
 
         // Conteneur de labels
         Container ctnGlobal = new Container(new BorderLayout());
+        ctnGlobal.addComponent(BorderLayout.NORTH, mLabelLieu);
         ctnGlobal.addComponent(BorderLayout.CENTER, lblImageBoussole);
         ctnGlobal.addComponent(BorderLayout.SOUTH, ctnLabels);
 
