@@ -33,7 +33,7 @@ public class RequestFound extends Location {
 		this.setCoordinates(loc.getCoordinates());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.HOUR, Location.JDO_HOUR_LAP);
+		cal.add(Calendar.HOUR, Location.getJdoHourGap(cal.getTime()));
 		this.setCreationDate(cal.getTime());
 	}
 

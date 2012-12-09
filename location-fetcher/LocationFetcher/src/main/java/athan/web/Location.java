@@ -13,6 +13,8 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * @author Saad BENBOUZID
@@ -20,8 +22,6 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 @Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
 public class Location {
-
-	public static final int JDO_HOUR_LAP = 2;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -77,7 +77,17 @@ public class Location {
 		public void setLng(double lng) {
 			this.lng = lng;
 		}
+	}
 
+	/**
+	 * Returns the gap of hour(s) for France Timezone / GMT, includin saving lights or not.
+	 * 
+	 * @param date
+	 * 
+	 * @return
+	 */
+	public static int getJdoHourGap(Date date) {
+		return TimeZone.getTimeZone("France").inDaylightTime(date) ? 2 : 1;
 	}
 
 	@Persistent

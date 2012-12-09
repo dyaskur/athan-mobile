@@ -44,7 +44,7 @@ public class RequestNotFound {
 		this.language = language;
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.HOUR, Location.JDO_HOUR_LAP);
+		cal.add(Calendar.HOUR, Location.getJdoHourGap(cal.getTime()));
 		this.setCreationDate(cal.getTime());
 	}
 
