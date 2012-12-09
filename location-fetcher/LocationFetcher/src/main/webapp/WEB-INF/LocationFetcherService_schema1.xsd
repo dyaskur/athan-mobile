@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://web.athan/" xmlns:tns="http://web.athan/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="LocationException" type="tns:LocationException" />
+
+  <xs:element name="geoname" type="tns:geoname" />
+
+  <xs:element name="geonameResponse" type="tns:geonameResponse" />
+
+  <xs:complexType name="geoname">
+    <xs:sequence>
+      <xs:element name="cityName" type="xs:string" minOccurs="0" />
+      <xs:element name="countryName" type="xs:string" minOccurs="0" />
+      <xs:element name="regionName" type="xs:string" minOccurs="0" />
+      <xs:element name="language" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="geonameResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:location" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="location">
+    <xs:sequence>
+      <xs:element name="cityName" type="xs:string" minOccurs="0" />
+      <xs:element name="coordinates" type="tns:coordinate" minOccurs="0" />
+      <xs:element name="countryName" type="xs:string" minOccurs="0" />
+      <xs:element name="regionName" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="coordinate">
+    <xs:sequence>
+      <xs:element name="lat" type="xs:double" />
+      <xs:element name="lng" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LocationException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
