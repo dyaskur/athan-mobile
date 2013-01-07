@@ -108,7 +108,7 @@ public abstract class Menu
      * en fin de panel menu, afin qu'au moins la commande de
      * retour soit la (dernière) plus visible
      */
-    public void replacerCommandesPrincipales() {
+    protected void replacerCommandesPrincipales() {
 
         mForm.removeCommand(mBackCommand);
         if (mHelpCommand != null) {
