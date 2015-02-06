@@ -1,229 +1,235 @@
 body {
-	min-width: 90px;
-	min-height: 850px;
+    min-width: 90px;
+    min-height: 850px;
 }
 
 .window {
-	margin-top: 20px;
-	background-color: #EDE9DA;
-	/* 	height: 100%;	 */
+    margin-top: 20px;
+    background-color: #EDE9DA;
+    /* 	height: 100%;	 */
 }
 
 .window_introduction {
-	background-color: #EDE9DA;
-	padding-left: 30px;
+    background-color: #EDE9DA;
+    padding-left: 30px;
 }
 
 .nav-tabs {
-	background-color: #EDE9DA;
+    background-color: #EDE9DA;
 }
 
 .nav_tabs .z-tabpanel {
-	padding: 0;
-	border-bottom: 0 none;
+    padding: 0;
+    border-bottom: 0 none;
 }
 
 .nav_tabs .z-tabpanels .z-toolbarbutton-cnt {
-	font-size: 1.2em;
-	padding-right: 2px;
-	padding-left: 2px;
-	padding-top: 4px;
-	padding-bottom: 4px;
+    font-size: 1.2em;
+    padding-right: 2px;
+    padding-left: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .nav_category {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .nav_text {
-	color: #696569;
-	font-size: 24px;
-	font-weight: bold;
+    color: #696569;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .z-vbox-sep {
-	background-color: #EDE9DA;
+    background-color: #EDE9DA;
 }
 
 .z-tabs {
-	background-color: #EDE9DA;
+    background-color: #EDE9DA;
 }
 
 .header_layout {
-	
+
 }
 
 .header_layout-sep {
-	width: 0px;
+    width: 0px;
 }
 
 /* Prevents mold outlines */
-.z-button .z-button-tm,.z-button .z-button-bm {
-	background-image: none;
+.z-button .z-button-tm, .z-button .z-button-bm {
+    background-image: none;
 }
 
-.z-button .z-button-cl,.z-button .z-button-cr {
-	background-image: none;
+.z-button .z-button-cl, .z-button .z-button-cr {
+    background-image: none;
 }
 
-.z-button .z-button-tl,.z-button .z-button-tr,.z-button .z-button-bl,.z-button .z-button-br
-	{
-	background-image: none;
+.z-button .z-button-tl, .z-button .z-button-tr, .z-button .z-button-bl, .z-button .z-button-br {
+    background-image: none;
 }
 
-.english_flag-btn,.french_flag-btn {
-	height: 22px;
-	padding-top: 0;
-	text-align: center;
-	background-color: #FFFFFF;
-	background-position: 1px -4px;
-	background-repeat: no-repeat;
-	width: 30px;
-	position: absolute;
-	top: 4px;
-	cursor: pointer;
+.english_flag-btn, .french_flag-btn {
+    height: 22px;
+    padding-top: 0;
+    text-align: center;
+    background-color: #FFFFFF;
+    background-position: 1px -4px;
+    background-repeat: no-repeat;
+    width: 30px;
+    position: absolute;
+    top: 4px;
+    cursor: pointer;
 }
 
 .english_flag-btn {
-	right: 38px;
+    right: 38px;
 }
 
 .french_flag-btn {
-	right: 4px;
+    right: 4px;
 }
 
 .z-button-os.english_flag-btn {
-	background-image: url('/images/english_flag.png');
+    background-image: url('/images/english_flag.png');
 }
 
 .z-button-os.french_flag-btn {
-	background-image: url('/images/french_flag.png');
+    background-image: url('/images/french_flag.png');
 }
 
 /* Buttons */
 .jad_btn_main {
-	width: 118px;
-	height: 38px;
-	position: absolute;
-	left: 10px;
-	top: 10px;
-	font-weight: normal;
-	font-size: 14px;
-	color: black;
+    width: 118px;
+    height: 38px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-weight: normal;
+    font-size: 14px;
+    color: black;
 }
 
 .jad_btn_main .z-button-cm {
-	background-image: url('/images/jadDownload.png');
+    background-image: url('/images/jadDownload.png');
 }
 
 .jad_btn_main .z-button-focus .z-button-cm {
-	background-position: 0 0;
+    background-position: 0 0;
 }
 
 .jad_btn_main .z-button-over .z-button-cm {
-	background-position: 0 0;
+    background-position: 0 0;
 }
 
 .jad_btn_main .z-button-clk .z-button-cm {
-	background-position: 0 0;
+    background-position: 0 0;
 }
 
 .getjar_appit_header {
-	position: absolute;
-	left: 134px;
-	top: 17px;
+    position: absolute;
+    left: 134px;
+    top: 17px;
 }
 
 .getjar_appit_footer {
-	padding-right: 15px;
-	padding-left: 10px;
+    padding-right: 15px;
+    padding-left: 10px;
 }
 
 .paypal_donate {
-	position: absolute;
-	right: 1px;
-	top: 43px;
+    position: absolute;
+    right: 1px;
+    top: 43px;
 }
 
 /* Texts */
 .software_purpose_header {
-	font-family: verdana, arial, sans-serif;
-	font-size: 14pt;
-	font-weight: bold;
-	position: absolute;
-	top: 113px;
-	padding-left: 15px;
-	color: #C5E0DB;
+    font-family: verdana, arial, sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+    position: absolute;
+    top: 113px;
+    padding-left: 15px;
+    color: #C5E0DB;
 }
 
 .software_purpose_header_bg {
-	position: absolute;
-	top: 105px;
-	height: 42px;
-	width: 960px;
+    position: absolute;
+    top: 105px;
+    height: 42px;
+    width: 960px;
 }
 
-.z-tab,.z-tab-seld {
-	width: 147px;
-	height: 38px;
+.z-tab, .z-tab-seld {
+    width: 147px;
+    height: 38px;
 }
 
-LI.z-tab,.z-tab-seld {
-	margin-right: 4px;
+LI.z-tab, .z-tab-seld {
+    margin-right: 4px;
 }
 
-.z-tab .z-tab-text,.z-tab-seld .z-tab-text {
-	color: #555;
-	cursor: default;
-	font-weight: bold;
-	font-style: normal;
-	font-family: verdana, arial, sans-serif;
-	font-size: 14px;
-	white-space: nowrap;
-	text-align: center;
-	padding-top: 11px;
-	padding-bottom: 11px;
+.z-tab .z-tab-text, .z-tab-seld .z-tab-text {
+    color: #555;
+    cursor: default;
+    font-weight: bold;
+    font-style: normal;
+    font-family: verdana, arial, sans-serif;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
+    padding-top: 11px;
+    padding-bottom: 11px;
 }
 
 .z-tab .z-tab-text {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .z-tab-seld .z-tab-text {
-	cursor: default;
+    cursor: default;
 }
 
 .z-tab-hl {
-	position: relative;
-	padding-left: 10px;
-	background: transparent no-repeat 0 -128px;
-	background-image: url(/images/tab-corner.png);
-	-moz-outline: none;
-	outline: none;
-	cursor: pointer;
-	height: 40px;
+    position: relative;
+    padding-left: 10px;
+    background: transparent no-repeat 0 -128px;
+    background-image: url(/images/tab-corner.png);
+    -moz-outline: none;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
 }
 
 .z-tab-hr {
-	background: transparent no-repeat right -128px;
-	background-image: url(/images/tab-corner.png);
-	padding-right: 10px;
-	display: block;
+    background: transparent no-repeat right -128px;
+    background-image: url(/images/tab-corner.png);
+    padding-right: 10px;
+    display: block;
 }
 
 .z-tab-hm {
-	padding-left: 2px;
-	padding-right: 1px;
-	overflow: hidden;
-	cursor: pointer;
-	background: transparent repeat-x 0 -128px;
-	background-image: url(/images/tab-corner-repeat.png);
+    padding-left: 2px;
+    padding-right: 1px;
+    overflow: hidden;
+    cursor: pointer;
+    background: transparent repeat-x 0 -128px;
+    background-image: url(/images/tab-corner-repeat.png);
 }
 
-.application_footer {
-	position: absolute;
-	top: 832px;
-	left: 11px;
-	font-family: verdana, arial, sans-serif;
-	font-size: 0.7em;
+.main_footer {
+    width: 100%;
+    background-color: #F7BE81;
+    height: 30px;
+    padding-top: 10px;
+}
+
+.credits_footer {
+    position: absolute;
+    top: 840px;
+    left: 11px;
+    font-family: verdana, arial, sans-serif;
+    font-size: 0.7em;
 }

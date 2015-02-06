@@ -10,17 +10,17 @@
 
 <!-- Google Analytics -->
 <?script content="
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27900187-1']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-27900187-1']);
+	_gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-"
-?>
+	(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	"
+	?>
 
 <!-- Addthis -->
 <?script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4efe0a8c69f43694" ?>
@@ -32,94 +32,105 @@
 <zk xmlns:h="native">
 
 	<!-- Prevents users from right clicking -->
-<!-- 	<popup id="rightClickPopuUp" zclass="z-popup-plain" style="height:0;width:0;overflow:hidden" /> -->
-	
-<!-- 	<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" context="rightClickPopuUp" apply="com.athan.mobile.controls.IndexViewCtrl"> -->
-	<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" apply="com.athan.mobile.controls.IndexViewCtrl">
-		
-		<style src="./css/index.css" />
-		
+	<!-- 	<popup id="rightClickPopuUp" zclass="z-popup-plain" style="height:0;width:0;overflow:hidden" /> -->
+
+	<!-- 	<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window" context="rightClickPopuUp" apply="com.athan.mobile.controls.IndexViewCtrl"> -->
+	<window id="indexWindow" border="none" width="960px" position="center,top" mode="overlapped" sclass="window"
+									apply="com.athan.mobile.controls.IndexViewCtrl">
+
+		<style src="./css/index.css"/>
+
 		<vbox>
-		
+
 			<hbox width="${indexWindow.width}" zclass="header_layout">
 				<image src="/images/site_header.jpg"></image>
-				<button id="btnJadFileMain" label="${c:l('download.jadFile')}" tooltiptext="${c:l('download.jadFile.tooltip')}" sclass="jad_btn_main" />
-				<h:a href="http://getjar.com/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);" class="getjar_appit_header">
+				<button id="btnJadFileMain" label="${c:l('download.jadFile')}" tooltiptext="${c:l('download.jadFile.tooltip')}"
+												sclass="jad_btn_main"/>
+				<h:a href="http://getjar.com/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);"
+									class="getjar_appit_header">
 					<h:img src="/images/home/AppIt-160x27px.gif" alt="${c:l('download.appIt')}"/>
 				</h:a>
-				<button id="english_flag" mold="os" sclass="english_flag-btn" />
-				<button id="french_flag" mold="os" sclass="french_flag-btn" />
+				<button id="english_flag" mold="os" sclass="english_flag-btn"/>
+				<button id="french_flag" mold="os" sclass="french_flag-btn"/>
 				<!-- Start - Paypal button -->
 				<div sclass="paypal_donate">
 					<h:form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-						<h:input type="hidden" name="cmd" value="_s-xclick" />
-						<h:input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----" />
-						<h:input type="image" src="/images/home/${c:l('image.subdirectory')}/btn_donate.png" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !" />
-						<h:img alt="${c:l('image.paypal.alt')}" border="0" src="/images/home/pixel.gif" width="1" height="1" onClick="_gaq.push(['_trackEvent', 'Paypal', 'Donate', 'Clicked');" />
+						<h:input type="hidden" name="cmd" value="_s-xclick"/>
+						<h:input type="hidden" name="encrypted"
+															value="-----BEGIN PKCS7-----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-----END PKCS7-----"/>
+						<h:input type="image" src="/images/home/${c:l('image.subdirectory')}/btn_donate.png" border="0" name="submit"
+															alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !"/>
+						<h:img alt="${c:l('image.paypal.alt')}" border="0" src="/images/home/pixel.gif" width="1" height="1"
+													onClick="_gaq.push(['_trackEvent', 'Paypal', 'Donate', 'Clicked');"/>
 					</h:form>
 				</div>
 				<!-- End - Paypal button -->
 			</hbox>
-			
-			<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg" />
-			<label value="${labels.application.header}" height="30px" width="100%" zclass="software_purpose_header" />
-		
+
+			<image src="/images/site_bg_header.png" sclass="software_purpose_header_bg"/>
+			<label value="${labels.application.header}" height="30px" width="100%" zclass="software_purpose_header"/>
+
 			<tabbox id="tab" width="${indexWindow.width}" sclass="nav_tabs">
-		        <tabs id="tabs">
-		            <tab id="tabHome" label="${c:l('tab.home')}" />
-		            <tab id="tabDownload" label="${c:l('tab.download')}" />
-		            <tab id="tabNews" label="${c:l('tab.news')}" />
-		            <tab id="tabResources" label="${c:l('tab.resources')}" />
-		            <tab id="tabContribute" label="${c:l('tab.contribute')}" />
-		            <tab id="tabAbout" label="${c:l('tab.about')}" />
-		        </tabs>
-		        <tabpanels id="tabPanels" width="${indexWindow.width}">
-		            <tabpanel id="tbpHome">
-		                <toolbar width="${indexWindow.width}">
-		                    <toolbarbutton id="homeIntroduction" label="${c:l('tab.home.introduction')}" />
-		                    <toolbarbutton id="homeFeatures" label="${c:l('tab.home.features')}" />
-		                </toolbar>
-		            </tabpanel>
-		            <tabpanel id="tbpDownload">
-		                <toolbar width="${indexWindow.width}">
-		                    <toolbarbutton id="downloadCurrent" label="${c:l('tab.download.current')}" />
-		                    <toolbarbutton id="downloadChangelogs" label="${c:l('tab.download.changelogs')}" />
-		                </toolbar>
-		            </tabpanel>
-		            <tabpanel id="tbpNews">
-		                <toolbar width="${indexWindow.width}">
-		                    <toolbarbutton id="newsReleases" label="${c:l('tab.news.releases')}" />
-		                    <toolbarbutton id="newsNextfeatures" label="${c:l('tab.news.nextfeatures')}" />
-		                </toolbar>
-		            </tabpanel>
-		            <tabpanel id="tbpResources">
-		                <toolbar width="${indexWindow.width}">
-		                    <toolbarbutton id="resourcesSoundfiles" label="${c:l('tab.resources.soundfiles')}" />
-		                    <toolbarbutton id="resourcesProject" label="${c:l('tab.resources.project')}" />
-		                </toolbar>
-		            </tabpanel>
-		            <tabpanel id="tbpContribute">
-		                <toolbar width="${indexWindow.width}">
-		                    <toolbarbutton id="contributeFeedbacks" label="${c:l('tab.contribute.feedbacks')}" />
-		                </toolbar>
-		            </tabpanel>
-		            <tabpanel id="tbpAbout">
-		                <toolbar width="${indexWindow.width}">
-		                    <toolbarbutton id="aboutContributor" label="${c:l('tab.about.contributor')}" />
-		                    <toolbarbutton id="aboutCredits" label="${c:l('tab.about.credits')}" />
-		                </toolbar>
-		            </tabpanel>
-		        </tabpanels>
-		    </tabbox>
-	    
-	      <hbox id="hbxFooter" style="width:100%; background-color:#F7BE81" pack="end">
-           <h:p class="application_footer">${c:l('application.footer.credits')}</h:p>
-<!--            <h:a href="http://getjar.com/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);" class="getjar_appit_footer"> -->
-<!-- 				<h:img src="/images/home/AppIt-61x23px.gif" alt="${c:l('download.appIt')}"/> -->
-<!-- 			</h:a> -->
-        </hbox>
-	    
-	    </vbox>
+				<tabs id="tabs">
+					<tab id="tabHome" label="${c:l('tab.home')}"/>
+					<tab id="tabDownload" label="${c:l('tab.download')}"/>
+					<tab id="tabNews" label="${c:l('tab.news')}"/>
+					<tab id="tabResources" label="${c:l('tab.resources')}"/>
+					<tab id="tabContribute" label="${c:l('tab.contribute')}"/>
+					<tab id="tabAbout" label="${c:l('tab.about')}"/>
+				</tabs>
+				<tabpanels id="tabPanels" width="${indexWindow.width}">
+					<tabpanel id="tbpHome">
+						<toolbar width="${indexWindow.width}">
+							<toolbarbutton id="homeIntroduction" label="${c:l('tab.home.introduction')}"/>
+							<toolbarbutton id="homeFeatures" label="${c:l('tab.home.features')}"/>
+						</toolbar>
+					</tabpanel>
+					<tabpanel id="tbpDownload">
+						<toolbar width="${indexWindow.width}">
+							<toolbarbutton id="downloadCurrent" label="${c:l('tab.download.current')}"/>
+							<toolbarbutton id="downloadChangelogs" label="${c:l('tab.download.changelogs')}"/>
+						</toolbar>
+					</tabpanel>
+					<tabpanel id="tbpNews">
+						<toolbar width="${indexWindow.width}">
+							<toolbarbutton id="newsReleases" label="${c:l('tab.news.releases')}"/>
+							<toolbarbutton id="newsNextfeatures" label="${c:l('tab.news.nextfeatures')}"/>
+						</toolbar>
+					</tabpanel>
+					<tabpanel id="tbpResources">
+						<toolbar width="${indexWindow.width}">
+							<toolbarbutton id="resourcesSoundfiles" label="${c:l('tab.resources.soundfiles')}"/>
+							<toolbarbutton id="resourcesProject" label="${c:l('tab.resources.project')}"/>
+						</toolbar>
+					</tabpanel>
+					<tabpanel id="tbpContribute">
+						<toolbar width="${indexWindow.width}">
+							<toolbarbutton id="contributeFeedbacks" label="${c:l('tab.contribute.feedbacks')}"/>
+						</toolbar>
+					</tabpanel>
+					<tabpanel id="tbpAbout">
+						<toolbar width="${indexWindow.width}">
+							<toolbarbutton id="aboutContributor" label="${c:l('tab.about.contributor')}"/>
+							<toolbarbutton id="aboutCredits" label="${c:l('tab.about.credits')}"/>
+						</toolbar>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+
+			<h:div class="main_footer">
+				<h:p class="credits_footer">${c:l('application.footer.credits')}</h:p>
+
+				<!-- AddThis -->
+				<!-- Go to www.addthis.com/dashboard to customize your tools -->
+				<h:div class="addthis_native_toolbox" style="margin-left:500px"></h:div>
+			</h:div>
+		<!-- AddThis Button END -->
+		<!--            <h:a href="http://getjar.com/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);" class="getjar_appit_footer"> -->
+		<!-- 				<h:img src="/images/home/AppIt-61x23px.gif" alt="${c:l('download.appIt')}"/> -->
+		<!-- 			</h:a> -->
+
+</vbox>
 	</window>
 
-</zk>
+	</zk>
