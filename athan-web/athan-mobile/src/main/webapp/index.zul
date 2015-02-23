@@ -46,7 +46,7 @@
 				<image src="/images/site_header.jpg"></image>
 				<button id="btnJadFileMain" label="${c:l('download.jadFile')}" tooltiptext="${c:l('download.jadFile.tooltip')}"
 												sclass="jad_btn_main"/>
-				<h:a href="http://getjar.com/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);"
+				<h:a href="http://www.getjar.mobi/mobile/285611/athan-mobile" onClick="_gaq.push(['_trackEvent', 'AppIt', 'Redirected', 'GetJar']);"
 									class="getjar_appit_header">
 					<h:img src="/images/home/AppIt-160x27px.gif" alt="${c:l('download.appIt')}"/>
 				</h:a>

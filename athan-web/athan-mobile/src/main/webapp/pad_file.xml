@@ -17,15 +17,15 @@
 		<Contact_Info>
 			<Author_First_Name>Saad</Author_First_Name>
 			<Author_Last_Name>Benbouzid</Author_Last_Name>
-			<Author_Email>athan-mobile@hotmail.fr</Author_Email>
+			<Author_Email>sbenbouzid@hotmail.fr</Author_Email>
 			<Contact_First_Name>Saad</Contact_First_Name>
 			<Contact_Last_Name>Benbouzid</Contact_Last_Name>
-			<Contact_Email>athan-mobile@hotmail.fr</Contact_Email>
+			<Contact_Email>sbenbouzid@hotmail.fr</Contact_Email>
 		</Contact_Info>
 		<Support_Info>
-			<Sales_Email>athan-mobile@hotmail.fr</Sales_Email>
-			<Support_Email>athan-mobile@hotmail.fr</Support_Email>
-			<General_Email>athan-mobile@hotmail.fr</General_Email>
+			<Sales_Email>sbenbouzid@hotmail.fr</Sales_Email>
+			<Support_Email>sbenbouzid@hotmail.fr</Support_Email>
+			<General_Email>sbenbouzid@hotmail.fr</General_Email>
 			<Sales_Phone />
 			<Support_Phone />
 			<General_Phone />
@@ -34,9 +34,9 @@
 	</Company_Info>
 	<Program_Info>
 		<Program_Name>Athan Mobile (Prayer Times and Qibla)</Program_Name>
-		<Program_Version>0.3.9</Program_Version>
-		<Program_Release_Month>02</Program_Release_Month>
-		<Program_Release_Day>16</Program_Release_Day>
+		<Program_Version>0.4.5</Program_Version>
+		<Program_Release_Month>10</Program_Release_Month>
+		<Program_Release_Day>19</Program_Release_Day>
 		<Program_Release_Year>2012</Program_Release_Year>
 		<Program_Cost_Dollars>0</Program_Cost_Dollars>
 		<Program_Cost_Other_Code />
@@ -51,9 +51,9 @@
 		<Program_Category_Class>Home &amp; Hobby::Religion</Program_Category_Class>
 		<Program_System_Requirements>Java MIDP 2.0 - CLDC 1.1</Program_System_Requirements>
 		<File_Info>
-			<File_Size_Bytes>989201</File_Size_Bytes>
-			<File_Size_K>966</File_Size_K>
-			<File_Size_MB>0.94</File_Size_MB>
+			<File_Size_Bytes>993791</File_Size_Bytes>
+			<File_Size_K>970</File_Size_K>
+			<File_Size_MB>0.95</File_Size_MB>
 		</File_Info>
 		<Expire_Info>
 			<Has_Expire_Info>N</Has_Expire_Info>
@@ -121,7 +121,7 @@ Visitez le site officiel pour plus d'informations : http://athan-mobile.appspot.
 		<Download_URLs>
 			<Primary_Download_URL>http://athan-mobile.appspot.com/download?type=JAD</Primary_Download_URL>
 			<Secondary_Download_URL>http://athan-mobile.appspot.com/download?type=JAR</Secondary_Download_URL>
-			<Additional_Download_URL_1>http://getjar.com/athan-mobile/</Additional_Download_URL_1>
+			<Additional_Download_URL_1>http://www.getjar.mobi/mobile/285611/athan-mobile</Additional_Download_URL_1>
 			<Additional_Download_URL_2 />
 		</Download_URLs>
 	</Web_Info>
